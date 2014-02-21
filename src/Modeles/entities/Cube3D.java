@@ -51,7 +51,7 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 		return false;
 	}
 	
-	private void genCube(){
+	public void genCube(){
 		glNewList(cubeDisplayList, GL_COMPILE);
 		glBegin(GL_TRIANGLES);
 		
