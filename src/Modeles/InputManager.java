@@ -3,17 +3,27 @@ package Modeles;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import Controleur.Controleur;
+
 public class InputManager {
 	
 	private Camera camera;
+	private Controleur clone;
+	
+	public InputManager(Controleur contr){
+		clone = contr;
+	}
 	
 	public void setCam(Camera cam){
 		camera = cam;
 	}
 	
 	public void check(){
-		float mouseDX = Mouse.getDX() * 1 * 0.06f;
-		float mouseDY = Mouse.getDY() * 1 * 0.06f;
+		
+		setCam(clone.getCamera());
+		
+		float mouseDX = Mouse.getDX() * 1 * 0.16f;
+		float mouseDY = Mouse.getDY() * 1 * 0.16f;
 		if(Mouse.isGrabbed()){
 			if (camera.getRot().y + mouseDX >= 360) {
 				camera.getRot().y = camera.getRot().y + mouseDX - 360;
@@ -36,7 +46,7 @@ public class InputManager {
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
 		boolean keyRight = Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D);
 		
-		float speed = 0.004f;
+		float speed = 0.04f;
 		
 		if(keyUp)
 			move(speed,1);
@@ -46,6 +56,8 @@ public class InputManager {
 			move(speed,0);
 		if(keyRight)
 			move(-speed,0);
+		
+		clone.setCamera(camera);
 	}
 	
 	private void move(float amt, float dir){

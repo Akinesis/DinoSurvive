@@ -1,6 +1,7 @@
 package Vues;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -23,6 +24,8 @@ public class GameDisplay implements Parametres{
 			Display.destroy();
 			System.exit(1);
 		}
+		
+		Mouse.setGrabbed(true);
 	}
 	
 	public boolean isClose(){

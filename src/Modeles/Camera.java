@@ -5,12 +5,17 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 
 import org.lwjgl.util.vector.Vector3f;
 
+import Controleur.Controleur;
+
 public class Camera {
 	
+	private Controleur clone;
 	private Vector3f position, rotation;
 	
-	public Camera(){
-		position = new Vector3f(0, -1, 0);
+	
+	public Camera(Controleur contr){
+		clone = contr;
+		position = new Vector3f(0, 1, 0);
 		rotation = new Vector3f(0, 0, 0);
 	}
 	

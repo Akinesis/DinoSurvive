@@ -3,6 +3,7 @@ package Controleur;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import Modeles.Camera;
 import Modeles.Chunk;
 import Modeles.InputManager;
@@ -21,8 +22,8 @@ public class Controleur {
 		display = new GameDisplay();
 		matrices = new OpenGL();
 		chunk = new Chunk();
-		camera = new Camera();
-		input = new InputManager();
+		camera = new Camera(this);
+		input = new InputManager(this);
 	}
 	
 	public void init(){
@@ -33,16 +34,26 @@ public class Controleur {
 		while(!display.isClose()){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			
-			input.setCam(camera);
+			matrices.init3D();
+			glLoadIdentity();
+			
+			camera.useView();
 			
 			input.check();
-			camera.useView();
 			
 			chunk.draw();
 			display.update();
 			
 			
 		}
+	}
+	
+	public Camera getCamera(){
+		return camera;
+	}
+	
+	public void setCamera(Camera cam){
+		camera = cam;
 	}
 
 }

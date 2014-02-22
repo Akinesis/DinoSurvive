@@ -1,6 +1,7 @@
 package Vues;
 
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_PROJECTION;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
@@ -17,6 +18,7 @@ public class OpenGL implements Parametres {
 		gluPerspective(fov, largeur/hauteur, near, far);
 		glMatrixMode(GL_MODELVIEW);	
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
 	}
 
 }
