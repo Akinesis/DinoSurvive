@@ -1,48 +1,49 @@
 package Modeles.entities;
 
 import Modeles.entities.Entity3D;
+import org.lwjgl.util.vector.Vector3f;
 
 public abstract class AbstractEntity3D implements Entity3D {
-	float x, y,z;
+	protected Vector3f pos;
 
 	@Override
 	public float getX() {
-		return x;
+		return pos.x;
 	}
 
 	@Override
 	public float getY() {
-		return y;
+		return pos.y;
 	}
 
 	@Override
 	public float getZ() {
-		return z;
+		return pos.z;
 	}
 
 	@Override
 	public void setX(float x) {
-		this.x=x;
+		this.pos.x=x;
 
 	}
 
 	@Override
 	public void setY(float y) {
-		this.x=y;
+		this.pos.y=y;
 
 	}
 
 	@Override
 	public void setz(float z) {
-		this.x=z;
+		this.pos.z=z;
 
 	}
 
 	@Override
 	public void setPos(float x, float y, float z) {
-		this.x=x;
-		this.y=y;
-		this.z=z;
+		this.pos.x=x;
+		this.pos.y=y;
+		this.pos.z=z;
 
 	}
 

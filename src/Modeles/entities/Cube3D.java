@@ -10,16 +10,21 @@ import static org.lwjgl.opengl.GL11.glGenLists;
 import static org.lwjgl.opengl.GL11.glNewList;
 import static org.lwjgl.opengl.GL11.glVertex3f;
 import static org.lwjgl.opengl.GL11.glColor3f;
+
+import org.lwjgl.util.vector.Vector3f;
+
 import Parametres.Parametres;
 
 public class Cube3D extends AbstractEntity3D implements Parametres{
 	
+	private Vector3f pos2;
 	protected float size;
 	protected int cubeDisplayList;
 	boolean etat;
 	
 	public Cube3D(float x, float y, float z, float size){
-		setPos(-x, y, -z);
+		pos = new Vector3f(x, y, z);
+		pos2 = new Vector3f(pos.x+size, pos.y+size, pos.z+size);
 		this.size=size;
 		
 		cubeDisplayList = glGenLists(1);
@@ -46,83 +51,84 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 	public boolean equals(Object o){
 		if(o instanceof Cube3D){
 			Cube3D temp = (Cube3D)o;
-			return (temp.x==x && temp.y == y && temp.z == z);
+			return (temp.pos.x==pos.x && temp.pos.y == pos.y && temp.pos.z == pos.z);
 		}
 		return false;
 	}
 	
 	public void genCube(){
 		glNewList(cubeDisplayList, GL_COMPILE);
-		glBegin(GL_TRIANGLES);
-		
+		glBegin(GL_TRIANGLES);	
 		
 		{//south face
 			glColor3f(1, 0, 0);
-			glVertex3f(x, y, z);
-			glVertex3f(x, y-size, z);
-			glVertex3f(x+size, y, z);
+			glVertex3f(pos.x, pos.y, pos.z);
+			glVertex3f(pos.x, pos2.y, pos.z);
+			glVertex3f(pos2.x, pos.y, pos.z);
 
-			glVertex3f(x+size, y, z);
-			glVertex3f(x, y-size, z);
-			glVertex3f(x+size, y-size, z);
+			glVertex3f(pos2.x, pos.y, pos.z);
+			glVertex3f(pos.x, pos2.y, pos.z);
+			glVertex3f(pos2.x, pos2.y, pos.z);
 		}
 		
 		{//north face
-			glVertex3f(x, y, z-size);
-			glVertex3f(x+size, y, z-size);
-			glVertex3f(x, y-size, z-size);
+			glVertex3f(pos.x, pos.y, pos2.z);
+			glVertex3f(pos2.x, pos.y, pos2.z);
+			glVertex3f(pos.x, pos2.y, pos2.z);
 			
-			glVertex3f(x, y-size, z-size);
-			glVertex3f(x+size, y, z-size);
-			glVertex3f(x+size, y-size, z-size);
+			glVertex3f(pos.x, pos2.y, pos2.z);
+			glVertex3f(pos2.x, pos.y, pos2.z);
+			glVertex3f(pos2.x, pos2.y, pos2.z);
 		}
 		
 		{//bottom face
-			glVertex3f(x, y-size, z);
-			glVertex3f(x, y-size, z-size);
-			glVertex3f(x+size, y-size, z);
+			glVertex3f(pos.x, pos2.y, pos.z);
+			glVertex3f(pos.x, pos2.y, pos2.z);
+			glVertex3f(pos2.x, pos2.y, pos.z);
 
-			glVertex3f(x+size, y-size, z);
-			glVertex3f(x, y-size, z-size);
-			glVertex3f(x+size, y-size, z-size);
+			glVertex3f(pos2.x, pos2.y, pos.z);
+			glVertex3f(pos.x, pos2.y, pos2.z);
+			glVertex3f(pos2.x, pos2.y, pos2.z);
 		}
 		
 		{//top face;
-			glVertex3f(x, y, z);
-			glVertex3f(x+size, y, z);
-			glVertex3f(x, y, z-size);
+			glVertex3f(pos.x, pos.y, pos.z);
+			glVertex3f(pos2.x, pos.y, pos.z);
+			glVertex3f(pos.x, pos.y, pos2.z);
 			
-			glVertex3f(x, y, z-size);
-			glVertex3f(x+size, y, z);
-			glVertex3f(x+size, y, z-size);		
+			glVertex3f(pos.x, pos.y, pos2.z);
+			glVertex3f(pos2.x, pos.y, pos.z);
+			glVertex3f(pos2.x, pos.y, pos2.z);		
 		}
 		
 		{//east face
-			glVertex3f(x+size, y, z);
-			glVertex3f(x+size, y-size, z);
-			glVertex3f(x+size, y, z-size);
+			glVertex3f(pos2.x, pos.y, pos.z);
+			glVertex3f(pos2.x, pos2.y, pos.z);
+			glVertex3f(pos2.x, pos.y, pos2.z);
 
-			glVertex3f(x+size, y, z-size);
-			glVertex3f(x+size, y-size, z);
-			glVertex3f(x+size, y-size, z-size);
+			glVertex3f(pos2.x, pos.y, pos2.z);
+			glVertex3f(pos2.x, pos2.y, pos.z);
+			glVertex3f(pos2.x, pos2.y, pos2.z);
 		}
 		
 		{//west face
-			glVertex3f(x, y, z);
-			glVertex3f(x, y, z-size);
-			glVertex3f(x, y-size, z);
+			glVertex3f(pos.x, pos.y, pos.z);
+			glVertex3f(pos.x, pos.y, pos2.z);
+			glVertex3f(pos.x, pos2.y, pos.z);
 
-			glVertex3f(x, y-size, z);
-			glVertex3f(x, y, z-size);
-			glVertex3f(x, y-size, z-size);
+			glVertex3f(pos.x, pos2.y, pos.z);
+			glVertex3f(pos.x, pos.y, pos2.z);
+			glVertex3f(pos.x, pos2.y, pos2.z);
 		}
 		
 		glColor3f(1, 1, 1);
 		
 		glEnd();
 		glEndList();
-
-
+	}
+	
+	public boolean getState(){
+		return etat;
 	}
 
 }
