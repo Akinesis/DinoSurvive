@@ -4,6 +4,9 @@ import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
+
+import org.lwjgl.input.Keyboard;
+
 import Modeles.Camera;
 import Modeles.Chunk;
 import Modeles.InputManager;
@@ -31,7 +34,7 @@ public class Controleur {
 		matrices.init3D();
 		chunk.addCube();
 		
-		while(!display.isClose()){
+		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			
 			matrices.init3D();
