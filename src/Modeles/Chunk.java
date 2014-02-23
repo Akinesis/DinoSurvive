@@ -3,8 +3,6 @@ package Modeles;
 import java.util.HashMap;
 import java.util.Vector;
 
-import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
-
 import Modeles.entities.*;
 
 public class Chunk {

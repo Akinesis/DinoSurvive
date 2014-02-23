@@ -27,6 +27,7 @@ public class Controleur {
 		chunk = new Chunk();
 		camera = new Camera(this);
 		input = new InputManager(this);
+		input.setCam(camera);
 	}
 	
 	public void init(){
