@@ -39,7 +39,7 @@ public class Controleur {
 		display.create();
 		matrices.init3D();
 
-		//chunks.get(0).addCube();
+		chunks.get(0).addCubes();
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
