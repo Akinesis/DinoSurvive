@@ -21,20 +21,16 @@ public class InputManager {
 
 	public void check(){
 
-		/*setCam(clone.getCamera());*/
 		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
 
 		float mouseDX = Mouse.getDX() * 1 * 0.16f;
 		float mouseDY = Mouse.getDY() * 1 * 0.16f;
 
 		while(Keyboard.next()){
-			if(Keyboard.isKeyDown(Keyboard.KEY_C)){
+			if(keyC){
 				coef*=-1;
 			}
 		}
-		
-		System.out.println(coef);
-
 
 		if(Mouse.isGrabbed()){
 			if (camera.getRot().y + mouseDX >= 360) {
@@ -68,7 +64,6 @@ public class InputManager {
 		if(keyRight)
 			move(-speed,0);
 
-		//clone.setCamera(camera);
 	}
 
 	private void move(float amt, float dir){
