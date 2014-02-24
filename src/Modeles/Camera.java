@@ -15,7 +15,7 @@ public class Camera {
 	
 	public Camera(Controleur contr){
 		clone = contr;
-		position = new Vector3f(0, -1, 0);
+		position = new Vector3f(0, -3, 0);
 		rotation = new Vector3f(0, 0, 0);
 	}
 	
