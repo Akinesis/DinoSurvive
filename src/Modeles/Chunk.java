@@ -7,40 +7,47 @@ import Controleur.Controleur;
 import Modeles.entities.*;
 
 public class Chunk {
-	private HashMap<String, Cube3D> cubes;
+	private Cube3D[][][] cubes;
 	private Vector<Cube3D> renderCubes;
 	private Controleur clone;
 	private int x,y,z,id;
 
-	//constructeur d'un chunk, possède des cubes et des vecteurs de cubes à déssiné
+	//constructeur d'un chunk, possÔøΩde des cubes et des vecteurs de cubes ÀÜ d≈Ωssin≈Ω
 	public Chunk(int x,int y,int z, int id, Controleur contr){
-		cubes = new HashMap<String, Cube3D>();
+		cubes = new Cube3D[16][16][16];
 		renderCubes = new Vector<Cube3D>();
 		clone = contr;
-		
+
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		//pour l'instant : id = ligne dnas le programe, changer ça !!! (extrapoler l'iD des XYZ)
+		//pour l'instant : id = ligne dnas le programe, changer ÔøΩa !!! (extrapoler l'iD des XYZ)
 		this.id = id;
 	}
 
-	//boucle qui ajoute tout les cube lié à l'ID du chunk (aka la ligne dans le programme)
+	//boucle qui ajoute tout les cube li≈Ω ÀÜ l'ID du chunk (aka la ligne dans le programme)
 	public void addCubes(){
 		clone.getMapRead().setCubes(cubes, id);
 	}
 
-	//vérife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
+	//v≈Ωrife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
 	public void checkState(){
-		Vector<Cube3D> liste = new Vector<Cube3D>(cubes.values());
-		for(Cube3D cube : liste){
-			if(cube.getState()){
-				renderCubes.add(cube);
+
+		for(int i=0; i<16; i++){
+			for(int j =0; j<16; j++){
+				for(int k=0; k<16; k++){
+					if(cubes[i][j][k]!=null){
+						if(cubes[i][j][k].getState()){
+							renderCubes.add(cubes[i][j][k]);
+						}
+					}
+				}
 			}
 		}
 	}
 
-	//génère les cubes dans le buffer;
+
+	//g≈ΩnÔøΩre les cubes dans le buffer;
 	//DOIT ETRE ASSOCIER A UNE METHODE DE RESET DES BUFFER !!
 	public void genCubes(){
 		for(Cube3D cube : renderCubes){
@@ -48,7 +55,7 @@ public class Chunk {
 		}
 	}
 
-	//déssine tout les cubes actif
+	//d≈Ωssine tout les cubes actif
 	public void draw(){
 		checkState();
 		for(Cube3D cube : renderCubes){
@@ -60,9 +67,9 @@ public class Chunk {
 	public void clearChunk(){
 		renderCubes.clear();
 	}
-	
+
 	//getter de la liste des cubes
-	public HashMap<String, Cube3D> getHashCube(){
+	public Cube3D[][][] getArrayCubes(){
 		return cubes;
 	}
 

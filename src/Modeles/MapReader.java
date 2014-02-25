@@ -41,7 +41,7 @@ public class MapReader {
 		int i = 0;
 
 		while(ligne!=null){
-			addr = ligne.split(":"); // [{0,0,0}, ...]
+			addr = ligne.split(":"); // [{0,0,0}; ...]
 			ligne = addr[0];
 			addr = ligne.split(",");//[{0;0;0}]
 			int x = Integer.parseInt(addr[0].subSequence(1, addr[0].length()).toString()); //transforme "{xxx" en un int XXX
@@ -58,7 +58,7 @@ public class MapReader {
 		return chunks;
 	}
 
-	public void setCubes(HashMap<String, Cube3D> liste, int id){
+	public void setCubes(Cube3D[][][] liste, int id){
 		openFile(clone.getMap());
 		String ligne = readLine();
 		String temp[];
@@ -77,10 +77,10 @@ public class MapReader {
 				int y = Integer.parseInt(temp[1].toString());
 				int z = Integer.parseInt(temp[2].subSequence(0, temp[2].length()-1).toString());
 
-				liste.put(cubes[i], new Cube3D(x, y, z, 1));
+				liste[Math.abs(x)][Math.abs(y)][Math.abs(z)]=new Cube3D(x, y, z, 1, clone);
+				//liste.put(cubes[i], new Cube3D(x, y, z, 1));
 			}
 		}
-		
 		close();
 	}
 

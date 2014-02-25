@@ -13,27 +13,30 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 
 import org.lwjgl.util.vector.Vector3f;
 
+import Controleur.Controleur;
 import Parametres.Parametres;
 
 public class Cube3D extends AbstractEntity3D implements Parametres{
 	
 	private Vector3f pos2;
 	protected float size;
-	protected int cubeDisplayList;
-	boolean etat;
+	protected BlankDisplayList cubeDisplayList;
+	private boolean etat;
+	private Controleur clone;
 	
-	public Cube3D(float x, float y, float z, float size){
+	public Cube3D(float x, float y, float z, float size, Controleur contr){
 		pos = new Vector3f(x, y, z);
 		pos2 = new Vector3f(pos.x+size, pos.y+size, pos.z+size);
 		this.size=size;
+		clone=contr;
 		
-		cubeDisplayList = glGenLists(1);
+		cubeDisplayList = clone.getDisplayList();
 		etat = true;
 	}
 
 	@Override
 	public void draw() {
-		glCallList(cubeDisplayList);
+		glCallList(cubeDisplayList.getList());
 	}
 
 	@Override
@@ -57,11 +60,11 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 	}
 	
 	public void genCube(){
-		glNewList(cubeDisplayList, GL_COMPILE);
+		glNewList(cubeDisplayList.getList(), GL_COMPILE);
 		glBegin(GL_TRIANGLES);	
 		
 		{//south face
-			glColor3f(1, 0, 0);
+			glColor3f(0.2f, 0.5f, 0.5f);
 			glVertex3f(pos.x, pos.y, pos.z);
 			glVertex3f(pos.x, pos2.y, pos.z);
 			glVertex3f(pos2.x, pos.y, pos.z);
