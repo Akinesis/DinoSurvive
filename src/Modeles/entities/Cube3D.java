@@ -18,7 +18,7 @@ import Parametres.Parametres;
 
 public class Cube3D extends AbstractEntity3D implements Parametres{
 	
-	private Vector3f pos2;
+	protected Vector3f pos2;
 	protected float size;
 	protected BlankDisplayList cubeDisplayList;
 	private boolean etat;
@@ -30,7 +30,7 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 		this.size=size;
 		clone=contr;
 		
-		cubeDisplayList = clone.getDisplayList();
+		//cubeDisplayList = clone.getDisplayList();
 		etat = true;
 	}
 
