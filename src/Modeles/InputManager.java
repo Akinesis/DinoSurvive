@@ -53,7 +53,7 @@ public class InputManager {
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
 		boolean keyRight = Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D);
 
-		float speed = 0.04f;
+		float speed = 0.09f;
 
 		if(keyUp)
 			move(speed,1);

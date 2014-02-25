@@ -41,6 +41,8 @@ public class Controleur {
 
 		for(Chunk chunk : chunks){
 			chunk.addCubes();
+			chunk.checkState();
+			chunk.genCubes();
 		}
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
@@ -58,7 +60,6 @@ public class Controleur {
 			}
 
 			display.update();
-
 
 		}
 	}

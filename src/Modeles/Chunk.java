@@ -27,7 +27,7 @@ public class Chunk {
 		clone.getMapRead().setCubes(cubes, id);
 	}
 
-	private void checkState(){
+	public void checkState(){
 		Vector<Cube3D> liste = new Vector<Cube3D>(cubes.values());
 		for(Cube3D cube : liste){
 			if(cube.getState()){
@@ -36,7 +36,7 @@ public class Chunk {
 		}
 	}
 
-	private void genCubes(){
+	public void genCubes(){
 		for(Cube3D cube : renderCubes){
 			cube.genCube();
 		}
@@ -44,7 +44,6 @@ public class Chunk {
 
 	public void draw(){
 		checkState();
-		genCubes();
 		for(Cube3D cube : renderCubes){
 			cube.draw();
 		}
