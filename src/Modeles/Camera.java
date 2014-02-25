@@ -12,13 +12,14 @@ public class Camera {
 	private Controleur clone;
 	private Vector3f position, rotation;
 	
-	
+	//constructeur de la caméra, initialise la possition
 	public Camera(Controleur contr){
 		clone = contr;
 		position = new Vector3f(0, -3, 0);
 		rotation = new Vector3f(0, 0, 0);
 	}
 	
+	//met à jour la position et la rotation
 	public void useView(){
 		glRotatef(rotation.x, 1, 0, 0);
 		glRotatef(rotation.y, 0, 1, 0);
@@ -26,6 +27,7 @@ public class Camera {
 		glTranslatef(position.x, position.y, position.z);
 	}
 	
+	//getters et setters
 	public Vector3f getPos(){
 		return position;
 	}

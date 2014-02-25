@@ -19,6 +19,8 @@ public class InputManager {
 		camera = cam;
 	}
 
+	//méthode de vérification de tout les input et ction en consquence
+	//doit être allégé et amélioré
 	public void check(){
 
 		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
@@ -26,12 +28,14 @@ public class InputManager {
 		float mouseDX = Mouse.getDX() * 1 * 0.16f;
 		float mouseDY = Mouse.getDY() * 1 * 0.16f;
 
+		//invertion de la sourie
 		while(Keyboard.next()){
 			if(keyC){
 				coef*=-1;
 			}
 		}
 
+		//mouvement de la sourie
 		if(Mouse.isGrabbed()){
 			if (camera.getRot().y + mouseDX >= 360) {
 				camera.getRot().y = (camera.getRot().y + mouseDX - 360)*coef;
@@ -48,13 +52,16 @@ public class InputManager {
 			}
 		}
 
+		//vérification du clavier
 		boolean keyUp = Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_Z);
 		boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S);
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
 		boolean keyRight = Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D);
 
+		//vitesse de déplacement
 		float speed = 0.09f;
 
+		//déplacement
 		if(keyUp)
 			move(speed,1);
 		if(keyDown)
@@ -66,6 +73,7 @@ public class InputManager {
 
 	}
 
+	//méthode de déplacement
 	private void move(float amt, float dir){
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));

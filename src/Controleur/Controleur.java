@@ -25,6 +25,7 @@ public class Controleur {
 	private InputManager input;
 	private MapReader mapRead;
 
+	//contructeur du Controleur
 	public Controleur(){
 		display = new GameDisplay();
 		matrices = new OpenGL();
@@ -35,26 +36,33 @@ public class Controleur {
 		chunks = mapRead.setChunks();
 	}
 
+	//la coeure du jeux, ma méthode contenant la boucle de jeu.
 	public void init(){
 		display.create();
 		matrices.init3D();
 
+		//initialise les chunks une première fois et met les cubes dans le buffer
 		for(Chunk chunk : chunks){
 			chunk.addCubes();
 			chunk.checkState();
+			//pas opti de faire ça içi, voir avec le ChunkManager
 			chunk.genCubes();
 		}
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			//initialise la matrice 3D
 			matrices.init3D();
 			glLoadIdentity();
 
+			//bouge la caméra
 			camera.useView();
 
+			//toute se qui à rapport au input
 			input.check();
 			
+			//déssine tout les chunks
 			for(Chunk chunk : chunks){
 				chunk.draw();
 			}
@@ -64,6 +72,8 @@ public class Controleur {
 		}
 	}
 
+	//série de getter
+	
 	public Camera getCamera(){
 		return camera;
 	}

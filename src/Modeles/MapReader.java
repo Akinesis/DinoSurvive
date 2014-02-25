@@ -19,6 +19,7 @@ public class MapReader {
 		clone = contr;
 	}
 
+	//ouvre le fichier map
 	private Boolean openFile(String file){
 		try {
 			FileReader fr = new FileReader(file);
@@ -30,6 +31,7 @@ public class MapReader {
 		}
 	}
 
+	//cré les chunks trouver dnas le fichier map
 	public Vector<Chunk> setChunks(){
 		openFile(clone.getMap());
 
