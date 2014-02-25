@@ -60,7 +60,6 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 	}
 	
 	public void genCube(){
-		glNewList(cubeDisplayList.getList(), GL_COMPILE);
 		glBegin(GL_TRIANGLES);	
 		
 		{//south face
@@ -124,10 +123,7 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 			glVertex3f(pos.x, pos2.y, pos2.z);
 		}
 		
-		glColor3f(1, 1, 1);
-		
 		glEnd();
-		glEndList();
 	}
 	
 	public boolean getState(){

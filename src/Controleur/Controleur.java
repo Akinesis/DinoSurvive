@@ -46,13 +46,16 @@ public class Controleur {
 		display.create();
 		matrices.init3D();
 		blank.genDisplayList();
-
+		blank.startDisplayList();
 		//initialise les chunks une premi�re fois et met les cubes dans le buffer
+		
 		for(Chunk chunk : chunks){
 			chunk.addCubes();
 			chunk.checkState();
 			//pas opti de faire �a i�i, voir avec le ChunkManager
+			chunk.genCubes();
 		}
+		blank.endDisplayList();
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -70,7 +73,6 @@ public class Controleur {
 			
 			//dŽssine tout les chunks
 			for(Chunk chunk : chunks){
-				chunk.genCubes();
 				chunk.draw();
 			}
 			
