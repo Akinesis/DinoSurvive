@@ -1,6 +1,5 @@
 package Modeles;
 
-import java.util.HashMap;
 import java.util.Vector;
 
 import Controleur.Controleur;
@@ -30,9 +29,9 @@ public class Chunk {
 		clone.getMapRead().setCubes(cubes, id);
 	}
 
-	//vŽrife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
+	//vérife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
 	public void checkState(){
-
+		clearChunk();
 		for(int i=0; i<16; i++){
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
@@ -61,7 +60,6 @@ public class Chunk {
 		for(Cube3dVbo cube : renderCubes){
 			cube.draw();
 		}
-		clearChunk();
 	}
 
 	//vide la lste de rendus

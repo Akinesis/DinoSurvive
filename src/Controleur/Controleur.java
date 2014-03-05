@@ -4,7 +4,8 @@ import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL15.glGenBuffers;
+
+import org.newdawn.slick.Color;
 
 import java.util.Vector;
 
@@ -12,10 +13,10 @@ import org.lwjgl.input.Keyboard;
 
 import Modeles.Camera;
 import Modeles.Chunk;
+import Modeles.ChunkManager;
 import Modeles.InputManager;
 import Modeles.MapReader;
-import Modeles.entities.BlankDisplayList;
-import Modeles.entities.Cube3dVbo;
+import Modeles.TextureManager;
 import Vues.GameDisplay;
 import Vues.OpenGL;
 
@@ -23,11 +24,11 @@ public class Controleur {
 
 	private GameDisplay display;
 	private OpenGL matrices;
-	private Vector<Chunk> chunks;
+	private ChunkManager chunkManager;
 	private Camera camera;
 	private InputManager input;
 	private MapReader mapRead;
-	private Cube3dVbo test;
+	private TextureManager texManager;
 
 	//contructeur du Controleur
 	public Controleur(){
@@ -37,22 +38,21 @@ public class Controleur {
 		input = new InputManager(this);
 		input.setCam(camera);
 		mapRead = new MapReader(this);
-		chunks = mapRead.setChunks();
-		test = new Cube3dVbo(0, 2, -1, 1, this);
+		chunkManager = new ChunkManager();
+		chunkManager.setChunksList(mapRead.setChunks());
 	}
 
 	//le coeur du jeux, ma mŽthode contenant la boucle de jeu.
 	public void init(){
 		display.create();
 		matrices.init3D();
-		//initialise les chunks une premi�re fois et met les cubes dans le buffer
-		for(Chunk chunk : chunks){
-			chunk.addCubes();
-			chunk.checkState();
-			//pas opti de faire �a i�i, voir avec le ChunkManager
-			chunk.genCubes();
-			chunk.bindBuffers();
-		}
+		
+		texManager = new TextureManager();
+
+		//initialise les chunks une première fois et met les cubes dans le buffer
+		chunkManager.initChunks();
+		texManager.genTexture();
+		texManager.bindBuffer();
 
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
@@ -68,18 +68,19 @@ public class Controleur {
 
 			//toute se qui à rapport au input
 			input.check();
+
+			texManager.bindText();
 			
 			//déssine tout les chunks
-			for(Chunk chunk : chunks){
-				chunk.draw();
-			}
-			
+			chunkManager.drawChunks();
+			texManager.drawTexture();
+
 			display.update();
 		}
 	}
 
 	//série de getter
-	
+
 	public Camera getCamera(){
 		return camera;
 	}
@@ -91,7 +92,7 @@ public class Controleur {
 	public String getMap(){
 		return "res/map/carte.dmp";
 	}
-	
+
 	public MapReader getMapRead(){
 		return mapRead;
 	}

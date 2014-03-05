@@ -4,10 +4,8 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.nio.FloatBuffer;
-
 import org.lwjgl.BufferUtils;
 
-import Controleur.Controleur;
 
 public class Cube3dVbo extends Cube3D {
 
@@ -16,8 +14,8 @@ public class Cube3dVbo extends Cube3D {
 	private int vboVertexHandle;
 	private FloatBuffer vertexData;
 
-	public Cube3dVbo(float x,float  y,float z,float size, Controleur contr){
-		super(x,y,z,size,contr);
+	public Cube3dVbo(float x,float  y,float z,float size){
+		super(x,y,z,size);
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 

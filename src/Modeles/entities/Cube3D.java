@@ -1,19 +1,14 @@
 package Modeles.entities;
 
-import static org.lwjgl.opengl.GL11.GL_COMPILE;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glCallList;
 import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glEndList;
-import static org.lwjgl.opengl.GL11.glGenLists;
-import static org.lwjgl.opengl.GL11.glNewList;
 import static org.lwjgl.opengl.GL11.glVertex3f;
 import static org.lwjgl.opengl.GL11.glColor3f;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import Controleur.Controleur;
 import Parametres.Parametres;
 
 public class Cube3D extends AbstractEntity3D implements Parametres{
@@ -22,13 +17,11 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 	protected float size;
 	protected BlankDisplayList cubeDisplayList;
 	private boolean etat;
-	private Controleur clone;
 	
-	public Cube3D(float x, float y, float z, float size, Controleur contr){
+	public Cube3D(float x, float y, float z, float size){
 		pos = new Vector3f(x, y, z);
 		pos2 = new Vector3f(pos.x+size, pos.y+size, pos.z+size);
 		this.size=size;
-		clone=contr;
 		
 		//cubeDisplayList = clone.getDisplayList();
 		etat = true;

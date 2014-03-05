@@ -13,14 +13,15 @@ public class InputManager {
 
 	public InputManager(Controleur contr){
 		clone = contr;
+		clone.getMap();//√† changer; inutile
 	}
 
 	public void setCam(Camera cam){
 		camera = cam;
 	}
 
-	//méthode de vérification de tout les input et ction en consquence
-	//doit être allégé et amélioré
+	//m√©thode de v√©rification de tout les input et agis en consquence
+	//doit √™tre all√©g√© et am≈Ωlior≈Ω
 	public void check(){
 
 		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
@@ -52,16 +53,16 @@ public class InputManager {
 			}
 		}
 
-		//vérification du clavier
+		//v≈Ωrification du clavier
 		boolean keyUp = Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_Z);
 		boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S);
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
 		boolean keyRight = Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D);
 
-		//vitesse de déplacement
+		//vitesse de d≈Ωplacement
 		float speed = 0.09f;
 
-		//déplacement
+		//d≈Ωplacement
 		if(keyUp)
 			move(speed,1);
 		if(keyDown)
@@ -73,7 +74,7 @@ public class InputManager {
 
 	}
 
-	//méthode de déplacement
+	//m≈Ωthode de d≈Ωplacement
 	private void move(float amt, float dir){
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));

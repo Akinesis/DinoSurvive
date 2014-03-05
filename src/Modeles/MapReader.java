@@ -3,14 +3,9 @@ package Modeles;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Vector;
 
-
-
-
 import Controleur.Controleur;
-import Modeles.entities.Cube3D;
 import Modeles.entities.Cube3dVbo;
 
 public class MapReader {
@@ -79,7 +74,7 @@ public class MapReader {
 				int y = Integer.parseInt(temp[1].toString());
 				int z = Integer.parseInt(temp[2].subSequence(0, temp[2].length()-1).toString());
 
-				liste[Math.abs(x)][Math.abs(y)][Math.abs(z)]=new Cube3dVbo(x, y, z, 1, clone);
+				liste[Math.abs(x)][Math.abs(y)][Math.abs(z)]=new Cube3dVbo(x, y, z, 1);
 				//liste.put(cubes[i], new Cube3D(x, y, z, 1));
 			}
 		}

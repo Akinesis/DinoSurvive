@@ -2,7 +2,7 @@ package Main;
 
 import Controleur.Game;
 
-public class main {
+public class Launcher {
 
 	//juste le main
 	public static void main(String[] args) {
