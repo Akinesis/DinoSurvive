@@ -8,8 +8,10 @@ import java.util.Vector;
 
 
 
+
 import Controleur.Controleur;
 import Modeles.entities.Cube3D;
+import Modeles.entities.Cube3dVbo;
 
 public class MapReader {
 	Controleur clone;
@@ -58,7 +60,7 @@ public class MapReader {
 		return chunks;
 	}
 
-	public void setCubes(Cube3D[][][] liste, int id){
+	public void setCubes(Cube3dVbo[][][] liste, int id){
 		openFile(clone.getMap());
 		String ligne = readLine();
 		String temp[];
@@ -77,7 +79,7 @@ public class MapReader {
 				int y = Integer.parseInt(temp[1].toString());
 				int z = Integer.parseInt(temp[2].subSequence(0, temp[2].length()-1).toString());
 
-				liste[Math.abs(x)][Math.abs(y)][Math.abs(z)]=new Cube3D(x, y, z, 1, clone);
+				liste[Math.abs(x)][Math.abs(y)][Math.abs(z)]=new Cube3dVbo(x, y, z, 1, clone);
 				//liste.put(cubes[i], new Cube3D(x, y, z, 1));
 			}
 		}

@@ -85,7 +85,7 @@ public class Cube3dVbo extends Cube3D {
 		vertexData.flip();
 	}
 	
-	public void testBuffers(){
+	public void bindBuffers(){
 		vboVertexHandle = glGenBuffers();
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
