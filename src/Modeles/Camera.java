@@ -15,6 +15,7 @@ public class Camera {
 	//constructeur de la caméra, initialise la possition
 	public Camera(Controleur contr){
 		clone = contr;
+		clone.getCamera();
 		position = new Vector3f(0, -3, 0);
 		rotation = new Vector3f(0, 0, 0);
 	}

@@ -4,10 +4,8 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.nio.FloatBuffer;
-
 import org.lwjgl.BufferUtils;
 
-import Controleur.Controleur;
 
 public class Cube3dVbo extends Cube3D {
 
@@ -15,9 +13,11 @@ public class Cube3dVbo extends Cube3D {
 	private int vertexSize = 3;
 	private int vboVertexHandle;
 	private FloatBuffer vertexData;
+	private int type;
 
-	public Cube3dVbo(float x,float  y,float z,float size, Controleur contr){
-		super(x,y,z,size,contr);
+	public Cube3dVbo(float x,float  y,float z,float size){
+		super(x,y,z,size);
+		type=1;
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 
@@ -43,12 +43,12 @@ public class Cube3dVbo extends Cube3D {
 				pos2.x, pos2.y, pos.z,
 
 				//north
+				pos2.x, pos2.y, pos2.z,
+				pos.x, pos2.y, pos2.z,
+				pos.x, pos.y, pos2.z,
+				pos2.x, pos2.y, pos2.z,
 				pos.x, pos.y, pos2.z,
 				pos2.x, pos.y, pos2.z,
-				pos.x, pos2.y, pos2.z,
-				pos.x, pos2.y, pos2.z,
-				pos2.x, pos.y, pos2.z,
-				pos2.x, pos2.y, pos2.z,
 
 				//bottom
 				pos.x, pos2.y, pos.z,
@@ -76,16 +76,16 @@ public class Cube3dVbo extends Cube3D {
 
 				//west
 				pos.x, pos.y, pos.z,
-				pos.x, pos.y, pos2.z,
+				pos.x, pos2.y, pos2.z,
 				pos.x, pos2.y, pos.z,
-				pos.x, pos2.y, pos.z,
 				pos.x, pos.y, pos2.z,
-				pos.x, pos2.y, pos2.z
+				pos.x, pos2.y, pos2.z,
+				pos.x, pos.y, pos.z
 		});
 		vertexData.flip();
 	}
 	
-	public void testBuffers(){
+	public void bindBuffers(){
 		vboVertexHandle = glGenBuffers();
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);

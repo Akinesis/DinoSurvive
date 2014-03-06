@@ -6,15 +6,15 @@ import Controleur.Controleur;
 import Modeles.entities.*;
 
 public class Chunk {
-	private Cube3D[][][] cubes;
-	private Vector<Cube3D> renderCubes;
+	private Cube3dVbo[][][] cubes;
+	private Vector<Cube3dVbo> renderCubes;
 	private Controleur clone;
 	private int x,y,z,id;
 
 	//constructeur d'un chunk, poss�de des cubes et des vecteurs de cubes ˆ dŽssinŽ
 	public Chunk(int x,int y,int z, int id, Controleur contr){
-		cubes = new Cube3D[16][16][16];
-		renderCubes = new Vector<Cube3D>();
+		cubes = new Cube3dVbo[16][16][16];
+		renderCubes = new Vector<Cube3dVbo>();
 		clone = contr;
 
 		this.x = x;
@@ -29,9 +29,9 @@ public class Chunk {
 		clone.getMapRead().setCubes(cubes, id);
 	}
 
-	//vŽrife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
+	//vérife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
 	public void checkState(){
-
+		clearChunk();
 		for(int i=0; i<16; i++){
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
@@ -49,7 +49,7 @@ public class Chunk {
 	//gŽn�re les cubes dans le buffer;
 	//DOIT ETRE ASSOCIER A UNE METHODE DE RESET DES BUFFER !!
 	public void genCubes(){
-		for(Cube3D cube : renderCubes){
+		for(Cube3dVbo cube : renderCubes){
 			cube.genCube();
 		}
 	}
@@ -57,7 +57,7 @@ public class Chunk {
 	//dŽssine tout les cubes actif
 	public void draw(){
 		checkState();
-		for(Cube3D cube : renderCubes){
+		for(Cube3dVbo cube : renderCubes){
 			cube.draw();
 		}
 	}
@@ -70,6 +70,18 @@ public class Chunk {
 	//getter de la liste des cubes
 	public Cube3D[][][] getArrayCubes(){
 		return cubes;
+	}
+	
+	public void bindBuffers(){
+		for(int i=0; i<16; i++){
+			for(int j =0; j<16; j++){
+				for(int k=0; k<16; k++){
+					if(cubes[i][j][k]!=null){
+						cubes[i][j][k].bindBuffers();
+					}
+				}
+			}
+		}
 	}
 
 }
