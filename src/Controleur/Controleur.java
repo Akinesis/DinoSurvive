@@ -47,17 +47,17 @@ public class Controleur {
 	public void init(){
 		display.create();
 		matrices.init3D();
-		//blank.genDisplayList();
-		//blank.startDisplayList();
+		blank.genDisplayList();
+		blank.startDisplayList();
 		//initialise les chunks une premi�re fois et met les cubes dans le buffer
 		
-		//for(Chunk chunk : chunks){
-			//chunk.addCubes();
-			//chunk.checkState();
+		for(Chunk chunk : chunks){
+			chunk.addCubes();
+			chunk.checkState();
 			//pas opti de faire �a i�i, voir avec le ChunkManager
-			//chunk.genCubes();
-		//}
-		//blank.endDisplayList();
+			chunk.genCubes();
+		}
+		blank.endDisplayList();
 		
 		test.testBuffers();
 
@@ -78,9 +78,9 @@ public class Controleur {
 			test.draw();
 			
 			//dŽssine tout les chunks
-			//for(Chunk chunk : chunks){
-			//	chunk.draw();
-			//}
+			for(Chunk chunk : chunks){
+				chunk.draw();
+			}
 			
 			display.update();
 		}

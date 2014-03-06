@@ -1,6 +1,5 @@
 package Modeles;
 
-import java.util.HashMap;
 import java.util.Vector;
 
 import Controleur.Controleur;
