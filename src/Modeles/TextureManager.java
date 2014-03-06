@@ -24,7 +24,7 @@ public class TextureManager {
 			e.printStackTrace();
 		}
 
-		textureData = BufferUtils.createFloatBuffer(6 * 2);
+		textureData = BufferUtils.createFloatBuffer(36 * 2);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
@@ -36,8 +36,45 @@ public class TextureManager {
 				0, 0.25f,
 				0, 0.25f,
 				0.25f, 0,
-				0, 0
-
+				0, 0,
+				
+				0.25f, 0,
+				0, 0,
+				0, 0.25f,
+				0.25f, 0,
+				0, 0.25f,
+				0.25f, 0.25f,
+				
+				//top
+				0.25f, 0.5f,
+				0.25f, 0.25f,
+				0, 0.5f,
+				0, 0.5f,
+				0.25f, 0.25f,
+				0, 0.25f,
+				
+				//bottom
+				0.25f, 0.25f,
+				0.25f, 0,
+				0, 0.25f,
+				0, 0.25f,
+				0.25f, 0,
+				0, 0,
+				
+				0.25f, 0.25f,
+				0.25f, 0,
+				0, 0.25f,
+				0, 0.25f,
+				0.25f, 0,
+				0, 0,
+				
+				0, 0.25f,
+				0.25f, 0,
+				0, 0,
+				0.25f,0.25f,
+				0.25f, 0,
+				0, 0.25f
+				
 		});
 		textureData.flip();
 	}

@@ -13,9 +13,11 @@ public class Cube3dVbo extends Cube3D {
 	private int vertexSize = 3;
 	private int vboVertexHandle;
 	private FloatBuffer vertexData;
+	private int type;
 
 	public Cube3dVbo(float x,float  y,float z,float size){
 		super(x,y,z,size);
+		type=1;
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 
@@ -41,12 +43,12 @@ public class Cube3dVbo extends Cube3D {
 				pos2.x, pos2.y, pos.z,
 
 				//north
+				pos2.x, pos2.y, pos2.z,
+				pos.x, pos2.y, pos2.z,
+				pos.x, pos.y, pos2.z,
+				pos2.x, pos2.y, pos2.z,
 				pos.x, pos.y, pos2.z,
 				pos2.x, pos.y, pos2.z,
-				pos.x, pos2.y, pos2.z,
-				pos.x, pos2.y, pos2.z,
-				pos2.x, pos.y, pos2.z,
-				pos2.x, pos2.y, pos2.z,
 
 				//bottom
 				pos.x, pos2.y, pos.z,
@@ -74,11 +76,11 @@ public class Cube3dVbo extends Cube3D {
 
 				//west
 				pos.x, pos.y, pos.z,
-				pos.x, pos.y, pos2.z,
+				pos.x, pos2.y, pos2.z,
 				pos.x, pos2.y, pos.z,
-				pos.x, pos2.y, pos.z,
 				pos.x, pos.y, pos2.z,
-				pos.x, pos2.y, pos2.z
+				pos.x, pos2.y, pos2.z,
+				pos.x, pos.y, pos.z
 		});
 		vertexData.flip();
 	}

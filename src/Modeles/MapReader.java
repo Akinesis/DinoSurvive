@@ -70,12 +70,11 @@ public class MapReader {
 			String cubes[] = ligne.split(":");
 			for(int i = 1; i < cubes.length; i++ ){
 				temp = cubes[i].split(",");
-				int x = Integer.parseInt(temp[0].subSequence(1, temp[0].length()).toString()); //transforme "{xxx" en un int XXX
+				int x = Integer.parseInt(temp[0].subSequence(1, temp[0].length()).toString()); //transforme "[xxx" en un int XXX
 				int y = Integer.parseInt(temp[1].toString());
 				int z = Integer.parseInt(temp[2].subSequence(0, temp[2].length()-1).toString());
 
 				liste[Math.abs(x)][Math.abs(y)][Math.abs(z)]=new Cube3dVbo(x, y, z, 1);
-				//liste.put(cubes[i], new Cube3D(x, y, z, 1));
 			}
 		}
 		close();

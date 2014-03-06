@@ -53,6 +53,7 @@ public class Controleur {
 		chunkManager.initChunks();
 		texManager.genTexture();
 		texManager.bindBuffer();
+		texManager.bindText();
 
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
@@ -68,8 +69,6 @@ public class Controleur {
 
 			//toute se qui à rapport au input
 			input.check();
-
-			texManager.bindText();
 			
 			//déssine tout les chunks
 			chunkManager.drawChunks();

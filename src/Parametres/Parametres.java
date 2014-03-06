@@ -7,7 +7,7 @@ public interface Parametres {
 	
 	float fov = 50;
 	float near = 0.3f;
-	float far = 20f;
+	float far = 45f;
 	
 	
 	
