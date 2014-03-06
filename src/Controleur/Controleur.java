@@ -5,7 +5,6 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
-import org.newdawn.slick.Color;
 
 import java.util.Vector;
 
@@ -46,21 +45,6 @@ public class Controleur {
 	public void init(){
 		display.create();
 		matrices.init3D();
-<<<<<<< HEAD
-		blank.genDisplayList();
-		blank.startDisplayList();
-		//initialise les chunks une premi�re fois et met les cubes dans le buffer
-		
-		for(Chunk chunk : chunks){
-			chunk.addCubes();
-			chunk.checkState();
-			//pas opti de faire �a i�i, voir avec le ChunkManager
-			chunk.genCubes();
-		}
-		blank.endDisplayList();
-=======
->>>>>>> FETCH_HEAD
-		
 		texManager = new TextureManager();
 
 		//initialise les chunks une première fois et met les cubes dans le buffer
@@ -84,20 +68,10 @@ public class Controleur {
 			//toute se qui à rapport au input
 			input.check();
 			
-<<<<<<< HEAD
-			test.draw();
-			
-			//dŽssine tout les chunks
-			for(Chunk chunk : chunks){
-				chunk.draw();
-			}
-			
-=======
 			//déssine tout les chunks
 			chunkManager.drawChunks();
 			texManager.drawTexture();
 
->>>>>>> FETCH_HEAD
 			display.update();
 		}
 	}
