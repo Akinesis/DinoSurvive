@@ -25,6 +25,7 @@ public class InputManager {
 	public void check(){
 
 		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
+		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 
 		float mouseDX = Mouse.getDX() * 1 * 0.16f;
 		float mouseDY = Mouse.getDY() * 1 * 0.16f;
@@ -33,6 +34,9 @@ public class InputManager {
 		while(Keyboard.next()){
 			if(keyC){
 				coef*=-1;
+			}
+			if(keyReturn){
+				clone.changeGragMouse();
 			}
 		}
 

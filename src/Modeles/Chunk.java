@@ -58,10 +58,21 @@ public class Chunk {
 	public void draw(TextureManager texMan){
 		checkState();
 		for(Cube3dVbo cube : renderCubes){
-			cube.draw();
-			texMan.bindBuffer();
+			cube.bindBuffers();
+			
 			texMan.genText(cube.getType());
-			texMan.drawTexture();
+			texMan.bindBuffer();
+			
+			cube.bindDrawCube();
+			texMan.bindDrawTexture();
+			
+			cube.enableCube();
+			texMan.enableTexture();
+			
+			cube.draw();
+			
+			texMan.disableTexture();
+			cube.disableCube();
 		}
 	}
 
@@ -80,7 +91,7 @@ public class Chunk {
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
 					if(cubes[i][j][k]!=null){
-						cubes[i][j][k].bindBuffers();
+						//cubes[i][j][k].bindBuffers();
 					}
 				}
 			}

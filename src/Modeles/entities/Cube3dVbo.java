@@ -24,12 +24,21 @@ public class Cube3dVbo extends Cube3D {
 	}
 
 	public void draw(){
+        glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
+	}
+	
+	public void bindDrawCube(){
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);
-
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
-        glDisableClientState(GL_VERTEX_ARRAY);
+	}
+	
+	public void enableCube(){
+		glEnableClientState(GL_VERTEX_ARRAY);
+	}
+	
+	public void disableCube(){
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 	
 	public void genCube(){

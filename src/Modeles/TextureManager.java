@@ -129,6 +129,57 @@ public class TextureManager {
 		});
 		textureData.flip();
 	}
+	
+	public void genStoneTexture(){
+		textureData.put(new float[]{
+				//south
+				0.5f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.5f,
+				0.25f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.25f,
+				
+				0.5f, 0.25f,
+				0.25f, 0.25f,
+				0.25f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.5f,
+				0.5f, 0.5f,
+				
+				//top
+				0.5f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.5f,
+				0.25f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.25f,
+				
+				//bottom
+				0.25f, 0.25f,
+				0.25f, 0.5f,
+				0.5f, 0.25f,
+				0.5f, 0.25f,
+				0.25f, 0.5f,
+				0.5f, 0.5f,
+				
+				0.5f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.5f,
+				0.25f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.25f,
+				
+				0.25f, 0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.25f,
+				0.5f,0.5f,
+				0.5f, 0.25f,
+				0.25f, 0.5f
+				
+		});
+		textureData.flip();
+	}
 
 	public void bindText(){
 		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
@@ -142,10 +193,17 @@ public class TextureManager {
 	    glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 	
-	public void drawTexture(){
+	public void bindDrawTexture(){
 		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
 		glTexCoordPointer(2, GL_FLOAT, 0, 0l);
+	}
+	
+	public void enableTexture(){
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
+	
+	public void disableTexture(){
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
 	
 	public void genText(int type){
@@ -156,6 +214,9 @@ public class TextureManager {
 			break;
 		case 2:
 			genDirtTexture();
+			break;
+		case 3:
+			genStoneTexture();
 			break;
 		default:
 			break;
