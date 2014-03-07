@@ -19,9 +19,9 @@ public class ChunkManager {
 		}
 	}
 	
-	public void drawChunks(){
+	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : chunks){
-			chunk.draw();
+			chunk.draw(textMan);
 		}
 	}
 

@@ -55,10 +55,13 @@ public class Chunk {
 	}
 
 	//dŽssine tout les cubes actif
-	public void draw(){
+	public void draw(TextureManager texMan){
 		checkState();
 		for(Cube3dVbo cube : renderCubes){
 			cube.draw();
+			texMan.bindBuffer();
+			texMan.genText(cube.getType());
+			texMan.drawTexture();
 		}
 	}
 

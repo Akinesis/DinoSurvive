@@ -28,7 +28,7 @@ public class TextureManager {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
-	public void genTexture(){
+	public void genGrassTexture(){
 		textureData.put(new float[]{
 				//south
 				0.25f, 0.25f,
@@ -54,12 +54,12 @@ public class TextureManager {
 				0, 0.25f,
 				
 				//bottom
+				0.25f, 0,
 				0.25f, 0.25f,
-				0.25f, 0,
-				0, 0.25f,
-				0, 0.25f,
-				0.25f, 0,
-				0, 0,
+				0.5f, 0,
+				0.5f, 0,
+				0.25f, 0.25f,
+				0.5f, 0.25f,
 				
 				0.25f, 0.25f,
 				0.25f, 0,
@@ -74,6 +74,57 @@ public class TextureManager {
 				0.25f,0.25f,
 				0.25f, 0,
 				0, 0.25f
+				
+		});
+		textureData.flip();
+	}
+	
+	public void genDirtTexture(){
+		textureData.put(new float[]{
+				//south
+				0.5f, 0.25f,
+				0.5f, 0,
+				0.25f, 0.25f,
+				0.25f, 0.25f,
+				0.5f, 0,
+				0.25f, 0,
+				
+				0.5f, 0,
+				0.25f, 0,
+				0.25f, 0.25f,
+				0.5f, 0,
+				0.25f, 0.25f,
+				0.5f, 0.25f,
+				
+				//top
+				0.5f, 0.25f,
+				0.5f, 0,
+				0.25f, 0.25f,
+				0.25f, 0.25f,
+				0.5f, 0,
+				0.25f, 0,
+				
+				//bottom
+				0.25f, 0,
+				0.25f, 0.25f,
+				0.5f, 0,
+				0.5f, 0,
+				0.25f, 0.25f,
+				0.5f, 0.25f,
+				
+				0.5f, 0.25f,
+				0.5f, 0,
+				0.25f, 0.25f,
+				0.25f, 0.25f,
+				0.5f, 0,
+				0.25f, 0,
+				
+				0.25f, 0.25f,
+				0.5f, 0,
+				0.25f, 0,
+				0.5f,0.25f,
+				0.5f, 0,
+				0.25f, 0.25f
 				
 		});
 		textureData.flip();
@@ -95,6 +146,20 @@ public class TextureManager {
 		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
 		glTexCoordPointer(2, GL_FLOAT, 0, 0l);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
+	
+	public void genText(int type){
+		textureData.clear();
+		switch (type) {
+		case 1:
+			genGrassTexture();
+			break;
+		case 2:
+			genDirtTexture();
+			break;
+		default:
+			break;
+		}
 	}
 
 }

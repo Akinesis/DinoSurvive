@@ -15,9 +15,9 @@ public class Cube3dVbo extends Cube3D {
 	private FloatBuffer vertexData;
 	private int type;
 
-	public Cube3dVbo(float x,float  y,float z,float size){
+	public Cube3dVbo(float x,float  y,float z,float size, int typ){
 		super(x,y,z,size);
-		type=1;
+		type=typ;
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 
@@ -90,6 +90,10 @@ public class Cube3dVbo extends Cube3D {
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	
+	public int getType(){
+		return type;
 	}
 	
 }

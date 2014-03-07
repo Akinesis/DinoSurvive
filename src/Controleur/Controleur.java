@@ -49,7 +49,7 @@ public class Controleur {
 
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
-		texManager.genTexture();
+		//texManager.genGrassTexture();
 		texManager.bindBuffer();
 		texManager.bindText();
 
@@ -69,8 +69,7 @@ public class Controleur {
 			input.check();
 			
 			//déssine tout les chunks
-			chunkManager.drawChunks();
-			texManager.drawTexture();
+			chunkManager.drawChunks(texManager);
 
 			display.update();
 		}
