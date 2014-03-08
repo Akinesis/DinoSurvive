@@ -130,7 +130,306 @@ public class TextureManager {
 		textureData.flip();
 	}
 	
-	public void genStoneTexture(){
+	public void genCoalTexture(){
+		textureData.put(new float[]{
+				0.75f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.25f,
+				0.5f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.0f,
+				0.75f, 0.0f,
+				0.5f, 0.0f,
+				0.5f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.25f,
+				0.5f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.0f,
+				0.5f, 0.0f,
+				0.5f, 0.25f,
+				0.75f, 0.0f,
+				0.75f, 0.0f,
+				0.5f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.25f,
+				0.5f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.0f,
+				0.5f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.0f,
+				0.75f, 0.25f,
+				0.75f, 0.0f,
+				0.5f, 0.25f
+
+		});
+		textureData.flip();
+	}
+	
+	public void genGoldTexture(){
+		textureData.put(new float[]{
+				1.0f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.25f,
+				0.75f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.0f,
+				1.0f, 0.0f,
+				0.75f, 0.0f,
+				0.75f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.25f,
+				1.0f, 0.25f,
+				1.0f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.25f,
+				0.75f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.0f,
+				0.75f, 0.0f,
+				0.75f, 0.25f,
+				1.0f, 0.0f,
+				1.0f, 0.0f,
+				0.75f, 0.25f,
+				1.0f, 0.25f,
+				1.0f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.25f,
+				0.75f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.0f,
+				0.75f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.0f,
+				1.0f, 0.25f,
+				1.0f, 0.0f,
+				0.75f, 0.25f
+
+		});
+		textureData.flip();
+	}
+	
+	public void genSilverTexture(){
+		textureData.put(new float[]{
+				0.25f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.75f,
+				0.0f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.5f,
+				0.25f, 0.5f,
+				0.0f, 0.5f,
+				0.0f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.75f,
+				0.25f, 0.75f,
+				0.25f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.75f,
+				0.0f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.5f,
+				0.0f, 0.5f,
+				0.0f, 0.75f,
+				0.25f, 0.5f,
+				0.25f, 0.5f,
+				0.0f, 0.75f,
+				0.25f, 0.75f,
+				0.25f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.75f,
+				0.0f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.5f,
+				0.0f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.5f,
+				0.25f, 0.75f,
+				0.25f, 0.5f,
+				0.0f, 0.75f
+
+		});
+		textureData.flip();
+	}
+	
+	public void genIronTexture(){
+		textureData.put(new float[]{
+				0.75f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.5f,
+				0.5f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.25f,
+				0.75f, 0.25f,
+				0.5f, 0.25f,
+				0.5f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.5f,
+				0.75f, 0.5f,
+				0.75f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.5f,
+				0.5f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.25f,
+				0.5f, 0.25f,
+				0.5f, 0.5f,
+				0.75f, 0.25f,
+				0.75f, 0.25f,
+				0.5f, 0.5f,
+				0.75f, 0.5f,
+				0.75f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.5f,
+				0.5f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.25f,
+				0.5f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.25f,
+				0.75f, 0.5f,
+				0.75f, 0.25f,
+				0.5f, 0.5f
+
+		});
+		textureData.flip();
+	}
+	
+	public void genCopperTexture(){
+		textureData.put(new float[]{
+				0.5f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.75f,
+				0.25f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.5f,
+				0.5f, 0.5f,
+				0.25f, 0.5f,
+				0.25f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.75f,
+				0.5f, 0.75f,
+				0.5f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.75f,
+				0.25f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.5f,
+				0.25f, 0.5f,
+				0.25f, 0.75f,
+				0.5f, 0.5f,
+				0.5f, 0.5f,
+				0.25f, 0.75f,
+				0.5f, 0.75f,
+				0.5f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.75f,
+				0.25f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.5f,
+				0.25f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.5f,
+				0.5f, 0.75f,
+				0.5f, 0.5f,
+				0.25f, 0.75f
+
+		});
+		textureData.flip();
+	}
+	
+	public void genTitaneTexture(){
+		textureData.put(new float[]{
+				0.75f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.75f,
+				0.5f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.5f,
+				0.75f, 0.5f,
+				0.5f, 0.5f,
+				0.5f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.75f,
+				0.75f, 0.75f,
+				0.75f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.75f,
+				0.5f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.5f,
+				0.5f, 0.5f,
+				0.5f, 0.75f,
+				0.75f, 0.5f,
+				0.75f, 0.5f,
+				0.5f, 0.75f,
+				0.75f, 0.75f,
+				0.75f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.75f,
+				0.5f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.5f,
+				0.5f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.5f,
+				0.75f, 0.75f,
+				0.75f, 0.5f,
+				0.5f, 0.75f
+		});
+		textureData.flip();
+	}
+	
+	public void genUraniumTexture(){
+		textureData.put(new float[]{
+				1.0f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.5f,
+				0.75f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.25f,
+				1.0f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.5f,
+				1.0f, 0.5f,
+				1.0f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.5f,
+				0.75f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.5f,
+				1.0f, 0.25f,
+				1.0f, 0.25f,
+				0.75f, 0.5f,
+				1.0f, 0.5f,
+				1.0f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.5f,
+				0.75f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.25f,
+				0.75f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.25f,
+				1.0f, 0.5f,
+				1.0f, 0.25f,
+				0.75f, 0.5f
+		});
+		textureData.flip();
+	}
+	
+public void genStoneTexture(){
 		textureData.put(new float[]{
 				//south
 				0.5f, 0.5f,
@@ -217,6 +516,27 @@ public class TextureManager {
 			break;
 		case 3:
 			genStoneTexture();
+			break;
+		case 4:
+			genCoalTexture();
+			break;
+		case 5:
+			genGoldTexture();
+			break;
+		case 6:
+			genSilverTexture();
+			break;
+		case 7:
+			genIronTexture();
+			break;
+		case 8:
+			genCopperTexture();
+			break;
+		case 9:
+			genTitaneTexture();
+			break;
+		case 10:
+			genUraniumTexture();
 			break;
 		default:
 			break;
