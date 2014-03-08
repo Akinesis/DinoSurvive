@@ -428,6 +428,48 @@ public class TextureManager {
 		});
 		textureData.flip();
 	}
+
+	public void genWoodTexture(){
+		textureData.put(new float[]{
+				0.25f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 1.0f,
+				0.0f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 0.75f,
+				0.25f, 0.75f,
+				0.0f, 0.75f,
+				0.0f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 1.0f,
+				0.25f, 1.0f,
+				0.25f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 1.0f,
+				0.0f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 0.75f,
+				0.0f, 0.75f,
+				0.0f, 1.0f,
+				0.25f, 0.75f,
+				0.25f, 0.75f,
+				0.0f, 1.0f,
+				0.25f, 1.0f,
+				0.25f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 1.0f,
+				0.0f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 0.75f,
+				0.0f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 0.75f,
+				0.25f, 1.0f,
+				0.25f, 0.75f,
+				0.0f, 1.0f
+		});
+		textureData.flip();
+	}
 	
 public void genStoneTexture(){
 		textureData.put(new float[]{
@@ -537,6 +579,9 @@ public void genStoneTexture(){
 			break;
 		case 10:
 			genUraniumTexture();
+			break;
+		case 11:
+			genWoodTexture();
 			break;
 		default:
 			break;
