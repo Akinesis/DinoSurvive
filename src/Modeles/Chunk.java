@@ -8,6 +8,31 @@ import Modeles.entities.*;
 public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
+	
+	public Cube3dVbo getCubes(int xChunk, int yChunk, int zChunk) {
+		return cubes[xChunk][yChunk][zChunk];
+	}
+
+	public Cube3dVbo[][][] getCubes(){
+		return cubes;
+	}
+	
+	public Vector<Cube3dVbo> getRenderCubes() {
+		return renderCubes;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getZ() {
+		return z;
+	}
+
 	private Controleur clone;
 	private int x,y,z,id;
 

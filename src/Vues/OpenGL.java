@@ -29,5 +29,8 @@ public class OpenGL implements Parametres {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glLoadIdentity();
 	}
+	public void init2D(){
+		
+	}
 
 }

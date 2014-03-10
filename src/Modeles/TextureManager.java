@@ -521,7 +521,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 	
-public void genStoneTexture(){
+	public void genStoneTexture(){
 		textureData.put(new float[]{
 				//south
 				0.5f, 0.5f,

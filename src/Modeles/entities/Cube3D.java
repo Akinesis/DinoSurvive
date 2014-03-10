@@ -119,6 +119,10 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 		glEnd();
 	}
 	
+	/**
+	 *
+	 * @return true si le cube est actif.
+	 */
 	public boolean getState(){
 		return etat;
 	}

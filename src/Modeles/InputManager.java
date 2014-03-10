@@ -8,12 +8,12 @@ import Controleur.Controleur;
 public class InputManager {
 
 	private Camera camera;
-	private Controleur clone;
+	private Controleur controleur;
 	private int coef = 1;
 
 	public InputManager(Controleur contr){
-		clone = contr;
-		clone.getMap();//à changer; inutile
+		controleur = contr;
+		controleur.getMap();//à changer; inutile
 	}
 
 	public void setCam(Camera cam){
@@ -36,7 +36,7 @@ public class InputManager {
 				coef*=-1;
 			}
 			if(keyReturn){
-				clone.changeGragMouse();
+				controleur.changeGragMouse();
 			}
 		}
 
@@ -85,8 +85,7 @@ public class InputManager {
 	}
 	
 	private void moveY(float amt){
-		double tempY = amt;
-		
+		double tempY = amt;	
 		camera.getPos().y += tempY;
 	}
 	
@@ -95,8 +94,14 @@ public class InputManager {
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));
 		
-		camera.getPos().z += tempZ;
-		camera.getPos().x += tempX;
+		tempZ += camera.getPos().z;
+		tempX += camera.getPos().x;
+		double tempY = camera.getPos().y;
+		
+		if( controleur.getChunkManager().getCubeAt( (int)Math.floor(tempX), (int)Math.floor(tempY), (int)Math.floor(tempZ) ) == null ){
+			camera.getPos().z = (float) tempZ;
+			camera.getPos().x = (float) tempX;
+		}
 	}
 
 }

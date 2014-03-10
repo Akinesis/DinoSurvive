@@ -5,13 +5,9 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
-
-import java.util.Vector;
-
 import org.lwjgl.input.Keyboard;
 
 import Modeles.Camera;
-import Modeles.Chunk;
 import Modeles.ChunkManager;
 import Modeles.InputManager;
 import Modeles.MapReader;
@@ -80,6 +76,26 @@ public class Controleur {
 
 	public Camera getCamera(){
 		return camera;
+	}
+
+	public GameDisplay getDisplay() {
+		return display;
+	}
+
+	public OpenGL getMatrices() {
+		return matrices;
+	}
+
+	public ChunkManager getChunkManager() {
+		return chunkManager;
+	}
+
+	public InputManager getInput() {
+		return input;
+	}
+
+	public TextureManager getTexManager() {
+		return texManager;
 	}
 
 	public void setCamera(Camera cam){
