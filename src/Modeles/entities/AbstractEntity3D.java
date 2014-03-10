@@ -7,18 +7,18 @@ public abstract class AbstractEntity3D implements Entity3D {
 	protected Vector3f pos;
 
 	@Override
-	public float getX() {
-		return pos.x;
+	public int getX() {
+		return (int)pos.x;
 	}
 
 	@Override
-	public float getY() {
-		return pos.y;
+	public int getY() {
+		return  (int)pos.y;
 	}
 
 	@Override
-	public float getZ() {
-		return pos.z;
+	public int getZ() {
+		return (int)pos.z;
 	}
 
 	@Override
