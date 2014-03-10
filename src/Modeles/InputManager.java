@@ -85,16 +85,14 @@ public class InputManager {
 	}
 	
 	private void moveY(float amt){
-		double tempY = amt;
-		
+		double tempY = amt;		
 		camera.getPos().y += tempY;
 	}
 	
 	//méthode de déplacement
 	private void move(float amt, float dir){
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
-		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));
-		
+		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));		
 		camera.getPos().z += tempZ;
 		camera.getPos().x += tempX;
 	}

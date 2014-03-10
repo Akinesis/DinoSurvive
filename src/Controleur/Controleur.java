@@ -59,7 +59,8 @@ public class Controleur {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//initialise la matrice 3D
-			matrices.rest3D(); 
+			//matrices.init3D();
+			glLoadIdentity();
 
 
 			//bouge la caméra
@@ -70,8 +71,6 @@ public class Controleur {
 			
 			//déssine tout les chunks
 			chunkManager.drawChunks(texManager);
-			
-			matrices.init2d();
 
 			display.update();
 		}
