@@ -1,5 +1,7 @@
 package Modeles;
-
+/**
+ * Classe représentant les Chunks comme divisions du "monde" 
+ */
 import java.util.Vector;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -13,7 +15,17 @@ public class Chunk {
 	private Controleur clone;
 	private int x,y,z,id;
 
-	//constructeur d'un chunk, possède des cubes et des vecteurs de cubes à dessiner
+	/*Constructeurs
+	 * 
+	 */
+	/**
+	 * Constructeur du chunk
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param id
+	 * @param contr
+	 */
 	public Chunk(int x,int y,int z, int id, Controleur contr){
 		cubes = new Cube3dVbo[16][16][16];
 		renderCubes = new Vector<Cube3dVbo>();
@@ -26,12 +38,66 @@ public class Chunk {
 		this.id = id;
 	}
 	
-	//getter de cube dans le chunk
-	public Cube3dVbo getCubeInChunk(int i, int j, int k){
-		return cubes[i][j][k];		
-		
+	/*
+	 * Getters
+	 */
+	
+	/**
+	 * Renvoie un cube aux coordonnées x,y,z (dans le chunk)
+	 * @param xChunk
+	 * @param yChunk
+	 * @param zChunk
+	 * @return un Cube3dVbo
+	 */
+	public Cube3dVbo getCube(int xChunk, int yChunk, int zChunk) {
+		return cubes[xChunk][yChunk][zChunk];
 	}
 
+	/**
+	 * Renvoie le tableau à trois dimension de cubes du chunk
+	 * @return
+	 */
+	public Cube3dVbo[][][] getCubes(){
+		return cubes;
+	}
+
+	/**
+	 * Renvoie le vecteur de Cube3dVbo rendus
+	 * @return
+	 */
+	public Vector<Cube3dVbo> getRenderCubes() {
+		return renderCubes;
+	}
+	/**
+	 * Renvoie la coordonnée suivant x du chunk
+	 * @return
+	 */
+	public int getX() {
+		return x;
+	}
+
+	/**
+	 * Renvoie la coordonnée suivant y du chunk
+	 * @return
+	 */
+	public int getY() {
+		return y;
+	}
+
+	/**
+	 * Renvoie la coordonnée suivant z du chunk
+	 * @return
+	 */
+	public int getZ() {
+		return z;
+	}
+	/**
+	 * renvoie l'id du chunk
+	 * @return
+	 */
+	public int getID(){
+		return id;
+	}
 	//boucle qui ajoute tout les cube liŽ ˆ l'ID du chunk (aka la ligne dans le programme)
 	public void addCubes(){
 		clone.getMapRead().setCubes(cubes, id);
