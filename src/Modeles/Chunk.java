@@ -73,7 +73,7 @@ public class Chunk {
 		clone.getMapRead().setCubes(cubes, id);
 	}
 
-	//vérife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
+	//v�rife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
 	public void checkState(){
 		clearChunk();
 		for(int i=0; i<16; i++){
@@ -90,7 +90,7 @@ public class Chunk {
 	}
 
 
-	//génère les cubes dans le buffer;
+	//g�nere les cubes dans le buffer;
 	//DOIT ETRE ASSOCIER A UNE METHODE DE RESET DES BUFFER !!
 	public void genCubes(){
 		for(Cube3dVbo cube : renderCubes){
@@ -144,8 +144,8 @@ public class Chunk {
 	
 	//ajout de cube dans le chunk
 	public void addCube3dVbo(Cube3dVbo cube){
-		//il faut vérifier que le cube peut être dans ce chunk là
-		//on fera ça après, ajoutons sauvagement un cube
+		//il faut v�rifier que le cube peut être dans ce chunk là
+		//on fera a apr�s, ajoutons sauvagement un cube
 		cubes[cube.getX()][cube.getY()][cube.getZ()] = cube;		
 	}
 	
