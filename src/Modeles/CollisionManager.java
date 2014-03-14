@@ -10,8 +10,8 @@ public class CollisionManager {
 		clone = contr;
 	}
 	
-	public boolean colideX(Camera cam, float posX){
-		return true;
+	public boolean colideXZ(Camera cam, float posX, float posZ){
+		return (clone.getChunkManager().getCubeAt(cam.getPos().x+posX, cam.getPos().y, cam.getPos().z+posZ))!=null;
 	}
 	
 	public boolean colideZ(Camera cam, float posZ){

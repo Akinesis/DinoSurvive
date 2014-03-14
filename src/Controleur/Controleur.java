@@ -11,6 +11,7 @@ import vues.GameDisplay;
 import vues.OpenGL;
 import Modeles.Camera;
 import Modeles.ChunkManager;
+import Modeles.CollisionManager;
 import Modeles.InputManager;
 import Modeles.MapReader;
 import Modeles.TextureManager;
@@ -24,6 +25,7 @@ public class Controleur {
 	private InputManager input;
 	private MapReader mapRead;
 	private TextureManager texManager;
+	private CollisionManager collision;
 
 	//contructeur du Controleur
 	public Controleur(){
@@ -31,6 +33,7 @@ public class Controleur {
 		matrices = new OpenGL();
 		camera = new Camera(this);
 		input = new InputManager(this);
+		collision = new CollisionManager(this);
 		input.setCam(camera);
 		mapRead = new MapReader(this);
 		chunkManager = new ChunkManager();
@@ -84,10 +87,6 @@ public class Controleur {
 		return display;
 	}
 
-	public OpenGL getMatrices() {
-		return matrices;
-	}
-
 	public ChunkManager getChunkManager() {
 		return chunkManager;
 	}
@@ -106,6 +105,10 @@ public class Controleur {
 
 	public MapReader getMapRead(){
 		return mapRead;
+	}
+	
+	public CollisionManager getCollision(){
+		return collision;
 	}
 
  	public void changeGragMouse(){

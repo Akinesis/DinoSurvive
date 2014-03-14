@@ -8,20 +8,20 @@ import controleur.Controleur;
 public class InputManager {
 
 	private Camera camera;
-	private Controleur controleur;
+	private Controleur clone;
 	private int coef = 1;
 
 	public InputManager(Controleur contr){
-		controleur = contr;
-		controleur.getMap();//à changer; inutile
+		clone = contr;
+		clone.getMap();//à changer; inutile
 	}
 
 	public void setCam(Camera cam){
 		camera = cam;
 	}
 
-	//méthode de vérification de tout les input et agis en consquence
-	//doit être allégé et amélioré
+	//m�thode de v�rification de tout les input et agis en consquence
+	//doit etre allégé et am�lior�
 	public void check(){
 
 		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
@@ -36,7 +36,7 @@ public class InputManager {
 				coef*=-1;
 			}
 			if(keyReturn){
-				controleur.changeGragMouse();
+				clone.changeGragMouse();
 			}
 		}
 
@@ -57,7 +57,7 @@ public class InputManager {
 			}
 		}
 
-		//vérification du clavier
+		//v�rification du clavier
 		boolean keyUp = Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_Z);
 		boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S);
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
@@ -65,10 +65,10 @@ public class InputManager {
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 
-		//vitesse de déplacement
+		//vitesse de d�placement
 		float speed = 0.09f;
 
-		//déplacement
+		//d�placement
 		if(keyUp)
 			move(speed,1);
 		if(keyDown)
@@ -94,9 +94,10 @@ public class InputManager {
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));
 		
-		camera.getPos().z += tempZ;
-		camera.getPos().x += tempX;
-
+		if(!clone.getCollision().colideXZ(camera, (float)tempX, (float)tempZ)){
+			camera.getPos().z += tempZ;
+			camera.getPos().x += tempX;
+		}
 	}
 
 }

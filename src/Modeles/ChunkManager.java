@@ -19,14 +19,16 @@ public class ChunkManager {
 		}
 	}
 	
-	public Cube3dVbo getCubeAt(int x, int y, int z){
-		int xChunk = x % 16;
-		int yChunk = y % 16;
-		int zChunk = z % 16;
+	public Cube3dVbo getCubeAt(float x, float y, float z){
+		float xChunk = (x>0)?(float)Math.floor(x / 16):(float)Math.ceil(x / 16);
+		float yChunk = (y>0)?(float)Math.floor(y / 16):(float)Math.ceil(y / 16);
+		float zChunk = (z>0)?(float)Math.floor(z / 16):(float)Math.ceil(z / 16);
+		
+		
 		Cube3dVbo cube = null;
 		for(Chunk ck : chunks){
 			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
-				cube = ck.getCubes(xChunk, yChunk, zChunk);
+				cube = ck.getCube(x, y, z);
 			}
 		}
 		return cube;

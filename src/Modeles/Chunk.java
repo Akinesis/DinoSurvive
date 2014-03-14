@@ -3,6 +3,7 @@ package Modeles;
  * Classe représentant les Chunks comme divisions du "monde" 
  */
 import java.util.Vector;
+
 import controleur.Controleur;
 import Modeles.entities.*;
 
@@ -33,33 +34,19 @@ public class Chunk {
 		this.id = id;
 	}
 	
-	//getter de cube dans le chunk
-	public Cube3dVbo getCubes(int xChunk, int yChunk, int zChunk) {
-		return cubes[xChunk][yChunk][zChunk];
-	}
-	/*
-	 * Getters
-	 */
-	
 	/**
-	 * Renvoie un cube aux coordonnÃ©es x,y,z (dans le chunk)
-	 * @param xChunk
-	 * @param yChunk
-	 * @param zChunk
+	 * Renvoie un cube aux coordonnées x,y,z
+	 * @param xC
+	 * @param y
+	 * @param z
 	 * @return un Cube3dVbo
 	 */
-	public Cube3dVbo getCube(int xChunk, int yChunk, int zChunk) {
-		return cubes[xChunk][yChunk][zChunk];
+	public Cube3dVbo getCube(float x, float y, float z) {
+		int tempX = (x>0)?(int)Math.floor(x)%16:(int)Math.abs(Math.ceil(z)%16);
+		int tempY = (y>0)?(int)Math.floor(y)%16:(int)Math.abs(Math.ceil(z)%16);
+		int tempZ = (z>0)?(int)Math.floor(z)%16:(int)Math.abs(Math.ceil(z)%16);
+		return cubes[tempX][tempY][tempZ];
 	}
-
-	/**
-	 * Renvoie le tableau Ã  trois dimension de cubes du chunk
-	 * @return
-	 */
-	public Cube3dVbo[][][] getCubes(){
-		return cubes;
-	}
-
 
 	/**
 	 * renvoie l'id du chunk
