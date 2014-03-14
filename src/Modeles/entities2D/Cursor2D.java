@@ -22,11 +22,11 @@ public class Cursor2D {
 	
 	
 	/**
-	 * calculs à utiliser pour l'affichage du curseur (osef de glVertex2f'
-	glVertex2f(Display.getWidth()/2 +10, Display.getHeight()/2);
-	glVertex2f(Display.getWidth()/2 -10, Display.getHeight()/2);
-
-	glVertex2f(Display.getWidth()/2, Display.getHeight()/2 +10);
-	glVertex2f(Display.getWidth()/2, Display.getHeight()/2 -10);
-*/
+	 * calculs à utiliser pour l'affichage du curseur (osef de glVertex2f)
+	 *glVertex2f(Display.getWidth()/2 +10, Display.getHeight()/2);
+	 *glVertex2f(Display.getWidth()/2 -10, Display.getHeight()/2);
+	 *
+	 *glVertex2f(Display.getWidth()/2, Display.getHeight()/2 +10);
+	 *glVertex2f(Display.getWidth()/2, Display.getHeight()/2 -10);
+	 */
 }

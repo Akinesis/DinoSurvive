@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import Parametres.Parametres;
+import parametres.Parametres;
 
 public class Cube3D extends AbstractEntity3D implements Parametres{
 	
@@ -118,9 +118,20 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 		
 		glEnd();
 	}
+	
+	/**
+	 *
+	 * @return true si le cube est actif.
+=======
 	/**
 	 * 
 	 * @return true si le cube est actif
+>>>>>>> 99a04e5f1bc8a53f0b6fea51b8ce1be7e0cf9f1f
+=======
+	/**
+	 * 
+	 * @return true si le cube est actif
+>>>>>>> 99a04e5f1bc8a53f0b6fea51b8ce1be7e0cf9f1f
 	 */
 	public boolean getState(){
 		return etat;

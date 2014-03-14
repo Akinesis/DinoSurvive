@@ -20,7 +20,6 @@ public class Cube3dVbo extends Cube3D {
 		type=typ;
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
-
 	}
 
 	public void draw(){

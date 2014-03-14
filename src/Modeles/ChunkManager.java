@@ -9,39 +9,6 @@ public class ChunkManager {
 	public ChunkManager(){
 		chunks = new Vector<Chunk>();
 	}
-	
-	/*
-	 * Getters
-	 */
-	public Vector<Chunk> getChunks() {
-		return chunks;
-	}
-
-	public Cube3dVbo getCubeAt(int x, int y, int z){
-		int xChunk = x % 16;
-		int yChunk = y % 16;
-		int zChunk = z % 16;
-		Cube3dVbo cube = null;
-		for(Chunk ck : chunks){
-			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
-				cube = ck.getCube(xChunk, yChunk, zChunk);
-			}
-		}
-		return cube;
-	}
-	
-	/*
-
-		public boolean isEmptyAt(int x, int y, int z){
-
-	 		return 
-
-		}
-
-	*/
-
-
-
 	public void addChunk(Chunk chu){
 		chunks.add(chu);
 	}
@@ -52,6 +19,19 @@ public class ChunkManager {
 		}
 	}
 	
+	public Cube3dVbo getCubeAt(int x, int y, int z){
+		int xChunk = x % 16;
+		int yChunk = y % 16;
+		int zChunk = z % 16;
+		Cube3dVbo cube = null;
+		for(Chunk ck : chunks){
+			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
+				cube = ck.getCubes(xChunk, yChunk, zChunk);
+			}
+		}
+		return cube;
+	}
+
 	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : chunks){
 			chunk.draw(textMan);

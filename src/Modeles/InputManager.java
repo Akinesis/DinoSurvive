@@ -3,7 +3,7 @@ package Modeles;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import Controleur.Controleur;
+import controleur.Controleur;
 
 public class InputManager {
 
@@ -89,19 +89,14 @@ public class InputManager {
 		camera.getPos().y += tempY;
 	}
 	
-	//mÃ©thode de dÃ©placement
+	//méthode de déplacement
 	private void move(float amt, float dir){
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));
+		
+		camera.getPos().z += tempZ;
+		camera.getPos().x += tempX;
 
-		tempZ += camera.getPos().z;
-		tempX += camera.getPos().x;
-		double tempY = camera.getPos().y;
-
-		if( controleur.getChunkManager().getCubeAt( (int)Math.floor(tempX), (int)Math.floor(tempY), (int)Math.floor(tempZ) ) == null ){
-			camera.getPos().z = (float) tempZ;
-			camera.getPos().x = (float) tempX;
-		}
 	}
 
 }

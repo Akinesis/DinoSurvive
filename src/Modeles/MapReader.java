@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-import Controleur.Controleur;
+import controleur.Controleur;
 import Modeles.entities.Cube3dVbo;
 
 public class MapReader {
@@ -75,7 +75,7 @@ public class MapReader {
 				int z = Integer.parseInt(temp[2].toString());
 				int typ = Integer.parseInt(temp[3].subSequence(0, temp[3].length()-1).toString());
 
-				liste[Math.abs(x)][Math.abs(y)][Math.abs(z)]=new Cube3dVbo(x, y, z, 1, typ);
+				liste[Math.abs(x)%16][Math.abs(y)%16][Math.abs(z)%16]=new Cube3dVbo(x, y, z, 1, typ);
 			}
 		}
 		close();

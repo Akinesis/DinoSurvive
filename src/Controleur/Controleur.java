@@ -1,4 +1,4 @@
-package Controleur;
+package controleur;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
@@ -7,13 +7,13 @@ import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
 import org.lwjgl.input.Keyboard;
 
+import vues.GameDisplay;
+import vues.OpenGL;
 import Modeles.Camera;
 import Modeles.ChunkManager;
 import Modeles.InputManager;
 import Modeles.MapReader;
 import Modeles.TextureManager;
-import Vues.GameDisplay;
-import Vues.OpenGL;
 
 public class Controleur {
 
@@ -36,6 +36,42 @@ public class Controleur {
 		chunkManager = new ChunkManager();
 		chunkManager.setChunksList(mapRead.setChunks());
 	}
+
+	//le coeur du jeux, ma mŽthode contenant la boucle de jeu.
+	public void init(){
+		display.create();
+		matrices.init3D();
+		texManager = new TextureManager();
+
+		//initialise les chunks une première fois et met les cubes dans le buffer
+		chunkManager.initChunks();
+		
+		//texManager.genGrassTexture();
+		texManager.bindBuffer();
+		texManager.bindText();
+
+
+		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			//initialise la matrice 3D
+			//matrices.init3D();
+			glLoadIdentity();
+
+
+			//bouge la caméra
+			camera.useView();
+
+			//toute se qui à rapport au input
+			input.check();
+			
+			//déssine tout les chunks
+			chunkManager.drawChunks(texManager);
+
+			display.update();
+		}
+	}
+	
 	/*
 	 * Getters
 	 */
@@ -71,50 +107,10 @@ public class Controleur {
 	public MapReader getMapRead(){
 		return mapRead;
 	}
-	/*
-	 * Setter
-	 */
-	public void setCamera(Camera cam){
-		camera = cam;
-	}
-
-	
-	//le coeur du jeux, ma mŽthode contenant la boucle de jeu.
-	public void init(){
-		display.create();
-		matrices.init3D();
-		texManager = new TextureManager();
-
-		//initialise les chunks une première fois et met les cubes dans le buffer
-		chunkManager.initChunks();
-		
-		//texManager.genGrassTexture();
-		texManager.bindBuffer();
-		texManager.bindText();
-
-
-		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-			//initialise la matrice 3D
-			//matrices.init3D();
-			glLoadIdentity();
-
-
-			//bouge la caméra
-			camera.useView();
-
-			//toute se qui à rapport au input
-			input.check();
-			
-			//déssine tout les chunks
-			chunkManager.drawChunks(texManager);
-
-			display.update();
-		}
-	}
 
  	public void changeGragMouse(){
 		display.changeGrabeMouse();
 	}
+
+	
 }

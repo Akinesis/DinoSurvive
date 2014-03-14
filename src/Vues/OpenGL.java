@@ -1,4 +1,4 @@
-package Vues;
+package vues;
 
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
@@ -15,7 +15,7 @@ import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
 import static org.lwjgl.opengl.GL11.glOrtho;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
-import Parametres.Parametres;
+import parametres.Parametres;
 
 public class OpenGL implements Parametres {
 
@@ -43,7 +43,7 @@ public class OpenGL implements Parametres {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 	
-	public void init2d(){
+	public void init2D(){
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, largeur, hauteur, 0, 1, -1);
