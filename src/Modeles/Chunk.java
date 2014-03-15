@@ -42,9 +42,15 @@ public class Chunk {
 	 * @return un Cube3dVbo
 	 */
 	public Cube3dVbo getCube(float x, float y, float z) {
-		int tempX = (x>0)?(int)Math.floor(x)%16:(int)Math.abs(Math.ceil(z)%16);
-		int tempY = (y>0)?(int)Math.floor(y)%16:(int)Math.abs(Math.ceil(z)%16);
-		int tempZ = (z>0)?(int)Math.floor(z)%16:(int)Math.abs(Math.ceil(z)%16);
+		/*int tempX = (x>0)?(int)Math.floor(x)%16:(int)Math.abs(Math.ceil(z))%16;
+		int tempY = (y>0)?(int)Math.floor(y)%16:(int)Math.abs(Math.ceil(z))%16;
+		int tempZ = (z>0)?(int)Math.floor(z)%16:(int)Math.abs(Math.ceil(z))%16;
+		*/
+		
+		int tempX = (int)Math.abs(Math.ceil(x))%16;
+		int tempY = (int)Math.abs(Math.ceil(y))%16;
+		int tempZ = (int)Math.abs(Math.ceil(z))%16;
+		
 		return cubes[tempX][tempY][tempZ];
 	}
 
