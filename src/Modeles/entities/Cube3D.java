@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL11.glColor3f;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import Parametres.Parametres;
+import parametres.Parametres;
 
 
 public class Cube3D extends AbstractEntity3D implements Parametres{

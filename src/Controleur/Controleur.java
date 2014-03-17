@@ -1,4 +1,4 @@
-package Controleur;
+package controleur;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
@@ -14,8 +14,8 @@ import Modeles.CollisionManager;
 import Modeles.InputManager;
 import Modeles.MapReader;
 import Modeles.TextureManager;
-import Vues.GameDisplay;
-import Vues.OpenGL;
+import vues.GameDisplay;
+import vues.OpenGL;
 
 
 public class Controleur {

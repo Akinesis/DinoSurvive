@@ -3,7 +3,7 @@ package Modeles;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import Controleur.Controleur;
+import controleur.Controleur;
 
 
 public class InputManager {

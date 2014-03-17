@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-import Controleur.Controleur;
+import controleur.Controleur;
 import Modeles.entities.Cube3dVbo;
 
 

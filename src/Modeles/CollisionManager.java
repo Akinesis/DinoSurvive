@@ -1,6 +1,6 @@
 package Modeles;
 
-import Controleur.Controleur;
+import controleur.Controleur;
 
 public class CollisionManager {
 

@@ -5,7 +5,7 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import Controleur.Controleur;
+import controleur.Controleur;
 
 
 public class Camera {
