@@ -16,7 +16,7 @@ public class Cube3dVbo extends Cube3D {
 	private int type;
 
 	public Cube3dVbo(float x,float  y,float z,float size, int typ){
-		super(x,y,z,size);
+		super(-x,y,-z,size);
 		type=typ;
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);

@@ -27,9 +27,9 @@ public class ChunkManager {
 	 * @return
 	 */
 	public Cube3dVbo getCubeAt(float x, float y, float z){
-		float xChunk = (x>0)?(float)Math.floor(x / 16):(float)Math.ceil(x / 16);
-		float yChunk = (y>0)?(float)Math.floor(y / 16):(float)Math.ceil(y / 16);
-		float zChunk = (z>0)?(float)Math.floor(z / 16):(float)Math.ceil(z / 16);
+		float xChunk = (float)Math.ceil(x / 16);
+		float yChunk = (float)Math.ceil(y / 16);
+		float zChunk = (float)Math.ceil(z / 16);
 		
 		
 		Cube3dVbo cube = null;
