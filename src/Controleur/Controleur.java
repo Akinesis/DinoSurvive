@@ -1,20 +1,22 @@
-package controleur;
+package Controleur;
 
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
+
 import org.lwjgl.input.Keyboard;
 
-import vues.GameDisplay;
-import vues.OpenGL;
 import Modeles.Camera;
 import Modeles.ChunkManager;
 import Modeles.CollisionManager;
 import Modeles.InputManager;
 import Modeles.MapReader;
 import Modeles.TextureManager;
+import Vues.GameDisplay;
+import Vues.OpenGL;
+
 
 public class Controleur {
 
@@ -65,10 +67,10 @@ public class Controleur {
 			//bouge la caméra
 			camera.useView();
 
-			//toute se qui à rapport au input
+			//tout ce qui à rapport aux input
 			input.check();
 			
-			//déssine tout les chunks
+			//dessine tout les chunks
 			chunkManager.drawChunks(texManager);
 
 			display.update();

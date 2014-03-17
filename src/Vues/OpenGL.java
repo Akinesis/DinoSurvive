@@ -1,4 +1,4 @@
-package vues;
+package Vues;
 
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
@@ -15,7 +15,7 @@ import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
 import static org.lwjgl.opengl.GL11.glOrtho;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
-import parametres.Parametres;
+import Parametres.Parametres;
 
 public class OpenGL implements Parametres {
 

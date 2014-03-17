@@ -1,6 +1,6 @@
 package Main;
 
-import controleur.Game;
+import Controleur.Game;
 
 public class Launcher {
 

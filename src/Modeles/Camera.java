@@ -5,14 +5,15 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import controleur.Controleur;
+import Controleur.Controleur;
+
 
 public class Camera {
 	
 	private Controleur clone;
 	private Vector3f position, rotation;
 	
-	//constructeur de la caméra, initialise la possition
+	//constructeur de la cam√©ra, initialise la position
 	public Camera(Controleur contr){
 		clone = contr;
 		clone.getCamera();
@@ -20,7 +21,7 @@ public class Camera {
 		rotation = new Vector3f(0, 0, 0);
 	}
 	
-	//met à jour la position et la rotation
+	//met √† jour la position et la rotation
 	public void useView(){
 		glRotatef(rotation.x, 1, 0, 0);
 		glRotatef(rotation.y, 0, 1, 0);

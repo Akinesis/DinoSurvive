@@ -1,11 +1,13 @@
 package Modeles;
 /**
- * Classe repr�sentant les Chunks comme divisions du "monde" 
+ * Classe représentant les Chunks comme divisions du "monde" 
  */
 import java.util.Vector;
 
-import controleur.Controleur;
+import Controleur.Controleur;
 import Modeles.entities.*;
+
+
 
 public class Chunk {
 	private Cube3dVbo[][][] cubes;
@@ -33,9 +35,49 @@ public class Chunk {
 		//pour l'instant : id = ligne dans le programme, changer ça !!! (extrapoler l'iD des XYZ)
 		this.id = id;
 	}
+	/*
+	 * Getters
+	 */
+	/**
+	 * Renvoie la position du chunk selon les x
+	 * @return
+	 */
+	public int getX(){
+		return x;
+	}
+	/**
+	 * Renvoie la position du chunk selon les y
+	 * @return
+	 */
+	public int getY(){
+		return y;
+	}
+	/**
+	 * Renvoie la position du chunk selon les z
+	 * @return
+	 */
+	public int getZ(){
+		return z;
+	}
 	
 	/**
-	 * Renvoie un cube aux coordonn�es x,y,z
+	 * Renvoie la liste des cubes 
+	 * @return
+	 */
+	public Cube3D[][][] getArrayCubes(){
+		return cubes;
+	}
+	
+	/**
+	 * Renvoie l'id du chunk
+	 * @return
+	 */
+	public int getID(){
+		return id;
+	}
+
+	/**
+	 * Renvoie un cube aux coordonnées x,y,z
 	 * @param xC
 	 * @param y
 	 * @param z
@@ -53,20 +95,21 @@ public class Chunk {
 		
 		return cubes[tempX][tempY][tempZ];
 	}
+	
+	/*
+	 * Methodes
+	 */
 
 	/**
-	 * renvoie l'id du chunk
-	 * @return
+	 * Ajoute tous les cube liés à l'ID du chunk (aka la ligne dans le programme)
 	 */
-	public int getID(){
-		return id;
-	}
-	//boucle qui ajoute tout les cube liŽ ˆ l'ID du chunk (aka la ligne dans le programme)
 	public void addCubes(){
 		clone.getMapRead().setCubes(cubes, id);
 	}
-
-	//v�rife quels cubes sont actife ou non (visible ou non) et les met dans la liste de rendue
+	
+	/**
+	 * Vérifie quels cubes sont actifs (visible ou non) et les met dans la liste de rendu
+	 */
 	public void checkState(){
 		clearChunk();
 		for(int i=0; i<16; i++){
@@ -83,15 +126,21 @@ public class Chunk {
 	}
 
 
-	//g�nere les cubes dans le buffer;
-	//DOIT ETRE ASSOCIER A UNE METHODE DE RESET DES BUFFER !!
+
+	/**
+	 * Méthode générant les cubes dans le buffer
+	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
+	 */
 	public void genCubes(){
 		for(Cube3dVbo cube : renderCubes){
 			cube.genCube();
 		}
 	}
 
-	//dessine tous les cubes actifs
+	/**
+	 * Dessine tous les cubes actifs
+	 * @param texMan
+	 */
 	public void draw(TextureManager texMan){
 		checkState();
 		for(Cube3dVbo cube : renderCubes){
@@ -113,16 +162,14 @@ public class Chunk {
 		}
 	}
 
-	//vide la liste de rendus
+	/**
+	 * Vide la liste de rendu
+	 */
 	public void clearChunk(){
 		renderCubes.clear();
 	}
 
-	//getter de la liste des cubes
-	public Cube3D[][][] getArrayCubes(){
-		return cubes;
-	}
-	
+
 	public void bindBuffers(){
 		for(int i=0; i<16; i++){
 			for(int j =0; j<16; j++){
@@ -135,10 +182,12 @@ public class Chunk {
 		}
 	}
 	
-	//ajout de cube dans le chunk
+	/**
+	 * Méthode ajoutant un cube dans le chunk
+	 * TODO : vérification que le cube a le droit d'être dans ce cube
+	 * @param cube
+	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		//il faut v�rifier que le cube peut être dans ce chunk là
-		//on fera a apr�s, ajoutons sauvagement un cube
 		cubes[cube.getX()][cube.getY()][cube.getZ()] = cube;		
 	}
 	
@@ -170,8 +219,8 @@ public class Chunk {
 			
 			addCube3dVbo(tronc);
 			
-			//cr��ation de feuilles (12 cf TextureManager)
-			//sch�ma différent entre les différents niveaux de feuilles
+			//cr��ation de feuilles (12 cf TextureManager)
+			//sch�ma différent entre les différents niveaux de feuilles
 			
 			if (i==2){
 				//feuilles en croix sur le premier niveau
@@ -225,18 +274,6 @@ public class Chunk {
 		addCube3dVbo(feuilles7);
 		addCube3dVbo(feuilles8);
 		addCube3dVbo(feuilles9);
-	}
-	
-	public int getX(){
-		return x;
-	}
-	
-	public int getY(){
-		return y;
-	}
-	
-	public int getZ(){
-		return z;
 	}
 
 }

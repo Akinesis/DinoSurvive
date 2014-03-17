@@ -4,7 +4,7 @@ import java.nio.FloatBuffer;
 
 /**
  * Classe gérant le curseur affiché sur le HUD
- * @author freyj
+ * 
  *
  */
 public class Cursor2D {
@@ -20,7 +20,19 @@ public class Cursor2D {
 		
 	}
 	
+	/*
+	 * dessin du curseur
+	 */
+	public void draw(){
+		
+	}
 	
+	/*
+	 * génération du curseur
+	 */
+	public void genCurseur(){
+		
+	}
 	/**
 	 * calculs à utiliser pour l'affichage du curseur (osef de glVertex2f)
 	 *glVertex2f(Display.getWidth()/2 +10, Display.getHeight()/2);

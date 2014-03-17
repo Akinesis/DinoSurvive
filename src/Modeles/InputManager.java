@@ -3,7 +3,8 @@ package Modeles;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import controleur.Controleur;
+import Controleur.Controleur;
+
 
 public class InputManager {
 
@@ -20,8 +21,8 @@ public class InputManager {
 		camera = cam;
 	}
 
-	//méthode de vérification de tout les input et agis en consquence
-	//doit etre allÃ©gÃ© et amélioré
+	//mï¿½thode de vï¿½rification de tout les input et agis en consquence
+	//doit etre allÃ©gÃ© et amï¿½liorï¿½
 	public void check(){
 
 		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
@@ -57,7 +58,7 @@ public class InputManager {
 			}
 		}
 
-		//vérification du clavier
+		//vï¿½rification du clavier
 		boolean keyUp = Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_Z);
 		boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S);
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
@@ -65,10 +66,10 @@ public class InputManager {
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 
-		//vitesse de déplacement
+		//vitesse de dï¿½placement
 		float speed = 0.09f;
 
-		//déplacement
+		//dï¿½placement
 		if(keyUp)
 			move(speed,1);
 		if(keyDown)
@@ -89,7 +90,7 @@ public class InputManager {
 		camera.getPos().y += tempY;
 	}
 	
-	//méthode de déplacement
+	//mï¿½thode de dï¿½placement
 	private void move(float amt, float dir){
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));

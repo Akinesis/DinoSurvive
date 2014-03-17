@@ -5,8 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-import controleur.Controleur;
+import Controleur.Controleur;
 import Modeles.entities.Cube3dVbo;
+
+
 
 public class MapReader {
 	Controleur clone;
@@ -28,7 +30,7 @@ public class MapReader {
 		}
 	}
 
-	//crŽ les chunks trouver dnas le fichier map
+	//crï¿½ les chunks trouver dnas le fichier map
 	public Vector<Chunk> setChunks(){
 		openFile(clone.getMap());
 

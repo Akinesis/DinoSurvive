@@ -1,4 +1,4 @@
-package parametres;
+package Parametres;
 
 public interface Parametres {
 

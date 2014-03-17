@@ -1,11 +1,12 @@
-package vues;
+package Vues;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
-import parametres.Parametres;
+import Parametres.Parametres;
+
 
 public class GameDisplay implements Parametres{
 	
