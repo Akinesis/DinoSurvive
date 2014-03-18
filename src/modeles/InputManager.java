@@ -97,7 +97,7 @@ public class InputManager {
 			moveY(speed);
 
 	}
-	
+
 	private void moveY(float amt){
 		double tempY = amt;		
 		camera.getPos().y += tempY;
@@ -111,11 +111,10 @@ public class InputManager {
 	private void move(float amt, float dir){
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));
-		
-		if(!clone.getCollision().colideXZ(camera, (float)tempX, (float)tempZ)){
-			camera.getPos().z += tempZ;
-			camera.getPos().x += tempX;
-		}
+
+		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ))?0:(float)tempZ;
+		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX))?0:(float)tempX;
+
 	}
 
 }
