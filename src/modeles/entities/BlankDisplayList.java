@@ -1,4 +1,4 @@
-package Modeles.entities;
+package modeles.entities;
 
 import static org.lwjgl.opengl.GL11.GL_COMPILE;
 import static org.lwjgl.opengl.GL11.glEndList;

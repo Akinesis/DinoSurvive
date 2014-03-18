@@ -1,4 +1,4 @@
-package Modeles.entities2D;
+package modeles.entities2D;
 /**
  * Classe gérant l'entité 2D  qui représente l'inventaire affiché sur le HUD
  */

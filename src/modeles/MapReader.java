@@ -1,12 +1,14 @@
-package Modeles;
+package modeles;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+import modeles.entities.Cube3dVbo;
+
 import controleur.Controleur;
-import Modeles.entities.Cube3dVbo;
+
 
 
 

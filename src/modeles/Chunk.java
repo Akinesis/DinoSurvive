@@ -1,11 +1,13 @@
-package Modeles;
+package modeles;
 /**
  * Classe représentant les Chunks comme divisions du "monde" 
  */
 import java.util.Vector;
 
+import modeles.entities.*;
+
 import controleur.Controleur;
-import Modeles.entities.*;
+
 
 
 
@@ -219,8 +221,8 @@ public class Chunk {
 			
 			addCube3dVbo(tronc);
 			
-			//cr��ation de feuilles (12 cf TextureManager)
-			//sch�ma différent entre les différents niveaux de feuilles
+			//création de feuilles (12 cf TextureManager)
+			//schéma différent entre les différents niveaux de feuilles (basique)
 			
 			if (i==2){
 				//feuilles en croix sur le premier niveau

@@ -1,4 +1,4 @@
-package Modeles;
+package modeles;
 
 import static org.lwjgl.opengl.GL11.glRotatef;
 import static org.lwjgl.opengl.GL11.glTranslatef;
@@ -6,6 +6,7 @@ import static org.lwjgl.opengl.GL11.glTranslatef;
 import org.lwjgl.util.vector.Vector3f;
 
 import controleur.Controleur;
+
 
 
 public class Camera {

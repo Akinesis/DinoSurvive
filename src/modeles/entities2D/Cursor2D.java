@@ -1,4 +1,4 @@
-package Modeles.entities2D;
+package modeles.entities2D;
 
 import java.nio.FloatBuffer;
 

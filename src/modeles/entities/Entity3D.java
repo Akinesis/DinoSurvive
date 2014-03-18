@@ -1,4 +1,4 @@
-package Modeles.entities;
+package modeles.entities;
 
 public interface Entity3D {
 	public int getX();

@@ -1,9 +1,10 @@
-package Modeles.entities;
+package modeles.entities;
 
+
+import modeles.entities.Entity3D;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import Modeles.entities.Entity3D;
 
 public abstract class AbstractEntity3D implements Entity3D {
 	protected Vector3f pos;

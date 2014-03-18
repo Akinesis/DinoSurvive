@@ -8,6 +8,7 @@ import org.lwjgl.opengl.DisplayMode;
 import parametres.Parametres;
 
 
+
 public class GameDisplay implements Parametres{
 	
 	public GameDisplay(){

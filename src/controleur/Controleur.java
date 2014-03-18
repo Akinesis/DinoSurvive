@@ -6,16 +6,18 @@ import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
 
+import modeles.Camera;
+import modeles.ChunkManager;
+import modeles.CollisionManager;
+import modeles.InputManager;
+import modeles.MapReader;
+import modeles.TextureManager;
+
 import org.lwjgl.input.Keyboard;
 
-import Modeles.Camera;
-import Modeles.ChunkManager;
-import Modeles.CollisionManager;
-import Modeles.InputManager;
-import Modeles.MapReader;
-import Modeles.TextureManager;
 import vues.GameDisplay;
 import vues.OpenGL;
+
 
 
 public class Controleur {
@@ -29,7 +31,9 @@ public class Controleur {
 	private TextureManager texManager;
 	private CollisionManager collision;
 
-	//contructeur du Controleur
+	/**
+	 * Constructeur du controleur
+	 */
 	public Controleur(){
 		display = new GameDisplay();
 		matrices = new OpenGL();
@@ -42,7 +46,7 @@ public class Controleur {
 		chunkManager.setChunksList(mapRead.setChunks());
 	}
 
-	//le coeur du jeux, ma mŽthode contenant la boucle de jeu.
+	//le coeur du jeu, ma méthode contenant la boucle de jeu.
 	public void init(){
 		display.create();
 		matrices.init3D();

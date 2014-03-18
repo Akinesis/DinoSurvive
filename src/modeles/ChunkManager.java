@@ -1,8 +1,9 @@
-package Modeles;
+package modeles;
 
 import java.util.Vector;
 
-import Modeles.entities.Cube3dVbo;
+import modeles.entities.Cube3dVbo;
+
 
 
 public class ChunkManager {

@@ -1,4 +1,4 @@
-package Modeles.entities2D;
+package modeles.entities2D;
 
 /**
  * Classe gérant le HUD et interagissant avec les entities2D qui iront dessus
