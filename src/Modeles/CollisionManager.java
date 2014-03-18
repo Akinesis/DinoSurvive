@@ -10,12 +10,12 @@ public class CollisionManager {
 		clone = contr;
 	}
 	
-	public boolean colideXZ(Camera cam, float posX, float posZ){
-		return (clone.getChunkManager().getCubeAt(cam.getPos().x+posX, cam.getPos().y, cam.getPos().z+posZ))!=null;
+	public boolean colideX(Camera cam, float posX){
+		return (clone.getChunkManager().getCubeAt(cam.getPos().x+posX, cam.getPos().y, cam.getPos().z))!=null;
 	}
 	
 	public boolean colideZ(Camera cam, float posZ){
-		return true;
+		return (clone.getChunkManager().getCubeAt(cam.getPos().x, cam.getPos().y, cam.getPos().z+posZ))!=null;
 	}
 	
 	public boolean colideY(Camera cam, float posY){
