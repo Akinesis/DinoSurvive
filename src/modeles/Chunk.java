@@ -91,9 +91,9 @@ public class Chunk {
 		int tempZ = (z>0)?(int)Math.floor(z)%16:(int)Math.abs(Math.ceil(z))%16;
 		*/
 		
-		int tempX = (int)Math.abs(Math.ceil(x))%16;
+		int tempX = (int)Math.abs(Math.ceil(x-0.1f))%16;
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
-		int tempZ = (int)Math.abs(Math.ceil(z))%16;
+		int tempZ = (int)Math.abs(Math.ceil(z-0.1f))%16;
 		
 		return cubes[tempX][tempY][tempZ];
 	}

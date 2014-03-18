@@ -6,7 +6,7 @@ public interface Parametres {
 	public float hauteur = 500;
 	
 	float fov = 50;
-	float near = 0.3f;
+	float near = 0.01f;
 	float far = 45f;
 	
 	
