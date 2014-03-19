@@ -7,7 +7,7 @@ import java.nio.FloatBuffer;
  * 
  *
  */
-public class Cursor2D {
+public class Cursor2D extends AbstractEntity2D{
 	private static int verticiesNum = 2;
 	private int vertexSize = 2;
 	private int vboVertexHandle;
@@ -41,4 +41,16 @@ public class Cursor2D {
 	 *glVertex2f(Display.getWidth()/2, Display.getHeight()/2 +10);
 	 *glVertex2f(Display.getWidth()/2, Display.getHeight()/2 -10);
 	 */
+
+	@Override
+	public void setUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
 }

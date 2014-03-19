@@ -6,7 +6,7 @@ package modeles.entities2D;
  *
  */
 
-public class HUDManager {
+public class HUDManager extends AbstractEntity2D{
 	private Cursor2D curseur;
 	private Inventaire2D inventaire;
 	
@@ -26,6 +26,27 @@ public class HUDManager {
 	}
 	public Inventaire2D getInventaire(){
 		return inventaire;
+	}
+	
+	/*
+	 * Méthodes
+	 */	
+	@Override
+	public void draw() {
+		curseur.draw();
+		inventaire.draw();		
+	}
+
+	@Override
+	public void setUp() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
