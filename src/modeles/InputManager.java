@@ -111,9 +111,15 @@ public class InputManager {
 	private void move(float amt, float dir){
 		double tempZ = amt * Math.sin(Math.toRadians(camera.getRot().y + 90 * dir));
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));
+		
+		float posTempZ = camera.getPos().z+(float)tempZ;
+		float posTempX = camera.getPos().x+(float)tempX;
+		
+		float indiceX = ((camera.getPos().x)>posTempX )?-0.2f:+0.2f;
+		float indiceZ = ((camera.getPos().z)>posTempZ )?-0.2f:+0.2f;
 
-		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ))?0:(float)tempZ;
-		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX))?0:(float)tempX;
+		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
+		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
 	}
 
