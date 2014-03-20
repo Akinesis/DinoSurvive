@@ -23,6 +23,7 @@ public class CollisionManager {
 	}
 	
 	public boolean colideY(Camera cam, float posY){
-		return true;
+		return (clone.getChunkManager().getCubeAt(cam.getPos().x, cam.getPos().y+posY, cam.getPos().z))!=null||
+				(clone.getChunkManager().getCubeAt(cam.getPos().x, cam.getPos().y+posY+2, cam.getPos().z))!=null;
 	}
 }

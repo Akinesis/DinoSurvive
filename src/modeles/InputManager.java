@@ -100,9 +100,8 @@ public class InputManager {
 
 	}
 
-	private void moveY(float amt){
-		double tempY = amt;		
-		camera.getPos().y += tempY;
+	private void moveY(float amt){	
+		camera.getPos().y += (clone.getCollision().colideY(camera, amt))?0:amt;
 	}
 	
 	/**
