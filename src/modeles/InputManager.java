@@ -34,6 +34,9 @@ public class InputManager {
 
 		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
 		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
+		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
+		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+		
 
 		float mouseDX = Mouse.getDX() * 1 * 0.16f;
 		float mouseDY = Mouse.getDY() * 1 * 0.16f;
@@ -46,6 +49,11 @@ public class InputManager {
 			if(keyReturn){
 				clone.changeGragMouse();
 			}
+			
+			if(keyJump)
+				moveY(-1);
+			if(keyBas)
+				moveY(1);
 		}
 
 		//mouvement de la souris
@@ -72,8 +80,6 @@ public class InputManager {
 		boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S);
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
 		boolean keyRight = Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D);
-		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
-		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 
 		/*
 		 * vitesse de déplacement
@@ -91,10 +97,6 @@ public class InputManager {
 			move(speed,0);
 		if(keyRight)
 			move(-speed,0);
-		if(keyJump)
-			moveY(-speed);
-		if(keyBas)
-			moveY(speed);
 
 	}
 
