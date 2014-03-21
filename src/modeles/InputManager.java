@@ -1,5 +1,6 @@
 package modeles;
 
+import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -16,10 +17,13 @@ public class InputManager {
 	private Camera camera;
 	private Controleur clone;
 	private int coef = 1;
+	private boolean isJumping;
+	private float hauteurSaut, lastJump;
 
 	public InputManager(Controleur contr){
 		clone = contr;
 		clone.getMap();//à changer; inutile
+		isJumping = false;
 	}
 
 	public void setCam(Camera cam){
@@ -50,8 +54,6 @@ public class InputManager {
 				clone.changeGragMouse();
 			}
 			
-			if(keyJump)
-				moveY(-1);
 			if(keyBas)
 				moveY(1);
 		}
@@ -98,14 +100,20 @@ public class InputManager {
 		if(keyRight)
 			move(-speed,0);
 		
-		if(!clone.getCollision().gravity(camera)){
-			camera.getPos().y += 0.15;
+		jump(keyJump);
+		
+		if(!clone.getCollision().gravity(camera) && !isJumping){
+			camera.getPos().y += 0.12;
 		}
 
 	}
 
-	private void moveY(float amt){	
-		camera.getPos().y += (clone.getCollision().colideY(camera, amt))?0:amt;
+	private void moveY(float amt){
+		if(clone.getCollision().colideY(camera, amt)){
+			isJumping = false;
+		}else{
+			camera.getPos().y += amt;
+		}
 	}
 	
 	/**
@@ -126,6 +134,28 @@ public class InputManager {
 		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
+	}
+	
+	private void jump(boolean space){
+		if(!isJumping && space && getTime()-lastJump > 700){
+			isJumping = true;
+			hauteurSaut = camera.getPos().y-1.2f;
+			lastJump = getTime();
+		}
+		
+		if(isJumping){
+			if(camera.getPos().y > hauteurSaut){
+				moveY(-0.05f);
+			}else{
+				isJumping = false;
+			}
+		}
+		
+		
+	}
+	
+	private static long getTime() {
+		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
 
 }
