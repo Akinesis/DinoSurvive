@@ -97,6 +97,10 @@ public class InputManager {
 			move(speed,0);
 		if(keyRight)
 			move(-speed,0);
+		
+		if(!clone.getCollision().gravity(camera)){
+			camera.getPos().y += 0.15;
+		}
 
 	}
 

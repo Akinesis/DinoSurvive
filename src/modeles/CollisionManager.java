@@ -26,4 +26,8 @@ public class CollisionManager {
 		return (clone.getChunkManager().getCubeAt(cam.getPos().x, cam.getPos().y+posY, cam.getPos().z))!=null||
 				(clone.getChunkManager().getCubeAt(cam.getPos().x, cam.getPos().y+posY+2, cam.getPos().z))!=null;
 	}
+	
+	public boolean gravity(Camera cam){
+		return (clone.getChunkManager().getCubeAt(cam.getPos().x, cam.getPos().y+3, cam.getPos().z))!=null;
+	}
 }
