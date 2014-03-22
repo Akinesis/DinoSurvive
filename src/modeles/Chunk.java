@@ -85,11 +85,6 @@ public class Chunk {
 	 * @return un Cube3dVbo
 	 */
 	public Cube3dVbo getCube(float x, float y, float z) {
-		/*int tempX = (x>0)?(int)Math.floor(x)%16:(int)Math.abs(Math.ceil(z))%16;
-		int tempY = (y>0)?(int)Math.floor(y)%16:(int)Math.abs(Math.ceil(z))%16;
-		int tempZ = (z>0)?(int)Math.floor(z)%16:(int)Math.abs(Math.ceil(z))%16;
-		*/
-		
 		int tempX = (int)Math.abs(Math.ceil(x))%16;
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
 		int tempZ = (int)Math.abs(Math.ceil(z))%16;
@@ -188,9 +183,9 @@ public class Chunk {
 	 * TODO : vérification que le cube a le droit d'être dans ce cube
 	 * @param cube
 	 */
-	public void addCube3dVbo(Cube3dVbo cube){
+	/*public void addCube3dVbo(Cube3dVbo cube){
 		cubes[cube.getX()][cube.getY()][cube.getZ()] = cube;		
-	}
+	}*/
 	
 	/**
 	 * Fonction permettant la génération d'un arbre dont le premier bloc de tronc est en position x,y,z
@@ -198,6 +193,7 @@ public class Chunk {
 	 * @param y :  position du cube selon les y
 	 * @param z :  position du cube selon les z 
 	 */
+	/*
 	//(pas besoin du paramètre 1 car pour un arbre les cubes font forcément 1)
 	//(potentiellement pour "jolifier" l'arbre, mettre un facteur de 0,5 pour les feuilles du dessus
 	//(aka : demi cube de feuilles)
@@ -275,7 +271,7 @@ public class Chunk {
 		addCube3dVbo(feuilles7);
 		addCube3dVbo(feuilles8);
 		addCube3dVbo(feuilles9);
-	}
+	}*/
 	
 	/**
 	 * Fonction permettant la génération d'un chunk de terre.
@@ -285,7 +281,7 @@ public class Chunk {
 		for(int i=0; i<16; ++i){
 			for(int j=0; j<16; ++j){
 				for(int k=0; k<16; ++k){
-					this.addCube3dVbo(new Cube3dVbo(i,j,k,1,2));
+					cubes[i][j][k]=new Cube3dVbo(i,j,k,1,2);
 				}
 			}
 		}
