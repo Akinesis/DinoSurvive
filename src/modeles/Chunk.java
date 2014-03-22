@@ -5,7 +5,6 @@ package modeles;
 import java.util.Vector;
 
 import modeles.entities.*;
-
 import controleur.Controleur;
 
 
@@ -276,6 +275,20 @@ public class Chunk {
 		addCube3dVbo(feuilles7);
 		addCube3dVbo(feuilles8);
 		addCube3dVbo(feuilles9);
+	}
+	
+	/**
+	 * Fonction permettant la gÃ©nÃ©ration d'un chunk de terre.
+	 * En clair, le chunk est rempli de terre excepté aux endroit ou un bloc existe déjà (à vérifié)
+	 */
+	public void genTerre(){
+		for(int i=0; i<16; ++i){
+			for(int j=0; j<16; ++j){
+				for(int k=0; k<16; ++k){
+					this.addCube3dVbo(new Cube3dVbo(i,j,k,1,2));
+				}
+			}
+		}
 	}
 
 }

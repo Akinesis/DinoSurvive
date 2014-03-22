@@ -11,6 +11,7 @@ import modeles.ChunkManager;
 import modeles.CollisionManager;
 import modeles.InputManager;
 import modeles.MapReader;
+import modeles.TerrainGenerator;
 import modeles.TextureManager;
 
 import org.lwjgl.input.Keyboard;
@@ -30,6 +31,7 @@ public class Controleur {
 	private MapReader mapRead;
 	private TextureManager texManager;
 	private CollisionManager collision;
+	private TerrainGenerator chunkTerre;
 
 	/**
 	 * Constructeur du controleur
@@ -44,6 +46,8 @@ public class Controleur {
 		mapRead = new MapReader(this);
 		chunkManager = new ChunkManager();
 		chunkManager.setChunksList(mapRead.setChunks());
+		chunkTerre = new TerrainGenerator(this);
+		
 	}
 
 	//le coeur du jeu, ma méthode contenant la boucle de jeu.
@@ -52,6 +56,9 @@ public class Controleur {
 		matrices.init3D();
 		texManager = new TextureManager();
 
+		//ajoute un chunk de terre dans le chunk manager
+		chunkTerre.genereTerre(0, 0, 0);
+		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
 		
