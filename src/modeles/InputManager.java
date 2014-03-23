@@ -79,7 +79,7 @@ public class InputManager {
 		 * vérification du clavier
 		 */
 		boolean keyUp = Keyboard.isKeyDown(Keyboard.KEY_UP) || Keyboard.isKeyDown(Keyboard.KEY_Z);
-		boolean keyDown = Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S);
+		boolean keyBack = Keyboard.isKeyDown(Keyboard.KEY_DOWN) || Keyboard.isKeyDown(Keyboard.KEY_S);
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
 		boolean keyRight = Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D);
 
@@ -93,7 +93,7 @@ public class InputManager {
 		 */
 		if(keyUp)
 			move(speed,1);
-		if(keyDown)
+		if(keyBack)
 			move(-speed,1);
 		if(keyLeft)
 			move(speed,0);
@@ -109,11 +109,13 @@ public class InputManager {
 	}
 
 	private void moveY(float amt){
-		if(clone.getCollision().colideY(camera, amt)){
+		/*if(clone.getCollision().colideY(camera, amt)){
 			isJumping = false;
 		}else{
 			camera.getPos().y += amt;
-		}
+		}*/
+		
+		camera.getPos().y += amt;
 	}
 	
 	/**

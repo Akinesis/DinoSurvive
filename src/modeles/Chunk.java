@@ -13,7 +13,7 @@ import controleur.Controleur;
 public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
-	
+
 	private Controleur clone;
 	private int x,y,z,id;
 
@@ -60,7 +60,7 @@ public class Chunk {
 	public int getZ(){
 		return z;
 	}
-	
+
 	/**
 	 * Renvoie la liste des cubes 
 	 * @return
@@ -68,7 +68,7 @@ public class Chunk {
 	public Cube3D[][][] getArrayCubes(){
 		return cubes;
 	}
-	
+
 	/**
 	 * Renvoie l'id du chunk
 	 * @return
@@ -88,10 +88,10 @@ public class Chunk {
 		int tempX = (int)Math.abs(Math.ceil(x))%16;
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
 		int tempZ = (int)Math.abs(Math.ceil(z))%16;
-		
+
 		return cubes[tempX][tempY][tempZ];
 	}
-	
+
 	/*
 	 * Methodes
 	 */
@@ -102,7 +102,7 @@ public class Chunk {
 	public void addCubes(){
 		clone.getMapRead().setCubes(cubes, id);
 	}
-	
+
 	/**
 	 * Vérifie quels cubes sont actifs (visible ou non) et les met dans la liste de rendu
 	 */
@@ -121,7 +121,40 @@ public class Chunk {
 		}
 	}
 
+	/**
+	 * Met a jours les cubes a rendre ou non
+	 */
+	public void update(){
+		for(int i=0; i<16; i++){
+			for(int j =0; j<16; j++){
+				for(int k=0; k<16; k++){
+					if(cubes[i][j][k]!=null){
+						if(surrend(i,j,k)){
+							cubes[i][j][k].setEtat(false);
+						}else{
+							cubes[i][j][k].setEtat(true);
+						}
+					}
+				}
+			}
+		}
+	}
 
+	private boolean surrend(int x, int y, int z){
+		boolean temp;
+		temp = cubes[x][y][z]!=null;
+		
+		temp = (x>1)?cubes[x-1][y][z]!=null && temp:false;
+		temp = (y>1)?cubes[x][y-1][z]!=null && temp:false;
+		temp = (z>1)?cubes[x][y][z-1]!=null && temp:false;
+		
+		temp = (x<15)?cubes[x+1][y][z]!=null && temp:false;
+		temp = (y<15)?cubes[x][y+1][z]!=null && temp:false;
+		temp = (z<15)?cubes[x][y][z+1]!=null && temp:false;
+		
+		return  temp;
+
+	}
 
 	/**
 	 * Méthode générant les cubes dans le buffer
@@ -138,21 +171,21 @@ public class Chunk {
 	 * @param texMan
 	 */
 	public void draw(TextureManager texMan){
-		checkState();
+		//checkState();
 		for(Cube3dVbo cube : renderCubes){
 			cube.bindBuffers();
-			
+
 			texMan.genText(cube.getType());
 			texMan.bindBuffer();
-			
+
 			cube.bindDrawCube();
 			texMan.bindDrawTexture();
-			
+
 			cube.enableCube();
 			texMan.enableTexture();
-			
+
 			cube.draw();
-			
+
 			texMan.disableTexture();
 			cube.disableCube();
 		}
@@ -177,7 +210,7 @@ public class Chunk {
 			}
 		}
 	}
-	
+
 	/**
 	 * Méthode ajoutant un cube dans le chunk
 	 * TODO : vérification que le cube a le droit d'être dans ce cube
@@ -186,7 +219,7 @@ public class Chunk {
 	/*public void addCube3dVbo(Cube3dVbo cube){
 		cubes[cube.getX()][cube.getY()][cube.getZ()] = cube;		
 	}*/
-	
+
 	/**
 	 * Fonction permettant la génération d'un arbre dont le premier bloc de tronc est en position x,y,z
 	 * @param x : position du cube selon les x
@@ -200,25 +233,25 @@ public class Chunk {
 	public void genTree(float x, float y, float z){
 		//arbre d'une taille comprise entre 3 et 6 cubes de tronc
 		//wouhou aléatoire !
-		
+
 		int taille = (int)((6-3)*Math.random()) +3;
 		int size = 1;
-		
+
 		//1 des cubes pour le moment 1
-		
+
 		for (int i = 0; i<taille; ++i){
-			
+
 			//à chaque itération il crée un cube de type tronc (11, cf TextureManager)
-			
+
 			Cube3dVbo tronc = new Cube3dVbo(x, y+i, z, 1, 11);
-			
+
 			//il l'ajoute dans le cube
-			
+
 			addCube3dVbo(tronc);
-			
+
 			//création de feuilles (12 cf TextureManager)
 			//schéma différent entre les différents niveaux de feuilles (basique)
-			
+
 			if (i==2){
 				//feuilles en croix sur le premier niveau
 				Cube3dVbo feuilles = new Cube3dVbo(x-1, y+i, z, size, 12);
@@ -272,7 +305,7 @@ public class Chunk {
 		addCube3dVbo(feuilles8);
 		addCube3dVbo(feuilles9);
 	}*/
-	
+
 	/**
 	 * Fonction permettant la génération d'un chunk de terre.
 	 * En clair, le chunk est rempli de terre except� aux endroit ou un bloc existe d�j� (� v�rifi�)

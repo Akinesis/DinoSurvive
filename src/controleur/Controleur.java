@@ -57,7 +57,7 @@ public class Controleur {
 		texManager = new TextureManager();
 
 		//ajoute un chunk de terre dans le chunk manager
-		//chunkTerre.genereTerre(1, 0, 0);
+		chunkTerre.genereTerre(1, 0, 0);
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
