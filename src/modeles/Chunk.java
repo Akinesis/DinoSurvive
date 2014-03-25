@@ -169,6 +169,7 @@ public class Chunk {
 	 */
 	public void clearChunk(){
 		renderCubes.clear();
+		nonRenderCubes.clear();
 	}
 
 	/**

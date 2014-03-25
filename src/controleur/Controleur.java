@@ -60,7 +60,6 @@ public class Controleur {
 		chunkTerre.genereTerre(1, 0, 0);
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
-		chunkManager.update();
 		chunkManager.initChunks();
 		
 		//texManager.genGrassTexture();
