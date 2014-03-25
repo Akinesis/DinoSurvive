@@ -12,7 +12,7 @@ public class TerrainGenerator {
 	}
 	
 	public void genereTerre(int x, int y, int z){
-		Chunk terre = new Chunk(x, y, z, 2, clone);
+		Chunk terre = clone.getChunkManager().getChunk(x,y,z);
 		//terre.genTerre();
 		clone.getChunkManager().addChunk(terre);
 	}
@@ -20,18 +20,16 @@ public class TerrainGenerator {
 	/**
 	 * Fonction permettant la generation d'un sol d'herbe, tout beau tout propre.
 	 */
-	public void genSol(int x, int y, int z){
+	public void genFond(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
 		int originX = (temp.getX()*16);
 		int originY = (temp.getY()*16);
 		int originZ = (temp.getZ()*16);
 		
-		for(int i = originX; i>originX-15; i--){
-			for(int j = originZ; j>originZ-15; j--){
-				temp.addCube3dVbo(new Cube3dVbo(i, originY, j, 1, 1));
+		for(int i = originX; i>originX-16; i--){
+			for(int j = originZ; j>originZ-16; j--){
+				temp.addCube3dVbo(new Cube3dVbo(i, originY, j, 1, 3));
 			}
 		}
-		
-		temp.addCube3dVbo(new Cube3dVbo(0, 2, 0, 1, 5));
 	}
 }

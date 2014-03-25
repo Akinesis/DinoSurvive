@@ -272,10 +272,10 @@ public class Chunk {
 	 * En clair, le chunk est rempli de terre excepté aux endroit ou un bloc existe déjà (à vérifié)
 	 */
 	public void genTerre(){
-		for(int i=0; i<16; ++i){
-			for(int j=0; j<16; ++j){
-				for(int k=0; k<16; ++k){
-					cubes[i][j][k]=new Cube3dVbo(i,j,k,1,2);
+		for(int i=x*16; i>x-16; i--){
+			for(int j=y*16; j>y-16; j--){
+				for(int k=z*16; k>z-16; k--){
+						addCube3dVbo(new Cube3dVbo(i,j,k,1,2));
 				}
 			}
 		}

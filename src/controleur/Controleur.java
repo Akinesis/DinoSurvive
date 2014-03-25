@@ -44,7 +44,7 @@ public class Controleur {
 		collision = new CollisionManager(this);
 		input.setCam(camera);
 		mapRead = new MapReader(this);
-		chunkManager = new ChunkManager();
+		chunkManager = new ChunkManager(this);
 		chunkManager.setChunksList(mapRead.setChunks());
 		chunkTerre = new TerrainGenerator(this);
 		
@@ -57,9 +57,9 @@ public class Controleur {
 		texManager = new TextureManager();
 
 		//ajoute un chunk de terre dans le chunk manager
-		chunkTerre.genereTerre(1, 0, 0);
-		chunkTerre.genSol(0, 0, 0);
-		chunkTerre.genSol(1, 0, 0);
+		chunkTerre.genereTerre(1, 0, 1);
+		chunkTerre.genFond(0, 0, 0);
+		chunkTerre.genFond(1, 0, 0);
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();

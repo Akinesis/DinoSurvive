@@ -2,18 +2,21 @@ package modeles;
 
 import java.util.Vector;
 
+import controleur.Controleur;
 import modeles.entities.Cube3dVbo;
 
 
 
 public class ChunkManager {
 	private Vector<Chunk> chunks;
+	private Controleur clone;
 	
 	/*
 	 * Constructeur
 	 */
-	public ChunkManager(){
+	public ChunkManager(Controleur contr){
 		chunks = new Vector<Chunk>();
+		clone = contr;
 	}
 	
 	/*
@@ -40,6 +43,19 @@ public class ChunkManager {
 			}
 		}
 		return cube;
+	}
+	
+	//marche pas
+	public void addCubeAt(Cube3dVbo cube){
+		float xChunk = (float)Math.ceil(cube.getX() / 16);
+		float yChunk = (float)Math.ceil(cube.getY() / 16);
+		float zChunk = (float)Math.ceil(cube.getZ() / 16);
+		
+		for(Chunk ck : chunks){
+			if((ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk)){
+				ck.addCube3dVbo(cube);
+			}
+		}
 	}
 	
 	
@@ -97,12 +113,13 @@ public class ChunkManager {
 	}
 	
 	public Chunk getChunk(int x, int y, int z){
-		Chunk temp = chunks.firstElement();
 		for(Chunk ck : chunks){
 			if( (ck.getX() == x) && (ck.getY() == y) && (ck.getZ() == z) ){
 				return ck;
 			}
 		}
+		Chunk temp = new Chunk(x, y, z, chunks.size(), clone);
+		chunks.add(temp);
 		return temp;
 	}
 
