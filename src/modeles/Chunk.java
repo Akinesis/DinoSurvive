@@ -13,6 +13,7 @@ import controleur.Controleur;
 public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
+	private Vector<Cube3dVbo> nonRenderCubes;
 
 	private Controleur clone;
 	private int x,y,z,id;
@@ -28,6 +29,7 @@ public class Chunk {
 	public Chunk(int x,int y,int z, int id, Controleur contr){
 		cubes = new Cube3dVbo[16][16][16];
 		renderCubes = new Vector<Cube3dVbo>();
+		nonRenderCubes = new Vector<Cube3dVbo>();
 		clone = contr;
 
 		this.x = x;
@@ -35,46 +37,6 @@ public class Chunk {
 		this.z = z;
 		//pour l'instant : id = ligne dans le programme, changer Ã§a !!! (extrapoler l'iD des XYZ)
 		this.id = id;
-	}
-	/*
-	 * Getters
-	 */
-	/**
-	 * Renvoie la position du chunk selon les x
-	 * @return
-	 */
-	public int getX(){
-		return x;
-	}
-	/**
-	 * Renvoie la position du chunk selon les y
-	 * @return
-	 */
-	public int getY(){
-		return y;
-	}
-	/**
-	 * Renvoie la position du chunk selon les z
-	 * @return
-	 */
-	public int getZ(){
-		return z;
-	}
-
-	/**
-	 * Renvoie la liste des cubes 
-	 * @return
-	 */
-	public Cube3D[][][] getArrayCubes(){
-		return cubes;
-	}
-
-	/**
-	 * Renvoie l'id du chunk
-	 * @return
-	 */
-	public int getID(){
-		return id;
 	}
 
 	/**
@@ -114,6 +76,8 @@ public class Chunk {
 					if(cubes[i][j][k]!=null){
 						if(cubes[i][j][k].getState()){
 							renderCubes.add(cubes[i][j][k]);
+						}else{
+							nonRenderCubes.add(cubes[i][j][k]);
 						}
 					}
 				}
@@ -140,13 +104,16 @@ public class Chunk {
 		}
 	}
 
+	/**
+	 * Pour un cube donné, renvoi si il est visible ou non
+	 */
 	private boolean surrend(int x, int y, int z){
 		boolean temp;
 		temp = cubes[x][y][z]!=null;
 		
-		temp = (x>1)?cubes[x-1][y][z]!=null && temp:false;
-		temp = (y>1)?cubes[x][y-1][z]!=null && temp:false;
-		temp = (z>1)?cubes[x][y][z-1]!=null && temp:false;
+		temp = (x>0)?cubes[x-1][y][z]!=null && temp:false;
+		temp = (y>0)?cubes[x][y-1][z]!=null && temp:false;
+		temp = (z>0)?cubes[x][y][z-1]!=null && temp:false;
 		
 		temp = (x<15)?cubes[x+1][y][z]!=null && temp:false;
 		temp = (y<15)?cubes[x][y+1][z]!=null && temp:false;
@@ -157,12 +124,18 @@ public class Chunk {
 	}
 
 	/**
-	 * MÃ©thode gÃ©nÃ©rant les cubes dans le buffer
+	 * Methode générant les cubes dans le buffer
 	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
 	 */
 	public void genCubes(){
 		for(Cube3dVbo cube : renderCubes){
 			cube.genCube();
+		}
+	}
+	
+	public void delCubes(){
+		for(Cube3dVbo cube : nonRenderCubes){
+			cube.delCube();
 		}
 	}
 
@@ -196,19 +169,6 @@ public class Chunk {
 	 */
 	public void clearChunk(){
 		renderCubes.clear();
-	}
-
-
-	public void bindBuffers(){
-		for(int i=0; i<16; i++){
-			for(int j =0; j<16; j++){
-				for(int k=0; k<16; k++){
-					if(cubes[i][j][k]!=null){
-						//cubes[i][j][k].bindBuffers();
-					}
-				}
-			}
-		}
 	}
 
 	/**
@@ -318,6 +278,39 @@ public class Chunk {
 				}
 			}
 		}
+	}
+	
+	/*
+	 * Getters
+	 */
+	/**
+	 * Renvoie la position du chunk selon les x
+	 * @return
+	 */
+	public int getX(){
+		return x;
+	}
+	/**
+	 * Renvoie la position du chunk selon les y
+	 * @return
+	 */
+	public int getY(){
+		return y;
+	}
+	/**
+	 * Renvoie la position du chunk selon les z
+	 * @return
+	 */
+	public int getZ(){
+		return z;
+	}
+
+	/**
+	 * Renvoie l'id du chunk
+	 * @return
+	 */
+	public int getID(){
+		return id;
 	}
 
 }

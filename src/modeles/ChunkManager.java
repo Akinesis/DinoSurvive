@@ -76,9 +76,10 @@ public class ChunkManager {
 	 */
 	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : chunks){
-			chunk.update();
+			//chunk.update();
 			chunk.checkState();
 			chunk.draw(textMan);
+			chunk.delCubes();
 		}
 	}
 
@@ -92,7 +93,6 @@ public class ChunkManager {
 			chunk.checkState();
 
 			chunk.genCubes();
-			chunk.bindBuffers();
 		}
 	}
 

@@ -60,6 +60,7 @@ public class Controleur {
 		chunkTerre.genereTerre(1, 0, 0);
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
+		chunkManager.update();
 		chunkManager.initChunks();
 		
 		//texManager.genGrassTexture();
@@ -75,7 +76,7 @@ public class Controleur {
 			glLoadIdentity();
 
 
-			//bouge la caméra
+			//bouge la came�ra
 			camera.useView();
 
 			//tout ce qui à rapport aux input

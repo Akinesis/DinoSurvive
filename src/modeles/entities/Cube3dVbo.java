@@ -20,6 +20,7 @@ public class Cube3dVbo extends Cube3D {
 		type=typ;
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
+		vboVertexHandle = glGenBuffers();
 	}
 
 	public void draw(){
@@ -38,6 +39,10 @@ public class Cube3dVbo extends Cube3D {
 	public void disableCube(){
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	
+	public void delCube(){
+		glDeleteBuffers(vboVertexHandle);
 	}
 	
 	public void genCube(){
@@ -94,7 +99,6 @@ public class Cube3dVbo extends Cube3D {
 	}
 	
 	public void bindBuffers(){
-		vboVertexHandle = glGenBuffers();
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
