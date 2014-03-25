@@ -34,7 +34,7 @@ public class ChunkManager {
 		
 		
 		Cube3dVbo cube = null;
-		for(Chunk ck : chunks){
+   		for(Chunk ck : chunks){
 			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
 				cube = ck.getCube(x, y, z);
 			}
@@ -94,6 +94,16 @@ public class ChunkManager {
 
 			chunk.genCubes();
 		}
+	}
+	
+	public Chunk getChunk(int x, int y, int z){
+		Chunk temp = chunks.firstElement();
+		for(Chunk ck : chunks){
+			if( (ck.getX() == x) && (ck.getY() == y) && (ck.getZ() == z) ){
+				return ck;
+			}
+		}
+		return temp;
 	}
 
 

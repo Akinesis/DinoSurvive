@@ -177,9 +177,9 @@ public class Chunk {
 	 * TODO : vérification que le cube a le droit d'être dans ce cube
 	 * @param cube
 	 */
-	/*public void addCube3dVbo(Cube3dVbo cube){
-		cubes[cube.getX()][cube.getY()][cube.getZ()] = cube;		
-	}*/
+	public void addCube3dVbo(Cube3dVbo cube){
+		cubes[Math.abs(cube.getX()%16)][Math.abs(cube.getY()%16)][Math.abs(cube.getZ()%16)] = cube;		
+	}
 
 	/**
 	 * Fonction permettant la génération d'un arbre dont le premier bloc de tronc est en position x,y,z
@@ -280,6 +280,7 @@ public class Chunk {
 			}
 		}
 	}
+
 	
 	/*
 	 * Getters

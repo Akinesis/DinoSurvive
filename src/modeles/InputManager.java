@@ -109,13 +109,11 @@ public class InputManager {
 	}
 
 	private void moveY(float amt){
-		/*if(clone.getCollision().colideY(camera, amt)){
+		if(clone.getCollision().colideY(camera, amt)){
 			isJumping = false;
 		}else{
 			camera.getPos().y += amt;
-		}*/
-		
-		camera.getPos().y += amt;
+		}
 	}
 	
 	/**
@@ -139,7 +137,7 @@ public class InputManager {
 	}
 	
 	private void jump(boolean space){
-		if(!isJumping && space && getTime()-lastJump > 700){
+		if(!isJumping && space && getTime()-lastJump > 800){
 			isJumping = true;
 			hauteurSaut = camera.getPos().y-1.2f;
 			lastJump = getTime();
