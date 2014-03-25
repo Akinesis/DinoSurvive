@@ -28,7 +28,7 @@ public class TextureManager {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
-	public void genGrassTexture(){
+	private void genGrassTexture(){
 		textureData.put(new float[]{
 				//south
 				0.03125f, 0.03125f,
@@ -79,7 +79,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genDirtTexture(){
+	private void genDirtTexture(){
 		textureData.put(new float[]{
 				//south
 				0.0625f, 0.03125f,
@@ -130,7 +130,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genStoneTexture(){
+	private void genStoneTexture(){
 		textureData.put(new float[]{
 				//south
 				0.0625f, 0.0625f,
@@ -180,7 +180,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 	
-	public void genCoalTexture(){
+	private void genCoalTexture(){
 		textureData.put(new float[]{
 				//south
 				0.09375f, 0.03125f,
@@ -231,7 +231,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genGoldTexture(){
+	private void genGoldTexture(){
 		textureData.put(new float[]{
 				//south
 				0.125f, 0.03125f,
@@ -281,7 +281,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genSilverTexture(){
+	private void genSilverTexture(){
 		textureData.put(new float[]{
 				//south
 				0.03125f, 0.09375f,
@@ -331,7 +331,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genIronTexture(){
+	private void genIronTexture(){
 		textureData.put(new float[]{
 				//south
 				0.09375f, 0.0625f,
@@ -381,7 +381,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genCopperTexture(){
+	private void genCopperTexture(){
 		textureData.put(new float[]{
 				//south
 				0.0625f, 0.09375f,
@@ -431,7 +431,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genTitaneTexture(){
+	private void genTitaneTexture(){
 		textureData.put(new float[]{
 				//south
 				0.09375f, 0.09375f,
@@ -481,7 +481,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genUraniumTexture(){
+	private void genUraniumTexture(){
 		textureData.put(new float[]{
 				//south
 				0.125f, 0.0625f,
@@ -531,7 +531,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genWoodTexture(){
+	private void genWoodTexture(){
 		textureData.put(new float[]{
 				//south
 				0.03125f, 0.125f,
@@ -581,7 +581,7 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	public void genLeafTexture(){
+	private void genLeafTexture(){
 		textureData.put(new float[]{
 				//south
 				0.09375f, 0.125f,
@@ -631,6 +631,206 @@ public class TextureManager {
 		textureData.flip();
 	}
 
+	private void genWaterTexture(){
+		textureData.put(new float[]{
+				//south
+				0.15625f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.03125f,
+				0.125f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.0f,
+
+				0.15625f, 0.0f,
+				0.125f, 0.0f,
+				0.125f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.03125f,
+				0.15625f, 0.03125f,
+
+				//top
+				0.15625f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.03125f,
+				0.125f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.0f,
+
+				//bottom
+				0.125f, 0.0f,
+				0.125f, 0.03125f,
+				0.15625f, 0.0f,
+				0.15625f, 0.0f,
+				0.125f, 0.03125f,
+				0.15625f, 0.03125f,
+
+				0.15625f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.03125f,
+				0.125f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.0f,
+
+				0.125f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.0f,
+				0.15625f, 0.03125f,
+				0.15625f, 0.0f,
+				0.125f, 0.03125f
+		});
+		textureData.flip();
+	}
+
+	private void genLavaTexture(){
+		textureData.put(new float[]{
+				//south
+				0.15625f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.0625f,
+				0.125f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.03125f,
+
+				0.15625f, 0.03125f,
+				0.125f, 0.03125f,
+				0.125f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.0625f,
+				0.15625f, 0.0625f,
+
+				//top
+				0.15625f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.0625f,
+				0.125f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.03125f,
+
+				//bottom
+				0.125f, 0.03125f,
+				0.125f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.15625f, 0.03125f,
+				0.125f, 0.0625f,
+				0.15625f, 0.0625f,
+
+				0.15625f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.0625f,
+				0.125f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.03125f,
+
+				0.125f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.03125f,
+				0.15625f, 0.0625f,
+				0.15625f, 0.03125f,
+				0.125f, 0.0625f
+		});
+		textureData.flip();
+	}
+	
+	private void genPlankTexture(){
+		textureData.put(new float[]{
+				//south
+				0.125f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.09375f,
+				0.09375f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.0625f,
+
+				0.125f, 0.0625f,
+				0.09375f, 0.0625f,
+				0.09375f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.09375f,
+				0.125f, 0.09375f,
+
+				//top
+				0.125f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.09375f,
+				0.09375f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.0625f,
+
+				//bottom
+				0.09375f, 0.0625f,
+				0.09375f, 0.09375f,
+				0.125f, 0.0625f,
+				0.125f, 0.0625f,
+				0.09375f, 0.09375f,
+				0.125f, 0.09375f,
+
+				0.125f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.09375f,
+				0.09375f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.0625f,
+
+				0.09375f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.0625f,
+				0.125f, 0.09375f,
+				0.125f, 0.0625f,
+				0.09375f, 0.09375f
+		});
+		textureData.flip();
+	}
+	
+	private void genWorkbenchTexture(){
+		textureData.put(new float[]{
+				//south
+				0.125f, 0.125f,
+				0.125f, 0.09375f,
+				0.09375f, 0.125f,
+				0.09375f, 0.125f,
+				0.125f, 0.09375f,
+				0.09375f, 0.09375f,
+
+				0.125f, 0.09375f,
+				0.09375f, 0.09375f,
+				0.09375f, 0.125f,
+				0.125f, 0.09375f,
+				0.09375f, 0.125f,
+				0.125f, 0.125f,
+
+				//top
+				0.15625f, 0.09375f,
+				0.15625f, 0.0625f,
+				0.125f, 0.09375f,
+				0.125f, 0.09375f,
+				0.15625f, 0.0625f,
+				0.125f, 0.0625f,
+
+				//bottom
+				0.125f, 0.0625f,
+				0.125f, 0.09375f,
+				0.15625f, 0.0625f,
+				0.15625f, 0.0625f,
+				0.125f, 0.09375f,
+				0.15625f, 0.09375f,
+
+				0.15625f, 0.125f,
+				0.15625f, 0.09375f,
+				0.125f, 0.125f,
+				0.125f, 0.125f,
+				0.15625f, 0.09375f,
+				0.125f, 0.09375f,
+
+				0.125f, 0.125f,
+				0.15625f, 0.09375f,
+				0.125f, 0.09375f,
+				0.15625f, 0.125f,
+				0.15625f, 0.09375f,
+				0.125f, 0.125f
+		});
+		textureData.flip();
+	}
+	
 	public void bindText(){
 		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 		texture.bind();
@@ -694,6 +894,18 @@ public class TextureManager {
 			break;
 		case 12:
 			genLeafTexture();
+			break;
+		case 13:
+			genWaterTexture();
+			break;
+		case 14:
+			genLavaTexture();
+			break;
+		case 15:
+			genPlankTexture();
+			break;
+		case 16:
+			genWorkbenchTexture();
 			break;
 		default:
 			break;
