@@ -108,5 +108,9 @@ public class Cube3dVbo extends Cube3D {
 		return type;
 	}
 	
+	public boolean isTransp(){
+		return type==12;
+	}
+	
 }
 

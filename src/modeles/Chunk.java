@@ -2,6 +2,10 @@ package modeles;
 /**
  * Classe représentant les Chunks comme divisions du "monde" 
  */
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glDisable;
+
 import java.util.Vector;
 
 import modeles.entities.*;
@@ -144,7 +148,6 @@ public class Chunk {
 	 * @param texMan
 	 */
 	public void draw(TextureManager texMan){
-		//checkState();
 		for(Cube3dVbo cube : renderCubes){
 			cube.bindBuffers();
 
