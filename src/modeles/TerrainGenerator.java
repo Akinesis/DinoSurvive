@@ -15,11 +15,11 @@ public class TerrainGenerator {
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
 		//terre.genTerre();
 		int originX = (temp.getX()*16);
-		int originY = (temp.getY()*16)+1;
+		int originY = (temp.getY()*16);
 		int originZ = (temp.getZ()*16);
 
-		for(int i = originX; i>originX-15; i--){
-			for(int j = originZ; j>originZ-15; j--){
+		for(int i = originX; i>originX-16; i--){
+			for(int j = originZ; j>originZ-16; j--){
 				for(int k = originY; k>originY-16; k--){
 					temp.addCube3dVbo(new Cube3dVbo(i, -k, j, 1, 2));
 				}
