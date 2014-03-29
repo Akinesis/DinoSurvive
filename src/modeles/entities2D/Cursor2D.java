@@ -1,6 +1,8 @@
 package modeles.entities2D;
 
 import java.nio.FloatBuffer;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  * Classe gérant le curseur affiché sur le HUD
@@ -24,7 +26,7 @@ public class Cursor2D extends AbstractEntity2D{
 	 * dessin du curseur
 	 */
 	public void draw(){
-		
+		glDrawArrays(GL_LINES, 0, verticiesNum);
 	}
 	
 	/*
