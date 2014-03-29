@@ -1,6 +1,10 @@
 package modeles.entities2D;
 
 import java.nio.FloatBuffer;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.Display;
+
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -10,15 +14,22 @@ import static org.lwjgl.opengl.GL11.*;
  *
  */
 public class Cursor2D extends AbstractEntity2D{
+	//nombre de vertex (traits)
 	private static int verticiesNum = 2;
+	//taille (x,y)
 	private int vertexSize = 2;
+	//ce qui est dessiné (le buffer)
 	private int vboVertexHandle;
+	//coordonnées des points
 	private FloatBuffer vertexData;
+
+	
 
 	/**
 	 * Constructeur du curseur
 	 */	
 	public Cursor2D(){
+		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 		
 	}
 	
@@ -33,17 +44,18 @@ public class Cursor2D extends AbstractEntity2D{
 	 * génération du curseur
 	 */
 	public void genCurseur(){
-		
+		//calcul du centre
+		float c_hor = Display.getWidth();
+		float c_vert = Display.getHeight();
+		vertexData.put(new float[]{
+				c_hor+10, c_vert,
+				c_hor-10, c_vert,
+				c_hor, c_vert +10,
+				c_hor, c_vert -10,
+		});
+		vertexData.flip();
 	}
-	/**
-	 * calculs à utiliser pour l'affichage du curseur (osef de glVertex2f)
-	 *glVertex2f(Display.getWidth()/2 +10, Display.getHeight()/2);
-	 *glVertex2f(Display.getWidth()/2 -10, Display.getHeight()/2);
-	 *
-	 *glVertex2f(Display.getWidth()/2, Display.getHeight()/2 +10);
-	 *glVertex2f(Display.getWidth()/2, Display.getHeight()/2 -10);
-	 */
-
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
@@ -53,6 +65,28 @@ public class Cursor2D extends AbstractEntity2D{
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void bindBuffer() {
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);
+	}
+
+	public void bindDrawCursor() {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	public void enableCursor() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void disableCursor() {
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
 	}
 }

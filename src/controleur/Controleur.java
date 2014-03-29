@@ -13,6 +13,7 @@ import modeles.InputManager;
 import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
+import modeles.entities2D.HUDManager;
 
 import org.lwjgl.input.Keyboard;
 
@@ -32,6 +33,7 @@ public class Controleur {
 	private TextureManager texManager;
 	private CollisionManager collision;
 	private TerrainGenerator chunkTerre;
+	private HUDManager hud;
 
 	/**
 	 * Constructeur du controleur
@@ -47,6 +49,7 @@ public class Controleur {
 		chunkManager = new ChunkManager(this);
 		chunkManager.setChunksList(mapRead.setChunks());
 		chunkTerre = new TerrainGenerator(this);
+		hud = new HUDManager();
 		
 	}
 
@@ -73,11 +76,11 @@ public class Controleur {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//initialise la matrice 3D
-			//matrices.init3D();
+			matrices.init3D();
 			glLoadIdentity();
 
 
-			//bouge la came©ra
+			//bouge la cameï¿½ra
 			camera.useView();
 
 			//tout ce qui Ã  rapport aux input
@@ -85,6 +88,7 @@ public class Controleur {
 			
 			//dessine tout les chunks
 			chunkManager.drawChunks(texManager);
+			matrices.init2D();
 
 			display.update();
 		}

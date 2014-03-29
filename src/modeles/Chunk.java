@@ -105,7 +105,7 @@ public class Chunk {
 	}
 
 	/**
-	 * Pour un cube donné, renvoi si il est visible ou non
+	 * Pour un cube donnï¿½, renvoi si il est visible ou non
 	 */
 	private boolean surrend(int x, int y, int z){
 		boolean temp;
@@ -124,7 +124,7 @@ public class Chunk {
 	}
 
 	/**
-	 * Methode générant les cubes dans le buffer
+	 * Methode gï¿½nï¿½rant les cubes dans le buffer
 	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
 	 */
 	public void genCubes(){
@@ -268,7 +268,7 @@ public class Chunk {
 
 	/**
 	 * Fonction permettant la gÃ©nÃ©ration d'un chunk de terre.
-	 * En clair, le chunk est rempli de terre excepté aux endroit ou un bloc existe déjà (à vérifié)
+	 * En clair, le chunk est rempli de terre exceptï¿½ aux endroit ou un bloc existe dï¿½jï¿½ (ï¿½ vï¿½rifiï¿½)
 	 */
 	public void genTerre(){
 		for(int i=x*16; i>x-16; i--){
