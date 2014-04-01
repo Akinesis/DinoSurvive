@@ -58,13 +58,12 @@ public class Controleur {
 
 		//ajoute un chunk de terre dans le chunk manager
 		chunkTerre.genereTerre(1, 0, 1);
-		chunkTerre.genFond(0, 0, 0);
-		chunkTerre.genFond(1, 0, 0);
+		//chunkTerre.genFond(0, 0, 0);
+		//chunkTerre.genFond(1, 0, 0);
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
 		
-		//texManager.genGrassTexture();
 		texManager.bindBuffer();
 		texManager.bindText();
 
@@ -77,7 +76,7 @@ public class Controleur {
 			glLoadIdentity();
 
 
-			//bouge la came�ra
+			//bouge la came�ra
 			camera.useView();
 
 			//tout ce qui à rapport aux input
@@ -86,7 +85,7 @@ public class Controleur {
 			//dessine tout les chunks
 			chunkManager.drawChunks(texManager);
 
-			display.update();
+			display.update(); //met à jour la fenêtre, aucun rapport avec les chunks
 		}
 	}
 	

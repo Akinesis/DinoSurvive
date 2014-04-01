@@ -41,7 +41,7 @@ public class Chunk {
 
 	/**
 	 * Renvoie un cube aux coordonn√©es x,y,z
-	 * @param xC
+	 * @param x
 	 * @param y
 	 * @param z
 	 * @return un Cube3dVbo
@@ -93,7 +93,7 @@ public class Chunk {
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
 					if(cubes[i][j][k]!=null){
-						if(surrend(i,j,k)){
+						if(surround(i,j,k)){
 							cubes[i][j][k].setEtat(false);
 						}else{
 							cubes[i][j][k].setEtat(true);
@@ -105,26 +105,26 @@ public class Chunk {
 	}
 
 	/**
-	 * Pour un cube donnÈ, renvoi si il est visible ou non
+	 * Pour un cube donnÔøΩ, renvoi si il est visible ou non
 	 */
-	private boolean surrend(int x, int y, int z){
+	private boolean surround(int x, int y, int z){
 		boolean temp;
-		temp = cubes[x][y][z]!=null;
+		temp = true;
 		
-		temp = (x>0)?cubes[x-1][y][z]!=null && temp:false;
-		temp = (y>0)?cubes[x][y-1][z]!=null && temp:false;
-		temp = (z>0)?cubes[x][y][z-1]!=null && temp:false;
+		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : false;
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : false;
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : false;
 		
-		temp = (x<15)?cubes[x+1][y][z]!=null && temp:false;
-		temp = (y<15)?cubes[x][y+1][z]!=null && temp:false;
-		temp = (z<15)?cubes[x][y][z+1]!=null && temp:false;
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : false;
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : false;
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : false;
 		
 		return  temp;
 
 	}
 
 	/**
-	 * Methode gÈnÈrant les cubes dans le buffer
+	 * Methode gÔøΩnÔøΩrant les cubes dans le buffer
 	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
 	 */
 	public void genCubes(){
@@ -177,7 +177,7 @@ public class Chunk {
 	 * @param cube
 	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		cubes[Math.abs(cube.getX()%16)][Math.abs(cube.getY()%16)][Math.abs(cube.getZ()%16)] = cube;		
+		cubes[Math.abs(cube.getX())%16][Math.abs(cube.getY())%16][Math.abs(cube.getZ())%16] = cube;		
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class Chunk {
 
 	/**
 	 * Fonction permettant la g√©n√©ration d'un chunk de terre.
-	 * En clair, le chunk est rempli de terre exceptÈ aux endroit ou un bloc existe dÈj‡ (‡ vÈrifiÈ)
+	 * En clair, le chunk est rempli de terre exceptÔøΩ aux endroit ou un bloc existe dÔøΩjÔøΩ (ÔøΩ vÔøΩrifiÔøΩ)
 	 */
 	public void genTerre(){
 		for(int i=x*16; i>x-16; i--){

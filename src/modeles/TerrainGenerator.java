@@ -13,15 +13,14 @@ public class TerrainGenerator {
 
 	public void genereTerre(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
-		//terre.genTerre();
 		int originX = (temp.getX()*16);
 		int originY = (temp.getY()*16);
 		int originZ = (temp.getZ()*16);
 
 		for(int i = originX; i>originX-16; i--){
-			for(int j = originZ; j>originZ-16; j--){
-				for(int k = originY; k>originY-16; k--){
-					temp.addCube3dVbo(new Cube3dVbo(i, -k, j, 1, 2));
+			for(int j = originY; j>originY-16; j--){
+				for(int k = originZ; k>originZ-16; k--){
+					temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 2));
 				}
 			}
 		}
