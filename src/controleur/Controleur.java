@@ -77,7 +77,7 @@ public class Controleur {
 			glLoadIdentity();
 
 
-			//bouge la came©ra
+			//bouge la cameï¿½ra
 			camera.useView();
 
 			//tout ce qui Ã  rapport aux input

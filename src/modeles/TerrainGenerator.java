@@ -19,9 +19,9 @@ public class TerrainGenerator {
 		int originZ = (temp.getZ()*16);
 
 		for(int i = originX; i>originX-16; i--){
-			for(int j = originZ; j>originZ-16; j--){
-				for(int k = originY; k>originY-16; k--){
-					temp.addCube3dVbo(new Cube3dVbo(i, -k, j, 1, 2));
+			for(int j = originY; j>originY-16; j--){
+				for(int k = originZ; k>originZ-16; k--){
+					temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 2));
 				}
 			}
 		}
@@ -40,7 +40,7 @@ public class TerrainGenerator {
 
 		for(int i = originX; i>originX-16; i--){
 			for(int j = originZ; j>originZ-16; j--){
-				temp.addCube3dVbo(new Cube3dVbo(i, originY, j, 1, 3));
+				temp.addCube3dVbo(new Cube3dVbo(i, originY, j, 1, 1));
 			}
 		}
 	}

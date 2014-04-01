@@ -3,9 +3,8 @@ package modeles.entities2D;
 import java.nio.FloatBuffer;
 
 /**
- * Classe gérant le curseur affiché sur le HUD
+ * Classe gerant le curseur affiche sur le HUD
  * 
- *
  */
 public class Cursor2D extends AbstractEntity2D{
 	private static int verticiesNum = 2;
