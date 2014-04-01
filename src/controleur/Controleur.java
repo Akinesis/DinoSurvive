@@ -13,6 +13,7 @@ import modeles.InputManager;
 import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
+import modeles.entities2D.Menu;
 
 import org.lwjgl.input.Keyboard;
 
@@ -54,6 +55,8 @@ public class Controleur {
 	public void init(){
 		display.create();
 		matrices.init3D();
+		Menu menu = new Menu();
+
 		texManager = new TextureManager();
 
 		//ajoute un chunk de terre dans le chunk manager
