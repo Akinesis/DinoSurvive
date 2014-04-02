@@ -1,4 +1,4 @@
-package modeles;
+﻿package modeles;
 /**
  * Classe représentant les Chunks comme divisions du "monde" 
  */
@@ -41,7 +41,7 @@ public class Chunk {
 
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z
-	 * @param xC
+	 * @param x
 	 * @param y
 	 * @param z
 	 * @return un Cube3dVbo
@@ -93,7 +93,7 @@ public class Chunk {
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
 					if(cubes[i][j][k]!=null){
-						if(surrend(i,j,k)){
+						if(surround(i,j,k)){
 							cubes[i][j][k].setEtat(false);
 						}else{
 							cubes[i][j][k].setEtat(true);
@@ -107,17 +107,17 @@ public class Chunk {
 	/**
 	 * Pour un cube donn�, renvoi si il est visible ou non
 	 */
-	private boolean surrend(int x, int y, int z){
+	private boolean surround(int x, int y, int z){
 		boolean temp;
-		temp = cubes[x][y][z]!=null;
+		temp = true;
 		
-		temp = (x>0)?cubes[x-1][y][z]!=null && temp:false;
-		temp = (y>0)?cubes[x][y-1][z]!=null && temp:false;
-		temp = (z>0)?cubes[x][y][z-1]!=null && temp:false;
+		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : false;
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : false;
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : false;
 		
-		temp = (x<15)?cubes[x+1][y][z]!=null && temp:false;
-		temp = (y<15)?cubes[x][y+1][z]!=null && temp:false;
-		temp = (z<15)?cubes[x][y][z+1]!=null && temp:false;
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : false;
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : false;
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : false;
 		
 		return  temp;
 
@@ -177,7 +177,19 @@ public class Chunk {
 	 * @param cube
 	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		cubes[Math.abs(cube.getX()%16)][Math.abs(cube.getY()%16)][Math.abs(cube.getZ()%16)] = cube;		
+		cubes[Math.abs(cube.getX())%16][Math.abs(cube.getY())%16][Math.abs(cube.getZ())%16] = cube;		
+	}
+	
+	/**
+	 * Méthode ajoutant un cube dans le chunk aux coordonnées préciser manuellement
+	 * TODO : vérification que le cube a le droit d'être dans ce cube
+	 * @param cube
+	 * @param i
+	 * @param j
+	 * @param k
+	 */
+	public void addCube3dVboCoor(Cube3dVbo cube, int i, int j, int k){
+		cubes[i][j][k] = cube;		
 	}
 
 	/**
