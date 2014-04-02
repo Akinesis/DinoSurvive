@@ -12,6 +12,7 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 import org.lwjgl.util.glu.GLU;
+import static org.lwjgl.opengl.GL11.*;
 
 import parametres.Parametres;
 
@@ -42,17 +43,17 @@ public class Menu implements Parametres{
 	}
 	
 	public void Dessiner(){
-		GL11.glLoadIdentity();
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_PROJECTION);
 		// Definition de la fenetre
 		GLU.gluOrtho2D(0.0f, Parametres.largeur, 0.0f, Parametres.hauteur);
 	    // Desactivation du test de prophondeur
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		glDisable(GL_DEPTH_TEST);
 	    // Vidage de l'image
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 		this.DessinerFond();
-		this.DessinerBoutons();
-		GL11.glFlush();
+		//this.DessinerBoutons();
+		glFlush();
 		try {
 			Display.swapBuffers();
 		} catch (LWJGLException e) {
@@ -61,18 +62,18 @@ public class Menu implements Parametres{
 	}
 	
 	public void DessinerFond(){
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.texture.getTextureID());
+		glBindTexture(GL_TEXTURE_2D, this.texture.getTextureID());
 		this.texture.bind();
 		
-		GL11.glBegin(GL11.GL_TRIANGLES); 
-		GL11.glTexCoord2f(1, 0); GL11.glVertex2i(450, 10);
-		GL11.glTexCoord2f(0, 0); GL11.glVertex2i(10, 10);
-		GL11.glTexCoord2f(0, 1); GL11.glVertex2i(10, 450);
+		glBegin(GL_TRIANGLES); 
+		glTexCoord2f(1, 0); glVertex2i(450, 10);
+		glTexCoord2f(0, 0); glVertex2i(10, 10);
+		glTexCoord2f(0, 1); glVertex2i(10, 450);
 		 
-		GL11.glTexCoord2f(0, 1); GL11.glVertex2i(10, 450);
-		GL11.glTexCoord2f(1, 1); GL11.glVertex2i(450, 450);
-		GL11.glTexCoord2f(1, 0); GL11.glVertex2i(450, 10);
-		GL11.glEnd();
+		glTexCoord2f(0, 1); glVertex2i(10, 450);
+		glTexCoord2f(1, 1); glVertex2i(450, 450);
+		glTexCoord2f(1, 0); glVertex2i(450, 10);
+		glEnd();
 	}
 	
 	public void DessinerBoutons(){

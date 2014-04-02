@@ -53,30 +53,37 @@ public class Controleur {
 
 	//le coeur du jeu, ma méthode contenant la boucle de jeu.
 	public void init(){
+		boolean launch = true;
 		display.create();
 		matrices.init3D();
 		Menu menu = new Menu();
-
-		texManager = new TextureManager();
-
-		//ajoute un chunk de terre dans le chunk manager
-		chunkTerre.genereTerre(1, 0, 1);
-		chunkTerre.genFond(0, 0, 0);
-		chunkTerre.genFond(1, 0, 0);
 		
-		//initialise les chunks une première fois et met les cubes dans le buffer
-		chunkManager.initChunks();
-		
-		//texManager.genGrassTexture();
-		texManager.bindBuffer();
-		texManager.bindText();
-
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
+			if(launch){
+				
+				for(int i=0; i <100; i++){
+					menu.Dessiner();
+				}
+				
+				texManager = new TextureManager();
+
+				//ajoute un chunk de terre dans le chunk manager
+				chunkTerre.genereTerre(1, 0, 1);
+				chunkTerre.genFond(0, 0, 0);
+				chunkTerre.genFond(1, 0, 0);
+				
+				//initialise les chunks une première fois et met les cubes dans le buffer
+				chunkManager.initChunks();
+				
+				//texManager.genGrassTexture();
+				texManager.bindBuffer();
+				texManager.bindText();
+			}
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//initialise la matrice 3D
-			//matrices.init3D();
+			matrices.init3D();
 			glLoadIdentity();
 
 
@@ -90,6 +97,7 @@ public class Controleur {
 			chunkManager.drawChunks(texManager);
 
 			display.update();
+			launch = false;
 		}
 	}
 	
