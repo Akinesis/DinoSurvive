@@ -19,6 +19,7 @@ public class InputManager {
 	private int coef = 1;
 	private boolean isJumping;
 	private float hauteurSaut, lastJump;
+	private long lastFrame;
 
 	public InputManager(Controleur contr){
 		clone = contr;
@@ -163,6 +164,13 @@ public class InputManager {
 
 	private static long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+	}
+	
+	private int getDelta() {
+		long currentTime = getTime();
+		int delta = (int) (currentTime - lastFrame);
+		lastFrame = getTime();
+		return delta;
 	}
 
 }

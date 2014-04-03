@@ -177,19 +177,7 @@ public class Chunk {
 	 * @param cube
 	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		cubes[Math.abs(cube.getX())%16][Math.abs(cube.getY())%16][Math.abs(cube.getZ())%16] = cube;		
-	}
-	
-	/**
-	 * Méthode ajoutant un cube dans le chunk aux coordonnées préciser manuellement
-	 * TODO : vérification que le cube a le droit d'être dans ce cube
-	 * @param cube
-	 * @param i
-	 * @param j
-	 * @param k
-	 */
-	public void addCube3dVboCoor(Cube3dVbo cube, int i, int j, int k){
-		cubes[i][j][k] = cube;		
+		cubes[(Math.abs(cube.getX())-1)%16][(Math.abs(cube.getY()))%16][(Math.abs(cube.getZ())-1)%16] = cube;		
 	}
 
 	/**
