@@ -6,14 +6,13 @@ import java.util.Vector;
 
 import modeles.entities.*;
 import controleur.Controleur;
-
-
-
+import static org.lwjgl.opengl.GL15.*;
 
 public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
+	private int vboVertexHandleChunk;
 
 	private Controleur clone;
 	private int x,y,z,id;
@@ -37,6 +36,10 @@ public class Chunk {
 		this.z = z;
 		//pour l'instant : id = ligne dans le programme, changer ça !!! (extrapoler l'iD des XYZ)
 		this.id = id;
+	}
+	
+	public void genVBO(){
+		vboVertexHandleChunk = glGenBuffers();
 	}
 
 	/**
@@ -135,7 +138,7 @@ public class Chunk {
 	
 	public void delCubes(){
 		for(Cube3dVbo cube : nonRenderCubes){
-			cube.delCube();
+			//cube.delCube(vboVertexHandleChunk);
 		}
 	}
 
@@ -145,12 +148,12 @@ public class Chunk {
 	 */
 	public void draw(TextureManager texMan){
 		for(Cube3dVbo cube : renderCubes){
-			cube.bindBuffers();
+			cube.bindBuffers(vboVertexHandleChunk);
 
 			texMan.genText(cube.getType());
 			texMan.bindBuffer();
 
-			cube.bindDrawCube();
+			cube.bindDrawCube(vboVertexHandleChunk);
 			texMan.bindDrawTexture();
 
 			cube.enableCube();

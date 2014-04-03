@@ -93,6 +93,7 @@ public class ChunkManager {
 	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : chunks){
 			//chunk.checkState();
+			chunk.genVBO();
 			chunk.draw(textMan);
 			chunk.delCubes();
 		}
