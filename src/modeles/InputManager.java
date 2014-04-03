@@ -81,7 +81,7 @@ public class InputManager {
 		/*
 		 * vitesse de déplacement
 		 */
-		float speed = 0.0055f*delta;
+		float speed = 0.0050f*delta;
 
 		/*
 		 * Déplacement
