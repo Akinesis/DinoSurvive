@@ -13,9 +13,9 @@ public class TerrainGenerator {
 
 	public void genereTerre(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
-		int originX = x*16;
+		int originX = x*16+((x>0)?-1:0);
 		int originY = y*16;
-		int originZ = z*16;
+		int originZ = z*16+((x>0)?-1:0);
 
 		for(int i = originX; i>originX-16; --i){
 			for(int j = originY; j>originY-16; --j){
