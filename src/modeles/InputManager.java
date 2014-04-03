@@ -20,11 +20,13 @@ public class InputManager {
 	private boolean isJumping;
 	private float hauteurSaut, lastJump;
 	private long lastFrame;
+	private int delta;
 
 	public InputManager(Controleur contr){
 		clone = contr;
 		clone.getMap();//à changer; inutile
 		isJumping = false;
+		lastFrame=getTime();
 	}
 
 	public void setCam(Camera cam){
@@ -41,6 +43,7 @@ public class InputManager {
 		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+		delta = getDelta();
 
 		//inversion de la souris
 		while(Keyboard.next()){
@@ -78,7 +81,7 @@ public class InputManager {
 		/*
 		 * vitesse de déplacement
 		 */
-		float speed = 0.09f;
+		float speed = 0.0055f*delta;
 
 		/*
 		 * Déplacement

@@ -58,6 +58,7 @@ public class Controleur {
 
 		//ajoute un chunk de terre dans le chunk manager
 		chunkTerre.genereTerre(1, 0, 1);
+		chunkTerre.genereTerre(-1, 0, 0);
 		chunkTerre.genFond(0, 0, 0);
 		chunkTerre.genFond(1, 0, 0);
 		

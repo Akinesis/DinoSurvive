@@ -177,7 +177,11 @@ public class Chunk {
 	 * @param cube
 	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		cubes[(Math.abs(cube.getX()))%16][(Math.abs(cube.getY()))%16][(Math.abs(cube.getZ()))%16] = cube;		
+		int posX = (Math.abs(cube.getX())+((cube.getX()<0)?-1:0))%16;
+		int posY = Math.abs(cube.getY())%16;
+		int posZ = (Math.abs(cube.getZ())+((cube.getZ()<0)?-1:0))%16;
+		
+		cubes[posX][posY][posZ] = cube;		
 	}
 
 	/**
