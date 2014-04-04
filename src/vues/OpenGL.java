@@ -8,8 +8,10 @@ import static org.lwjgl.opengl.GL11.GL_BLEND;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glLineWidth;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
@@ -50,7 +52,7 @@ public class OpenGL implements Parametres {
 		glMatrixMode(GL_MODELVIEW);
 		
 		glLoadIdentity();
-		
+		glLineWidth(3);
 		glDisable(GL_DEPTH_TEST);
 	}
 

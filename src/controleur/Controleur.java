@@ -49,7 +49,6 @@ public class Controleur {
 		chunkManager = new ChunkManager(this);
 		chunkManager.setChunksList(mapRead.setChunks());
 		chunkTerre = new TerrainGenerator(this);
-		hud = new HUDManager();
 		
 	}
 
@@ -57,6 +56,7 @@ public class Controleur {
 	public void init(){
 		display.create();
 		matrices.init3D();
+		hud = new HUDManager();
 		texManager = new TextureManager();
 
 		//ajoute un chunk de terre dans le chunk manager
@@ -89,6 +89,7 @@ public class Controleur {
 			//dessine tout les chunks
 			chunkManager.drawChunks(texManager);
 			matrices.init2D();
+			hud.draw();
 
 			display.update();
 		}
