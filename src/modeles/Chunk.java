@@ -150,7 +150,7 @@ public class Chunk {
 		for(Cube3dVbo cube : renderCubes){
 			cube.bindBuffers(vboVertexHandleChunk);
 
-			texMan.genText(cube.getType());
+			texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
 			texMan.bindBuffer();
 
 			cube.bindDrawCube(vboVertexHandleChunk);

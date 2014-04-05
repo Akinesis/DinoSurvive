@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.nio.FloatBuffer;
 
 
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
+
 import org.lwjgl.BufferUtils;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
+
+import com.sun.org.apache.bcel.internal.generic.IDIV;
 
 public class TextureManager {
 
@@ -29,30 +33,36 @@ public class TextureManager {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
-	private void genGrassTexture(){
+	private void genGrassTexture(float indiceTextX, float indiceTextY){	
+		float xGrass = indiceTextX*0.03125f;
+		float yGrass = indiceTextY*0.03125f*1;
+		
+		indiceTextX = 0 + (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
+		indiceTextY = 0 + (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+		
 		textureData.put(new float[]{
 				//south
-				0.03125f, 0.03125f,
-				0.03125f, 0,
-				0, 0.03125f,
-				0, 0.03125f,
-				0.03125f, 0,
-				0, 0,
+				0.03125f+indiceTextX, 0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0.03125f+indiceTextY,
+				0+indiceTextX, 0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0+indiceTextY,
 
-				0.03125f, 0,
-				0, 0,
-				0, 0.03125f,
-				0.03125f, 0,
-				0, 0.03125f,
-				0.03125f, 0.03125f,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0.03125f+indiceTextY,
 
 				//top
-				0.03125f, 0.0625f,
-				0.03125f, 0.03125f,
-				0, 0.0625f,
-				0, 0.0625f,
-				0.03125f, 0.03125f,
-				0, 0.03125f,
+				0.03125f+xGrass, 0.09375f+yGrass,
+				0.03125f+xGrass, 0.0625f+yGrass,
+				0.0f+xGrass, 0.09375f+yGrass,
+				0.0f+xGrass, 0.09375f+yGrass,
+				0.03125f+xGrass, 0.0625f+yGrass,
+				0.0f+xGrass, 0.0625f+yGrass,
 
 				//bottom
 				0.03125f, 0,
@@ -62,19 +72,19 @@ public class TextureManager {
 				0.03125f, 0.03125f,
 				0.0625f, 0.03125f,
 
-				0.03125f, 0.03125f,
-				0.03125f, 0,
-				0, 0.03125f,
-				0, 0.03125f,
-				0.03125f, 0,
-				0, 0,
+				0.03125f+indiceTextX, 0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0.03125f+indiceTextY,
+				0+indiceTextX, 0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0+indiceTextY,
 
-				0, 0.03125f,
-				0.03125f, 0,
-				0, 0,
-				0.03125f,0.03125f,
-				0.03125f, 0,
-				0, 0.03125f
+				0+indiceTextX, 0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0+indiceTextY,
+				0.03125f+indiceTextX,0.03125f+indiceTextY,
+				0.03125f+indiceTextX, 0+indiceTextY,
+				0+indiceTextX, 0.03125f+indiceTextY
 
 		});
 		textureData.flip();
@@ -857,11 +867,11 @@ public class TextureManager {
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
 
-	public void genText(int type){
+	public void genText(int type, float x, float y){
 		textureData.clear();
 		switch (type) {
 		case 1:
-			genGrassTexture();
+			genGrassTexture(x, y);
 			break;
 		case 2:
 			genDirtTexture();

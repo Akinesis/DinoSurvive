@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.nio.FloatBuffer;
+
 import org.lwjgl.BufferUtils;
 
 
@@ -14,12 +15,16 @@ public class Cube3dVbo extends Cube3D {
 	private int vboVertexHandle;
 	private FloatBuffer vertexData;
 	private int type;
+	private float indiceTextX, indiceTextY;
 
 	public Cube3dVbo(float x,float  y,float z,float size, int typ){
 		super(-x,y,-z,size);
 		type=typ;
 
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
+		indiceTextX = (float)(Math.random());
+		indiceTextY = (float)(Math.random());
+		
 		//vboVertexHandle = glGenBuffers();
 	}
 
@@ -110,6 +115,14 @@ public class Cube3dVbo extends Cube3D {
 	
 	public boolean isSolide(){
 		return type==13 || type==14;
+	}
+	
+	public float getTextX(){
+		return indiceTextX;
+	}
+	
+	public float getTextY(){
+		return indiceTextY;
 	}
 	
 }
