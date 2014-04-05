@@ -31,7 +31,7 @@ public class Controleur {
 	private MapReader mapRead;
 	private TextureManager texManager;
 	private CollisionManager collision;
-	private TerrainGenerator chunkTerre;
+	private TerrainGenerator terrGen;
 
 	/**
 	 * Constructeur du controleur
@@ -46,7 +46,7 @@ public class Controleur {
 		mapRead = new MapReader(this);
 		chunkManager = new ChunkManager(this);
 		chunkManager.setChunksList(mapRead.setChunks());
-		chunkTerre = new TerrainGenerator(this);
+		terrGen = new TerrainGenerator(this);
 		
 	}
 
@@ -57,10 +57,11 @@ public class Controleur {
 		texManager = new TextureManager();
 
 		//ajoute un chunk de terre dans le chunk manager
-		chunkTerre.genereTerre(1, 0, 1);
-		chunkTerre.genereTerre(-1, 0, 0);
-		chunkTerre.genFond(0, 0, 0);
-		chunkTerre.genFond(1, 0, 0);
+		terrGen.genereTerre(1, 0, 1);
+		terrGen.genereTerre(-1, 0, 0);
+		terrGen.genFond(0, 0, 0);
+		terrGen.genFond(1, 0, 0);
+		terrGen.genTree(1, 0, 0);
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();

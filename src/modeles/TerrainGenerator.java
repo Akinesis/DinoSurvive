@@ -42,4 +42,95 @@ public class TerrainGenerator {
 			}
 		}
 	}
+	
+	/**
+	 * Fonction permettant la génération d'un arbre dont le premier bloc de tronc est en position x,y,z
+	 * @param x : position du cube selon les x
+	 * @param y :  position du cube selon les y
+	 * @param z :  position du cube selon les z 
+	 */
+	//(pas besoin du paramètre 1 car pour un arbre les cubes font forcément 1)
+	//(potentiellement pour "jolifier" l'arbre, mettre un facteur de 0,5 pour les feuilles du dessus
+	//(aka : demi cube de feuilles)
+	public void genTree(int chX, int chY, int chZ){
+		//arbre d'une taille comprise entre 3 et 6 cubes de tronc
+		//wouhou aléatoire !
+
+		Chunk temp = clone.getChunkManager().getChunk(chX,chY,chZ);
+		
+		float x = chX*16+12;
+		float y = chY*16;
+		float z = chZ*16+12;
+		
+		int taille = (int)((6-3)*Math.random()) +3;
+		int size = 1;
+
+		//1 des cubes pour le moment 1
+
+		for (int i = 0; i<taille; ++i){
+
+			//à chaque itération il crée un cube de type tronc (11, cf TextureManager)
+
+			Cube3dVbo tronc = new Cube3dVbo(x, y+i, z, 1, 11);
+
+			//il l'ajoute dans le cube
+
+			temp.addCube3dVbo(tronc);
+
+			//création de feuilles (12 cf TextureManager)
+			//schéma différent entre les différents niveaux de feuilles (basique)
+
+			if (i==2){
+				//feuilles en croix sur le premier niveau
+				Cube3dVbo feuilles = new Cube3dVbo(x-1, y+i, z, size, 12);
+				Cube3dVbo feuilles2 = new Cube3dVbo(x+1, y+i, z, size, 12);
+				Cube3dVbo feuilles3 = new Cube3dVbo(x, y+i, z+1, size, 12);
+				Cube3dVbo feuilles4 = new Cube3dVbo(x, y+i, z-1, size, 12);
+
+				temp.addCube3dVbo(feuilles);
+				temp.addCube3dVbo(feuilles2);
+				temp.addCube3dVbo(feuilles3);
+				temp.addCube3dVbo(feuilles4);
+			}
+			else if (i>2){
+				//feuilles partout sur les niveaux suivants (moche !)
+				Cube3dVbo feuilles = new Cube3dVbo(x-1, y+i, z, 1, 12);
+				Cube3dVbo feuilles2 = new Cube3dVbo(x+1, y+i, z, 1, 12);
+				Cube3dVbo feuilles3 = new Cube3dVbo(x, y+i, z+1, 1, 12);
+				Cube3dVbo feuilles4 = new Cube3dVbo(x, y+i, z-1, 1, 12);
+				Cube3dVbo feuilles5 = new Cube3dVbo(x-1, y+i, z-1, 1, 12);
+				Cube3dVbo feuilles6 = new Cube3dVbo(x+1, y+i, z+1, 1, 12);
+				Cube3dVbo feuilles7 = new Cube3dVbo(x-1, y+i, z+1, 1, 12);
+
+				temp.addCube3dVbo(feuilles);
+				temp.addCube3dVbo(feuilles2);
+				temp.addCube3dVbo(feuilles3);
+				temp.addCube3dVbo(feuilles4);
+				temp.addCube3dVbo(feuilles5);
+				temp.addCube3dVbo(feuilles6);
+				temp.addCube3dVbo(feuilles7);				
+			}
+		}
+		// à la fin de la génération de l'arbre, on génère une couche de feuilles au dessus
+
+		Cube3dVbo feuilles = new Cube3dVbo(x-1, y+taille, z, size, 12);
+		Cube3dVbo feuilles2 = new Cube3dVbo(x, y+taille, z, size, 12);
+		Cube3dVbo feuilles3 = new Cube3dVbo(x-1, y+taille, z-1, size, 12);
+		Cube3dVbo feuilles4 = new Cube3dVbo(x-1, y+taille, z+1, size, 12);
+		Cube3dVbo feuilles5 = new Cube3dVbo(x+1, y+taille, z, size, 12);
+		Cube3dVbo feuilles6 = new Cube3dVbo(x+1, y+taille, z-1, size, 12);
+		Cube3dVbo feuilles7 = new Cube3dVbo(x+1, y+taille, z+1, size, 12);
+		Cube3dVbo feuilles8 = new Cube3dVbo(x, y+taille, z+1, size, 12);
+		Cube3dVbo feuilles9 = new Cube3dVbo(x, y+taille, z-1, size, 12);
+
+		temp.addCube3dVbo(feuilles);
+		temp.addCube3dVbo(feuilles2);
+		temp.addCube3dVbo(feuilles3);
+		temp.addCube3dVbo(feuilles4);
+		temp.addCube3dVbo(feuilles5);
+		temp.addCube3dVbo(feuilles6);
+		temp.addCube3dVbo(feuilles7);
+		temp.addCube3dVbo(feuilles8);
+		temp.addCube3dVbo(feuilles9);
+	}
 }
