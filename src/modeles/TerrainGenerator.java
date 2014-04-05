@@ -40,7 +40,7 @@ public class TerrainGenerator {
 
 		for(int i = originX; i>originX-16; i--){
 			for(int j = originZ; j>originZ-16; j--){
-				temp.addCube3dVbo(new Cube3dVbo(i, originY, j, 1, 3));
+				temp.addCube3dVbo(new Cube3dVbo(i, originY, j, 1, 1));
 			}
 		}
 	}
