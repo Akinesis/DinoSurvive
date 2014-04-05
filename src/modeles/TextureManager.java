@@ -35,10 +35,19 @@ public class TextureManager {
 
 	private void genGrassTexture(float indiceTextX, float indiceTextY){	
 		float xGrass = indiceTextX*0.03125f;
-		float yGrass = indiceTextY*0.03125f*1;
+		float yGrass = indiceTextY*0.03125f;
 		
-		indiceTextX = 0 + (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
-		indiceTextY = 0 + (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+		xGrass = xGrass-(xGrass%0.001953125f);
+		yGrass = yGrass-(yGrass%0.001953125f);
+		
+		float xDirt = indiceTextX*0.03125f;
+		float yDirt = indiceTextY*0.03125f;
+		
+		xDirt = xDirt-(xDirt%0.001953125f);
+		yDirt = yDirt-(yDirt%0.001953125f);
+		
+		indiceTextX = (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
+		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
 		
 		textureData.put(new float[]{
 				//south
@@ -57,20 +66,20 @@ public class TextureManager {
 				0.03125f+indiceTextX, 0.03125f+indiceTextY,
 
 				//top
-				0.03125f+xGrass, 0.09375f+yGrass,
-				0.03125f+xGrass, 0.0625f+yGrass,
-				0.0f+xGrass, 0.09375f+yGrass,
-				0.0f+xGrass, 0.09375f+yGrass,
-				0.03125f+xGrass, 0.0625f+yGrass,
-				0.0f+xGrass, 0.0625f+yGrass,
+				0.03125f+xGrass, 0.09375f+yDirt,
+				0.03125f+xGrass, 0.0625f+yDirt,
+				0.0f+xGrass, 0.09375f+yDirt,
+				0.0f+xGrass, 0.09375f+yDirt,
+				0.03125f+xGrass, 0.0625f+yDirt,
+				0.0f+xGrass, 0.0625f+yDirt,
 
 				//bottom
-				0.03125f, 0,
-				0.03125f, 0.03125f,
-				0.0625f, 0,
-				0.0625f, 0,
-				0.03125f, 0.03125f,
-				0.0625f, 0.03125f,
+				0.0625f+xDirt, 0.0f+indiceTextY,
+				0.0625f+xDirt, 0.03125f+indiceTextY,
+				0.09375f+xDirt, 0.0f+indiceTextY,
+				0.09375f+xDirt, 0.0f+indiceTextY,
+				0.0625f+xDirt, 0.03125f+indiceTextY,
+				0.09375f+xDirt, 0.03125f+indiceTextY,
 
 				0.03125f+indiceTextX, 0.03125f+indiceTextY,
 				0.03125f+indiceTextX, 0+indiceTextY,
@@ -90,654 +99,717 @@ public class TextureManager {
 		textureData.flip();
 	}
 
-	private void genDirtTexture(){
+	private void genDirtTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.0625f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0.03125f,
-				0.03125f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0,
+				0.09375f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.0f+indiceTextY,
 
-				0.0625f, 0,
-				0.03125f, 0,
-				0.03125f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0.03125f,
-				0.0625f, 0.03125f,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.03125f+indiceTextY,
 
 				//top
-				0.0625f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0.03125f,
-				0.03125f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0,
+				0.09375f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.0f+indiceTextY,
 
 				//bottom
-				0.03125f, 0,
-				0.03125f, 0.03125f,
-				0.0625f, 0,
-				0.0625f, 0,
-				0.03125f, 0.03125f,
-				0.0625f, 0.03125f,
+				0.0625f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.03125f+indiceTextY,
 
-				0.0625f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0.03125f,
-				0.03125f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0,
+				0.09375f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.0f+indiceTextY,
 
-				0.03125f, 0.03125f,
-				0.0625f, 0,
-				0.03125f, 0,
-				0.0625f,0.03125f,
-				0.0625f, 0,
-				0.03125f, 0.03125f
-
+				0.0625f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.0f+indiceTextY,
+				0.09375f+indiceTextX, 0.03125f+indiceTextY,
+				0.09375f+indiceTextX, 0.0f+indiceTextY,
+				0.0625f+indiceTextX, 0.03125f+indiceTextY
 		});
 		textureData.flip();
 	}
 
-	private void genStoneTexture(){
+	private void genStoneTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.0625f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.0625f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.03125f,
+				0.09375f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.0625f, 0.03125f,
-				0.03125f, 0.03125f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.0625f,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.09375f+indiceTextY,
 
 				//top
-				0.0625f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.0625f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.03125f,
+				0.09375f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.0625f+indiceTextY,
 
 				//bottom
-				0.03125f, 0.03125f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.0625f,
+				0.0625f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.09375f+indiceTextY,
 
-				0.0625f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.0625f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.03125f,
+				0.09375f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.03125f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.0625f, 0.03125f,
-				0.03125f, 0.0625f,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.0625f+indiceTextY,
+				0.09375f+indiceTextX, 0.09375f+indiceTextY,
+				0.09375f+indiceTextX, 0.0625f+indiceTextY,
+				0.0625f+indiceTextX, 0.09375f+indiceTextY
 		});
 		textureData.flip();
 	}
 	
-	private void genCoalTexture(){
+	private void genCoalTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.09375f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.03125f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.0f,
+				0.15625f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.0f+indiceTextY,
 
-				0.09375f, 0.0f,
-				0.0625f, 0.0f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.03125f,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.03125f+indiceTextY,
 
 				//top
-				0.09375f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.03125f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.0f,
+				0.15625f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.0f+indiceTextY,
 
 				//bottom
-				0.0625f, 0.0f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.0f,
-				0.09375f, 0.0f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.03125f,
+				0.125f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.03125f+indiceTextY,
 
-				0.09375f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.03125f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.0f,
+				0.15625f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.0f+indiceTextY,
 
-				0.0625f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.0f,
-				0.09375f, 0.03125f,
-				0.09375f, 0.0f,
-				0.0625f, 0.03125f
-
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.0f+indiceTextY,
+				0.15625f+indiceTextX, 0.03125f+indiceTextY,
+				0.15625f+indiceTextX, 0.0f+indiceTextY,
+				0.125f+indiceTextX, 0.03125f+indiceTextY,
 		});
 		textureData.flip();
 	}
 
-	private void genGoldTexture(){
+	private void genGoldTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.125f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.03125f,
-				0.09375f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.0f,
+				0.21875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.0f+indiceTextY,
 
-				0.125f, 0.0f,
-				0.09375f, 0.0f,
-				0.09375f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.03125f,
-				0.125f, 0.03125f,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.03125f+indiceTextY,
 
 				//top
-				0.125f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.03125f,
-				0.09375f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.0f,
+				0.21875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.0f+indiceTextY,
 
 				//bottom
-				0.09375f, 0.0f,
-				0.09375f, 0.03125f,
-				0.125f, 0.0f,
-				0.125f, 0.0f,
-				0.09375f, 0.03125f,
-				0.125f, 0.03125f,
+				0.1875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.03125f+indiceTextY,
 
-				0.125f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.03125f,
-				0.09375f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.0f,
+				0.21875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.0f+indiceTextY,
 
-				0.09375f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.0f,
-				0.125f, 0.03125f,
-				0.125f, 0.0f,
-				0.09375f, 0.03125f
+				0.1875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.0f+indiceTextY,
+				0.21875f+indiceTextX, 0.03125f+indiceTextY,
+				0.21875f+indiceTextX, 0.0f+indiceTextY,
+				0.1875f+indiceTextX, 0.03125f+indiceTextY
 		});
 		textureData.flip();
 	}
 
-	private void genSilverTexture(){
+	private void genSilverTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.03125f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.09375f,
-				0.0f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.0625f,
+				0.03125f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.125f+indiceTextY,
 
-				0.03125f, 0.0625f,
-				0.0f, 0.0625f,
-				0.0f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.09375f,
-				0.03125f, 0.09375f,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.15625f+indiceTextY,
 
 				//top
-				0.03125f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.09375f,
-				0.0f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.0625f,
+				0.03125f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.125f+indiceTextY,
 
 				//bottom
-				0.0f, 0.0625f,
-				0.0f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.03125f, 0.0625f,
-				0.0f, 0.09375f,
-				0.03125f, 0.09375f,
+				0.0f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.15625f+indiceTextY,
 
-				0.03125f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.09375f,
-				0.0f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.0625f,
+				0.03125f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.125f+indiceTextY,
 
-				0.0f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.03125f, 0.0625f,
-				0.0f, 0.09375f
+				0.0f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.125f+indiceTextY,
+				0.03125f+indiceTextX, 0.15625f+indiceTextY,
+				0.03125f+indiceTextX, 0.125f+indiceTextY,
+				0.0f+indiceTextX, 0.15625f+indiceTextY
 		});
 		textureData.flip();
 	}
 
-	private void genIronTexture(){
+	private void genIronTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.09375f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.03125f,
+				0.15625f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.09375f, 0.03125f,
-				0.0625f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.0625f,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.09375f+indiceTextY,
 
 				//top
-				0.09375f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.03125f,
+				0.15625f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.0625f+indiceTextY,
 
 				//bottom
-				0.0625f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.0625f,
+				0.125f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.09375f+indiceTextY,
 
-				0.09375f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.0625f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.03125f,
+				0.15625f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.0625f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.09375f, 0.03125f,
-				0.0625f, 0.0625f
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.0625f+indiceTextY,
+				0.15625f+indiceTextX, 0.09375f+indiceTextY,
+				0.15625f+indiceTextX, 0.0625f+indiceTextY,
+				0.125f+indiceTextX, 0.09375f+indiceTextY,
 		});
 		textureData.flip();
 	}
 
-	private void genCopperTexture(){
+	private void genCopperTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.0625f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.03125f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.0625f,
+				0.09375f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.125f+indiceTextY,
 
-				0.0625f, 0.0625f,
-				0.03125f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.0625f, 0.09375f,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.15625f+indiceTextY,
 
 				//top
-				0.0625f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.03125f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.0625f,
+				0.09375f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.125f+indiceTextY,
 
 				//bottom
-				0.03125f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.0625f, 0.09375f,
+				0.0625f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.15625f+indiceTextY,
 
-				0.0625f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.09375f,
-				0.03125f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.0625f,
+				0.09375f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.125f+indiceTextY,
 
-				0.03125f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.0625f, 0.0625f,
-				0.03125f, 0.09375f
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.125f+indiceTextY,
+				0.09375f+indiceTextX, 0.15625f+indiceTextY,
+				0.09375f+indiceTextX, 0.125f+indiceTextY,
+				0.0625f+indiceTextX, 0.15625f+indiceTextY,
 		});
 		textureData.flip();
 	}
 
-	private void genTitaneTexture(){
+	private void genTitaneTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.09375f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.0625f,
+				0.15625f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.125f+indiceTextY,
 
-				0.09375f, 0.0625f,
-				0.0625f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.09375f,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.15625f+indiceTextY,
 
 				//top
-				0.09375f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.0625f,
+				0.15625f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.125f+indiceTextY,
 
 				//bottom
-				0.0625f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.09375f,
+				0.125f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.15625f+indiceTextY,
 
-				0.09375f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.09375f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.0625f,
+				0.15625f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.125f+indiceTextY,
 
-				0.0625f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.09375f, 0.0625f,
-				0.0625f, 0.09375f
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.125f+indiceTextY,
+				0.15625f+indiceTextX, 0.15625f+indiceTextY,
+				0.15625f+indiceTextX, 0.125f+indiceTextY,
+				0.125f+indiceTextX, 0.15625f+indiceTextY,
 		});
 		textureData.flip();
 	}
 
-	private void genUraniumTexture(){
+	private void genUraniumTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.125f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.09375f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.03125f,
+				0.21875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.125f, 0.03125f,
-				0.09375f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.125f, 0.0625f,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.09375f+indiceTextY,
 
 				//top
-				0.125f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.09375f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.03125f,
+				0.21875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.0625f+indiceTextY,
 
 				//bottom
-				0.09375f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.125f, 0.03125f,
-				0.125f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.125f, 0.0625f,
+				0.1875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.09375f+indiceTextY,
 
-				0.125f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.0625f,
-				0.09375f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.03125f,
+				0.21875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.09375f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.03125f,
-				0.125f, 0.0625f,
-				0.125f, 0.03125f,
-				0.09375f, 0.0625f,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.0625f+indiceTextY,
+				0.21875f+indiceTextX, 0.09375f+indiceTextY,
+				0.21875f+indiceTextX, 0.0625f+indiceTextY,
+				0.1875f+indiceTextX, 0.09375f+indiceTextY
 		});
 		textureData.flip();
 	}
 
-	private void genWoodTexture(){
+	private void genWoodTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.03125f, 0.125f,
-				0.03125f, 0.09375f,
-				0.0f, 0.125f,
-				0.0f, 0.125f,
-				0.03125f, 0.09375f,
-				0.0f, 0.09375f,
+				0.03125f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.1875f+indiceTextY,
 
-				0.03125f, 0.09375f,
-				0.0f, 0.09375f,
-				0.0f, 0.125f,
-				0.03125f, 0.09375f,
-				0.0f, 0.125f,
-				0.03125f, 0.125f,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.21875f+indiceTextY,
 
 				//top
-				0.0625f, 0.125f,
-				0.0625f, 0.09375f,
-				0.03125f, 0.125f,
-				0.03125f, 0.125f,
-				0.0625f, 0.09375f,
-				0.03125f, 0.09375f,
+				0.28125f, 0.15625f,
+				0.28125f, 0.125f,
+				0.25f, 0.15625f,
+				0.25f, 0.15625f,
+				0.28125f, 0.125f,
+				0.25f, 0.125f,
 
 				//bottom
-				0.03125f, 0.09375f,
-				0.03125f, 0.125f,
-				0.0625f, 0.09375f,
-				0.0625f, 0.09375f,
-				0.03125f, 0.125f,
-				0.0625f, 0.125f,
+				0.25f, 0.125f,
+				0.25f, 0.15625f,
+				0.28125f, 0.125f,
+				0.28125f, 0.125f,
+				0.25f, 0.15625f,
+				0.28125f, 0.15625f,
 
-				0.03125f, 0.125f,
-				0.03125f, 0.09375f,
-				0.0f, 0.125f,
-				0.0f, 0.125f,
-				0.03125f, 0.09375f,
-				0.0f, 0.09375f,
+				0.03125f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.1875f+indiceTextY,
 
-				0.0f, 0.125f,
-				0.03125f, 0.09375f,
-				0.0f, 0.09375f,
-				0.03125f, 0.125f,
-				0.03125f, 0.09375f,
-				0.0f, 0.125f
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.1875f+indiceTextY,
+				0.03125f+indiceTextX, 0.21875f+indiceTextY,
+				0.03125f+indiceTextX, 0.1875f+indiceTextY,
+				0.0f+indiceTextX, 0.21875f+indiceTextY,
 		});
 		textureData.flip();
 	}
 
-	private void genLeafTexture(){
+	private void genLeafTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.09375f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.125f,
-				0.0625f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.09375f,
+				0.09375f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.1875f+indiceTextY,
 
-				0.09375f, 0.09375f,
-				0.0625f, 0.09375f,
-				0.0625f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.125f,
-				0.09375f, 0.125f,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.21875f+indiceTextY,
 
 				//top
-				0.09375f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.125f,
-				0.0625f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.09375f,
+				0.09375f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.1875f+indiceTextY,
 
 				//bottom
-				0.0625f, 0.09375f,
-				0.0625f, 0.125f,
-				0.09375f, 0.09375f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.125f,
-				0.09375f, 0.125f,
+				0.0625f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.21875f+indiceTextY,
 
-				0.09375f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.125f,
-				0.0625f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.09375f,
+				0.09375f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.1875f+indiceTextY,
 
-				0.0625f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.09375f,
-				0.09375f, 0.125f,
-				0.09375f, 0.09375f,
-				0.0625f, 0.125f
+				0.0625f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.1875f+indiceTextY,
+				0.09375f+indiceTextX, 0.21875f+indiceTextY,
+				0.09375f+indiceTextX, 0.1875f+indiceTextY,
+				0.0625f+indiceTextX, 0.21875f+indiceTextY
 		});
 		textureData.flip();
 	}
 
-	private void genWaterTexture(){
+	private void genWaterTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.15625f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.03125f,
-				0.125f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.0f,
+				0.28125f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.0f+indiceTextY,
 
-				0.15625f, 0.0f,
-				0.125f, 0.0f,
-				0.125f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.03125f,
-				0.15625f, 0.03125f,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.03125f+indiceTextY,
 
 				//top
-				0.15625f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.03125f,
-				0.125f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.0f,
+				0.28125f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.0f+indiceTextY,
 
 				//bottom
-				0.125f, 0.0f,
-				0.125f, 0.03125f,
-				0.15625f, 0.0f,
-				0.15625f, 0.0f,
-				0.125f, 0.03125f,
-				0.15625f, 0.03125f,
+				0.25f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.03125f+indiceTextY,
 
-				0.15625f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.03125f,
-				0.125f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.0f,
+				0.28125f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.0f+indiceTextY,
 
-				0.125f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.0f,
-				0.15625f, 0.03125f,
-				0.15625f, 0.0f,
-				0.125f, 0.03125f
+				0.25f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.0f+indiceTextY,
+				0.28125f+indiceTextX, 0.03125f+indiceTextY,
+				0.28125f+indiceTextX, 0.0f+indiceTextY,
+				0.25f+indiceTextX, 0.03125f+indiceTextY
 		});
 		textureData.flip();
 	}
 
-	private void genLavaTexture(){
+	private void genLavaTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		textureData.put(new float[]{
 				//south
-				0.15625f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.0625f,
-				0.125f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.03125f,
+				0.28125f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.15625f, 0.03125f,
-				0.125f, 0.03125f,
-				0.125f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.0625f,
-				0.15625f, 0.0625f,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.09375f+indiceTextY,
 
 				//top
-				0.15625f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.0625f,
-				0.125f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.03125f,
+				0.28125f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.0625f+indiceTextY,
 
 				//bottom
-				0.125f, 0.03125f,
-				0.125f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.15625f, 0.03125f,
-				0.125f, 0.0625f,
-				0.15625f, 0.0625f,
+				0.25f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.09375f+indiceTextY,
 
-				0.15625f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.0625f,
-				0.125f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.03125f,
+				0.28125f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.0625f+indiceTextY,
 
-				0.125f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.03125f,
-				0.15625f, 0.0625f,
-				0.15625f, 0.03125f,
-				0.125f, 0.0625f
+				0.25f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.0625f+indiceTextY,
+				0.28125f+indiceTextX, 0.09375f+indiceTextY,
+				0.28125f+indiceTextX, 0.0625f+indiceTextY,
+				0.25f+indiceTextX, 0.09375f+indiceTextY
 		});
 		textureData.flip();
 	}
@@ -745,49 +817,49 @@ public class TextureManager {
 	private void genPlankTexture(){
 		textureData.put(new float[]{
 				//south
-				0.125f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.09375f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.0625f,
+				0.21875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.15625f,
+				0.1875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.125f,
 
-				0.125f, 0.0625f,
-				0.09375f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.125f, 0.09375f,
+				0.21875f, 0.125f,
+				0.1875f, 0.125f,
+				0.1875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.15625f,
+				0.21875f, 0.15625f,
 
 				//top
-				0.125f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.09375f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.0625f,
+				0.21875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.15625f,
+				0.1875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.125f,
 
 				//bottom
-				0.09375f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.125f, 0.0625f,
-				0.125f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.125f, 0.09375f,
+				0.1875f, 0.125f,
+				0.1875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.21875f, 0.125f,
+				0.1875f, 0.15625f,
+				0.21875f, 0.15625f,
 
-				0.125f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.09375f,
-				0.09375f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.0625f,
+				0.21875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.15625f,
+				0.1875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.125f,
 
-				0.09375f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.0625f,
-				0.125f, 0.09375f,
-				0.125f, 0.0625f,
-				0.09375f, 0.09375f
+				0.1875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.125f,
+				0.21875f, 0.15625f,
+				0.21875f, 0.125f,
+				0.1875f, 0.15625f
 		});
 		textureData.flip();
 	}
@@ -874,43 +946,43 @@ public class TextureManager {
 			genGrassTexture(x, y);
 			break;
 		case 2:
-			genDirtTexture();
+			genDirtTexture(x,y);
 			break;
 		case 3:
-			genStoneTexture();
+			genStoneTexture(x, y);
 			break;
 		case 4:
-			genCoalTexture();
+			genCoalTexture(x, y);
 			break;
 		case 5:
-			genGoldTexture();
+			genGoldTexture(x, y);
 			break;
 		case 6:
-			genSilverTexture();
+			genSilverTexture(x, y);
 			break;
 		case 7:
-			genIronTexture();
+			genIronTexture(x, y);
 			break;
 		case 8:
-			genCopperTexture();
+			genCopperTexture(x, y);
 			break;
 		case 9:
-			genTitaneTexture();
+			genTitaneTexture(x, y);
 			break;
 		case 10:
-			genUraniumTexture();
+			genUraniumTexture(x, y);
 			break;
 		case 11:
-			genWoodTexture();
+			genWoodTexture(x, y);
 			break;
 		case 12:
-			genLeafTexture();
+			genLeafTexture(x, y);
 			break;
 		case 13:
-			genWaterTexture();
+			genWaterTexture(x, y);
 			break;
 		case 14:
-			genLavaTexture();
+			genLavaTexture(x, y);
 			break;
 		case 15:
 			genPlankTexture();
