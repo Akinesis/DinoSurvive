@@ -105,22 +105,39 @@ public class Chunk {
 	}
 
 	/**
-	 * Pour un cube donn�, renvoi si il est visible ou non
+	 * Pour un cube donné, renvoi si il est visible ou non
 	 */
 	private boolean surrend(int x, int y, int z){
-		boolean temp;
-		temp = cubes[x][y][z]!=null;
-		
+		boolean temp = true;
+
+		if(x>0 && y>0 && z>0 && x<15 && y<15 && z<15){
+			if(cubes[x-1][y][z]!=null){
+				if(cubes[x][y-1][z]!=null){
+					if(cubes[x][y][z-1]!=null){
+						if(cubes[x+1][y][z]!=null){
+							if(cubes[x][y+1][z]!=null){
+								if(cubes[x][y][z+1]!=null){
+									return true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+		/*
 		temp = (x>0)?cubes[x-1][y][z]!=null && temp:false;
 		temp = (y>0)?cubes[x][y-1][z]!=null && temp:false;
 		temp = (z>0)?cubes[x][y][z-1]!=null && temp:false;
-		
+
 		temp = (x<15)?cubes[x+1][y][z]!=null && temp:false;
 		temp = (y<15)?cubes[x][y+1][z]!=null && temp:false;
 		temp = (z<15)?cubes[x][y][z+1]!=null && temp:false;
-		
-		return  temp;
 
+		return  temp;
+		 */
 	}
 
 	/**
@@ -132,7 +149,7 @@ public class Chunk {
 			cube.genCube();
 		}
 	}
-	
+
 	public void delCubes(){
 		for(Cube3dVbo cube : nonRenderCubes){
 			cube.delCube();
@@ -177,7 +194,7 @@ public class Chunk {
 	 * @param cube
 	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		cubes[Math.abs(cube.getX()%16)][Math.abs(cube.getY()%16)][Math.abs(cube.getZ()%16)] = cube;		
+		cubes[Math.abs(cube.getX())%16][Math.abs(cube.getY())%16][Math.abs(cube.getZ())%16] = cube;		
 	}
 
 	/**
@@ -268,19 +285,19 @@ public class Chunk {
 
 	/**
 	 * Fonction permettant la génération d'un chunk de terre.
-	 * En clair, le chunk est rempli de terre except� aux endroit ou un bloc existe d�j� (� v�rifi�)
+	 * En clair, le chunk est rempli de terre excepté aux endroit ou un bloc existe déjà (à vérifié)
 	 */
 	public void genTerre(){
 		for(int i=x*16; i>x-16; i--){
 			for(int j=y*16; j>y-16; j--){
 				for(int k=z*16; k>z-16; k--){
-						addCube3dVbo(new Cube3dVbo(i,j,k,1,2));
+					addCube3dVbo(new Cube3dVbo(i,j,k,1,2));
 				}
 			}
 		}
 	}
 
-	
+
 	/*
 	 * Getters
 	 */

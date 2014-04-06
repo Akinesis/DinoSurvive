@@ -64,10 +64,10 @@ public class Controleur {
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
 		
-		//texManager.genGrassTexture();
 		texManager.bindBuffer();
 		texManager.bindText();
 
+		chunkManager.delCubes();
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

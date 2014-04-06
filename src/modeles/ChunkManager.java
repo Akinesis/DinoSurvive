@@ -35,7 +35,6 @@ public class ChunkManager {
 		float yChunk = (float)Math.ceil(y / 16);
 		float zChunk = (float)Math.ceil(z / 16);
 		
-		
 		Cube3dVbo cube = null;
    		for(Chunk ck : chunks){
 			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
@@ -109,6 +108,13 @@ public class ChunkManager {
 			chunk.checkState();
 
 			chunk.genCubes();
+		}
+	}
+	
+	
+	public void delCubes(){
+		for (Chunk chunk : chunks){
+			chunk.delCubes();
 		}
 	}
 	
