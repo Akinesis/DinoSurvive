@@ -103,11 +103,11 @@ public class ChunkManager {
 	 */
 	public void initChunks(){
 		for(Chunk chunk : chunks){
-			chunk.genVBO();
 			chunk.addCubes();
 			chunk.update();
 			chunk.checkState();
-			chunk.genCubes();
+			chunk.genCubes(clone.getTexManager());
+			chunk.genVBO();
 		}
 	}
 	

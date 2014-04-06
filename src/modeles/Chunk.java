@@ -6,6 +6,10 @@ import java.nio.FloatBuffer;
 import java.util.Vector;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL30;
 
 import modeles.entities.*;
 import controleur.Controleur;
@@ -22,9 +26,14 @@ public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
+	private int vaoID;
 	private int vboVertexHandleChunk;
-	private FloatBuffer vertexData;
-	private float[] renderArray;
+	private FloatBuffer interleavedBuffer;
+	//private FloatBuffer vertexData, vertexTexture;
+	private int floatByteSize = 4;
+	private int positionFloatCount = 3;
+	private int floatsPerVertex = positionFloatCount*2;
+	int vertexFloatSizeInBytes = floatByteSize * floatsPerVertex;
 
 	private Controleur clone;
 	private int x,y,z,id;
@@ -49,9 +58,25 @@ public class Chunk {
 		//pour l'instant : id = ligne dans le programme, changer ça !!! (extrapoler l'iD des XYZ)
 		this.id = id;
 	}
-	
+
 	public void genVBO(){
-		vboVertexHandleChunk = glGenBuffers();
+		vboVertexHandleChunk = GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
+
+		// -- Now we can split our interleaved data over 2 attribute lists
+		// First up is our positional information in list 0
+		GL20.glVertexAttribPointer(0, positionFloatCount, GL11.GL_FLOAT, false,
+				vertexFloatSizeInBytes, 0);
+
+		// Second is our texture information in list 1, for this we also need the offset
+		int byteOffset = floatByteSize * positionFloatCount;
+		GL20.glVertexAttribPointer(1, positionFloatCount, GL11.GL_FLOAT, false,
+				vertexFloatSizeInBytes, byteOffset);
+
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+		GL30.glBindVertexArray(0);
+
 	}
 
 	/**
@@ -125,15 +150,15 @@ public class Chunk {
 	private boolean surround(int x, int y, int z){
 		boolean temp;
 		temp = true;
-		
+
 		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : false;
 		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : false;
 		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : false;
-		
+
 		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : false;
 		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : false;
 		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : false;
-		
+
 		return  temp;
 	}
 
@@ -141,12 +166,13 @@ public class Chunk {
 	 * Methode générant les cubes dans le buffer
 	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
 	 */
-	public void genCubes(){
-		vertexData = BufferUtils.createFloatBuffer(36*renderCubes.size() * 3);
+	public void genCubes(TextureManager texMan){
+		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*3*2*36);
 		for(Cube3dVbo cube : renderCubes){
-			vertexData.put(cube.genCubes());
+			interleavedBuffer.put(cube.genCubes());
+			interleavedBuffer.put(texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY()));
 		}
-		vertexData.flip();
+		interleavedBuffer.flip();
 	}
 
 	public void delCubes(){
@@ -177,26 +203,32 @@ public class Chunk {
 			texMan.disableTexture();
 			cube.disableCube();
 		}*/
+
+		texMan.bindBuffer();
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboVertexHandleChunk);
+		glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
 		
+		/*
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        
-        texMan.genText(1, 0.5f, 0.5f);
-		//texMan.bindBuffer();
-		
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
-        glVertexPointer(3, GL_FLOAT, 0, 0L);
-        texMan.bindDrawTexture();
-        
-        glEnableClientState(GL_VERTEX_ARRAY);
-        texMan.enableTexture();
-        
-        glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
-        
-        texMan.disableTexture();
-        glDisableClientState(GL_VERTEX_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		texMan.genText(1, 0.5f, 0.5f);
+		//texMan.bindBuffer();
+
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
+		glVertexPointer(3, GL_FLOAT, 0, 0L);
+		texMan.bindDrawTexture();
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		texMan.enableTexture();
+
+		glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
+
+		texMan.disableTexture();
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		*/
 	}
 
 	/**
@@ -216,22 +248,8 @@ public class Chunk {
 		int posX = (Math.abs(cube.getX())+((cube.getX()<0)?-1:0))%16;
 		int posY = Math.abs(cube.getY())%16;
 		int posZ = (Math.abs(cube.getZ())+((cube.getZ()<0)?-1:0))%16;
-		
-		cubes[posX][posY][posZ] = cube;		
-	}
 
-	/**
-	 * Fonction permettant la génération d'un chunk de terre.
-	 * En clair, le chunk est rempli de terre excepté aux endroit ou un bloc existe déjà (à vérifié)
-	 */
-	public void genTerre(){
-		for(int i=x*16; i>x-16; i--){
-			for(int j=y*16; j>y-16; j--){
-				for(int k=z*16; k>z-16; k--){
-					addCube3dVbo(new Cube3dVbo(i,j,k,1,2));
-				}
-			}
-		}
+		cubes[posX][posY][posZ] = cube;		
 	}
 
 

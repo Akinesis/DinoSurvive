@@ -5,10 +5,14 @@ import java.nio.FloatBuffer;
 
 
 
+
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
@@ -33,7 +37,7 @@ public class TextureManager {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
-	private void genGrassTexture(float indiceTextX, float indiceTextY){	
+	private float[] genGrassTexture(float indiceTextX, float indiceTextY){	
 		float xGrass = indiceTextX*0.03125f;
 		float yGrass = indiceTextY*0.03125f;
 		
@@ -49,7 +53,7 @@ public class TextureManager {
 		indiceTextX = (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
 		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
 		
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.03125f+indiceTextX, 0.03125f+indiceTextY,
 				0.03125f+indiceTextX, 0+indiceTextY,
@@ -95,17 +99,17 @@ public class TextureManager {
 				0.03125f+indiceTextX, 0+indiceTextY,
 				0+indiceTextX, 0.03125f+indiceTextY
 
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genDirtTexture(float indiceTextX, float indiceTextY){
+	private float[] genDirtTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.09375f+indiceTextX, 0.03125f+indiceTextY,
 				0.09375f+indiceTextX, 0.0f+indiceTextY,
@@ -150,17 +154,17 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.03125f+indiceTextY,
 				0.09375f+indiceTextX, 0.0f+indiceTextY,
 				0.0625f+indiceTextX, 0.03125f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genStoneTexture(float indiceTextX, float indiceTextY){
+	private float[] genStoneTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.09375f+indiceTextX, 0.09375f+indiceTextY,
 				0.09375f+indiceTextX, 0.0625f+indiceTextY,
@@ -205,17 +209,17 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.09375f+indiceTextY,
 				0.09375f+indiceTextX, 0.0625f+indiceTextY,
 				0.0625f+indiceTextX, 0.09375f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 	
-	private void genCoalTexture(float indiceTextX, float indiceTextY){
+	private float[] genCoalTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.15625f+indiceTextX, 0.03125f+indiceTextY,
 				0.15625f+indiceTextX, 0.0f+indiceTextY,
@@ -260,17 +264,17 @@ public class TextureManager {
 				0.15625f+indiceTextX, 0.03125f+indiceTextY,
 				0.15625f+indiceTextX, 0.0f+indiceTextY,
 				0.125f+indiceTextX, 0.03125f+indiceTextY,
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genGoldTexture(float indiceTextX, float indiceTextY){
+	private float[] genGoldTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.21875f+indiceTextX, 0.03125f+indiceTextY,
 				0.21875f+indiceTextX, 0.0f+indiceTextY,
@@ -315,17 +319,17 @@ public class TextureManager {
 				0.21875f+indiceTextX, 0.03125f+indiceTextY,
 				0.21875f+indiceTextX, 0.0f+indiceTextY,
 				0.1875f+indiceTextX, 0.03125f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genSilverTexture(float indiceTextX, float indiceTextY){
+	private float[] genSilverTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.03125f+indiceTextX, 0.15625f+indiceTextY,
 				0.03125f+indiceTextX, 0.125f+indiceTextY,
@@ -370,17 +374,17 @@ public class TextureManager {
 				0.03125f+indiceTextX, 0.15625f+indiceTextY,
 				0.03125f+indiceTextX, 0.125f+indiceTextY,
 				0.0f+indiceTextX, 0.15625f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genIronTexture(float indiceTextX, float indiceTextY){
+	private float[] genIronTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.15625f+indiceTextX, 0.09375f+indiceTextY,
 				0.15625f+indiceTextX, 0.0625f+indiceTextY,
@@ -425,17 +429,17 @@ public class TextureManager {
 				0.15625f+indiceTextX, 0.09375f+indiceTextY,
 				0.15625f+indiceTextX, 0.0625f+indiceTextY,
 				0.125f+indiceTextX, 0.09375f+indiceTextY,
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genCopperTexture(float indiceTextX, float indiceTextY){
+	private float[] genCopperTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.09375f+indiceTextX, 0.15625f+indiceTextY,
 				0.09375f+indiceTextX, 0.125f+indiceTextY,
@@ -480,17 +484,17 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.15625f+indiceTextY,
 				0.09375f+indiceTextX, 0.125f+indiceTextY,
 				0.0625f+indiceTextX, 0.15625f+indiceTextY,
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genTitaneTexture(float indiceTextX, float indiceTextY){
+	private float[] genTitaneTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.15625f+indiceTextX, 0.15625f+indiceTextY,
 				0.15625f+indiceTextX, 0.125f+indiceTextY,
@@ -535,17 +539,17 @@ public class TextureManager {
 				0.15625f+indiceTextX, 0.15625f+indiceTextY,
 				0.15625f+indiceTextX, 0.125f+indiceTextY,
 				0.125f+indiceTextX, 0.15625f+indiceTextY,
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genUraniumTexture(float indiceTextX, float indiceTextY){
+	private float[] genUraniumTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.21875f+indiceTextX, 0.09375f+indiceTextY,
 				0.21875f+indiceTextX, 0.0625f+indiceTextY,
@@ -590,17 +594,17 @@ public class TextureManager {
 				0.21875f+indiceTextX, 0.09375f+indiceTextY,
 				0.21875f+indiceTextX, 0.0625f+indiceTextY,
 				0.1875f+indiceTextX, 0.09375f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genWoodTexture(float indiceTextX, float indiceTextY){
+	private float[] genWoodTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.03125f+indiceTextX, 0.21875f+indiceTextY,
 				0.03125f+indiceTextX, 0.1875f+indiceTextY,
@@ -645,17 +649,17 @@ public class TextureManager {
 				0.03125f+indiceTextX, 0.21875f+indiceTextY,
 				0.03125f+indiceTextX, 0.1875f+indiceTextY,
 				0.0f+indiceTextX, 0.21875f+indiceTextY,
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genLeafTexture(float indiceTextX, float indiceTextY){
+	private float[] genLeafTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.09375f+indiceTextX, 0.21875f+indiceTextY,
 				0.09375f+indiceTextX, 0.1875f+indiceTextY,
@@ -700,17 +704,17 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.21875f+indiceTextY,
 				0.09375f+indiceTextX, 0.1875f+indiceTextY,
 				0.0625f+indiceTextX, 0.21875f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genWaterTexture(float indiceTextX, float indiceTextY){
+	private float[] genWaterTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.28125f+indiceTextX, 0.03125f+indiceTextY,
 				0.28125f+indiceTextX, 0.0f+indiceTextY,
@@ -755,17 +759,17 @@ public class TextureManager {
 				0.28125f+indiceTextX, 0.03125f+indiceTextY,
 				0.28125f+indiceTextX, 0.0f+indiceTextY,
 				0.25f+indiceTextX, 0.03125f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 
-	private void genLavaTexture(float indiceTextX, float indiceTextY){
+	private float[] genLavaTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 		
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
-		textureData.put(new float[]{
+		return new float[]{
 				//south
 				0.28125f+indiceTextX, 0.09375f+indiceTextY,
 				0.28125f+indiceTextX, 0.0625f+indiceTextY,
@@ -810,12 +814,12 @@ public class TextureManager {
 				0.28125f+indiceTextX, 0.09375f+indiceTextY,
 				0.28125f+indiceTextX, 0.0625f+indiceTextY,
 				0.25f+indiceTextX, 0.09375f+indiceTextY
-		});
-		textureData.flip();
+		};
+		
 	}
 	
-	private void genPlankTexture(){
-		textureData.put(new float[]{
+	private float[] genPlankTexture(){
+		return new float[]{
 				//south
 				0.21875f, 0.15625f,
 				0.21875f, 0.125f,
@@ -860,12 +864,12 @@ public class TextureManager {
 				0.21875f, 0.15625f,
 				0.21875f, 0.125f,
 				0.1875f, 0.15625f
-		});
-		textureData.flip();
+		};
+		
 	}
 	
-	private void genWorkbenchTexture(){
-		textureData.put(new float[]{
+	private float[] genWorkbenchTexture(){
+		return new float[]{
 				//south
 				0.125f, 0.125f,
 				0.125f, 0.09375f,
@@ -910,8 +914,7 @@ public class TextureManager {
 				0.15625f, 0.125f,
 				0.15625f, 0.09375f,
 				0.125f, 0.125f
-		});
-		textureData.flip();
+		};
 	}
 	
 	public void bindText(){
@@ -920,10 +923,13 @@ public class TextureManager {
 	}
 
 	public void bindBuffer(){
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getTextureID());
+		/*
 		vboTexHandle = texture.getTextureID();
 		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
 		glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 	}
 
 	public void bindDrawTexture(){
@@ -939,59 +945,43 @@ public class TextureManager {
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
 
-	public void genText(int type, float x, float y){
+	public float[] genText(int type, float x, float y){
 		textureData.clear();
 		switch (type) {
 		case 1:
-			genGrassTexture(x, y);
-			break;
+			return genGrassTexture(x, y);
 		case 2:
-			genDirtTexture(x,y);
-			break;
+			return genDirtTexture(x,y);
 		case 3:
-			genStoneTexture(x, y);
-			break;
+			return genStoneTexture(x, y);
 		case 4:
-			genCoalTexture(x, y);
-			break;
+			return genCoalTexture(x, y);
 		case 5:
-			genGoldTexture(x, y);
-			break;
+			return genGoldTexture(x, y);
 		case 6:
-			genSilverTexture(x, y);
-			break;
+			return genSilverTexture(x, y);
 		case 7:
-			genIronTexture(x, y);
-			break;
+			return genIronTexture(x, y);
 		case 8:
-			genCopperTexture(x, y);
-			break;
+			return genCopperTexture(x, y);
 		case 9:
-			genTitaneTexture(x, y);
-			break;
+			return genTitaneTexture(x, y);
 		case 10:
-			genUraniumTexture(x, y);
-			break;
+			return genUraniumTexture(x, y);
 		case 11:
-			genWoodTexture(x, y);
-			break;
+			return genWoodTexture(x, y);
 		case 12:
-			genLeafTexture(x, y);
-			break;
+			return genLeafTexture(x, y);
 		case 13:
-			genWaterTexture(x, y);
-			break;
+			return genWaterTexture(x, y);
 		case 14:
-			genLavaTexture(x, y);
-			break;
+			return genLavaTexture(x, y);
 		case 15:
-			genPlankTexture();
-			break;
+			return genPlankTexture();
 		case 16:
-			genWorkbenchTexture();
-			break;
+			return genWorkbenchTexture();
 		default:
-			break;
+			return genGrassTexture(x, y);
 		}
 	}
 
