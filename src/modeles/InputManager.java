@@ -19,11 +19,14 @@ public class InputManager {
 	private int coef = 1;
 	private boolean isJumping;
 	private float hauteurSaut, lastJump;
+	private long lastFrame;
+	private int delta;
 
 	public InputManager(Controleur contr){
 		clone = contr;
 		clone.getMap();//à changer; inutile
 		isJumping = false;
+		lastFrame=getTime();
 	}
 
 	public void setCam(Camera cam){
@@ -40,6 +43,7 @@ public class InputManager {
 		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+		delta = getDelta();
 
 		//inversion de la souris
 		while(Keyboard.next()){
@@ -77,7 +81,7 @@ public class InputManager {
 		/*
 		 * vitesse de déplacement
 		 */
-		float speed = 0.09f;
+		float speed = 0.0050f*delta;
 
 		/*
 		 * Déplacement
@@ -130,8 +134,8 @@ public class InputManager {
 		float indiceX = ((camera.getPos().x)>posTempX )?-0.2f:+0.2f;
 		float indiceZ = ((camera.getPos().z)>posTempZ )?-0.2f:+0.2f;
 
-		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
-		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
+		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
+		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
 	}
 
@@ -163,6 +167,13 @@ public class InputManager {
 
 	private static long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+	}
+	
+	private int getDelta() {
+		long currentTime = getTime();
+		int delta = (int) (currentTime - lastFrame);
+		lastFrame = getTime();
+		return delta;
 	}
 
 }
