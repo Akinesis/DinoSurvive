@@ -2,10 +2,20 @@ package modeles;
 /**
  * Classe représentant les Chunks comme divisions du "monde" 
  */
+import java.nio.FloatBuffer;
 import java.util.Vector;
+
+import org.lwjgl.BufferUtils;
 
 import modeles.entities.*;
 import controleur.Controleur;
+import static org.lwjgl.opengl.GL11.GL_FLOAT;
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
+import static org.lwjgl.opengl.GL11.glDisableClientState;
+import static org.lwjgl.opengl.GL11.glDrawArrays;
+import static org.lwjgl.opengl.GL11.glEnableClientState;
+import static org.lwjgl.opengl.GL11.glVertexPointer;
 import static org.lwjgl.opengl.GL15.*;
 
 public class Chunk {
@@ -13,6 +23,8 @@ public class Chunk {
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
 	private int vboVertexHandleChunk;
+	private FloatBuffer vertexData;
+	private float[] renderArray;
 
 	private Controleur clone;
 	private int x,y,z,id;
@@ -123,8 +135,6 @@ public class Chunk {
 		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : false;
 		
 		return  temp;
-
-		return  temp;
 	}
 
 	/**
@@ -132,9 +142,11 @@ public class Chunk {
 	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
 	 */
 	public void genCubes(){
+		vertexData = BufferUtils.createFloatBuffer(36*renderCubes.size() * 3);
 		for(Cube3dVbo cube : renderCubes){
-			cube.genCube();
+			vertexData.put(cube.genCubes());
 		}
+		vertexData.flip();
 	}
 
 	public void delCubes(){
@@ -148,7 +160,7 @@ public class Chunk {
 	 * @param texMan
 	 */
 	public void draw(TextureManager texMan){
-		for(Cube3dVbo cube : renderCubes){
+		/*for(Cube3dVbo cube : renderCubes){
 			cube.bindBuffers(vboVertexHandleChunk);
 
 			texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
@@ -164,7 +176,27 @@ public class Chunk {
 
 			texMan.disableTexture();
 			cube.disableCube();
-		}
+		}*/
+		
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
+		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        
+        texMan.genText(1, 0.5f, 0.5f);
+		//texMan.bindBuffer();
+		
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
+        glVertexPointer(3, GL_FLOAT, 0, 0L);
+        texMan.bindDrawTexture();
+        
+        glEnableClientState(GL_VERTEX_ARRAY);
+        texMan.enableTexture();
+        
+        glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
+        
+        texMan.disableTexture();
+        glDisableClientState(GL_VERTEX_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	/**

@@ -21,7 +21,7 @@ public class Cube3dVbo extends Cube3D {
 		super(-x,y,-z,size);
 		type=typ;
 
-		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
+		//vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 		indiceTextX = (float)(Math.random());
 		indiceTextY = (float)(Math.random());
 		
@@ -50,8 +50,8 @@ public class Cube3dVbo extends Cube3D {
 		glDeleteBuffers(vboChunk);
 	}
 	
-	public void genCube(){
-		vertexData.put(new float[]{
+	public float[] genCubes(){
+		return new float[]{
 				//south
 				pos.x, pos.y, pos.z,
 				pos.x, pos2.y, pos.z,
@@ -99,8 +99,7 @@ public class Cube3dVbo extends Cube3D {
 				pos.x, pos.y, pos2.z,
 				pos.x, pos2.y, pos2.z,
 				pos.x, pos.y, pos.z
-		});
-		vertexData.flip();
+		};
 	}
 	
 	public void bindBuffers(int vboChunk){

@@ -92,7 +92,7 @@ public class ChunkManager {
 	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : chunks){
 			//chunk.checkState();
-			chunk.genVBO();
+			//chunk.genVBO();
 			chunk.draw(textMan);
 			chunk.delCubes();
 		}
@@ -103,10 +103,10 @@ public class ChunkManager {
 	 */
 	public void initChunks(){
 		for(Chunk chunk : chunks){
+			chunk.genVBO();
 			chunk.addCubes();
 			chunk.update();
 			chunk.checkState();
-
 			chunk.genCubes();
 		}
 	}
