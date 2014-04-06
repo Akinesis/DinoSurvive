@@ -6,14 +6,13 @@ import java.util.Vector;
 
 import modeles.entities.*;
 import controleur.Controleur;
-
-
-
+import static org.lwjgl.opengl.GL15.*;
 
 public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
+	private int vboVertexHandleChunk;
 
 	private Controleur clone;
 	private int x,y,z,id;
@@ -38,10 +37,14 @@ public class Chunk {
 		//pour l'instant : id = ligne dans le programme, changer ça !!! (extrapoler l'iD des XYZ)
 		this.id = id;
 	}
+	
+	public void genVBO(){
+		vboVertexHandleChunk = glGenBuffers();
+	}
 
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z
-	 * @param xC
+	 * @param x
 	 * @param y
 	 * @param z
 	 * @return un Cube3dVbo
@@ -93,7 +96,7 @@ public class Chunk {
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
 					if(cubes[i][j][k]!=null){
-						if(surrend(i,j,k)){
+						if(surround(i,j,k)){
 							cubes[i][j][k].setEtat(false);
 						}else{
 							cubes[i][j][k].setEtat(true);
@@ -107,37 +110,21 @@ public class Chunk {
 	/**
 	 * Pour un cube donné, renvoi si il est visible ou non
 	 */
-	private boolean surrend(int x, int y, int z){
-		boolean temp = true;
-
-		if(x>0 && y>0 && z>0 && x<15 && y<15 && z<15){
-			if(cubes[x-1][y][z]!=null){
-				if(cubes[x][y-1][z]!=null){
-					if(cubes[x][y][z-1]!=null){
-						if(cubes[x+1][y][z]!=null){
-							if(cubes[x][y+1][z]!=null){
-								if(cubes[x][y][z+1]!=null){
-									return true;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return false;
-		/*
-		temp = (x>0)?cubes[x-1][y][z]!=null && temp:false;
-		temp = (y>0)?cubes[x][y-1][z]!=null && temp:false;
-		temp = (z>0)?cubes[x][y][z-1]!=null && temp:false;
-
-		temp = (x<15)?cubes[x+1][y][z]!=null && temp:false;
-		temp = (y<15)?cubes[x][y+1][z]!=null && temp:false;
-		temp = (z<15)?cubes[x][y][z+1]!=null && temp:false;
+	private boolean surround(int x, int y, int z){
+		boolean temp;
+		temp = true;
+		
+		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : false;
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : false;
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : false;
+		
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : false;
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : false;
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : false;
+		
+		return  temp;
 
 		return  temp;
-		 */
 	}
 
 	/**
@@ -152,7 +139,7 @@ public class Chunk {
 
 	public void delCubes(){
 		for(Cube3dVbo cube : nonRenderCubes){
-			cube.delCube();
+			//cube.delCube(vboVertexHandleChunk);
 		}
 	}
 
@@ -162,12 +149,12 @@ public class Chunk {
 	 */
 	public void draw(TextureManager texMan){
 		for(Cube3dVbo cube : renderCubes){
-			cube.bindBuffers();
+			cube.bindBuffers(vboVertexHandleChunk);
 
-			texMan.genText(cube.getType());
+			texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
 			texMan.bindBuffer();
 
-			cube.bindDrawCube();
+			cube.bindDrawCube(vboVertexHandleChunk);
 			texMan.bindDrawTexture();
 
 			cube.enableCube();
@@ -194,94 +181,12 @@ public class Chunk {
 	 * @param cube
 	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		cubes[Math.abs(cube.getX())%16][Math.abs(cube.getY())%16][Math.abs(cube.getZ())%16] = cube;		
+		int posX = (Math.abs(cube.getX())+((cube.getX()<0)?-1:0))%16;
+		int posY = Math.abs(cube.getY())%16;
+		int posZ = (Math.abs(cube.getZ())+((cube.getZ()<0)?-1:0))%16;
+		
+		cubes[posX][posY][posZ] = cube;		
 	}
-
-	/**
-	 * Fonction permettant la génération d'un arbre dont le premier bloc de tronc est en position x,y,z
-	 * @param x : position du cube selon les x
-	 * @param y :  position du cube selon les y
-	 * @param z :  position du cube selon les z 
-	 */
-	/*
-	//(pas besoin du paramètre 1 car pour un arbre les cubes font forcément 1)
-	//(potentiellement pour "jolifier" l'arbre, mettre un facteur de 0,5 pour les feuilles du dessus
-	//(aka : demi cube de feuilles)
-	public void genTree(float x, float y, float z){
-		//arbre d'une taille comprise entre 3 et 6 cubes de tronc
-		//wouhou aléatoire !
-
-		int taille = (int)((6-3)*Math.random()) +3;
-		int size = 1;
-
-		//1 des cubes pour le moment 1
-
-		for (int i = 0; i<taille; ++i){
-
-			//à chaque itération il crée un cube de type tronc (11, cf TextureManager)
-
-			Cube3dVbo tronc = new Cube3dVbo(x, y+i, z, 1, 11);
-
-			//il l'ajoute dans le cube
-
-			addCube3dVbo(tronc);
-
-			//création de feuilles (12 cf TextureManager)
-			//schéma différent entre les différents niveaux de feuilles (basique)
-
-			if (i==2){
-				//feuilles en croix sur le premier niveau
-				Cube3dVbo feuilles = new Cube3dVbo(x-1, y+i, z, size, 12);
-				Cube3dVbo feuilles2 = new Cube3dVbo(x+1, y+i, z, size, 12);
-				Cube3dVbo feuilles3 = new Cube3dVbo(x, y+i, z+1, size, 12);
-				Cube3dVbo feuilles4 = new Cube3dVbo(x, y+i, z-1, size, 12);
-
-				addCube3dVbo(feuilles);
-				addCube3dVbo(feuilles2);
-				addCube3dVbo(feuilles3);
-				addCube3dVbo(feuilles4);
-			}
-			else if (i>2){
-				//feuilles partout sur les niveaux suivants (moche !)
-				Cube3dVbo feuilles = new Cube3dVbo(x-1, y+i, z, 1, 12);
-				Cube3dVbo feuilles2 = new Cube3dVbo(x+1, y+i, z, 1, 12);
-				Cube3dVbo feuilles3 = new Cube3dVbo(x, y+i, z+1, 1, 12);
-				Cube3dVbo feuilles4 = new Cube3dVbo(x, y+i, z-1, 1, 12);
-				Cube3dVbo feuilles5 = new Cube3dVbo(x-1, y+i, z-1, 1, 12);
-				Cube3dVbo feuilles6 = new Cube3dVbo(x+1, y+i, z+1, 1, 12);
-				Cube3dVbo feuilles7 = new Cube3dVbo(x-1, y+i, z+1, 1, 12);
-
-				addCube3dVbo(feuilles);
-				addCube3dVbo(feuilles2);
-				addCube3dVbo(feuilles3);
-				addCube3dVbo(feuilles4);
-				addCube3dVbo(feuilles5);
-				addCube3dVbo(feuilles6);
-				addCube3dVbo(feuilles7);				
-			}
-		}
-		// à la fin de la génération de l'arbre, on génère une couche de feuilles au dessus
-
-		Cube3dVbo feuilles = new Cube3dVbo(x-1, y+taille, z, size, 12);
-		Cube3dVbo feuilles2 = new Cube3dVbo(x, y+taille, z, size, 12);
-		Cube3dVbo feuilles3 = new Cube3dVbo(x-1, y+taille, z-1, size, 12);
-		Cube3dVbo feuilles4 = new Cube3dVbo(x-1, y+taille, z+1, size, 12);
-		Cube3dVbo feuilles5 = new Cube3dVbo(x+1, y+taille, z, size, 12);
-		Cube3dVbo feuilles6 = new Cube3dVbo(x+1, y+taille, z-1, size, 12);
-		Cube3dVbo feuilles7 = new Cube3dVbo(x+1, y+taille, z+1, size, 12);
-		Cube3dVbo feuilles8 = new Cube3dVbo(x, y+taille, z+1, size, 12);
-		Cube3dVbo feuilles9 = new Cube3dVbo(x, y+taille, z-1, size, 12);
-
-		addCube3dVbo(feuilles);
-		addCube3dVbo(feuilles2);
-		addCube3dVbo(feuilles3);
-		addCube3dVbo(feuilles4);
-		addCube3dVbo(feuilles5);
-		addCube3dVbo(feuilles6);
-		addCube3dVbo(feuilles7);
-		addCube3dVbo(feuilles8);
-		addCube3dVbo(feuilles9);
-	}*/
 
 	/**
 	 * Fonction permettant la génération d'un chunk de terre.
