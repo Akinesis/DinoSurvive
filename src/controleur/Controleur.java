@@ -15,6 +15,7 @@ import modeles.TerrainGenerator;
 import modeles.TextureManager;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 import vues.GameDisplay;
 import vues.OpenGL;

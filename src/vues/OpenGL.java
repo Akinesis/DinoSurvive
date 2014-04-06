@@ -74,7 +74,7 @@ public class OpenGL implements Parametres {
 	}
 
 	private void fogCreate(){
-		//création du fog
+		//crï¿½ation du fog
 
 		//floatBuffer avec la le fog
 		FloatBuffer fogColours = BufferUtils.createFloatBuffer(4);

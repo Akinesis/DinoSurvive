@@ -31,6 +31,7 @@ public class TextureManager {
 
 		textureData = BufferUtils.createFloatBuffer(36 * 2);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		vboTexHandle = texture.getTextureID();
 	}
 
 	private void genGrassTexture(float indiceTextX, float indiceTextY){	
@@ -920,7 +921,6 @@ public class TextureManager {
 	}
 
 	public void bindBuffer(){
-		vboTexHandle = texture.getTextureID();
 		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
 		glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);

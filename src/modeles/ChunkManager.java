@@ -10,7 +10,7 @@ import modeles.entities.Cube3dVbo;
 public class ChunkManager {
 	private Vector<Chunk> chunks;
 	private Controleur clone;
-	
+
 	/*
 	 * Constructeur
 	 */
@@ -18,11 +18,11 @@ public class ChunkManager {
 		chunks = new Vector<Chunk>();
 		clone = contr;
 	}
-	
+
 	/*
 	 * Getters and setters
 	 */
-	
+
 	/**
 	 * Renvoie le cube à la position demandée
 	 * @param x
@@ -34,35 +34,35 @@ public class ChunkManager {
 		float xChunk = (float)Math.ceil(x / 16);
 		float yChunk = (float)Math.ceil(y / 16);
 		float zChunk = (float)Math.ceil(z / 16);
-		
-		
+
+
 		Cube3dVbo cube = null;
-   		for(Chunk ck : chunks){
+		for(Chunk ck : chunks){
 			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
 				cube = ck.getCube(x, y, z);
 			}
 		}
 		return cube;
 	}
-	
+
 	//marche pas
 	public void addCubeAt(Cube3dVbo cube){
 		float xChunk = (float)Math.ceil(cube.getX() / 16);
 		float yChunk = (float)Math.ceil(cube.getY() / 16);
 		float zChunk = (float)Math.ceil(cube.getZ() / 16);
-		
+
 		for(Chunk ck : chunks){
 			if((ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk)){
 				ck.addCube3dVbo(cube);
 			}
 		}
 	}
-	
-	
+
+
 	public void setChunksList(Vector<Chunk> chun){
 		chunks = chun;
 	}
-	
+
 	/**
 	 * Ajoute un chunk dans la liste de chunks
 	 * @param chu
@@ -79,20 +79,19 @@ public class ChunkManager {
 			chunk.checkState();
 		}
 	}
-	
+
 	public void update(){
 		for(Chunk chunk : chunks){
 			chunk.update();
 		}
 	}
-	
+
 	/**
 	 * Dessine les chunks
 	 * @param textMan
 	 */
 	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : chunks){
-			//chunk.checkState();
 			chunk.genVBO();
 			chunk.draw(textMan);
 			chunk.delCubes();
@@ -111,7 +110,7 @@ public class ChunkManager {
 			chunk.genCubes();
 		}
 	}
-	
+
 	public Chunk getChunk(int x, int y, int z){
 		for(Chunk ck : chunks){
 			if( (ck.getX() == x) && (ck.getY() == y) && (ck.getZ() == z) ){

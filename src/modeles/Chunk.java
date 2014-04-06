@@ -2,7 +2,10 @@
 /**
  * Classe représentant les Chunks comme divisions du "monde" 
  */
+import java.nio.FloatBuffer;
 import java.util.Vector;
+
+import org.lwjgl.opengl.GL11;
 
 import modeles.entities.*;
 import controleur.Controleur;
@@ -13,6 +16,7 @@ public class Chunk {
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
 	private int vboVertexHandleChunk;
+	private FloatBuffer vertexData;
 
 	private Controleur clone;
 	private int x,y,z,id;
@@ -138,7 +142,7 @@ public class Chunk {
 	
 	public void delCubes(){
 		for(Cube3dVbo cube : nonRenderCubes){
-			//cube.delCube(vboVertexHandleChunk);
+			cube.delCube(vboVertexHandleChunk);
 		}
 	}
 
@@ -187,21 +191,6 @@ public class Chunk {
 		cubes[posX][posY][posZ] = cube;		
 	}
 
-	/**
-	 * Fonction permettant la génération d'un chunk de terre.
-	 * En clair, le chunk est rempli de terre except� aux endroit ou un bloc existe d�j� (� v�rifi�)
-	 */
-	public void genTerre(){
-		for(int i=x*16; i>x-16; i--){
-			for(int j=y*16; j>y-16; j--){
-				for(int k=z*16; k>z-16; k--){
-						addCube3dVbo(new Cube3dVbo(i,j,k,1,2));
-				}
-			}
-		}
-	}
-
-	
 	/*
 	 * Getters
 	 */
