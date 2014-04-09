@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
@@ -26,12 +27,12 @@ public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
-	private int vaoID;
 	private int vboVertexHandleChunk;
 	private FloatBuffer interleavedBuffer;
 	//private FloatBuffer vertexData, vertexTexture;
 	private int floatByteSize = 4;
 	private int positionFloatCount = 3;
+	private int textureID;
 	private int floatsPerVertex = positionFloatCount*2;
 	int vertexFloatSizeInBytes = floatByteSize * floatsPerVertex;
 
@@ -70,9 +71,8 @@ public class Chunk {
 				vertexFloatSizeInBytes, 0);
 
 		// Second is our texture information in list 1, for this we also need the offset
-		int byteOffset = floatByteSize * positionFloatCount;
-		GL20.glVertexAttribPointer(1, positionFloatCount, GL11.GL_FLOAT, false,
-				vertexFloatSizeInBytes, byteOffset);
+		int byteOffset = floatByteSize * 2;
+		GL20.glVertexAttribPointer(1, positionFloatCount, GL11.GL_FLOAT, false, vertexFloatSizeInBytes, byteOffset);
 
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		GL30.glBindVertexArray(0);
@@ -204,10 +204,14 @@ public class Chunk {
 			cube.disableCube();
 		}*/
 
-		texMan.bindBuffer();
-		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboVertexHandleChunk);
-		glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
+		//texMan.bindBuffer();
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texMan.getTextVBO());
 		
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
+		
+		glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
+		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 		/*
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);

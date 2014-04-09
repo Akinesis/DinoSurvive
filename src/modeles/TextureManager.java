@@ -1,11 +1,10 @@
 package modeles;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-
-
-
-
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -13,46 +12,83 @@ import static org.lwjgl.opengl.GL15.*;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GL30;
 import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
-import com.sun.org.apache.bcel.internal.generic.IDIV;
+import de.matthiasmann.twl.utils.PNGDecoder;
+import de.matthiasmann.twl.utils.PNGDecoder.Format;
 
 public class TextureManager {
 
 	private Texture texture;
 	private FloatBuffer textureData;
-	private int vboTexHandle;
+	private int textVBO, tWidth, tHeight;
+	private ByteBuffer buf = null;
 
 	public TextureManager() {
+		tWidth = 0;
+		tHeight = 0;
 		try {
-			texture = TextureLoader.getTexture("PNG",
-					ResourceLoader.getResourceAsStream("res/text.png"));
+			// Open the PNG file as an InputStream
+			InputStream in = new FileInputStream("res/text.png");
+			// Link the PNG decoder to this stream
+			PNGDecoder decoder = new PNGDecoder(in);
+			
+			// Get the width and height of the texture
+			tWidth = decoder.getWidth();
+			tHeight = decoder.getHeight();
+			// Decode the PNG file in a ByteBuffer
+			buf = ByteBuffer.allocateDirect(
+					4 * decoder.getWidth() * decoder.getHeight());
+			decoder.decode(buf, decoder.getWidth() * 4, Format.RGBA);
+			buf.flip();
+			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.exit(-1);
 		}
 
 		textureData = BufferUtils.createFloatBuffer(36 * 2);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		
+		textVBO = GL11.glGenTextures();
+		GL13.glActiveTexture(GL13.GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textVBO);
+
+		// All RGB bytes are aligned to each other and each component is 1 byte
+		GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
+		
+		// Upload the texture data and generate mip maps (for scaling)
+		GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGB, tWidth, tHeight, 0,
+		GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buf);
+		GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
+
+		// Setup the ST coordinate system
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
+		
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER,
+				GL11.GL_NEAREST);
+				GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER,
+				GL11.GL_LINEAR_MIPMAP_LINEAR);
 	}
 
 	private float[] genGrassTexture(float indiceTextX, float indiceTextY){	
 		float xGrass = indiceTextX*0.03125f;
 		float yGrass = indiceTextY*0.03125f;
-		
+
 		xGrass = xGrass-(xGrass%0.001953125f);
 		yGrass = yGrass-(yGrass%0.001953125f);
-		
+
 		float xDirt = indiceTextX*0.03125f;
 		float yDirt = indiceTextY*0.03125f;
-		
+
 		xDirt = xDirt-(xDirt%0.001953125f);
 		yDirt = yDirt-(yDirt%0.001953125f);
-		
+
 		indiceTextX = (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
 		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
-		
+
 		return new float[]{
 				//south
 				0.03125f+indiceTextX, 0.03125f+indiceTextY,
@@ -100,13 +136,13 @@ public class TextureManager {
 				0+indiceTextX, 0.03125f+indiceTextY
 
 		};
-		
+
 	}
 
 	private float[] genDirtTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -155,13 +191,13 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.0f+indiceTextY,
 				0.0625f+indiceTextX, 0.03125f+indiceTextY
 		};
-		
+
 	}
 
 	private float[] genStoneTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -210,13 +246,13 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.0625f+indiceTextY,
 				0.0625f+indiceTextX, 0.09375f+indiceTextY
 		};
-		
+
 	}
-	
+
 	private float[] genCoalTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -265,13 +301,13 @@ public class TextureManager {
 				0.15625f+indiceTextX, 0.0f+indiceTextY,
 				0.125f+indiceTextX, 0.03125f+indiceTextY,
 		};
-		
+
 	}
 
 	private float[] genGoldTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -320,13 +356,13 @@ public class TextureManager {
 				0.21875f+indiceTextX, 0.0f+indiceTextY,
 				0.1875f+indiceTextX, 0.03125f+indiceTextY
 		};
-		
+
 	}
 
 	private float[] genSilverTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -375,13 +411,13 @@ public class TextureManager {
 				0.03125f+indiceTextX, 0.125f+indiceTextY,
 				0.0f+indiceTextX, 0.15625f+indiceTextY
 		};
-		
+
 	}
 
 	private float[] genIronTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -430,13 +466,13 @@ public class TextureManager {
 				0.15625f+indiceTextX, 0.0625f+indiceTextY,
 				0.125f+indiceTextX, 0.09375f+indiceTextY,
 		};
-		
+
 	}
 
 	private float[] genCopperTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -485,13 +521,13 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.125f+indiceTextY,
 				0.0625f+indiceTextX, 0.15625f+indiceTextY,
 		};
-		
+
 	}
 
 	private float[] genTitaneTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -540,13 +576,13 @@ public class TextureManager {
 				0.15625f+indiceTextX, 0.125f+indiceTextY,
 				0.125f+indiceTextX, 0.15625f+indiceTextY,
 		};
-		
+
 	}
 
 	private float[] genUraniumTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -595,13 +631,13 @@ public class TextureManager {
 				0.21875f+indiceTextX, 0.0625f+indiceTextY,
 				0.1875f+indiceTextX, 0.09375f+indiceTextY
 		};
-		
+
 	}
 
 	private float[] genWoodTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -650,13 +686,13 @@ public class TextureManager {
 				0.03125f+indiceTextX, 0.1875f+indiceTextY,
 				0.0f+indiceTextX, 0.21875f+indiceTextY,
 		};
-		
+
 	}
 
 	private float[] genLeafTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -705,13 +741,13 @@ public class TextureManager {
 				0.09375f+indiceTextX, 0.1875f+indiceTextY,
 				0.0625f+indiceTextX, 0.21875f+indiceTextY
 		};
-		
+
 	}
 
 	private float[] genWaterTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -760,13 +796,13 @@ public class TextureManager {
 				0.28125f+indiceTextX, 0.0f+indiceTextY,
 				0.25f+indiceTextX, 0.03125f+indiceTextY
 		};
-		
+
 	}
 
 	private float[] genLavaTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
-		
+
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
@@ -815,9 +851,9 @@ public class TextureManager {
 				0.28125f+indiceTextX, 0.0625f+indiceTextY,
 				0.25f+indiceTextX, 0.09375f+indiceTextY
 		};
-		
+
 	}
-	
+
 	private float[] genPlankTexture(){
 		return new float[]{
 				//south
@@ -865,9 +901,9 @@ public class TextureManager {
 				0.21875f, 0.125f,
 				0.1875f, 0.15625f
 		};
-		
+
 	}
-	
+
 	private float[] genWorkbenchTexture(){
 		return new float[]{
 				//south
@@ -916,7 +952,7 @@ public class TextureManager {
 				0.125f, 0.125f
 		};
 	}
-	
+
 	public void bindText(){
 		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 		texture.bind();
@@ -933,7 +969,7 @@ public class TextureManager {
 	}
 
 	public void bindDrawTexture(){
-		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
+		glBindBuffer(GL_ARRAY_BUFFER, textVBO);
 		glTexCoordPointer(2, GL_FLOAT, 0, 0l);
 	}
 
@@ -983,6 +1019,10 @@ public class TextureManager {
 		default:
 			return genGrassTexture(x, y);
 		}
+	}
+	
+	public int getTextVBO(){
+		return textVBO;
 	}
 
 }
