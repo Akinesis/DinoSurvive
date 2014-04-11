@@ -24,32 +24,32 @@ public class Cube3dVbo extends Cube3D {
 		//vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 		indiceTextX = (float)(Math.random());
 		indiceTextY = (float)(Math.random());
-		
+
 		//vboVertexHandle = glGenBuffers();
 	}
 
 	public void draw(){
-        glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
+		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 	}
-	
+
 	public void bindDrawCube(int vboChunk){
 		glBindBuffer(GL_ARRAY_BUFFER, vboChunk);
-        glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);
+		glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);
 	}
-	
+
 	public void enableCube(){
 		glEnableClientState(GL_VERTEX_ARRAY);
 	}
-	
+
 	public void disableCube(){
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
-	
+
 	public void delCube(int vboChunk){
 		glDeleteBuffers(vboChunk);
 	}
-	
+
 	public float[] genCubes(){
 		return new float[]{
 				//south
@@ -101,28 +101,83 @@ public class Cube3dVbo extends Cube3D {
 				pos.x, pos.y, pos.z
 		};
 	}
+
+	public float[] genSouth(){
+		return new float[]{pos.x, pos.y, pos.z,
+				pos.x, pos2.y, pos.z,
+				pos2.x, pos.y, pos.z,
+				pos2.x, pos.y, pos.z,
+				pos.x, pos2.y, pos.z,
+				pos2.x, pos2.y, pos.z,};
+	}
+
+	public float[] genNorth(){
+		return new float[]{
+				pos2.x, pos2.y, pos2.z,
+				pos.x, pos2.y, pos2.z,
+				pos.x, pos.y, pos2.z,
+				pos2.x, pos2.y, pos2.z,
+				pos.x, pos.y, pos2.z,
+				pos2.x, pos.y, pos2.z,};
+	}
+
+	public float[] genEast(){
+		return new float[]{pos2.x, pos.y, pos.z,
+				pos2.x, pos2.y, pos.z,
+				pos2.x, pos.y, pos2.z,
+				pos2.x, pos.y, pos2.z,
+				pos2.x, pos2.y, pos.z,
+				pos2.x, pos2.y, pos2.z,};
+	}
+
+	public float[] genWest(){
+		return new float[]{pos.x, pos.y, pos.z,
+				pos.x, pos2.y, pos2.z,
+				pos.x, pos2.y, pos.z,
+				pos.x, pos.y, pos2.z,
+				pos.x, pos2.y, pos2.z,
+				pos.x, pos.y, pos.z};
+	}
+
+	public float[] genTop(){
+		return new float[]{pos.x, pos.y, pos.z,
+				pos2.x, pos.y, pos.z,
+				pos.x, pos.y, pos2.z,
+				pos.x, pos.y, pos2.z,
+				pos2.x, pos.y, pos.z,
+				pos2.x, pos.y, pos2.z,};
+	}
+
+	public float[] genBVottom(){
+		return new float[]{pos.x, pos2.y, pos.z,
+				pos.x, pos2.y, pos2.z,
+				pos2.x, pos2.y, pos.z,
+				pos2.x, pos2.y, pos.z,
+				pos.x, pos2.y, pos2.z,
+				pos2.x, pos2.y, pos2.z,};
+	}
 	
 	public void bindBuffers(int vboChunk){
 		glBindBuffer(GL_ARRAY_BUFFER, vboChunk);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
-	
+
 	public int getType(){
 		return type;
 	}
-	
+
 	public boolean isSolide(){
 		return type==13 || type==14;
 	}
-	
+
 	public float getTextX(){
 		return indiceTextX;
 	}
-	
+
 	public float getTextY(){
 		return indiceTextY;
 	}
-	
+
 }
 

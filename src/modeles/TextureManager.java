@@ -507,6 +507,7 @@ public class TextureManager {
 				0.0625f+indiceTextX, 0.15625f+indiceTextY,
 				0.09375f+indiceTextX, 0.15625f+indiceTextY,
 
+				//east
 				0.09375f+indiceTextX, 0.15625f+indiceTextY,
 				0.09375f+indiceTextX, 0.125f+indiceTextY,
 				0.0625f+indiceTextX, 0.15625f+indiceTextY,

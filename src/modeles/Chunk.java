@@ -72,7 +72,7 @@ public class Chunk {
 
 		// Second is our texture information in list 1, for this we also need the offset
 		int byteOffset = floatByteSize * 2;
-		GL20.glVertexAttribPointer(1, positionFloatCount, GL11.GL_FLOAT, false, vertexFloatSizeInBytes, byteOffset);
+		GL20.glVertexAttribPointer(1, 3, GL11.GL_FLOAT, false, vertexFloatSizeInBytes, byteOffset);
 
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		GL30.glBindVertexArray(0);
@@ -168,9 +168,25 @@ public class Chunk {
 	 */
 	public void genCubes(TextureManager texMan){
 		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*3*2*36);
+		float[] textArray, cubeArray;
+		int i;
+
 		for(Cube3dVbo cube : renderCubes){
-			interleavedBuffer.put(cube.genCubes());
-			interleavedBuffer.put(texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY()));
+			textArray = texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
+			cubeArray = cube.genCubes();
+			int j = 0;
+			
+			for(i =0; i<108; i+=3){
+				interleavedBuffer.put(cubeArray[i]);
+				interleavedBuffer.put(cubeArray[i+1]);
+				interleavedBuffer.put(cubeArray[i+2]);
+				
+				interleavedBuffer.put(textArray[j]);
+				interleavedBuffer.put(textArray[j+1]);
+				System.out.println(i +" " + j);
+				j+=2;
+			}
+	
 		}
 		interleavedBuffer.flip();
 	}
