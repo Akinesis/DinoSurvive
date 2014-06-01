@@ -118,6 +118,12 @@ public class ChunkManager {
 		}
 	}
 	
+	public void unbindAll(){
+		for(Chunk ck : chunks){
+			ck.unbindVbo();
+		}
+	}
+	
 	public Chunk getChunk(int x, int y, int z){
 		for(Chunk ck : chunks){
 			if( (ck.getX() == x) && (ck.getY() == y) && (ck.getZ() == z) ){

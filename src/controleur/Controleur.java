@@ -99,6 +99,10 @@ public class Controleur {
 
 			display.update(); //met à jour la fenêtre, aucun rapport avec les chunks
 		}
+		
+		chunkManager.unbindAll();
+		texManager.deleteText();
+		display.end();
 	}
 	
 	/*

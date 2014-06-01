@@ -240,6 +240,11 @@ public class Chunk {
 
 		cubes[posX][posY][posZ] = cube;		
 	}
+	
+	public void unbindVbo(){
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+		GL15.glDeleteBuffers(vboVertexHandleChunk);
+	}
 
 
 	/*

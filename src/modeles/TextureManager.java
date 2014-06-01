@@ -36,6 +36,11 @@ public class TextureManager {
 		textureData = BufferUtils.createFloatBuffer(36 * 2);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
+	
+	public void deleteText(){
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		GL11.glDeleteTextures(texture.getTextureID());
+	}
 
 	private float[] genGrassTexture(float indiceTextX, float indiceTextY){	
 		float xGrass = indiceTextX*0.03125f;

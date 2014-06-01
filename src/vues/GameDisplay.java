@@ -42,5 +42,9 @@ public class GameDisplay implements Parametres{
 	public void changeGrabeMouse(){
 		Mouse.setGrabbed(!Mouse.isGrabbed());
 	}
+	
+	public void end(){
+		Display.destroy();
+	}
 
 }
