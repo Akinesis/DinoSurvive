@@ -14,12 +14,16 @@ import org.lwjgl.opengl.GL30;
 import modeles.entities.*;
 import controleur.Controleur;
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_COORD_ARRAY;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
 import static org.lwjgl.opengl.GL11.glDisableClientState;
 import static org.lwjgl.opengl.GL11.glDrawArrays;
 import static org.lwjgl.opengl.GL11.glEnableClientState;
+import static org.lwjgl.opengl.GL11.glTexCoordPointer;
 import static org.lwjgl.opengl.GL11.glVertexPointer;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glClientActiveTexture;
 import static org.lwjgl.opengl.GL15.*;
 
 public class Chunk {
@@ -32,7 +36,7 @@ public class Chunk {
 	//private FloatBuffer vertexData, vertexTexture;
 	private int floatByteSize = 4;
 	private int positionFloatCount = 3;
-	private int floatsPerVertex = positionFloatCount*2;
+	private int floatsPerVertex = positionFloatCount*3;
 	int vertexFloatSizeInBytes = floatByteSize * floatsPerVertex;
 
 	private Controleur clone;
@@ -167,10 +171,27 @@ public class Chunk {
 	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
 	 */
 	public void genCubes(TextureManager texMan){
-		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*3*2*36);
+		float cubeCoord[],texCoord[];
+		int j= 0;
+		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*(6*3+6*2)*36);
 		for(Cube3dVbo cube : renderCubes){
-			interleavedBuffer.put(cube.genCubes());
-			interleavedBuffer.put(texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY()));
+			cubeCoord=cube.genCubes();
+			texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
+			for(int i = 0; i< cubeCoord.length; i+=3){
+				interleavedBuffer.put(cubeCoord[i]);
+				interleavedBuffer.put(cubeCoord[i+1]);
+				interleavedBuffer.put(cubeCoord[i+2]);
+				
+				interleavedBuffer.put(texCoord[j]);
+				interleavedBuffer.put(texCoord[j+1]);
+				
+				j+=2;
+			}
+			
+			j=0;
+			
+			//interleavedBuffer.put(cube.genCubes());
+			//interleavedBuffer.put(texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY()));
 		}
 		interleavedBuffer.flip();
 	}
@@ -186,49 +207,17 @@ public class Chunk {
 	 * @param texMan
 	 */
 	public void draw(TextureManager texMan){
-		/*for(Cube3dVbo cube : renderCubes){
-			cube.bindBuffers(vboVertexHandleChunk);
-
-			texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
-			texMan.bindBuffer();
-
-			cube.bindDrawCube(vboVertexHandleChunk);
-			texMan.bindDrawTexture();
-
-			cube.enableCube();
-			texMan.enableTexture();
-
-			cube.draw();
-
-			texMan.disableTexture();
-			cube.disableCube();
-		}*/
-
-		texMan.bindBuffer();
-		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, vboVertexHandleChunk);
-		glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
 		
-		/*
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
-		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		texMan.genText(1, 0.5f, 0.5f);
-		//texMan.bindBuffer();
-
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
-		glVertexPointer(3, GL_FLOAT, 0, 0L);
-		texMan.bindDrawTexture();
-
 		glEnableClientState(GL_VERTEX_ARRAY);
-		texMan.enableTexture();
-
-		glDrawArrays(GL_TRIANGLES, 0, 36*renderCubes.size());
-
-		texMan.disableTexture();
+		glVertexPointer(3, GL_FLOAT, 5*4, 0L);
+		glClientActiveTexture(GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texMan.getID());
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_FLOAT, 5*4, 3*4 );
+		glDrawArrays(GL_TRIANGLES, 0, renderCubes.size()*6*6);
 		glDisableClientState(GL_VERTEX_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		*/
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
 
 	/**

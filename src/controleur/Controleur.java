@@ -58,7 +58,17 @@ public class Controleur {
 
 		//ajoute un chunk de terre dans le chunk manager
 		terrGen.genereTerre(1, 0, 1);
+		terrGen.genereTerre(-1, -1, 0);
 		terrGen.genereTerre(-1, 0, 0);
+		terrGen.genereTerre(-1, -2, 0);
+		terrGen.genereTerre(-1, 0, 1);
+		terrGen.genereTerre(0, 0, 1);
+		terrGen.genereTerre(1, 0, 2);
+		terrGen.genereTerre(2, 0, 1);
+		terrGen.genereTerre(0, 0, -1);
+		terrGen.genereTerre(-1, 0, -2);
+		terrGen.genereTerre(-2, 0, -1);
+		terrGen.genereTerre(-1, -1, 1);
 		terrGen.genFond(0, 0, 0);
 		terrGen.genFond(1, 0, 0);
 		terrGen.genTree(1, 0, 0);
@@ -66,7 +76,6 @@ public class Controleur {
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
 		
-		texManager.bindBuffer();
 		texManager.bindText();
 
 		chunkManager.delCubes();

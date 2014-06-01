@@ -922,19 +922,13 @@ public class TextureManager {
 		texture.bind();
 	}
 
-	public void bindBuffer(){
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getTextureID());
-		/*
-		vboTexHandle = texture.getTextureID();
-		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
-		glBufferData(GL_ARRAY_BUFFER, textureData, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);*/
-	}
-
 	public void bindDrawTexture(){
 		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
 		glTexCoordPointer(2, GL_FLOAT, 0, 0l);
+	}
+	
+	public int getID(){
+		return texture.getTextureID();
 	}
 
 	public void enableTexture(){
