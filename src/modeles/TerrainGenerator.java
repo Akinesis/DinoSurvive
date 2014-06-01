@@ -10,6 +10,16 @@ public class TerrainGenerator {
 	public TerrainGenerator(Controleur contr){
 		clone = contr;
 	}
+	
+	public void buildStart(){
+		for(int x = -2; x<3; x++){
+			for(int y = 0; y>-5; y--){
+				for(int z = -2; z<3; z++){
+					genereTerre(x,y,z);
+				}
+			}
+		}
+	}
 
 	public void genereTerre(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
@@ -38,7 +48,7 @@ public class TerrainGenerator {
 
 		for(int i = originX; i>originX-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
-				temp.addCube3dVbo(new Cube3dVbo(i, originY, j, 1, 1));
+				temp.addCube3dVbo(new Cube3dVbo(i, -originY, j, 1, 1));
 			}
 		}
 	}

@@ -22,6 +22,10 @@ public class Camera {
 		rotation = new Vector3f(0, 0, 0);
 	}
 	
+	public void spawn(int y){
+		position = new Vector3f(-8f, (y-1)*16-2.75f, -8f);
+	}
+	
 	//met à jour la position et la rotation
 	public void useView(){
 		glRotatef(rotation.x, 1, 0, 0);

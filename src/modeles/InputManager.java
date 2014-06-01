@@ -1,5 +1,7 @@
 package modeles;
 
+import modeles.entities.Cube3dVbo;
+
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -64,7 +66,7 @@ public class InputManager {
 		jump(keyJump);
 
 		if(!clone.getCollision().gravity(camera) && !isJumping){
-			//camera.getPos().y += 0.12;
+			camera.getPos().y += 0.12;
 		}
 
 	}
@@ -98,6 +100,8 @@ public class InputManager {
 	}
 
 	private void mouse(){
+		boolean leftClik = Mouse.isButtonDown(0);
+		
 		float mouseDX = Mouse.getDX() * 1 * 0.16f;
 		float mouseDY = Mouse.getDY() * 1 * 0.16f;
 		
@@ -117,6 +121,11 @@ public class InputManager {
 				camera.getRot().x = 85;
 			}
 		}
+		
+		if(leftClik){
+		}
+		
+		
 	}
 
 	/**
