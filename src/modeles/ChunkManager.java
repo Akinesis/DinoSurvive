@@ -8,7 +8,7 @@ import modeles.entities.Cube3dVbo;
 
 
 public class ChunkManager {
-	private Vector<Chunk> chunks;
+	private Vector<Chunk> chunks, renderChunks;
 	private Controleur clone;
 	
 	/*
@@ -16,6 +16,7 @@ public class ChunkManager {
 	 */
 	public ChunkManager(Controleur contr){
 		chunks = new Vector<Chunk>();
+		renderChunks = new Vector<Chunk>();
 		clone = contr;
 	}
 	
@@ -71,7 +72,7 @@ public class ChunkManager {
 	}
 
 	/**
-	 * Vérifie l'état des chunks
+	 * Vérifie l'état des cubes du chunk
 	 */
 	public void checkState(){
 		for(Chunk chunk : chunks){
@@ -85,14 +86,18 @@ public class ChunkManager {
 		}
 	}
 	
+	public void updateVbo(){
+		for(Chunk chunk : renderChunks){
+			chunk.updateVbo();
+		}
+	}
+	
 	/**
 	 * Dessine les chunks
 	 * @param textMan
 	 */
 	public void drawChunks(TextureManager textMan){
-		for(Chunk chunk : chunks){
-			//chunk.checkState();
-			//chunk.genVBO();
+		for(Chunk chunk : renderChunks){
 			chunk.draw(textMan);
 			chunk.delCubes();
 		}
@@ -102,12 +107,21 @@ public class ChunkManager {
 	 * Initialise les chunks
 	 */
 	public void initChunks(){
-		for(Chunk chunk : chunks){
+		checkRender();
+		for(Chunk chunk : renderChunks){
 			chunk.addCubes();
 			chunk.update();
 			chunk.checkState();
 			chunk.genCubes(clone.getTexManager());
 			chunk.genVBO();
+		}
+	}
+	
+	private void checkRender(){
+		for(Chunk ck : chunks){
+			if(!chunksurround(ck)){
+				renderChunks.add(ck);
+			}
 		}
 	}
 	
@@ -147,6 +161,39 @@ public class ChunkManager {
 		}
 		Chunk temp = new Chunk(x, y, z, chunks.size(), clone);
 		chunks.add(temp);
+		return temp;
+	}
+	
+	private boolean chunksurround(Chunk ck){
+		
+		int xCh = ck.getX();
+		int yCh = ck.getY();
+		int zCh = ck.getZ();
+		
+		boolean temp=true;
+
+		temp = temp && chunkExist(xCh+1,yCh,zCh);
+		temp = temp && chunkExist(xCh-1,yCh,zCh);
+		
+		temp = temp && chunkExist(xCh,yCh-1,zCh) || yCh+1>0;
+		temp = temp && chunkExist(xCh,yCh+1,zCh);
+		
+		temp = temp && chunkExist(xCh,yCh,zCh+1);
+		temp = temp && chunkExist(xCh,yCh,zCh-1);
+		
+
+		return  temp;
+	}
+	
+	private boolean chunkExist(int xCh, int yCh, int zCh){
+
+		boolean temp = false;
+		
+		for(Chunk chun : chunks){
+			if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
+				temp=true;
+			}
+		}
 		return temp;
 	}
 

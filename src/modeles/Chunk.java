@@ -187,13 +187,13 @@ public class Chunk {
 				
 				j+=2;
 			}
-			
 			j=0;
-			
-			//interleavedBuffer.put(cube.genCubes());
-			//interleavedBuffer.put(texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY()));
 		}
 		interleavedBuffer.flip();
+	}
+	
+	public void updateVbo(){
+		genCubes(clone.getTexManager());
 	}
 
 	public void delCubes(){

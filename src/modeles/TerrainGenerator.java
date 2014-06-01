@@ -16,6 +16,9 @@ public class TerrainGenerator {
 			for(int y = 0; y>-5; y--){
 				for(int z = -2; z<3; z++){
 					genereTerre(x,y,z);
+					if(y==-4){
+						genCeil(x, y, z);
+					}
 				}
 			}
 		}
@@ -49,6 +52,22 @@ public class TerrainGenerator {
 		for(int i = originX; i>originX-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
 				temp.addCube3dVbo(new Cube3dVbo(i, -originY, j, 1, 1));
+			}
+		}
+	}
+	
+	/**
+	 * Fonction permettant la generation d'un plafond d'herbe, tout beau tout propre.
+	 */
+	public void genCeil(int x, int y, int z){
+		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
+		int originX = x*16;
+		int originY = y*16;
+		int originZ = z*16;
+
+		for(int i = originX; i>originX-16; --i){
+			for(int j = originZ; j>originZ-16; --j){
+				temp.addCube3dVbo(new Cube3dVbo(i, -originY+15, j, 1, 1));
 			}
 		}
 	}
