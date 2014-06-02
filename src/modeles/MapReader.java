@@ -49,7 +49,7 @@ public class MapReader {
 			int y = Integer.parseInt(addr[1].toString());
 			int z = Integer.parseInt(addr[2].subSequence(0, addr[2].length()-1).toString());
 
-			chunks.add(new Chunk(x, y, z, i, clone));
+			chunks.add(new Chunk(x, -y, z, i, clone));
 			i++;
 			ligne = readLine();
 		}	
