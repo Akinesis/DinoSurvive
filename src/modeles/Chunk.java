@@ -70,13 +70,13 @@ public class Chunk {
 
 		// -- Now we can split our interleaved data over 2 attribute lists
 		// First up is our positional information in list 0
-		GL20.glVertexAttribPointer(0, positionFloatCount, GL11.GL_FLOAT, false,
-				vertexFloatSizeInBytes, 0);
+		/*GL20.glVertexAttribPointer(0, positionFloatCount, GL11.GL_FLOAT, false,
+				vertexFloatSizeInBytes, 0);*/
 
 		// Second is our texture information in list 1, for this we also need the offset
-		int byteOffset = floatByteSize * positionFloatCount;
-		GL20.glVertexAttribPointer(1, positionFloatCount, GL11.GL_FLOAT, false,
-				vertexFloatSizeInBytes, byteOffset);
+		//int byteOffset = floatByteSize * positionFloatCount;
+		/*GL20.glVertexAttribPointer(1, positionFloatCount, GL11.GL_FLOAT, false,
+				vertexFloatSizeInBytes, byteOffset);*/
 
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		GL30.glBindVertexArray(0);
@@ -155,13 +155,13 @@ public class Chunk {
 		boolean temp;
 		temp = true;
 
-		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : false;
-		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : false;
-		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : false;
+		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(x-1, y, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x-1, this.y, this.z));
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : clone.getChunkManager().getCubeAt(x, y-1, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y+1, this.z));
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().getCubeAt(x, y, z-1)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z-1));
 
-		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : false;
-		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : false;
-		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : false;
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(x+1, y, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x+1, this.y, this.z));
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().getCubeAt(x, y+1, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y-1, this.z));
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : clone.getChunkManager().getCubeAt(x, y, z+1)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z+1));
 
 		return  temp;
 	}

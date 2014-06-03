@@ -172,29 +172,115 @@ public class ChunkManager {
 		
 		boolean temp=true;
 
-		temp = temp && chunkExist(xCh+1,yCh,zCh);
-		temp = temp && chunkExist(xCh-1,yCh,zCh);
+		temp = (chunkExist(xCh+1,yCh,zCh))?temp && completeFace(xCh+1,yCh,zCh, 5):false;
+		temp = (chunkExist(xCh-1,yCh,zCh))?temp && completeFace(xCh-1,yCh,zCh, 6):false;
 		
-		temp = temp && chunkExist(xCh,yCh-1,zCh) || yCh+1>0;
-		temp = temp && chunkExist(xCh,yCh+1,zCh);
+		temp = (chunkExist(xCh,yCh+1,zCh))?temp && completeFace(xCh,yCh+1,zCh, 4)|| yCh+1>0:false;
+		temp = (chunkExist(xCh,yCh-1,zCh))?temp && completeFace(xCh,yCh-1,zCh, 3):false;
 		
-		temp = temp && chunkExist(xCh,yCh,zCh+1);
-		temp = temp && chunkExist(xCh,yCh,zCh-1);
+		temp = (chunkExist(xCh,yCh,zCh+1))?temp && completeFace(xCh,yCh,zCh+1, 1):false;
+		temp = (chunkExist(xCh,yCh,zCh-1))?temp && completeFace(xCh,yCh,zCh-1, 2):false;
 		
 
 		return  temp;
 	}
 	
-	private boolean chunkExist(int xCh, int yCh, int zCh){
-
-		boolean temp = false;
+	public boolean chunkExist(int xCh, int yCh, int zCh){
 		
 		for(Chunk chun : chunks){
 			if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
-				temp=true;
+				return true;
 			}
 		}
-		return temp;
+		return false;
+	}
+	
+	private boolean completeFace(int xCh, int yCh, int zCh, int face){
+		int i = 1;
+		int j = 1;
+		
+		switch(face){
+			case 1:
+				for(Chunk chun : chunks){
+					if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
+						for(i =0; i<15;i++){
+							for(j=0; j<15; j++){
+								if(chun.getCube(i, j, 0)==null){
+									return false;
+								}
+							}
+						}
+					}
+				}
+				break;
+			case 2:
+				for(Chunk chun : chunks){
+					if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
+						for(i =0; i<15;i++){
+							for(j=0; j<15; j++){
+								if(chun.getCube(i, j, 15)==null){
+									return false;
+								}
+							}
+						}
+					}
+				}
+				break;
+			case 3:
+				for(Chunk chun : chunks){
+					if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
+						for(i =0; i<15;i++){
+							for(j=0; j<15; j++){
+								if(chun.getCube(i, 0, j)==null){
+									return false;
+								}
+							}
+						}
+					}
+				}
+				break;
+			case 4:
+				for(Chunk chun : chunks){
+					if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
+						for(i =0; i<15;i++){
+							for(j=0; j<15; j++){
+								if(chun.getCube(i, 15, j)==null){
+									return false;
+								}
+							}
+						}
+					}
+				}
+				break;
+			case 5:
+				for(Chunk chun : chunks){
+					if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
+						for(i =0; i<15;i++){
+							for(j=0; j<15; j++){
+								if(chun.getCube(0, i, j)==null){
+									return false;
+								}
+							}
+						}
+					}
+				}
+				break;
+			case 6:
+				for(Chunk chun : chunks){
+					if(chun.getX()==xCh && chun.getY()==yCh && chun.getZ()==zCh){
+						for(i =0; i<15;i++){
+							for(j=0; j<15; j++){
+								if(chun.getCube(15, i, j)==null){
+									return false;
+								}
+							}
+						}
+					}
+				}
+				break;	
+		}
+		
+		return true;
 	}
 
 
