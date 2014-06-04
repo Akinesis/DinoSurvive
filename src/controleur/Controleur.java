@@ -13,6 +13,7 @@ import modeles.InputManager;
 import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
+import modeles.entities2D.HUDManager;
 
 import org.lwjgl.input.Keyboard;
 
@@ -32,6 +33,7 @@ public class Controleur {
 	private TextureManager texManager;
 	private CollisionManager collision;
 	private TerrainGenerator terrGen;
+	private HUDManager hud;
 
 	/**
 	 * Constructeur du controleur
@@ -55,6 +57,7 @@ public class Controleur {
 		display.create();
 		matrices.init3D();
 		texManager = new TextureManager();
+		hud = new HUDManager();
 
 		//ajoute un chunk de terre dans le chunk manager
 		/*terrGen.genereTerre(1, 0, 1);
@@ -78,7 +81,7 @@ public class Controleur {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//initialise la matrice 3D
-			//matrices.init3D();
+			matrices.init3D();
 			glLoadIdentity();
 
 
@@ -90,6 +93,9 @@ public class Controleur {
 			
 			//dessine tout les chunks
 			chunkManager.drawChunks(texManager);
+			
+			matrices.init2D();
+			hud.draw();
 
 			display.update(); //met à jour la fenêtre, aucun rapport avec les chunks
 		}
