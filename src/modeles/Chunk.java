@@ -8,7 +8,6 @@ import java.util.Vector;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import modeles.entities.*;
@@ -30,7 +29,6 @@ public class Chunk {
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
-	private int vaoID;
 	private int vboVertexHandleChunk;
 	private FloatBuffer interleavedBuffer;
 	//private FloatBuffer vertexData, vertexTexture;
@@ -155,13 +153,13 @@ public class Chunk {
 		boolean temp;
 		temp = true;
 
-		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(x-1, y, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x-1, this.y, this.z));
-		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : clone.getChunkManager().getCubeAt(x, y-1, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y+1, this.z));
-		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().getCubeAt(x, y, z-1)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z-1));
+		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(0+this.x*16, y-this.x*16, z+this.x*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x-1, this.y, this.z));
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : clone.getChunkManager().getCubeAt(x+this.x*16, 0-this.y*16, z+this.x*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y-1, this.z));
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().getCubeAt(x+this.x*16, y-this.x*16, 0+this.z*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z-1));
 
-		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(x+1, y, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x+1, this.y, this.z));
-		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().getCubeAt(x, y+1, z)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y-1, this.z));
-		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : clone.getChunkManager().getCubeAt(x, y, z+1)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z+1));
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(15+this.x*16+1, y-this.x*16, z+this.x*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x+1, this.y, this.z));
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().getCubeAt(x+this.x*16, 15-this.y*16, z+this.x*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y+1, this.z));
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : clone.getChunkManager().getCubeAt(x+this.x*16, y-this.x*16, 15+this.z*16+1)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z+1));
 
 		return  temp;
 	}
@@ -173,7 +171,7 @@ public class Chunk {
 	public void genCubes(TextureManager texMan){
 		float cubeCoord[],texCoord[];
 		int j= 0;
-		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*(6*3+6*2)*36);
+		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*(6*3+6*2)*6);
 		for(Cube3dVbo cube : renderCubes){
 			cubeCoord=cube.genCubes();
 			texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
@@ -196,11 +194,6 @@ public class Chunk {
 		genCubes(clone.getTexManager());
 	}
 
-	public void delCubes(){
-		for(Cube3dVbo cube : nonRenderCubes){
-			//cube.delCube(vboVertexHandleChunk);
-		}
-	}
 
 	/**
 	 * Dessine tous les cubes actifs

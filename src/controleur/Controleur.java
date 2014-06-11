@@ -75,8 +75,6 @@ public class Controleur {
 		
 		texManager.bindText();
 
-		chunkManager.delCubes();
-
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

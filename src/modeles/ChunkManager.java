@@ -99,7 +99,7 @@ public class ChunkManager {
 	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : renderChunks){
 			chunk.draw(textMan);
-			chunk.delCubes();
+			
 		}
 	}
 
@@ -125,12 +125,6 @@ public class ChunkManager {
 		}
 	}
 	
-	
-	public void delCubes(){
-		for (Chunk chunk : chunks){
-			chunk.delCubes();
-		}
-	}
 	
 	public void unbindAll(){
 		for(Chunk ck : chunks){
