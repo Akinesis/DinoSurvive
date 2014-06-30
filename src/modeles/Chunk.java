@@ -77,7 +77,7 @@ public class Chunk {
 				vertexFloatSizeInBytes, byteOffset);*/
 
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-		GL30.glBindVertexArray(0);
+		//GL30.glBindVertexArray(0);
 
 	}
 
@@ -153,13 +153,13 @@ public class Chunk {
 		boolean temp;
 		temp = true;
 
-		temp = (x>0) ? cubes[x-1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ())!=null && temp || !(clone.getChunkManager().chunkExist(this.x-1, this.y, this.z));
-		//temp = (y>0) ? cubes[x][y-1][z]!=null && temp : false;//clone.getChunkManager().getCubeAt(x+this.x*16, 0-this.y*16, z+this.x*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y-1, this.z));
-		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : false;//clone.getChunkManager().getCubeAt(x+this.x*16, y-this.x*16, 0+this.z*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z-1));
-
-		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : false;//clone.getChunkManager().getCubeAt(15+this.x*16+1, y-this.x*16, z+this.x*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x+1, this.y, this.z));
-		//temp = (y<15) ? cubes[x][y+1][z]!=null && temp : false;//clone.getChunkManager().getCubeAt(x+this.x*16, 15-this.y*16, z+this.x*16)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y+1, this.z));
-		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : false;//clone.getChunkManager().getCubeAt(x+this.x*16, y-this.x*16, 15+this.z*16+1)!=null && temp || !(clone.getChunkManager().chunkExist(this.x, this.y, this.z+1));
+		temp = (x>0) ? cubes[x-1][y][z]!=null : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ())==null;
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ())==null && temp || (clone.getChunkManager().chunkExist(this.x, this.y+1, this.z));
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()-1)==null && temp;
+		
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX()+1, cubes[x][y][z].getY(), cubes[x][y][z].getZ())==null && temp;
+		//temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ())==null && temp || (clone.getChunkManager().chunkExist(this.x, this.y+1, this.z));
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()+1)==null && temp;
 
 		return  temp;
 	}
