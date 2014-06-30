@@ -17,6 +17,7 @@ public class HUDManager extends AbstractEntity2D{
 		curseur = new Cursor2D();
 		inventaire = new Inventaire2D();
 		curseur.genCurseur();
+		inventaire.genInventaire();
 	}
 	
 	/*

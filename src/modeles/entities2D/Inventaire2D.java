@@ -22,8 +22,8 @@ import org.lwjgl.opengl.Display;
  * Classe gérant l'entité 2D  qui représente l'inventaire affiché sur le HUD
  */
 public class Inventaire2D extends AbstractEntity2D{
-	boolean onScreen = false;
-	private static int verticiesNum = 6;
+	boolean onScreen = true;
+	private static int verticiesNum = 12;
 	//taille (x,y)
 	private int vertexSize = 2;
 	//ce qui est dessiné (le buffer)
@@ -58,8 +58,7 @@ public class Inventaire2D extends AbstractEntity2D{
 	}
 	
 	/*
-	 * Méthodes (non-Javadoc)
-	 * @see modeles.entities2D.AbstractEntity2D#draw()
+	 * Méthodes
 	 */
 
 	@Override
@@ -83,10 +82,10 @@ public class Inventaire2D extends AbstractEntity2D{
 				float c_hor = Display.getWidth()/2;
 				float c_vert = Display.getHeight()/2;
 				vertexData.put(new float[]{
-						c_hor+25, c_vert,
-						c_hor-25, c_vert,
-						c_hor, c_vert +25,
-						c_hor, c_vert -25,
+						c_hor+300, c_vert,
+						c_hor-300, c_vert,
+						c_hor, c_vert +300,
+						c_hor, c_vert -300,
 				});
 				vertexData.flip();
 	}
