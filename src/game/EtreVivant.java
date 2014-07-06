@@ -3,7 +3,7 @@ package game;
 import game.inventaire.Inventaire;
 
 
-//peut-être fusionne avec Item en une Class Entiter point a debattre
+//peut-être une Class Entiter dont EtreVivant et Item heriterai point a debattre
 public abstract class EtreVivant {
 	private String nom; //certainement inutile;
 	private Inventaire inventaire;
@@ -16,15 +16,15 @@ public abstract class EtreVivant {
 	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public Inventaire getInventaire() {
-		return inventaire;
+		return this.inventaire;
 	}
 
 	public Statistique getStatsistique() {
-		return statsistique;
+		return this.statsistique;
 	}
 	
 	

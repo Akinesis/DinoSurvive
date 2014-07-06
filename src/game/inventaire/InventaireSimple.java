@@ -14,42 +14,44 @@ public class InventaireSimple implements Inventaire {
 	}
 
 	@Override
-	public void addItem(Item item) {
+	public boolean addItem(Item item, Inventaire inventaire) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
-
 	@Override
-	public void addItem(Item item, int position) {
+	public boolean addItem(Item item, int position, Inventaire inventaire) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
-
 	@Override
-	public void addInventaire(Inventaire inventaire) {
+	public boolean addInventaire(Inventaire inventaire) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
-
 	@Override
 	public void removeItem(Item item) {
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
 	public void transferItem(Inventaire inventaire, Item item) {
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
 	public void moveItem(Item item, int position) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	public Sac<Item> getInventaire() {
-		return inventaire;
+	@Override
+	public boolean contains(Item item) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+	public Sac<Item> getInventaire() {
+		return this.inventaire;
+	}
+
+	
+
 }

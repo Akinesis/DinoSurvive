@@ -6,8 +6,8 @@ public class Statistique {
 	private int pointDeManaMax;
 	private int pointDeVigueurMax;
 	private int pointDeVieActuel;
-	private int pointDeManaActuel; //pour lancer des competences speciales, utiliter a debattre
-	private int pointDeVigueurActuel; //pour Sprinter et peut-etre pour d'autres competences. Devra peut-être renommee en pointDEndurance
+	private int pointDeManaActuel; //pour lancer des competences speciales( genre tir puissant, double tir, ...), utiliter a debattre
+	private int pointDeVigueurActuel; //pour Sprinter et peut-etre pour d'autres competences(coup puissant ?). Devra peut-être renommee en pointDEndurance
 	private int niveau;
 	private int experienceActuelle;
 	//voir pour un tableau de int pour les attributs suivant
@@ -37,9 +37,9 @@ public class Statistique {
 		this.pointDeVieMax = 100;
 		this.pointDeManaMax = 100;
 		this.pointDeVigueurMax = 100;
-		this.pointDeVieActuel = this.pointDeVieMax;
-		this.pointDeManaActuel = this.pointDeManaMax;
-		this.pointDeVigueurActuel = this.pointDeVigueurMax;
+		this.pointDeVieActuel = 100;
+		this.pointDeManaActuel = 100;
+		this.pointDeVigueurActuel = 100;
 		this.niveau = 1;
 		this.experienceActuelle = 0;
 		this.force = force;
@@ -61,57 +61,56 @@ public class Statistique {
 		
 	}
 
-	public int getPointDeVieActuel() {
-		return pointDeVieActuel;
-	}
-
-	public int getPointDeManaActuel() {
-		return pointDeManaActuel;
-	}
-
-	public int getPointDeVigueurActuel() {
-		return pointDeVigueurActuel;
-	}
-	
 	public int getPointDeVieMax() {
-		return pointDeVieMax;
+		return this.pointDeVieMax;
 	}
 
 	public int getPointDeManaMax() {
-		return pointDeManaMax;
+		return this.pointDeManaMax;
 	}
 
 	public int getPointDeVigueurMax() {
-		return pointDeVigueurMax;
+		return this.pointDeVigueurMax;
+	}
+
+	public int getPointDeVieActuel() {
+		return this.pointDeVieActuel;
+	}
+
+	public int getPointDeManaActuel() {
+		return this.pointDeManaActuel;
+	}
+
+	public int getPointDeVigueurActuel() {
+		return this.pointDeVigueurActuel;
 	}
 
 	public int getNiveau() {
-		return niveau;
+		return this.niveau;
 	}
 
 	public int getExperienceActuelle() {
-		return experienceActuelle;
+		return this.experienceActuelle;
 	}
-	
+
 	public int getForce() {
-		return force;
+		return this.force;
 	}
 
 	public int getDexterite() {
-		return dexterite;
+		return this.dexterite;
 	}
 
 	public int getVitalite() {
-		return vitalite;
+		return this.vitalite;
 	}
 
 	public int getAstuce() {
-		return astuce;
+		return this.astuce;
 	}
 
 	public int getIntelligence() {
-		return intelligence;
+		return this.intelligence;
 	}
-
 
 }
