@@ -41,8 +41,9 @@ public class InputManager {
 	 * TODO: alléger et améliorer
 	 */
 	public void check(){
-
-		boolean keyC = Keyboard.isKeyDown(Keyboard.KEY_C);
+		
+		boolean keyI = Keyboard.isKeyDown(Keyboard.KEY_I);
+		boolean keydol = Keyboard.isKeyDown(Keyboard.KEY_HOME); 
 		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
@@ -50,7 +51,7 @@ public class InputManager {
 
 		//inversion de la souris
 		while(Keyboard.next()){
-			if(keyC){
+			if(keydol){
 				coef*=-1;
 			}
 			if(keyReturn){
@@ -59,6 +60,9 @@ public class InputManager {
 
 			if(keyBas)
 				moveY(1);
+			if(keyI){
+				clone.getHUDManager().getInventaire().changerEtatInventaire();
+			}
 		}
 		
 		mouse();

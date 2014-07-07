@@ -138,6 +138,10 @@ public class Controleur {
 	public CollisionManager getCollision(){
 		return collision;
 	}
+	
+	public HUDManager getHUDManager(){
+		return hud;
+	}
 
  	public void changeGragMouse(){
 		display.changeGrabeMouse();
