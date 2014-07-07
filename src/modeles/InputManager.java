@@ -71,7 +71,7 @@ public class InputManager {
 		jump(keyJump);
 
 		if(!clone.getCollision().gravity(camera) && !isJumping){
-			camera.getPos().y += 0.12;
+			//camera.getPos().y += 0.12;
 		}
 
 	}
