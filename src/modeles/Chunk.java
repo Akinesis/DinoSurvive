@@ -8,7 +8,6 @@ import java.util.Vector;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL30;
 
 import modeles.entities.*;
 import controleur.Controleur;
@@ -154,7 +153,7 @@ public class Chunk {
 		temp = false;
 
 		temp = (x>0) ? cubes[x-1][y][z]!=null : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ())==null;
-		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ())==null && temp || (clone.getChunkManager().chunkExist(this.x, this.y+1, this.z));
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : (clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ())==null && temp)|| !(this.y==0);
 		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()-1)==null && temp;
 		
 		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX()+1, cubes[x][y][z].getY(), cubes[x][y][z].getZ())==null && temp;

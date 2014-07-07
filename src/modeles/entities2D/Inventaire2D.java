@@ -23,7 +23,7 @@ import org.lwjgl.opengl.Display;
  */
 public class Inventaire2D extends AbstractEntity2D{
 	boolean onScreen = true;
-	private static int verticiesNum = 12;
+	private static int verticiesNum = 6;
 	//taille (x,y)
 	private int vertexSize = 2;
 	//ce qui est dessiné (le buffer)
@@ -85,7 +85,6 @@ public class Inventaire2D extends AbstractEntity2D{
 						c_hor+300, c_vert,
 						c_hor-300, c_vert,
 						c_hor, c_vert +300,
-						c_hor, c_vert -300,
 				});
 				vertexData.flip();
 	}

@@ -26,7 +26,5 @@ public abstract class EtreVivant {
 	public Statistique getStatsistique() {
 		return this.statsistique;
 	}
-	
-	
-	
+
 }

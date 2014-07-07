@@ -58,7 +58,7 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 		glBegin(GL_TRIANGLES);	
 		
 		{//south face
-			glColor3f(0.2f, 0.5f, 0.5f);
+			glColor3f(0.9f, 0.5f, 0.9f);
 			glVertex3f(pos.x, pos.y, pos.z);
 			glVertex3f(pos.x, pos2.y, pos.z);
 			glVertex3f(pos2.x, pos.y, pos.z);
