@@ -3,14 +3,14 @@ package game;
 import game.inventaire.Inventaire;
 
 
-//peut-être une Class Entiter dont EtreVivant et Item heriterai point a debattre
+//peut-ï¿½tre une Class Entiter dont EtreVivant et Item heriterai point a debattre
 public abstract class EtreVivant {
 	private String nom; //certainement inutile;
 	private Inventaire inventaire;
-	private Statistique statsistique; //contient les pv, pvMax, pm, pmMax, pvg, pvgMax
+	private Caracteristique caracteristique; //contient les pv, pvMax, pm, pmMax, pvg, pvgMax
 
-	public EtreVivant(String nom, Inventaire inventaire, Statistique statsistique) {
-		this.statsistique = statsistique;
+	public EtreVivant(String nom, Inventaire inventaire, Caracteristique caracteristique) {
+		this.caracteristique = caracteristique;
 		this.nom = nom;
 		this.inventaire = inventaire;
 	}
@@ -23,8 +23,8 @@ public abstract class EtreVivant {
 		return this.inventaire;
 	}
 
-	public Statistique getStatsistique() {
-		return this.statsistique;
+	public Caracteristique getStatsistique() {
+		return this.caracteristique;
 	}
 	
 	
