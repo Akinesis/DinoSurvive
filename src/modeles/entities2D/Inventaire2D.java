@@ -3,6 +3,7 @@ package modeles.entities2D;
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
+import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glDisableClientState;
 import static org.lwjgl.opengl.GL11.glDrawArrays;
 import static org.lwjgl.opengl.GL11.glEnableClientState;
@@ -63,7 +64,10 @@ public class Inventaire2D extends AbstractEntity2D{
 
 	@Override
 	public void draw() {
-		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);		
+		glColor3f(0.2f, 0.8f, 0.5f);
+		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
+		//reset colour
+		glColor3f(1f, 1f, 1f);
 	}
 
 	@Override
@@ -78,13 +82,19 @@ public class Inventaire2D extends AbstractEntity2D{
 		
 	}
 	public void genInventaire(){
-		//calcul du centre
-				float c_hor = Display.getWidth()/2;
-				float c_vert = Display.getHeight()/2;
+		//calcul du centre de l'écran
+				float lar = Display.getWidth();
+				float hau = Display.getHeight();
 				vertexData.put(new float[]{
-						c_hor+300, c_vert,
-						c_hor-300, c_vert,
-						c_hor, c_vert +300,
+						//premier triangle (counterclockwise)
+						lar, 0.9f*hau,
+						lar, 0.1f*hau,
+						0.75f*lar, 0.1f*hau,
+						
+						//deuxième triangle
+						0.75f*lar, 0.1f*hau,
+						0.75f*lar, 0.9f*hau,
+						lar, 0.9f*hau						
 				});
 				vertexData.flip();
 	}
