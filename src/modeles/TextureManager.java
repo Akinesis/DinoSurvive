@@ -28,7 +28,7 @@ public class TextureManager {
 	public TextureManager() {
 		try {
 			texture = TextureLoader.getTexture("PNG",
-					ResourceLoader.getResourceAsStream("res/text.png"));
+					ResourceLoader.getResourceAsStream("res/text.png_version/text.joa.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

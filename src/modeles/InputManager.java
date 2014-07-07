@@ -102,6 +102,7 @@ public class InputManager {
 
 	private void mouse(){
 		boolean leftClik = Mouse.isButtonDown(0);
+		boolean rightClik = Mouse.isButtonDown(1);
 		
 		float mouseDX = Mouse.getDX() * 1 * 0.16f;
 		float mouseDY = Mouse.getDY() * 1 * 0.16f;
@@ -125,9 +126,9 @@ public class InputManager {
 		
 		if(leftClik){
 			clone.getChunkManager().updateVbo();
+			
 		}
-		
-		
+				
 	}
 
 	/**

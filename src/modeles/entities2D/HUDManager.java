@@ -35,13 +35,13 @@ public class HUDManager extends AbstractEntity2D{
 	 */	
 	@Override
 	public void draw() {
-		if (inventaire.getaffichInventaire()){
+		/*if (inventaire.getaffichInventaire()){
 			inventaire.bindBuffer();
 			inventaire.bindDrawInventory();
 			inventaire.enableInventory();
 			inventaire.draw();
 			inventaire.disableInventory();
-		}
+		}*/
 		curseur.bindBuffer();	
 		curseur.bindDrawCursor();
 		curseur.enableCursor();
