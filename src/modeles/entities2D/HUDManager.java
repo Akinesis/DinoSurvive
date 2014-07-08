@@ -18,7 +18,6 @@ public class HUDManager extends AbstractEntity2D{
 	private Inventaire2D inventaire;
 	private Hotbar hotbar;
 	private DebugText debug;
-	private Controleur clone;
 	
 	/*
 	 * Constructeur
@@ -30,8 +29,7 @@ public class HUDManager extends AbstractEntity2D{
 		curseur.genCurseur();
 		inventaire.genInventaire();
 		hotbar.genHotbar();
-		clone = contr;
-		debug = new DebugText(clone);
+		debug = new DebugText(contr);
 		
 
 	}
@@ -55,10 +53,10 @@ public class HUDManager extends AbstractEntity2D{
 	public void draw() {
 		//affichage de l'inventaire
 		if(debug.getModeDebug()){
+			debug.setUp();
 			debug.draw();
+			debug.disable();
 		}
-		
-		
 		
 		if (inventaire.getaffichInventaire()){
 			inventaire.bindBuffer();

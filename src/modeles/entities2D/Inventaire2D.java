@@ -69,6 +69,7 @@ public class Inventaire2D extends AbstractEntity2D{
 		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 		//reset colour
 		glColor3f(1f, 1f, 1f);
+		System.out.println("affichage de l'inventaire");
 	}
 
 	@Override

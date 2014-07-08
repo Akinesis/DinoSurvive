@@ -17,7 +17,6 @@ import controleur.Controleur;
  *
  */
 public class DebugText extends AbstractEntity2D{
-
 	private boolean modeDebug = false;
 	private TrueTypeFont font;
 	private Controleur clone;
@@ -69,6 +68,11 @@ public class DebugText extends AbstractEntity2D{
 
 	@Override
 	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void disable() {
 		// TODO Auto-generated method stub
 		
 	}
