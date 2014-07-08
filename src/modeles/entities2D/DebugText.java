@@ -4,6 +4,7 @@ import java.awt.Font;
 
 import modeles.entities.Cube3dVbo;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -15,7 +16,7 @@ import controleur.Controleur;
  * @author Freyja
  *
  */
-public class DebugText extends AbstractEntity2D {
+public class DebugText extends AbstractEntity2D{
 
 	private boolean modeDebug = false;
 	private TrueTypeFont font;
@@ -44,6 +45,7 @@ public class DebugText extends AbstractEntity2D {
 		//affiche la position de la caméra et le chunk actuel (ou -1,-1,-1 si pas de chunk)
 		float[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
 		
+		//récupère les info des cubes de tête, torse et pied.
 		Cube3dVbo cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
 		int[] type = {(cubeTemp!=null)?cubeTemp.getType():-1,-1,-1};
 		cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y+1, clone.getCamera().getPos().z);
@@ -54,6 +56,8 @@ public class DebugText extends AbstractEntity2D {
 		font.drawString(10, 10, clone.getCamera().getPos().toString() , Color.white);
 		font.drawString(10, 30, "Chunk : "+temp[0]+", "+temp[1]+", "+temp[2]  , Color.white);
 		font.drawString(10, 50, "Block : "+type[0]+", "+type[1]+", "+type[2] , Color.white);
+		
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
 	}
 
