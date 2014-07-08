@@ -32,7 +32,6 @@ public class Camera {
 		glRotatef(rotation.y, 0, 1, 0);
 		glRotatef(rotation.z, 0, 0, 1);
 		glTranslatef(position.x, position.y, position.z);
-		System.out.println(position);
 	}
 	
 	//getters et setters

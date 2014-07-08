@@ -57,7 +57,7 @@ public class Controleur {
 		display.create();
 		matrices.init3D();
 		texManager = new TextureManager();
-		hud = new HUDManager();
+		hud = new HUDManager(this);
 
 		//ajoute un chunk de terre dans le chunk manager
 		/*terrGen.genereTerre(1, 0, 1);
@@ -68,14 +68,17 @@ public class Controleur {
 		terrGen.genTree(1, 0, 0);*/
 		terrGen.buildStart();
 		terrGen.genFond(1, -5, 0);
+		terrGen.genWall(1, -5, 0);
 		camera.spawn(chunkManager.getHigherPointAt(8, 8));
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
 		
-		texManager.bindText();
 
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
+			
+			texManager.bindText();
+			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//initialise la matrice 3D
@@ -89,8 +92,11 @@ public class Controleur {
 			//tout ce qui à rapport aux input
 			input.check();
 			
+			
 			//dessine tout les chunks
 			chunkManager.drawChunks(texManager);
+			
+			//texManager.undindTexture();
 			
 			matrices.init2D();
 			hud.draw();

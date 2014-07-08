@@ -1,5 +1,12 @@
 package modeles.entities2D;
 
+import java.awt.Font;
+
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
+
+import controleur.Controleur;
+
 /**
  * Classe gérant le HUD et interagissant avec les entities2D qui iront dessus
  *
@@ -9,15 +16,20 @@ package modeles.entities2D;
 public class HUDManager extends AbstractEntity2D{
 	private Cursor2D curseur;
 	private Inventaire2D inventaire;
+	private TrueTypeFont font;
+	private Controleur clone;
 	
 	/*
 	 * Constructeur
 	 */
-	public HUDManager(){
+	public HUDManager(Controleur contr){
 		curseur = new Cursor2D();
 		inventaire = new Inventaire2D();
 		curseur.genCurseur();
 		inventaire.genInventaire();
+		clone = contr;
+		Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
+		font = new TrueTypeFont(awtFont, true);
 	}
 	
 	/*
@@ -35,6 +47,7 @@ public class HUDManager extends AbstractEntity2D{
 	 */	
 	@Override
 	public void draw() {
+		float[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
 		if (inventaire.getaffichInventaire()){
 			inventaire.bindBuffer();
 			inventaire.bindDrawInventory();
@@ -47,6 +60,10 @@ public class HUDManager extends AbstractEntity2D{
 		curseur.enableCursor();
 		curseur.draw();
 		curseur.disableCursor();
+		
+		//affiche la position de la caméra et le chunk actuel (ou -1,-1,-1 si pas de chunk)
+		font.drawString(10, 10, clone.getCamera().getPos().toString() , Color.white);
+		font.drawString(10, 30, "Chunk : "+temp[0]+", "+temp[1]+", "+temp[2]  , Color.white);
 	}
 
 	@Override

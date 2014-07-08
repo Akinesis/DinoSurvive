@@ -57,6 +57,22 @@ public class TerrainGenerator {
 	}
 	
 	/**
+	 * Fonction permettant la generation d'un sol d'herbe, tout beau tout propre.
+	 */
+	public void genWall(int x, int y, int z){
+		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
+		int originX = x*16;
+		int originY = y*16;
+		int originZ = z*16;
+
+		for(int i = originY+1; i>originY-16; --i){
+			for(int j = originZ; j>originZ-16; --j){
+				temp.addCube3dVbo(new Cube3dVbo(originX, -i, j, 1, 15));
+			}
+		}
+	}
+	
+	/**
 	 * Fonction permettant la generation d'un plafond d'herbe, tout beau tout propre.
 	 */
 	public void genCeil(int x, int y, int z){

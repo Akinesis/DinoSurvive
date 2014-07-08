@@ -158,6 +158,26 @@ public class ChunkManager {
 		return temp;
 	}
 	
+	public float[] getChunkAt(float x, float y, float z){
+		
+		float[] temp = {-1,-1,-1};
+		
+		float xChunk = (float)Math.ceil(x / 16);
+		float yChunk = (float)Math.ceil(y / 16);
+		float zChunk = (float)Math.ceil(z / 16);
+		
+		for(Chunk ck : chunks){
+			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
+				temp[0]=ck.getX();
+				temp[1]=ck.getY();
+				temp[2]=ck.getZ();
+			}
+		}
+		
+		return temp;
+
+	}
+	
 	private boolean chunksurround(Chunk ck){
 		
 		int xCh = ck.getX();

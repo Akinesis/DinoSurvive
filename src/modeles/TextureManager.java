@@ -27,8 +27,7 @@ public class TextureManager {
 
 	public TextureManager() {
 		try {
-			texture = TextureLoader.getTexture("PNG",
-					ResourceLoader.getResourceAsStream("res/text.png"));
+			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/text.png_version/text.joa.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -942,6 +941,11 @@ public class TextureManager {
 
 	public void disableTexture(){
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
+	
+	public void undindTexture(){
+		glBindTexture(GL_TEXTURE_2D, 0);
+		texture.release();
 	}
 
 	public float[] genText(int type, float x, float y){
