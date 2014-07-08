@@ -1,5 +1,7 @@
 package modeles;
 
+import java.util.Random;
+
 import modeles.entities.Cube3dVbo;
 import controleur.Controleur;
 
@@ -45,13 +47,15 @@ public class TerrainGenerator {
 	 */
 	public void genFond(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
+		Random r = new Random();
 		int originX = x*16;
 		int originY = y*16;
 		int originZ = z*16;
 
 		for(int i = originX; i>originX-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
-				temp.addCube3dVbo(new Cube3dVbo(i, -originY, j, 1, 15));
+				int valeur = 3 + r.nextInt(11 - 3);
+				temp.addCube3dVbo(new Cube3dVbo(i, -originY, j, 1, valeur));
 			}
 		}
 	}
@@ -67,7 +71,7 @@ public class TerrainGenerator {
 
 		for(int i = originY+1; i>originY-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
-				temp.addCube3dVbo(new Cube3dVbo(originX, -i, j, 1, 15));
+				temp.addCube3dVbo(new Cube3dVbo(originX, -i, j, 1, 1));
 			}
 		}
 	}
