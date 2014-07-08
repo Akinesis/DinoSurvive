@@ -2,6 +2,8 @@ package modeles.entities2D;
 
 import java.awt.Font;
 
+import modeles.entities.Cube3dVbo;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -42,8 +44,17 @@ public class DebugText extends AbstractEntity2D {
 		// TODO Auto-generated method stub
 		//affiche la position de la caméra et le chunk actuel (ou -1,-1,-1 si pas de chunk)
 		float[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
+		
+		Cube3dVbo cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
+		int[] type = {(cubeTemp!=null)?cubeTemp.getType():-1,-1,-1};
+		cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y+1, clone.getCamera().getPos().z);
+		type[1] = (cubeTemp!=null)?cubeTemp.getType():-1;
+		cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y+2, clone.getCamera().getPos().z);
+		type[2] = (cubeTemp!=null)?cubeTemp.getType():-1;
+		
 		font.drawString(10, 10, clone.getCamera().getPos().toString() , Color.white);
 		font.drawString(10, 30, "Chunk : "+temp[0]+", "+temp[1]+", "+temp[2]  , Color.white);
+		font.drawString(10, 50, "Block : "+type[0]+", "+type[1]+", "+type[2] , Color.white);
 		
 	}
 
