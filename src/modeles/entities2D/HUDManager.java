@@ -16,6 +16,7 @@ import controleur.Controleur;
 public class HUDManager extends AbstractEntity2D{
 	private Cursor2D curseur;
 	private Inventaire2D inventaire;
+	private Hotbar hotbar;
 	private TrueTypeFont font;
 	private Controleur clone;
 	
@@ -25,8 +26,11 @@ public class HUDManager extends AbstractEntity2D{
 	public HUDManager(Controleur contr){
 		curseur = new Cursor2D();
 		inventaire = new Inventaire2D();
+		hotbar = new Hotbar();
 		curseur.genCurseur();
 		inventaire.genInventaire();
+		hotbar.genHotbar();
+		
 		clone = contr;
 		Font awtFont = new Font("Times New Roman", Font.BOLD, 24);
 		font = new TrueTypeFont(awtFont, true);
@@ -41,7 +45,9 @@ public class HUDManager extends AbstractEntity2D{
 	public Inventaire2D getInventaire(){
 		return inventaire;
 	}
-	
+	public Hotbar getHotbar(){
+		return hotbar;
+	}
 	/*
 	 * Méthodes
 	 */	

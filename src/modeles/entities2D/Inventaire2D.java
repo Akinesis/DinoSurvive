@@ -23,7 +23,8 @@ import org.lwjgl.opengl.Display;
  * Classe gérant l'entité 2D  qui représente l'inventaire affiché sur le HUD
  */
 public class Inventaire2D extends AbstractEntity2D{
-	boolean onScreen = true;
+	//au départ l'inventaire n'est pas affiché
+	boolean onScreen = false;
 	private static int verticiesNum = 6;
 	//taille (x,y)
 	private int vertexSize = 2;
@@ -64,7 +65,7 @@ public class Inventaire2D extends AbstractEntity2D{
 
 	@Override
 	public void draw() {
-		glColor3f(0.2f, 0.8f, 0.5f);
+		glColor3f(0.45f, 1f, 1f);
 		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 		//reset colour
 		glColor3f(1f, 1f, 1f);
