@@ -1,12 +1,10 @@
 package modeles;
 
-import modeles.entities.Cube3dVbo;
 
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import sun.security.krb5.internal.crypto.CksumType;
 import controleur.Controleur;
 
 
