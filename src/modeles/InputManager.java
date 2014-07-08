@@ -43,7 +43,7 @@ public class InputManager {
 	public void check(){
 		
 		boolean keyI = Keyboard.isKeyDown(Keyboard.KEY_I);
-		boolean keyD = Keyboard.isKeyDown(Keyboard.KEY_D);
+		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_INSERT);
 		boolean keydol = Keyboard.isKeyDown(Keyboard.KEY_HOME); 
 		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
@@ -64,7 +64,7 @@ public class InputManager {
 			if(keyI){
 				clone.getHUDManager().getInventaire().changerEtatInventaire();
 			}
-			if(keyD){
+			if(keyINSERT){
 				clone.getHUDManager().getModeDebug().changeDebug();
 			}
 		}
