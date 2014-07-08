@@ -68,7 +68,7 @@ public class Controleur {
 		terrGen.genTree(1, 0, 0);*/
 		terrGen.buildStart();
 		terrGen.genFond(1, -5, 0);
-		terrGen.genWall(1, -5, 0);
+		//terrGen.genWall(1, -5, 0);
 		camera.spawn(chunkManager.getHigherPointAt(8, 8));
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
