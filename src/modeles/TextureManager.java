@@ -36,6 +36,17 @@ public class TextureManager {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 	
+	public TextureManager(String adresseTexture) {
+		try {
+			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(adresseTexture));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		textureData = BufferUtils.createFloatBuffer(36 * 2);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	}
+	
 	public void deleteText(){
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 		GL11.glDeleteTextures(texture.getTextureID());

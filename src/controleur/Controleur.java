@@ -14,6 +14,7 @@ import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
 import modeles.entities2D.HUDManager;
+import modeles.entities2D.Menu;
 
 import org.lwjgl.input.Keyboard;
 
@@ -49,7 +50,6 @@ public class Controleur {
 		chunkManager = new ChunkManager(this);
 		chunkManager.setChunksList(mapRead.setChunks());
 		terrGen = new TerrainGenerator(this);
-		
 	}
 
 	//le coeur du jeu, ma méthode contenant la boucle de jeu.
@@ -58,7 +58,7 @@ public class Controleur {
 		matrices.init3D();
 		texManager = new TextureManager();
 		hud = new HUDManager(this);
-
+		
 		//ajoute un chunk de terre dans le chunk manager
 		/*terrGen.genereTerre(1, 0, 1);
 		terrGen.genereTerre(-1, -1, 0);
@@ -112,7 +112,6 @@ public class Controleur {
 	/*
 	 * Getters
 	 */
-
 	public Camera getCamera(){
 		return camera;
 	}

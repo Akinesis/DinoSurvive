@@ -47,35 +47,42 @@ public class InputManager {
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 		delta = getDelta();
-
-		//inversion de la souris
-		while(Keyboard.next()){
-			if(keydol){
-				coef*=-1;
-			}
-			if(keyReturn){
-				clone.changeGragMouse();
-			}
-
-			if(keyBas)
-				moveY(1);
-			if(keyI){
-				clone.getHUDManager().getInventaire().changerEtatInventaire();
-			}
-			if(keyINSERT){
-				clone.getHUDManager().getModeDebug().changeDebug();
-			}
-		}
 		
-		mouse();
-		move();
+		//neutralise tout les mouvements (sauf ceux de la souris(camera peut tourne)) tant que le menu principal est present  
+		if(this.clone.getHUDManager().getMenu().getEstAfficher()){
+			if(Keyboard.isKeyDown(Keyboard.KEY_M)){
+				this.clone.getHUDManager().getMenu().inverserEstAfficher();
+			}
+		}else{
+			//inversion de la souris
+			while(Keyboard.next()){
+				if(keydol){
+					coef*=-1;
+				}
+				if(keyReturn){
+					clone.changeGragMouse();
+				}
 
-		jump(keyJump);
+				if(keyBas)
+					moveY(1);
+				if(keyI){
+					clone.getHUDManager().getInventaire().changerEtatInventaire();
+				}
+				if(keyINSERT){
+					clone.getHUDManager().getModeDebug().changeDebug();
+				}
+			
+			}
+		
+			mouse();
+			move();
 
-		if(!clone.getCollision().gravity(camera) && !isJumping){
-			//camera.getPos().y += 0.12;
+			jump(keyJump);
+		
+			if(!clone.getCollision().gravity(camera) && !isJumping){
+				//camera.getPos().y += 0.12;
+			}
 		}
-
 	}
 
 	private void move(){
