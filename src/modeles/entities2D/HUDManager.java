@@ -18,6 +18,7 @@ public class HUDManager extends AbstractEntity2D{
 	private Inventaire2D inventaire;
 	private Hotbar hotbar;
 	private DebugText debug;
+	private Menu menu;
 	
 	/*
 	 * Constructeur
@@ -30,7 +31,8 @@ public class HUDManager extends AbstractEntity2D{
 		inventaire.genInventaire();
 		hotbar.genHotbar();
 		debug = new DebugText(contr);
-		
+		this.menu = new Menu();
+		this.menu.generationMenu();
 
 	}
 	
@@ -65,14 +67,21 @@ public class HUDManager extends AbstractEntity2D{
 			inventaire.draw();
 			inventaire.disableInventory();
 		}
-		//affichage des données en plus (pour test et compagnie)
-
-		curseur.bindBuffer();	
-		curseur.bindDrawCursor();
-		curseur.enableCursor();
-		curseur.draw();
-		curseur.disableCursor();
-		
+		if (this.menu.getEstAfficher()){
+			this.menu.bindBufferMenu();;
+			this.menu.bindDrawMenu();
+			this.menu.enableMenu();
+			this.menu.draw();
+			this.menu.disableMenu();
+		}else{
+			//inhibe le curseur tantque e menu principale est present
+			//affichage des données en plus (pour test et compagnie)
+			curseur.bindBuffer();	
+			curseur.bindDrawCursor();
+			curseur.enableCursor();
+			curseur.draw();
+			curseur.disableCursor();
+		}
 		
 	}
 
@@ -92,4 +101,8 @@ public class HUDManager extends AbstractEntity2D{
 		return this.debug;
 	}
 
+
+	public Menu getMenu() {
+		return this.menu;
+	}
 }
