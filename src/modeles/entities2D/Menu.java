@@ -1,23 +1,33 @@
 package modeles.entities2D;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
+<<<<<<< HEAD
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_COORD_ARRAY;
+=======
+>>>>>>> origin/master
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
 import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glDisableClientState;
 import static org.lwjgl.opengl.GL11.glDrawArrays;
 import static org.lwjgl.opengl.GL11.glEnableClientState;
+<<<<<<< HEAD
 import static org.lwjgl.opengl.GL11.glTexCoordPointer;
 import static org.lwjgl.opengl.GL11.glVertexPointer;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glClientActiveTexture;
+=======
+import static org.lwjgl.opengl.GL11.glVertexPointer;
+>>>>>>> origin/master
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
 import static org.lwjgl.opengl.GL15.glBindBuffer;
 import static org.lwjgl.opengl.GL15.glBufferData;
 import static org.lwjgl.opengl.GL15.glGenBuffers;
+<<<<<<< HEAD
 import org.lwjgl.util.glu.GLU;
+=======
+>>>>>>> origin/master
 
 import java.nio.FloatBuffer;
 
@@ -26,7 +36,10 @@ import modeles.entities.AbstractEntity3D;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.Display;
+<<<<<<< HEAD
 import org.lwjgl.opengl.GL11;
+=======
+>>>>>>> origin/master
 
 public class Menu extends AbstractEntity3D{
 	private static int verticiesNum = 6;
@@ -38,17 +51,30 @@ public class Menu extends AbstractEntity3D{
 	
 	public Menu(){
 		this.estAfficher = true;
+<<<<<<< HEAD
 		this.vertexData = BufferUtils.createFloatBuffer(verticiesNum * this.vertexSize);
 		this.vboVertexHandle = glGenBuffers();
+=======
+		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
+		vboVertexHandle = glGenBuffers();
+>>>>>>> origin/master
 		this.textureManager = new TextureManager("res/Menu.png");
 	}
 	
 	public void generationMenu() {
+<<<<<<< HEAD
 		this.vertexData.put(new float[]{   
 			Display.getWidth(), Display.getHeight(),	Display.getWidth(), 0,		0, 0,
 			0, 0,										0, Display.getHeight(),		Display.getWidth(), Display.getHeight(),
 		});
 		this.vertexData.flip();
+=======
+		vertexData.put(new float[]{   
+			Display.getWidth(), Display.getHeight(),	Display.getWidth(), 0,		0, 0,
+			0, 0,										0, Display.getHeight(),		Display.getWidth(), Display.getHeight(),
+		});
+		vertexData.flip();
+>>>>>>> origin/master
 	}
 
 	@Override
@@ -65,6 +91,7 @@ public class Menu extends AbstractEntity3D{
 
 	@Override
 	public void draw() {
+<<<<<<< HEAD
 		//glColor3f(0f, 0.28f, 0.84f);
 		//glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 		
@@ -98,6 +125,24 @@ public class Menu extends AbstractEntity3D{
 	public void bindDrawMenu() {
 		glBindBuffer(GL_ARRAY_BUFFER, this.vboVertexHandle);
         glVertexPointer(this.vertexSize, GL_FLOAT, 0, 0L);	
+=======
+		glColor3f(0f, 0.1f, 0.2f);
+		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
+		System.out.println("menu.draw");
+		glColor3f(1f, 1f, 1f);
+	}
+
+	public void bindBufferMenu() {
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        System.out.println("menu.bindbuffer");
+	}
+
+	public void bindDrawMenu() {
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
+        glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);	
+>>>>>>> origin/master
 		
 	}
 
@@ -130,6 +175,10 @@ public class Menu extends AbstractEntity3D{
 
 	public void inverserEstAfficher() {
 		this.estAfficher = !(this.estAfficher);
+<<<<<<< HEAD
+=======
+		System.out.println("menu.estAfficher = " + this.estAfficher);
+>>>>>>> origin/master
 	}
 	
 }
