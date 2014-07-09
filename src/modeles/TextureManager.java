@@ -65,7 +65,9 @@ public class TextureManager {
 		xDirt = xDirt-(xDirt%0.001953125f);
 		yDirt = yDirt-(yDirt%0.001953125f);
 		
-		indiceTextX = (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
+		//indiceTextX = (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
+		indiceTextX *= 0.03125f;
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
 		
 		return new float[]{
