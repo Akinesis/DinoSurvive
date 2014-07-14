@@ -43,7 +43,7 @@ public class Menu extends AbstractEntity3D{
 		this.vertexDataFond = BufferUtils.createFloatBuffer(6 * this.vertexSize);
 		this.vertexDataBoutons = BufferUtils.createFloatBuffer(30 * this.vertexSize);
 		this.vboVertexHandle = glGenBuffers();
-		this.textureManagerFond = new TextureManager("res/Menue.png");
+		this.textureManagerFond = new TextureManager("res/Menu.png");
 		this.textureManagerBoutons = new TextureManager("res/Menu.png");
 	}
 	
