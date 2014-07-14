@@ -17,6 +17,8 @@ public class HUDManager extends AbstractEntity2D{
 	private DebugText debug;
 	private Menu menu;
 	private BarreEtat barreEtat;
+	private BarreSac barreSac;
+	private MenuJeu menuJeu;
 	
 	/*
 	 * Constructeur
@@ -26,11 +28,18 @@ public class HUDManager extends AbstractEntity2D{
 		inventaire = new Inventaire2D();
 		hotbar = new Hotbar();
 		barreEtat = new BarreEtat();
+		barreSac = new BarreSac();
+		menuJeu = new MenuJeu();
+		
 		curseur.genCurseur();
 		inventaire.genInventaire();
 		hotbar.genHotbar();
 		barreEtat.genBarreEtat();
+		barreSac.genBarreSac();
+		menuJeu.genMenuJeu();
+		
 		debug = new DebugText(contr);
+		
 		this.menu = new Menu();
 		this.menu.generationMenuFond();
 		this.menu.generationMenuBoutons();
@@ -51,6 +60,9 @@ public class HUDManager extends AbstractEntity2D{
 	public BarreEtat getBarreEtat(){
 		return barreEtat;
 	}
+	public MenuJeu getMenuJeu(){
+		return menuJeu;
+	}
 	/*
 	 * Méthodes
 	 */	
@@ -66,13 +78,7 @@ public class HUDManager extends AbstractEntity2D{
 		//hotfix du conflit debug/2d
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
-		if (inventaire.getaffichInventaire()){
-			inventaire.bindBuffer();
-			inventaire.bindDrawInventory();
-			inventaire.enableInventory();
-			inventaire.draw();
-			inventaire.disableInventory();
-		}
+
 		if (this.menu.getEstAfficher()){
 			this.menu.bindBufferMenu();;
 			this.menu.bindDrawMenu();
@@ -82,23 +88,43 @@ public class HUDManager extends AbstractEntity2D{
 		}else{
 			//inhibe le curseur tantque e menu principale est present
 			//affichage des données en plus (pour test et compagnie)
+			if (inventaire.getaffichInventaire()){
+				inventaire.bindBuffer();
+				inventaire.bindDrawInventory();
+				inventaire.enableInventory();
+				inventaire.draw();
+				inventaire.disableInventory();
+			}
+			if(menuJeu.getAffichMenu()){
+				menuJeu.bindBuffer();
+				menuJeu.bindDrawMenuJeu();
+				menuJeu.enableMenuJeu();
+				menuJeu.draw();
+				menuJeu.disableMenuJeu();
+			}
 			curseur.bindBuffer();	
 			curseur.bindDrawCursor();
 			curseur.enableCursor();
 			curseur.draw();
 			curseur.disableCursor();
+			
 			hotbar.bindBuffer();
 			hotbar.bindDrawHotbar();
 			hotbar.enableHotbar();
 			hotbar.draw();
 			hotbar.disableHotbar();
+			
 			barreEtat.bindBuffer();
 			barreEtat.bindDrawBarreEtat();
 			barreEtat.enableBarreEtat();
 			barreEtat.draw();
 			barreEtat.disableBarreEtat();
 			
-			
+			barreSac.bindBuffer();
+			barreSac.bindDrawBarreSac();
+			barreSac.enableBarreSac();
+			barreSac.draw();
+			barreSac.disableBarreSac();
 		}
 		
 	}

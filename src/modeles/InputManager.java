@@ -40,6 +40,7 @@ public class InputManager {
 	 */
 	public void check(){
 		
+		boolean keyChap = Keyboard.isKeyDown(Keyboard.KEY_F10);
 		boolean keyI = Keyboard.isKeyDown(Keyboard.KEY_I);
 		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_INSERT);
 		boolean keydol = Keyboard.isKeyDown(Keyboard.KEY_HOME); 
@@ -70,6 +71,9 @@ public class InputManager {
 				}
 				if(keyINSERT){
 					clone.getHUDManager().getModeDebug().changeDebug();
+				}
+				if(keyChap){
+					clone.getHUDManager().getMenuJeu().changeAffichMenu();
 				}
 			
 			}
