@@ -12,12 +12,9 @@ import static org.lwjgl.opengl.GL15.*;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
-
-import com.sun.org.apache.bcel.internal.generic.IDIV;
 
 public class TextureManager {
 

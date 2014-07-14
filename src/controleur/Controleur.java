@@ -14,8 +14,6 @@ import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
 import modeles.entities2D.HUDManager;
-import modeles.entities2D.Menu;
-
 import org.lwjgl.input.Keyboard;
 
 import vues.GameDisplay;

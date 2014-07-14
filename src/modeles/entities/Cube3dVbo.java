@@ -5,8 +5,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.nio.FloatBuffer;
 
-import org.lwjgl.BufferUtils;
-
 
 public class Cube3dVbo extends Cube3D {
 
