@@ -2,6 +2,7 @@ package modeles.entities2D;
 
 import java.awt.Font;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -59,6 +60,8 @@ public class HUDManager extends AbstractEntity2D{
 			debug.draw();
 			debug.disable();
 		}
+		//hotfix du conflit debug/2d
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
 		if (inventaire.getaffichInventaire()){
 			inventaire.bindBuffer();
