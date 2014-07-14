@@ -1,10 +1,6 @@
 package modeles.entities2D;
 
-import java.awt.Font;
-
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
 
 import controleur.Controleur;
 
@@ -20,6 +16,7 @@ public class HUDManager extends AbstractEntity2D{
 	private Hotbar hotbar;
 	private DebugText debug;
 	private Menu menu;
+	private BarreEtat barreEtat;
 	
 	/*
 	 * Constructeur
@@ -28,9 +25,11 @@ public class HUDManager extends AbstractEntity2D{
 		curseur = new Cursor2D();
 		inventaire = new Inventaire2D();
 		hotbar = new Hotbar();
+		barreEtat = new BarreEtat();
 		curseur.genCurseur();
 		inventaire.genInventaire();
 		hotbar.genHotbar();
+		barreEtat.genBarreEtat();
 		debug = new DebugText(contr);
 		this.menu = new Menu();
 		this.menu.generationMenu();
@@ -48,6 +47,9 @@ public class HUDManager extends AbstractEntity2D{
 	}
 	public Hotbar getHotbar(){
 		return hotbar;
+	}
+	public BarreEtat getBarreEtat(){
+		return barreEtat;
 	}
 	/*
 	 * Méthodes
@@ -84,6 +86,18 @@ public class HUDManager extends AbstractEntity2D{
 			curseur.enableCursor();
 			curseur.draw();
 			curseur.disableCursor();
+			hotbar.bindBuffer();
+			hotbar.bindDrawHotbar();
+			hotbar.enableHotbar();
+			hotbar.draw();
+			hotbar.disableHotbar();
+			barreEtat.bindBuffer();
+			barreEtat.bindDrawBarreEtat();
+			barreEtat.enableBarreEtat();
+			barreEtat.draw();
+			barreEtat.disableBarreEtat();
+			
+			
 		}
 		
 	}

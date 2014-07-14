@@ -20,55 +20,30 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.Display;
 
 /**
- * Classe gérant l'entité 2D  qui représente l'inventaire affiché sur le HUD
+ * Classe gérant l'affichage des barres vie/etc du joueur
+ * 
+ *
  */
-public class Inventaire2D extends AbstractEntity2D{
-	//au départ l'inventaire n'est pas affiché
-	boolean onScreen = false;
-	private static int verticiesNum = 6;
+public class BarreEtat extends AbstractEntity2D {
+	
+	private static int verticiesNum = 18;
 	//taille (x,y)
 	private int vertexSize = 2;
 	//ce qui est dessiné (le buffer)
 	private int vboVertexHandle;
 	//coordonnées des points
 	private FloatBuffer vertexData;
-	
-	/*
-	 * Constructeur
-	 */
-	
-	public Inventaire2D(){
+
+	public BarreEtat(){
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 		vboVertexHandle = glGenBuffers();
 	}
-	
-	/*
-	 * Getter et Setter
-	 */
-	/**
-	 * Fonction permettant de récupérer l'état d'affichage de l'inventaire
-	 * @return un booléen
-	 */
-	public boolean getaffichInventaire(){
-		return onScreen;		
-	}
-	/**
-	 * Fonction permettant de passer l'état de l'inventaire à affiché ou non
-	 */
-	public void changerEtatInventaire(){
-		this.onScreen = !(this.onScreen);
-	}
-	
-	/*
-	 * Méthodes
-	 */
-
 	@Override
 	public void draw() {
-		glColor3f(0.45f, 1f, 1f);
+		glColor3f(0.1f, 0.1f, 1f);
 		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
-		//reset colour
-		glColor3f(1f, 1f, 1f);
+		glColor3f(1f,1f,1f);
+		
 	}
 
 	@Override
@@ -82,47 +57,66 @@ public class Inventaire2D extends AbstractEntity2D{
 		// TODO Auto-generated method stub
 		
 	}
-	public void genInventaire(){
-		//calcul de la taille de l'écran
-				float lar = Display.getWidth();
-				float hau = Display.getHeight();
-				vertexData.put(new float[]{
-						//premier triangle (counterclockwise)
-						lar, 0.9f*hau,
-						lar, 0.1f*hau,
-						0.75f*lar, 0.1f*hau,
-						
-						//deuxième triangle
-						0.75f*lar, 0.1f*hau,
-						0.75f*lar, 0.9f*hau,
-						lar, 0.9f*hau						
-				});
-				vertexData.flip();
-	}
 
 	public void bindBuffer() {
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
 		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);	
 		
 	}
 
-	public void bindDrawInventory() {
+	public void bindDrawBarreEtat() {
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
         glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);	
 		
 	}
 
-	public void enableInventory() {
+	public void enableBarreEtat() {
 		glEnableClientState(GL_VERTEX_ARRAY);
 		
 	}
 
-	public void disableInventory() {
+	public void disableBarreEtat() {
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
 	}
-
-
+	public void genBarreEtat() {
+		//calcul de la taille de l'écran
+				float lar = Display.getWidth();
+				float hau = Display.getHeight();
+				vertexData.put(new float[]{
+						//barre supérieure (santé)
+						//triangle sup
+						0.9f*lar, 0.1f*hau,
+						0.9f*lar, 0.08f*hau,
+						0.75f*lar, 0.08f*hau,				
+						//triangle inf
+						0.9f*lar, 0.1f*hau,
+						0.75f*lar, 0.08f*hau,
+						0.75f*lar, 0.1f*hau,
+						//barre middle (anti matière)
+						//triangle sup
+						0.9f*lar, 0.13f*hau,
+						0.9f*lar, 0.11f*hau,
+						0.75f*lar, 0.11f*hau,				
+						//triangle inf
+						0.9f*lar, 0.13f*hau,
+						0.75f*lar, 0.11f*hau,
+						0.75f*lar, 0.13f*hau,
+						//barre inf (endurance)
+						//triangle sup
+						0.9f*lar, 0.16f*hau,
+						0.9f*lar, 0.14f*hau,
+						0.75f*lar, 0.14f*hau,				
+						//triangle inf
+						0.9f*lar, 0.16f*hau,
+						0.75f*lar, 0.14f*hau,
+						0.75f*lar, 0.16f*hau,
+						
+				});
+				vertexData.flip();
+		
+	}
 
 }
