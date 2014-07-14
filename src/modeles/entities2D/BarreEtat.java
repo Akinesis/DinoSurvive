@@ -88,31 +88,31 @@ public class BarreEtat extends AbstractEntity2D {
 				vertexData.put(new float[]{
 						//barre supérieure (santé)
 						//triangle sup
-						0.9f*lar, 0.1f*hau,
-						0.9f*lar, 0.08f*hau,
-						0.75f*lar, 0.08f*hau,				
+						0.9f*lar, 0.03f*hau,
+						0.9f*lar, 0.01f*hau,
+						0.75f*lar, 0.01f*hau,				
 						//triangle inf
-						0.9f*lar, 0.1f*hau,
-						0.75f*lar, 0.08f*hau,
-						0.75f*lar, 0.1f*hau,
+						0.9f*lar, 0.03f*hau,
+						0.75f*lar, 0.01f*hau,
+						0.75f*lar, 0.03f*hau,
 						//barre middle (anti matière)
 						//triangle sup
-						0.9f*lar, 0.13f*hau,
-						0.9f*lar, 0.11f*hau,
-						0.75f*lar, 0.11f*hau,				
+						0.9f*lar, 0.06f*hau,
+						0.9f*lar, 0.04f*hau,
+						0.75f*lar, 0.04f*hau,				
 						//triangle inf
-						0.9f*lar, 0.13f*hau,
-						0.75f*lar, 0.11f*hau,
-						0.75f*lar, 0.13f*hau,
+						0.9f*lar, 0.06f*hau,
+						0.75f*lar, 0.04f*hau,
+						0.75f*lar, 0.06f*hau,
 						//barre inf (endurance)
 						//triangle sup
-						0.9f*lar, 0.16f*hau,
-						0.9f*lar, 0.14f*hau,
-						0.75f*lar, 0.14f*hau,				
+						0.9f*lar, 0.09f*hau,
+						0.9f*lar, 0.07f*hau,
+						0.75f*lar, 0.07f*hau,				
 						//triangle inf
-						0.9f*lar, 0.16f*hau,
-						0.75f*lar, 0.14f*hau,
-						0.75f*lar, 0.16f*hau,
+						0.9f*lar, 0.09f*hau,
+						0.75f*lar, 0.07f*hau,
+						0.75f*lar, 0.09f*hau,
 						
 				});
 				vertexData.flip();
