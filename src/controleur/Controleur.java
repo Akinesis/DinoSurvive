@@ -55,10 +55,18 @@ public class Controleur {
 	//le coeur du jeu, ma méthode contenant la boucle de jeu.
 	public void init(){
 		display.create();
-		matrices.init3D();
-		texManager = new TextureManager();
 		hud = new HUDManager(this);
+		texManager = new TextureManager();	
+		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glLoadIdentity();
+			input.check();
+			matrices.init2D();
+			this.hud.draw();//peut-etre cree et utilise un drawMenu()
+			display.update();
+		}
 		
+		matrices.init3D();
 		//ajoute un chunk de terre dans le chunk manager
 		/*terrGen.genereTerre(1, 0, 1);
 		terrGen.genereTerre(-1, -1, 0);
