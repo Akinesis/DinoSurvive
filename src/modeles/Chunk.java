@@ -58,6 +58,15 @@ public class Chunk {
 		this.z = z;
 		//pour l'instant : id = ligne dans le programme, changer ça !!! (extrapoler l'iD des XYZ)
 		this.id = id;
+		
+		for(int i=0; i<16; i++){
+			for(int j =0; j<16; j++){
+				for(int k=0; k<16; k++){
+					cubes[i][j][k]=null;
+				}
+			}
+		}
+		
 	}
 
 	public void genVBO(){
@@ -140,13 +149,13 @@ public class Chunk {
 	private boolean surround(int x, int y, int z){
 		boolean temp;
 
-		temp = (x>0) ? cubes[x-1][y][z]!=null : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ())==null;
-		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : (clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ())==null && temp) && !(this.y==0);
-		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()-1)==null && temp;
+		temp = (x>0) ? cubes[x-1][y][z]!=null : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()+1, cubes[x][y][z].getY(), cubes[x][y][z].getZ());
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : (clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ()) && temp);
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()+1) && temp;
 		
-		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX()+1, cubes[x][y][z].getY(), cubes[x][y][z].getZ())==null && temp;
-		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : (clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ())!=null && temp);
-		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : clone.getChunkManager().getCubeAt(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()+1)==null && temp;
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ()) && temp;
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : !(clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ()) && temp);
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()-1) && temp;
 
 		return  temp;
 	}

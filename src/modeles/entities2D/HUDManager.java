@@ -55,6 +55,7 @@ public class HUDManager extends AbstractEntity2D{
 	@Override
 	public void draw() {
 		//affichage de l'inventaire
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		if(debug.getModeDebug()){
 			debug.setUp();
 			debug.draw();
