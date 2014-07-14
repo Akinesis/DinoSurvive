@@ -33,7 +33,7 @@ public class HUDManager extends AbstractEntity2D{
 		debug = new DebugText(contr);
 		this.menu = new Menu();
 		this.menu.generationMenuFond();
-		this.menu.generationMenuBoutons()
+		this.menu.generationMenuBoutons();
 	}
 	
 	/*
