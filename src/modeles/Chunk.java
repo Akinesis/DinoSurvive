@@ -150,11 +150,11 @@ public class Chunk {
 		boolean temp;
 
 		temp = (x>0) ? cubes[x-1][y][z]!=null : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()+1, cubes[x][y][z].getY(), cubes[x][y][z].getZ());
-		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : (clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ()) && temp);
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ()) && temp || this.y!=0;
 		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()+1) && temp;
 		
 		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ()) && temp;
-		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : !(clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ()) && temp);
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ()) && temp;
 		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()-1) && temp;
 
 		return  temp;

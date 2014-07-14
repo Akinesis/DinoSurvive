@@ -67,13 +67,6 @@ public class Controleur {
 		}
 		
 		matrices.init3D();
-		//ajoute un chunk de terre dans le chunk manager
-		/*terrGen.genereTerre(1, 0, 1);
-		terrGen.genereTerre(-1, -1, 0);
-		terrGen.genereTerre(-1, 0, 0);
-		terrGen.genFond(0, 0, 0);
-		terrGen.genFond(1, 0, 0);
-		terrGen.genTree(1, 0, 0);*/
 		terrGen.buildStart();
 		terrGen.genFond(1, -5, 0);
 		//terrGen.genWall(1, -5, 0);
