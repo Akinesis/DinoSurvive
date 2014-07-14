@@ -32,8 +32,7 @@ public class HUDManager extends AbstractEntity2D{
 		barreEtat.genBarreEtat();
 		debug = new DebugText(contr);
 		this.menu = new Menu();
-		this.menu.generationMenuFond();
-		this.menu.generationMenuBoutons();
+		this.menu.generationMenu();
 
 	}
 	
