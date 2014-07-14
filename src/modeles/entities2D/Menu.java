@@ -29,27 +29,52 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
 public class Menu extends AbstractEntity3D{
-	private static int verticiesNum = 6;
+	//private static int verticiesNum = 36;
 	private int vertexSize = 2;
 	private int vboVertexHandle;
-	private FloatBuffer vertexData;
+	private FloatBuffer vertexDataFond;
+	private FloatBuffer vertexDataBoutons;
 	private boolean estAfficher;
-	private TextureManager textureManager;
+	private TextureManager textureManagerFond;
+	private TextureManager textureManagerBoutons;
 	
 	public Menu(){
 		this.estAfficher = true;
-		this.vertexData = BufferUtils.createFloatBuffer(verticiesNum * this.vertexSize);
+		this.vertexDataFond = BufferUtils.createFloatBuffer(6 * this.vertexSize);
+		this.vertexDataBoutons = BufferUtils.createFloatBuffer(30 * this.vertexSize);
 		this.vboVertexHandle = glGenBuffers();
-		this.textureManager = new TextureManager("res/Menu.png");
+		this.textureManagerFond = new TextureManager("res/Menue.png");
+		this.textureManagerBoutons = new TextureManager("res/Menu.png");
 	}
 	
-	public void generationMenu() {
-		this.vertexData.put(new float[]{   
+	public void generationMenuFond() {
+		this.vertexDataFond.put(new float[]{   
 			Display.getWidth(), Display.getHeight(),	Display.getWidth(), 0,		0, 0,
 			0, 0,										0, Display.getHeight(),		Display.getWidth(), Display.getHeight(),
 		});
-		this.vertexData.flip();
+		this.vertexDataFond.flip();
 	}
+	
+	public void generationMenuBoutons() {
+		this.vertexDataBoutons.put(new float[]{   
+			0.9875f*Display.getWidth(), 0.2f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.2f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.1f*Display.getHeight(),
+			0.6375f*Display.getWidth(), 0.1f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.1f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.2f*Display.getHeight(),
+			
+			0.9875f*Display.getWidth(), 0.32f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.32f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.22f*Display.getHeight(),
+			0.6375f*Display.getWidth(), 0.22f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.22f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.32f*Display.getHeight(),
+			
+			0.9875f*Display.getWidth(), 0.44f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.44f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.34f*Display.getHeight(),
+			0.6375f*Display.getWidth(), 0.34f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.34f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.44f*Display.getHeight(),
+			
+			0.9875f*Display.getWidth(), 0.56f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.56f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.46f*Display.getHeight(),
+			0.6375f*Display.getWidth(), 0.46f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.46f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.56f*Display.getHeight(),
+			
+			0.9875f*Display.getWidth(), 0.68f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.68f*Display.getHeight(),		0.6375f*Display.getWidth(), 0.58f*Display.getHeight(),
+			0.6375f*Display.getWidth(), 0.58f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.58f*Display.getHeight(),		0.9875f*Display.getWidth(), 0.68f*Display.getHeight(),
+		});
+		this.vertexDataBoutons.flip();
+	}
+
 
 	@Override
 	public void setUp() {
@@ -74,7 +99,7 @@ public class Menu extends AbstractEntity3D{
 		
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.textureManager.getID());
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.textureManagerFond.getID());
 		GL11.glBegin(GL_TRIANGLES);
 		//this.generationMenu();
 		GL11.glTexCoord2d(1,1); GL11.glVertex2d(Display.getWidth(), Display.getHeight());
@@ -86,12 +111,55 @@ public class Menu extends AbstractEntity3D{
 		
 		GL11.glEnd();
 		
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.textureManagerBoutons.getID());
+		GL11.glBegin(GL_TRIANGLES);
+		
+		//1				
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.2f*Display.getHeight());
+		GL11.glTexCoord2d(0,1); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.2f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.1f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.1f*Display.getHeight());
+		GL11.glTexCoord2d(1,0); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.1f*Display.getHeight());
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.2f*Display.getHeight());
+		//2
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.32f*Display.getHeight());
+		GL11.glTexCoord2d(0,1); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.32f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.22f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.22f*Display.getHeight());
+		GL11.glTexCoord2d(1,0); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.22f*Display.getHeight());
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.32f*Display.getHeight());
+		//3
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.44f*Display.getHeight());
+		GL11.glTexCoord2d(0,1); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.44f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.34f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.34f*Display.getHeight());
+		GL11.glTexCoord2d(1,0); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.34f*Display.getHeight());
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.44f*Display.getHeight());
+		//4
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.56f*Display.getHeight());
+		GL11.glTexCoord2d(0,1); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.56f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.46f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.46f*Display.getHeight());
+		GL11.glTexCoord2d(1,0); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.46f*Display.getHeight());
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.56f*Display.getHeight());
+		//5
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.68f*Display.getHeight());
+		GL11.glTexCoord2d(0,1); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.68f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.58f*Display.getHeight());
+		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.58f*Display.getHeight());
+		GL11.glTexCoord2d(1,0); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.58f*Display.getHeight());
+		GL11.glTexCoord2d(1,1); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.68f*Display.getHeight());
+		
+		GL11.glEnd();
+		
 		//glColor3f(1f, 1f, 1f);
 	}
 
 	public void bindBufferMenu() {
 		glBindBuffer(GL_ARRAY_BUFFER, this.vboVertexHandle);
-		glBufferData(GL_ARRAY_BUFFER, this.vertexData, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, this.vertexDataFond, GL_STATIC_DRAW);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
@@ -121,7 +189,7 @@ public class Menu extends AbstractEntity3D{
 	}
 
 	public FloatBuffer getVertexData() {
-		return this.vertexData;
+		return this.vertexDataFond;
 	}
 
 	public boolean getEstAfficher() {
