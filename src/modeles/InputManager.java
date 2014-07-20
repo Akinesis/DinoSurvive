@@ -142,7 +142,8 @@ public class InputManager {
 		}
 		
 		if(leftClik){
-			clone.getChunkManager().updateVbo();
+			clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+			clone.getChunkManager().update();
 			
 		}
 				

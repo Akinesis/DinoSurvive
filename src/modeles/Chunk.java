@@ -70,6 +70,7 @@ public class Chunk {
 	}
 
 	public void genVBO(){
+		
 		vboVertexHandleChunk = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
@@ -91,6 +92,14 @@ public class Chunk {
 		int tempZ = (int)Math.abs(Math.ceil(z))%16;
 
 		return cubes[tempX][tempY][tempZ];
+	}
+	
+	public void delCube(float x, float y, float z){
+		int tempX = (int)Math.abs(Math.ceil(x))%16;
+		int tempY = (int)Math.abs(Math.ceil(y))%16;
+		int tempZ = (int)Math.abs(Math.ceil(z))%16;
+
+		cubes[tempX][tempY][tempZ]=null;
 	}
 
 	/*
@@ -127,7 +136,7 @@ public class Chunk {
 	/**
 	 * Met a jours les cubes a rendre ou non
 	 */
-	public void update(){
+	public void updateStates(){
 		for(int i=0; i<16; i++){
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
@@ -141,6 +150,14 @@ public class Chunk {
 				}
 			}
 		}
+	}
+	
+	public void update(){
+		updateStates();
+		checkState();
+		unbindVbo();
+		genCubes(clone.getTexManager());
+		genVBO();
 	}
 
 	/**
@@ -185,18 +202,12 @@ public class Chunk {
 		}
 		interleavedBuffer.flip();
 	}
-	
-	public void updateVbo(){
-		genCubes(clone.getTexManager());
-	}
-
 
 	/**
 	 * Dessine tous les cubes actifs
 	 * @param texMan
 	 */
 	public void draw(TextureManager texMan){
-		
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 5*4, 0L);

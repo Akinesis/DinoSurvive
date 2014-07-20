@@ -58,6 +58,22 @@ public class ChunkManager {
 		}
 	}
 	
+	public void delCubeAt(float x, float y, float z){
+		float xChunk = (float)Math.ceil(x / 16);
+		float yChunk = (float)Math.ceil(y / 16);
+		float zChunk = (float)Math.ceil(z / 16);
+		
+		x = (int)Math.abs(Math.ceil(x))%16;
+		y = (int)Math.abs(Math.ceil(y))%16;
+		z = (int)Math.abs(Math.ceil(z))%16;
+		
+   		for(Chunk ck : chunks){
+			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
+				ck.delCube(x, y, z);
+			}
+		}
+	}
+	
 	
 	public void setChunksList(Vector<Chunk> chun){
 		chunks = chun;
@@ -80,15 +96,15 @@ public class ChunkManager {
 		}
 	}
 	
-	public void update(){
+	public void updateStates(){
 		for(Chunk chunk : chunks){
-			chunk.update();
+			chunk.updateStates();
 		}
 	}
 	
-	public void updateVbo(){
+	public void update(){
 		for(Chunk chunk : renderChunks){
-			chunk.updateVbo();
+			chunk.update();
 		}
 	}
 	
@@ -110,7 +126,7 @@ public class ChunkManager {
 		checkRender();
 		for(Chunk chunk : renderChunks){
 			chunk.addCubes();
-			chunk.update();
+			chunk.updateStates();
 			chunk.checkState();
 			chunk.genCubes(clone.getTexManager());
 			chunk.genVBO();
