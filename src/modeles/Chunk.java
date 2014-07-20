@@ -39,6 +39,8 @@ public class Chunk {
 	private Controleur clone;
 	private int x,y,z,id;
 
+	private boolean updated;
+
 	/**
 	 * Constructeur du chunk
 	 * @param x
@@ -52,13 +54,14 @@ public class Chunk {
 		renderCubes = new Vector<Cube3dVbo>();
 		nonRenderCubes = new Vector<Cube3dVbo>();
 		clone = contr;
+		updated = true;
 
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		//pour l'instant : id = ligne dans le programme, changer ça !!! (extrapoler l'iD des XYZ)
 		this.id = id;
-		
+
 		for(int i=0; i<16; i++){
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
@@ -66,11 +69,11 @@ public class Chunk {
 				}
 			}
 		}
-		
+
 	}
 
 	public void genVBO(){
-		
+
 		vboVertexHandleChunk = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
@@ -93,13 +96,14 @@ public class Chunk {
 
 		return cubes[tempX][tempY][tempZ];
 	}
-	
+
 	public void delCube(float x, float y, float z){
 		int tempX = (int)Math.abs(Math.ceil(x))%16;
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
 		int tempZ = (int)Math.abs(Math.ceil(z))%16;
 
 		cubes[tempX][tempY][tempZ]=null;
+		updated=false;
 	}
 
 	/*
@@ -151,7 +155,7 @@ public class Chunk {
 			}
 		}
 	}
-	
+
 	/**
 	 * Met a jours tout les étas des cubes,
 	 * Puis suprimer les ancien buffer pour les recrée avec les nouvelles valeurs.
@@ -173,7 +177,7 @@ public class Chunk {
 		temp = (x>0) ? cubes[x-1][y][z]!=null : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()+1, cubes[x][y][z].getY(), cubes[x][y][z].getZ());
 		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ()) && temp || this.y!=0;
 		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()+1) && temp;
-		
+
 		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ()) && temp;
 		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ()) && temp;
 		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()-1) && temp;
@@ -196,10 +200,10 @@ public class Chunk {
 				interleavedBuffer.put(cubeCoord[i]);
 				interleavedBuffer.put(cubeCoord[i+1]);
 				interleavedBuffer.put(cubeCoord[i+2]);
-				
+
 				interleavedBuffer.put(texCoord[j]);
 				interleavedBuffer.put(texCoord[j+1]);
-				
+
 				j+=2;
 			}
 			j=0;
@@ -244,11 +248,13 @@ public class Chunk {
 
 		cubes[posX][posY][posZ] = cube;		
 	}
-	
+
 	public void unbindVbo(){
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		GL15.glDeleteBuffers(vboVertexHandleChunk);
-	}
+		if(interleavedBuffer!=null){
+			interleavedBuffer.clear();
+		}}
 
 
 	/*
@@ -276,12 +282,12 @@ public class Chunk {
 		return z;
 	}
 
-	/**
-	 * Renvoie l'id du chunk
-	 * @return
-	 */
-	public int getID(){
-		return id;
+	public boolean isUpdated(){
+		return updated;
+	}
+
+	public void haveBeenUpdated(boolean status){
+		updated = status;
 	}
 
 }
