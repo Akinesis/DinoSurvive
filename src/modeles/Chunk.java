@@ -152,6 +152,10 @@ public class Chunk {
 		}
 	}
 	
+	/**
+	 * Met a jours tout les étas des cubes,
+	 * Puis suprimer les ancien buffer pour les recrée avec les nouvelles valeurs.
+	 */
 	public void update(){
 		updateStates();
 		checkState();
