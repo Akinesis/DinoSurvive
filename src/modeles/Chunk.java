@@ -98,9 +98,9 @@ public class Chunk {
 	}
 
 	public void delCube(float x, float y, float z){
-		int tempX = (int)Math.abs(Math.ceil(x))%16;
-		int tempY = (int)Math.abs(Math.ceil(y))%16;
-		int tempZ = (int)Math.abs(Math.ceil(z))%16;
+		int tempX = (int)(Math.abs(x)+((x<0)?-1:0))%16;
+		int tempY = (int)Math.abs(y)%16;
+		int tempZ = (int)(Math.abs(z)+((z<0)?-1:0))%16;
 
 		cubes[tempX][tempY][tempZ]=null;
 		updated=false;
@@ -246,7 +246,8 @@ public class Chunk {
 		int posY = Math.abs(cube.getY())%16;
 		int posZ = (Math.abs(cube.getZ())+((cube.getZ()<0)?-1:0))%16;
 
-		cubes[posX][posY][posZ] = cube;		
+		cubes[posX][posY][posZ] = cube;
+		updated=false;
 	}
 
 	public void unbindVbo(){
