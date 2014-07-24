@@ -58,7 +58,7 @@ public class Controleur implements Parametres{
 		hud = new HUDManager(this);
 		texManager = new TextureManager();	
 		
-		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
+		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
@@ -77,7 +77,7 @@ public class Controleur implements Parametres{
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
 		
-		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
+		while(!Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			matrices.setSize(display.getHeight(), display.getWidth());
 			texManager.bindText();
 			

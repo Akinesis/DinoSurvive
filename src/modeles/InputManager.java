@@ -40,7 +40,7 @@ public class InputManager {
 	 */
 	public void check(){
 		
-		boolean keyChap = Keyboard.isKeyDown(Keyboard.KEY_F10);
+		boolean keyChap = Keyboard.isKeyDown(Keyboard.KEY_ESCAPE);
 		boolean keyI = Keyboard.isKeyDown(Keyboard.KEY_I);
 		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_INSERT);
 		boolean keydol = Keyboard.isKeyDown(Keyboard.KEY_HOME); 
