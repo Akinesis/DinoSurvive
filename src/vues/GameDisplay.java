@@ -46,5 +46,13 @@ public class GameDisplay implements Parametres{
 	public void end(){
 		Display.destroy();
 	}
+	
+	public int getHeight(){
+		return Display.getHeight();
+	}
+	
+	public int getWidth(){
+		return Display.getWidth();
+	}
 
 }

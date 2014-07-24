@@ -14,14 +14,16 @@ import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
 import modeles.entities2D.HUDManager;
+
 import org.lwjgl.input.Keyboard;
 
+import parametres.Parametres;
 import vues.GameDisplay;
 import vues.OpenGL;
 
 
 
-public class Controleur {
+public class Controleur implements Parametres{
 
 	private GameDisplay display;
 	private OpenGL matrices;
@@ -55,7 +57,9 @@ public class Controleur {
 		display.create();
 		hud = new HUDManager(this);
 		texManager = new TextureManager();	
+		
 		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
+			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
 			input.check();
@@ -73,9 +77,8 @@ public class Controleur {
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
 		
-
 		while(!Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) && !display.isClose()){
-		
+			matrices.setSize(display.getHeight(), display.getWidth());
 			texManager.bindText();
 			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

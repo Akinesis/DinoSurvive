@@ -27,6 +27,7 @@ import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
 import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.util.glu.GLU.gluPerspective;
 
 import java.nio.FloatBuffer;
@@ -37,10 +38,18 @@ import parametres.Parametres;
 
 public class OpenGL implements Parametres {
 
+	private int haut, larg;
+	
+	public OpenGL(){
+		haut = hauteur;
+		larg = largeur;
+	}
+	
 	public void init3D(){
+		glViewport(0, 0, larg, haut);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(fov, largeur/hauteur, near, far);
+		gluPerspective(fov, (float)larg/(float)haut, near, far);
 		glMatrixMode(GL_MODELVIEW);	
 		enable();
 		fogCreate();
@@ -48,9 +57,10 @@ public class OpenGL implements Parametres {
 	}
 
 	public void rest3D(){
+		glViewport(0, 0, larg, haut);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		gluPerspective(fov, largeur/hauteur, near, far);
+		gluPerspective(fov, (float)larg/(float)haut, near, far);
 		glEnable(GL_DEPTH_TEST);
 	}
 
@@ -65,7 +75,7 @@ public class OpenGL implements Parametres {
 	public void init2D(){
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, largeur, hauteur, 0, 1, -1);
+		glOrtho(0, larg, haut, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 
 		glLoadIdentity();
@@ -74,7 +84,7 @@ public class OpenGL implements Parametres {
 	}
 
 	private void fogCreate(){
-		//création du fog
+		//crï¿½ation du fog
 
 		//floatBuffer avec la le fog
 		FloatBuffer fogColours = BufferUtils.createFloatBuffer(4);
@@ -90,6 +100,11 @@ public class OpenGL implements Parametres {
 		glFogf(GL_FOG_END, 50);
 		glFogf(GL_FOG_DENSITY, 0.05f);
 
+	}
+	
+	public void setSize(int ht, int la){
+		haut = ht;
+		larg = la;
 	}
 
 }
