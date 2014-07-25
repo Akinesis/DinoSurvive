@@ -226,6 +226,7 @@ public class Chunk {
 		glDrawArrays(GL_TRIANGLES, 0, renderCubes.size()*6*6);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 	}
 
 	/**
