@@ -149,4 +149,16 @@ public class HUDManager extends AbstractEntity2D{
 	public Menu getMenu() {
 		return this.menu;
 	}
+
+	@Override
+	public float[] getCoord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

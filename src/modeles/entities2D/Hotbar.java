@@ -107,4 +107,14 @@ public class Hotbar extends AbstractEntity2D{
 		glEnableClientState(GL_VERTEX_ARRAY);
 		
 	}
+	@Override
+	public float[] getCoord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

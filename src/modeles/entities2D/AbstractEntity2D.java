@@ -30,4 +30,7 @@ public abstract class AbstractEntity2D{
 	public abstract void draw();
 	public abstract void setUp();
 	public abstract void destroy() ;
+	
+	public abstract float[] getCoord();
+	public abstract int getType();
 }

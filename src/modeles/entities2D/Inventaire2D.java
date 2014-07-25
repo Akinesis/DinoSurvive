@@ -123,6 +123,18 @@ public class Inventaire2D extends AbstractEntity2D{
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
+	@Override
+	public float[] getCoord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 }
