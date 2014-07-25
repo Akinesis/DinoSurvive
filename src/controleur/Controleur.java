@@ -84,7 +84,7 @@ public class Controleur implements Parametres{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//initialise la matrice 3D
-			matrices.init3D();
+			matrices.reset3D();
 			glLoadIdentity();
 
 

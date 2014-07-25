@@ -56,12 +56,13 @@ public class OpenGL implements Parametres {
 		glLoadIdentity();
 	}
 
-	public void rest3D(){
+	public void reset3D(){
 		glViewport(0, 0, larg, haut);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluPerspective(fov, (float)larg/(float)haut, near, far);
-		glEnable(GL_DEPTH_TEST);
+		glMatrixMode(GL_MODELVIEW);	
+		enable();
 	}
 
 	private void enable(){
