@@ -19,7 +19,6 @@ import org.newdawn.slick.util.ResourceLoader;
 public class TextureManager {
 
 	private Texture texture;
-	private FloatBuffer textureData;
 	private int vboTexHandle;
 
 	public TextureManager() {
@@ -29,7 +28,6 @@ public class TextureManager {
 			e.printStackTrace();
 		}
 
-		textureData = BufferUtils.createFloatBuffer(36 * 2);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 	
@@ -40,7 +38,6 @@ public class TextureManager {
 			e.printStackTrace();
 		}
 
-		textureData = BufferUtils.createFloatBuffer(36 * 2);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 	
@@ -931,15 +928,6 @@ public class TextureManager {
 		};
 	}
 	
-	public void bindText(){
-		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
-		texture.bind();
-	}
-
-	public void bindDrawTexture(){
-		glBindBuffer(GL_ARRAY_BUFFER, vboTexHandle);
-		glTexCoordPointer(2, GL_FLOAT, 0, 0l);
-	}
 	
 	public int getID(){
 		return texture.getTextureID();
@@ -952,14 +940,8 @@ public class TextureManager {
 	public void disableTexture(){
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
-	
-	public void undindTexture(){
-		glBindTexture(GL_TEXTURE_2D, 0);
-		texture.release();
-	}
 
 	public float[] genText(int type, float x, float y){
-		textureData.clear();
 		switch (type) {
 		case 1:
 			return genGrassTexture(x, y);

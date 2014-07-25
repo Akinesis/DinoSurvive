@@ -255,7 +255,8 @@ public class Chunk {
 		GL15.glDeleteBuffers(vboVertexHandleChunk);
 		if(interleavedBuffer!=null){
 			interleavedBuffer.clear();
-		}}
+		}
+	}
 
 
 	/*

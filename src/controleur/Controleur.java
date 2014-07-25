@@ -79,7 +79,7 @@ public class Controleur implements Parametres{
 		
 		while(!Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			matrices.setSize(display.getHeight(), display.getWidth());
-			texManager.bindText();
+			//texManager.bindText();
 			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
