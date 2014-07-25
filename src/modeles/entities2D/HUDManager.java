@@ -1,7 +1,12 @@
 package modeles.entities2D;
 
 import java.nio.FloatBuffer;
+import java.util.Vector;
 
+import modeles.TextureManager;
+import modeles.entities.Cube3dVbo;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
@@ -27,6 +32,7 @@ public class HUDManager extends AbstractEntity2D{
 	private HUDTextureManager hudText;
 	private int vboVertexHandleHUD;
 	private FloatBuffer interleavedBuffer;
+	private Vector<AbstractEntity2D> entitiesaAfficher;
 	
 	/*
 	 * Constructeur
@@ -45,6 +51,7 @@ public class HUDManager extends AbstractEntity2D{
 		barreEtat.genBarreEtat();
 		barreSac.genBarreSac();
 		menuJeu.genMenuJeu();
+		entitiesaAfficher = new Vector<AbstractEntity2D>();
 		
 		debug = new DebugText(contr);
 		
@@ -75,15 +82,7 @@ public class HUDManager extends AbstractEntity2D{
 	 * Méthodes
 	 */	
 	
-	/**
-	 * VBos
-	 */
-	public void genVBO(){
-		vboVertexHandleHUD = GL15.glGenBuffers();
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleHUD);		
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-	}
+
 	
 	@Override
 	public void draw() {
@@ -178,7 +177,6 @@ public class HUDManager extends AbstractEntity2D{
 
 	@Override
 	public float[] getCoord() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -186,6 +184,49 @@ public class HUDManager extends AbstractEntity2D{
 	public int getType() {
 		return 0;
 	}
+	
+	/**
+	 * VBos
+	 */
+	public void genVBO(){
+		vboVertexHandleHUD = GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleHUD);		
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+	}
 
+	public void unbindVbo(){
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+		GL15.glDeleteBuffers(vboVertexHandleHUD);
+		if(interleavedBuffer!=null){
+			interleavedBuffer.clear();
+		}
+	}
+	
+	public void genHUD(HUDTextureManager texMan){
+		float cubeCoord[],texCoord[];
+		int j= 0;
+		int sizeBuffer = 0;
+		for (AbstractEntity2D entity : entitiesaAfficher){
+			sizeBuffer+=entity.getCoord().length;
+		}
+		interleavedBuffer = BufferUtils.createFloatBuffer(sizeBuffer);
+		
+		for(AbstractEntity2D entity : entitiesaAfficher){
+			cubeCoord=entity.getCoord();
+			texCoord=texMan.genText(entity.getType(), entity.getTextX(), entity.getTextY());
+			for(int i = 0; i< cubeCoord.length; i+=3){
+				interleavedBuffer.put(cubeCoord[i]);
+				interleavedBuffer.put(cubeCoord[i+1]);
+				interleavedBuffer.put(cubeCoord[i+2]);
 
+				interleavedBuffer.put(texCoord[j]);
+				interleavedBuffer.put(texCoord[j+1]);
+
+				j+=2;
+			}
+			j=0;
+		}
+		interleavedBuffer.flip();
+	}
 }
