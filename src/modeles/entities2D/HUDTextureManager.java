@@ -54,17 +54,44 @@ public class HUDTextureManager {
 	public void disableTexture(){
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
-
+	
+	//arbitrairement hotbar = 1, barreEtat = 2, barreSac = 3, Inventaire2D = 4, MenuJeu = 5, au cas où cursor2D = 6, le reste 0
 	public float[] genText(int type, float x, float y){
 		switch (type) {
 		case 1:
 			return genHotBarText(x,y);
+		case 2:
+			return genBarreEtat(x,y);
+		case 3:
+			return genBarreSac(x,y);
+		case 4:
+			return genInventaire2D(x,y);
+		case 5:
+			return genMenuJeu(x,y);
+		//case 6:
+		//	return genCurseur2D(x,y);
 		default:
 			return genHotBarText(x, y);
 		}
 	}
 
+	private float[] genMenuJeu(float x, float y) {
+		return new float[]{};
+	}
+
+	private float[] genInventaire2D(float x, float y) {
+		return new float[]{};
+	}
+
+	private float[] genBarreSac(float x, float y) {
+		return new float[]{};
+	}
+
+	private float[] genBarreEtat(float x, float y) {
+		return new float[]{};
+	}
+
 	private float[] genHotBarText(float x, float y) {
-		return null;
+		return new float[]{};
 	}
 }

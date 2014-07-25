@@ -1,10 +1,21 @@
 package modeles.entities2D;
 
+import static org.lwjgl.opengl.GL11.GL_FLOAT;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_COORD_ARRAY;
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
+import static org.lwjgl.opengl.GL11.glDisableClientState;
+import static org.lwjgl.opengl.GL11.glDrawArrays;
+import static org.lwjgl.opengl.GL11.glEnableClientState;
+import static org.lwjgl.opengl.GL11.glTexCoordPointer;
+import static org.lwjgl.opengl.GL11.glVertexPointer;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glClientActiveTexture;
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.glBindBuffer;
+
 import java.nio.FloatBuffer;
 import java.util.Vector;
-
-import modeles.TextureManager;
-import modeles.entities.Cube3dVbo;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -33,6 +44,7 @@ public class HUDManager extends AbstractEntity2D{
 	private int vboVertexHandleHUD;
 	private FloatBuffer interleavedBuffer;
 	private Vector<AbstractEntity2D> entitiesaAfficher;
+	private int sizeBuffer;
 	
 	/*
 	 * Constructeur
@@ -106,7 +118,8 @@ public class HUDManager extends AbstractEntity2D{
 		}else{
 			//inhibe le curseur tantque e menu principale est present
 			//affichage des données en plus (pour test et compagnie)
-			if (inventaire.getaffichInventaire()){
+			//en commentaire ancienne version, sans vbo, pas d'interleaving, pas bien
+	/**		if (inventaire.getaffichInventaire()){
 				inventaire.bindBuffer();
 				inventaire.bindDrawInventory();
 				inventaire.enableInventory();
@@ -143,12 +156,25 @@ public class HUDManager extends AbstractEntity2D{
 			barreSac.enableBarreSac();
 			barreSac.draw();
 			barreSac.disableBarreSac();
+			**/
 		}
 		
+		
+			
 	}
 
 	public void draw(HUDTextureManager hudtexManager) {
-		// TODO Auto-generated method stub
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(2, GL_FLOAT, 4*4, 0L);
+		glClientActiveTexture(GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, hudText.getID());
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_FLOAT, 4*4, 2*4 );
+		glDrawArrays(GL_TRIANGLES, 0, sizeBuffer);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 		
 	}
 	
@@ -156,13 +182,11 @@ public class HUDManager extends AbstractEntity2D{
 	
 	@Override
 	public void setUp() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -206,7 +230,7 @@ public class HUDManager extends AbstractEntity2D{
 	public void genHUD(HUDTextureManager texMan){
 		float cubeCoord[],texCoord[];
 		int j= 0;
-		int sizeBuffer = 0;
+		sizeBuffer = 0;
 		for (AbstractEntity2D entity : entitiesaAfficher){
 			sizeBuffer+=entity.getCoord().length;
 		}
@@ -215,10 +239,9 @@ public class HUDManager extends AbstractEntity2D{
 		for(AbstractEntity2D entity : entitiesaAfficher){
 			cubeCoord=entity.getCoord();
 			texCoord=texMan.genText(entity.getType(), entity.getTextX(), entity.getTextY());
-			for(int i = 0; i< cubeCoord.length; i+=3){
+			for(int i = 0; i< cubeCoord.length; i+=2){
 				interleavedBuffer.put(cubeCoord[i]);
 				interleavedBuffer.put(cubeCoord[i+1]);
-				interleavedBuffer.put(cubeCoord[i+2]);
 
 				interleavedBuffer.put(texCoord[j]);
 				interleavedBuffer.put(texCoord[j+1]);
