@@ -131,8 +131,7 @@ public class Inventaire2D extends AbstractEntity2D{
 
 	@Override
 	public int getType() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 4;
 	}
 
 

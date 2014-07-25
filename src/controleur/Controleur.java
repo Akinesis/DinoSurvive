@@ -14,6 +14,7 @@ import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
 import modeles.entities2D.HUDManager;
+import modeles.entities2D.HUDTextureManager;
 
 import org.lwjgl.input.Keyboard;
 
@@ -35,6 +36,7 @@ public class Controleur implements Parametres{
 	private CollisionManager collision;
 	private TerrainGenerator terrGen;
 	private HUDManager hud;
+	private HUDTextureManager hudtexManager;
 
 	/**
 	 * Constructeur du controleur
@@ -57,6 +59,7 @@ public class Controleur implements Parametres{
 		display.create();
 		hud = new HUDManager(this);
 		texManager = new TextureManager();	
+		hudtexManager = new HUDTextureManager();
 		
 		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			
@@ -64,7 +67,7 @@ public class Controleur implements Parametres{
 			glLoadIdentity();
 			input.check();
 			matrices.init2D();
-			this.hud.draw();//peut-etre cree et utilise un drawMenu()
+			this.hud.draw(hudtexManager);//peut-etre cree et utilise un drawMenu()
 			display.update();
 		}
 		

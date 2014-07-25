@@ -123,8 +123,7 @@ public class MenuJeu extends AbstractEntity2D {
 
 	@Override
 	public int getType() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 5;
 	}
 
 }

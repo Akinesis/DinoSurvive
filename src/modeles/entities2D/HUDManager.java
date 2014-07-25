@@ -1,6 +1,9 @@
 package modeles.entities2D;
 
+import java.nio.FloatBuffer;
+
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
 
 import controleur.Controleur;
 
@@ -19,6 +22,11 @@ public class HUDManager extends AbstractEntity2D{
 	private BarreEtat barreEtat;
 	private BarreSac barreSac;
 	private MenuJeu menuJeu;
+	
+	
+	private HUDTextureManager hudText;
+	private int vboVertexHandleHUD;
+	private FloatBuffer interleavedBuffer;
 	
 	/*
 	 * Constructeur
@@ -66,6 +74,17 @@ public class HUDManager extends AbstractEntity2D{
 	/*
 	 * Méthodes
 	 */	
+	
+	/**
+	 * VBos
+	 */
+	public void genVBO(){
+		vboVertexHandleHUD = GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleHUD);		
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+	}
+	
 	@Override
 	public void draw() {
 		//affichage de l'inventaire
@@ -129,6 +148,13 @@ public class HUDManager extends AbstractEntity2D{
 		
 	}
 
+	public void draw(HUDTextureManager hudtexManager) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
@@ -158,7 +184,8 @@ public class HUDManager extends AbstractEntity2D{
 
 	@Override
 	public int getType() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 }

@@ -85,7 +85,6 @@ public class DebugText extends AbstractEntity2D{
 
 	@Override
 	public int getType() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
