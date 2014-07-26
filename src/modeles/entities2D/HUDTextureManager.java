@@ -93,7 +93,26 @@ public class HUDTextureManager {
 
 	private float[] genHotBarText() {
 		return new float[]{
-				//premier triangle 
+				//pointe vers le  haut
+				0f, 0f,
+				0f, 0.024f,
+				0.017f, 0.024f,
+				
+				//triangle sup du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.025f,
+				0f, 0.27f,
+				
+				//triangle inf du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.27f, 
+				0.017f, 0.27f,
+				
+				//pointe vers le bas
+				0.017f, 0.27f,
+				0f, 0.27f,
+				0f, 0.29f,
+				
 				
 		};
 	}

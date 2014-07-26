@@ -67,7 +67,7 @@ public class Controleur implements Parametres{
 			glLoadIdentity();
 			input.check();
 			matrices.init2D();
-			this.hud.draw();//peut-etre cree et utilise un drawMenu()
+			this.hud.draw(hudtexManager);
 			display.update();
 		}
 		
@@ -104,7 +104,7 @@ public class Controleur implements Parametres{
 			//texManager.undindTexture();
 			
 			matrices.init2D();
-			this.hud.draw();
+			this.hud.draw(hudtexManager);
 
 			display.update(); //met à jour la fenêtre, aucun rapport avec les chunks
 		}

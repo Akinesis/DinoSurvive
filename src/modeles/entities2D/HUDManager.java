@@ -98,6 +98,7 @@ public class HUDManager extends AbstractEntity2D{
 	
 	@Override
 	public void draw() {
+		/*
 		//affichage de l'inventaire
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		if(debug.getModeDebug()){
@@ -159,11 +160,11 @@ public class HUDManager extends AbstractEntity2D{
 			
 		}
 		
-		
+		*/
 			
 	}
 
-	/*public void draw(HUDTextureManager hudtexManager) {
+	public void draw(HUDTextureManager hudtexManager) {
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT, 4*4, 0L);
@@ -176,7 +177,7 @@ public class HUDManager extends AbstractEntity2D{
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 		
-	}*/
+	}
 	
 	
 	
