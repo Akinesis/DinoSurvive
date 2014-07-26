@@ -106,8 +106,8 @@ public class HUDManager extends AbstractEntity2D{
 			debug.disable();
 		}
 		//hotfix du conflit debug/2d
+
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		
 
 		if (this.menu.getEstAfficher()){
 			this.menu.bindBufferMenu();;
@@ -119,7 +119,7 @@ public class HUDManager extends AbstractEntity2D{
 			//inhibe le curseur tantque e menu principale est present
 			//affichage des données en plus (pour test et compagnie)
 			//en commentaire ancienne version, sans vbo, pas d'interleaving, pas bien
-	/**		if (inventaire.getaffichInventaire()){
+			if (inventaire.getaffichInventaire()){
 				inventaire.bindBuffer();
 				inventaire.bindDrawInventory();
 				inventaire.enableInventory();
@@ -156,14 +156,14 @@ public class HUDManager extends AbstractEntity2D{
 			barreSac.enableBarreSac();
 			barreSac.draw();
 			barreSac.disableBarreSac();
-			**/
+			
 		}
 		
 		
 			
 	}
 
-	public void draw(HUDTextureManager hudtexManager) {
+	/*public void draw(HUDTextureManager hudtexManager) {
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT, 4*4, 0L);
@@ -176,7 +176,7 @@ public class HUDManager extends AbstractEntity2D{
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
 		
-	}
+	}*/
 	
 	
 	
@@ -238,7 +238,7 @@ public class HUDManager extends AbstractEntity2D{
 		
 		for(AbstractEntity2D entity : entitiesaAfficher){
 			cubeCoord=entity.getCoord();
-			texCoord=texMan.genText(entity.getType(), entity.getTextX(), entity.getTextY());
+			texCoord=texMan.genText(entity.getType());
 			for(int i = 0; i< cubeCoord.length; i+=2){
 				interleavedBuffer.put(cubeCoord[i]);
 				interleavedBuffer.put(cubeCoord[i+1]);

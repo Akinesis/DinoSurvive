@@ -56,42 +56,45 @@ public class HUDTextureManager {
 	}
 	
 	//arbitrairement hotbar = 1, barreEtat = 2, barreSac = 3, Inventaire2D = 4, MenuJeu = 5, au cas où cursor2D = 6, le reste 0
-	public float[] genText(int type, float x, float y){
+	public float[] genText(int type){
 		switch (type) {
 		case 1:
-			return genHotBarText(x,y);
+			return genHotBarText();
 		case 2:
-			return genBarreEtat(x,y);
+			return genBarreEtat();
 		case 3:
-			return genBarreSac(x,y);
+			return genBarreSac();
 		case 4:
-			return genInventaire2D(x,y);
+			return genInventaire2D();
 		case 5:
-			return genMenuJeu(x,y);
+			return genMenuJeu();
 		//case 6:
-		//	return genCurseur2D(x,y);
+		//	return genCurseur2D();
 		default:
-			return genHotBarText(x, y);
+			return genHotBarText();
 		}
 	}
 
-	private float[] genMenuJeu(float x, float y) {
+	private float[] genMenuJeu() {
 		return new float[]{};
 	}
 
-	private float[] genInventaire2D(float x, float y) {
+	private float[] genInventaire2D() {
 		return new float[]{};
 	}
 
-	private float[] genBarreSac(float x, float y) {
+	private float[] genBarreSac() {
 		return new float[]{};
 	}
 
-	private float[] genBarreEtat(float x, float y) {
+	private float[] genBarreEtat() {
 		return new float[]{};
 	}
 
-	private float[] genHotBarText(float x, float y) {
-		return new float[]{};
+	private float[] genHotBarText() {
+		return new float[]{
+				//premier triangle 
+				
+		};
 	}
 }
