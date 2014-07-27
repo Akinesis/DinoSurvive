@@ -111,6 +111,7 @@ public class Controleur implements Parametres{
 		
 		chunkManager.unbindAll();
 		texManager.deleteText();
+		hudtexManager.deleteText();
 		display.end();
 	}
 	

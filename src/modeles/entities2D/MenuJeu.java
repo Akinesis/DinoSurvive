@@ -53,7 +53,7 @@ public class MenuJeu extends AbstractEntity2D {
 		onScreen = !(onScreen);
 	}
 	@Override
-	public void draw() {
+	public void draw(HUDTextureManager hudtex) {
 		glColor3f(0.4f, 0.45f, 1f);
 		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 		glColor3f(1f,1f,1f);

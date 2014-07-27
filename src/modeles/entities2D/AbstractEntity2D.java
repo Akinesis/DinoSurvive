@@ -27,7 +27,7 @@ public abstract class AbstractEntity2D{
 	/*
 	 * Abstract methods
 	 */
-	public abstract void draw();
+	public abstract void draw(HUDTextureManager hudtexManager);
 	public abstract void setUp();
 	public abstract void destroy() ;
 	

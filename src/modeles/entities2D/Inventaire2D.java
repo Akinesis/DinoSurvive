@@ -64,7 +64,7 @@ public class Inventaire2D extends AbstractEntity2D{
 	 */
 
 	@Override
-	public void draw() {
+	public void draw(HUDTextureManager hudtex) {
 		glColor3f(0.45f, 1f, 1f);
 		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 		//reset colour

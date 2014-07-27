@@ -96,14 +96,13 @@ public class HUDManager extends AbstractEntity2D{
 	
 
 	
-	@Override
-	public void draw() {
+	public void draw(HUDTextureManager hudtex, int boo) {
 		/*
 		//affichage de l'inventaire
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		if(debug.getModeDebug()){
 			debug.setUp();
-			debug.draw();
+			debug.draw(hudtex);
 			debug.disable();
 		}
 		//hotfix du conflit debug/2d
@@ -164,8 +163,9 @@ public class HUDManager extends AbstractEntity2D{
 			
 	}
 
+	@Override
 	public void draw(HUDTextureManager hudtexManager) {
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
+		/*glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT, 4*4, 0L);
 		glClientActiveTexture(GL_TEXTURE0);
@@ -176,6 +176,11 @@ public class HUDManager extends AbstractEntity2D{
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		*/
+		
+		for(AbstractEntity2D entity : entitiesaAfficher){
+			entity.draw(hudtexManager);
+		}
 		
 	}
 	
