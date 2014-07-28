@@ -74,6 +74,8 @@ public class HUDTextureManager {
 			//return genMenuJeu();
 		//case 6:
 		//	return genCurseur2D();
+		case 7: 
+			return genPortrait();
 		default:
 			return genHotBarText();
 		}
@@ -89,6 +91,32 @@ public class HUDTextureManager {
 
 	private float[] genBarreSac() {
 		return new float[]{};
+	}
+	
+	private float[] genPortrait(){
+		return new float[]{
+				//pointe vers le  haut
+				0f, 0f,
+				0f, 0.0266f,
+				0.0266f, 0.0266f,
+				
+				//triangle sup du grand rectangle
+				0.0275f, 0.301f,
+				0.0275f, 0.0275f,
+				0f, 0.0275f,
+				
+				//triangle inf du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.27f, 
+				0.017f, 0.27f,
+				
+				//pointe vers le bas
+				0.017f, 0.27f,
+				0f, 0.27f,
+				0f, 0.29f,
+				
+				
+		};
 	}
 
 	private float[] genBarreEtat() {

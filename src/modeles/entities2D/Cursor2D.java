@@ -84,19 +84,14 @@ public class Cursor2D extends AbstractEntity2D{
 
 	@Override
 	public void setUp() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public float[] getCoord() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

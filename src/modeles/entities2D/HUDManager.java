@@ -38,6 +38,7 @@ public class HUDManager extends AbstractEntity2D{
 	private BarreEtat barreEtat;
 	private BarreSac barreSac;
 	private MenuJeu menuJeu;
+	private Portrait portrait;
 	
 	
 	private int vboVertexHandleHUD;
@@ -56,6 +57,7 @@ public class HUDManager extends AbstractEntity2D{
 		barreEtat = new BarreEtat();
 		barreSac = new BarreSac();
 		menuJeu = new MenuJeu();
+		portrait = new Portrait();
 
 		debug = new DebugText(contr);
 		
@@ -67,10 +69,12 @@ public class HUDManager extends AbstractEntity2D{
 		entitiesTotales.add(barreEtat);
 		entitiesTotales.add(barreSac);
 		entitiesTotales.add(menuJeu);
+		entitiesTotales.add(portrait);
 		
 		entitiesaAfficher.add(hotbar);
 		entitiesaAfficher.add(barreSac);
 		entitiesaAfficher.add(barreEtat);
+		entitiesaAfficher.add(portrait);
 		
 		
 		this.menu = new Menu();
