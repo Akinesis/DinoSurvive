@@ -38,7 +38,6 @@ public class DebugText extends AbstractEntity2D{
 	}
 
 
-	@Override
 	public void draw(HUDTextureManager hudtex) {
 		// TODO Auto-generated method stub
 		//affiche la position de la caméra et le chunk actuel (ou -1,-1,-1 si pas de chunk)

@@ -32,13 +32,6 @@ public class BarreSac extends AbstractEntity2D {
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 		vboVertexHandle = glGenBuffers();
 	}
-	@Override
-	public void draw(HUDTextureManager hudtex) {
-		glColor3f(0.4f, 0.1f, 1f);
-		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
-		glColor3f(1f,1f,1f);
-		
-	}
 
 	@Override
 	public void setUp() {
@@ -49,22 +42,6 @@ public class BarreSac extends AbstractEntity2D {
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
-	}
-	public void bindBuffer() {
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
-		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);	
-		
-	}
-	public void bindDrawBarreSac() {
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
-        glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);	
-		
-	}
-	public void disableBarreSac() {
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
 	}
 	public void genBarreSac() {
@@ -89,10 +66,7 @@ public class BarreSac extends AbstractEntity2D {
 				vertexData.flip();
 		
 	}
-	public void enableBarreSac() {
-		glEnableClientState(GL_VERTEX_ARRAY);
-		
-	}
+
 	@Override
 	public float[] getCoord() {
 		// TODO Auto-generated method stub

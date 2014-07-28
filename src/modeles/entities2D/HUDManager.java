@@ -56,16 +56,12 @@ public class HUDManager extends AbstractEntity2D{
 		barreEtat = new BarreEtat();
 		barreSac = new BarreSac();
 		menuJeu = new MenuJeu();
-		
-		curseur.genCurseur();
-		inventaire.genInventaire();
-		hotbar.genHotbar();
-		barreEtat.genBarreEtat();
-		barreSac.genBarreSac();
-		menuJeu.genMenuJeu();
-		entitiesaAfficher = new Vector<AbstractEntity2D>();
-		
+
 		debug = new DebugText(contr);
+		
+		entitiesaAfficher = new Vector<AbstractEntity2D>();
+		entitiesaAfficher.add(hotbar);
+		
 		
 		this.menu = new Menu();
 		this.menu.generationMenuFond();
@@ -93,79 +89,9 @@ public class HUDManager extends AbstractEntity2D{
 	/*
 	 * Méthodes
 	 */	
-	
 
-	
-	public void draw(HUDTextureManager hudtex, int boo) {
-		/*
-		//affichage de l'inventaire
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		if(debug.getModeDebug()){
-			debug.setUp();
-			debug.draw(hudtex);
-			debug.disable();
-		}
-		//hotfix du conflit debug/2d
-
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-
-		if (this.menu.getEstAfficher()){
-			this.menu.bindBufferMenu();;
-			this.menu.bindDrawMenu();
-			this.menu.enableMenu();
-			this.menu.draw();
-			this.menu.disableMenu();
-		}else{
-			//inhibe le curseur tantque e menu principale est present
-			//affichage des données en plus (pour test et compagnie)
-			//en commentaire ancienne version, sans vbo, pas d'interleaving, pas bien
-			if (inventaire.getaffichInventaire()){
-				inventaire.bindBuffer();
-				inventaire.bindDrawInventory();
-				inventaire.enableInventory();
-				inventaire.draw();
-				inventaire.disableInventory();
-			}
-			if(menuJeu.getAffichMenu()){
-				menuJeu.bindBuffer();
-				menuJeu.bindDrawMenuJeu();
-				menuJeu.enableMenuJeu();
-				menuJeu.draw();
-				menuJeu.disableMenuJeu();
-			}
-			curseur.bindBuffer();	
-			curseur.bindDrawCursor();
-			curseur.enableCursor();
-			curseur.draw();
-			curseur.disableCursor();
-			
-			hotbar.bindBuffer();
-			hotbar.bindDrawHotbar();
-			hotbar.enableHotbar();
-			hotbar.draw();
-			hotbar.disableHotbar();
-			
-			barreEtat.bindBuffer();
-			barreEtat.bindDrawBarreEtat();
-			barreEtat.enableBarreEtat();
-			barreEtat.draw();
-			barreEtat.disableBarreEtat();
-			
-			barreSac.bindBuffer();
-			barreSac.bindDrawBarreSac();
-			barreSac.enableBarreSac();
-			barreSac.draw();
-			barreSac.disableBarreSac();
-			
-		}
-		
-		*/
-			
-	}
-
-	@Override
 	public void draw(HUDTextureManager hudtexManager) {
-		/*glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT, 4*4, 0L);
 		glClientActiveTexture(GL_TEXTURE0);
@@ -175,16 +101,15 @@ public class HUDManager extends AbstractEntity2D{
 		glDrawArrays(GL_TRIANGLES, 0, sizeBuffer);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-		*/
-		
-		for(AbstractEntity2D entity : entitiesaAfficher){
-			entity.draw(hudtexManager);
-		}
-		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);		
 	}
 	
-	
+	public void genHUD(){
+		this.unbindVbo();
+		this.genHUDBuffer(hudText);
+		this.genVBO();
+		
+	}
 	
 	@Override
 	public void setUp() {
@@ -233,7 +158,7 @@ public class HUDManager extends AbstractEntity2D{
 		}
 	}
 	
-	public void genHUD(HUDTextureManager texMan){
+	public void genHUDBuffer(HUDTextureManager texMan){
 		float cubeCoord[],texCoord[];
 		int j= 0;
 		sizeBuffer = 0;
@@ -256,6 +181,6 @@ public class HUDManager extends AbstractEntity2D{
 			}
 			j=0;
 		}
-		interleavedBuffer.flip();
+		interleavedBuffer.flip();		
 	}
 }
