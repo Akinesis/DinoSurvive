@@ -89,7 +89,7 @@ public class HUDManager extends AbstractEntity2D{
 	/*
 	 * Méthodes
 	 */	
-
+	
 	public void draw(HUDTextureManager hudtexManager) {
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
 		glEnableClientState(GL_VERTEX_ARRAY);
@@ -107,8 +107,16 @@ public class HUDManager extends AbstractEntity2D{
 	public void genHUD(HUDTextureManager hudtexManager){
 		this.genHUDBuffer(hudtexManager);
 		this.genVBO();
-		
 	}
+	
+	public void drawMenu(){
+		this.menu.bindBufferMenu();;
+		this.menu.bindDrawMenu();
+		this.menu.enableMenu();
+		this.menu.draw();
+		this.menu.disableMenu();
+	}
+
 	
 	@Override
 	public void setUp() {

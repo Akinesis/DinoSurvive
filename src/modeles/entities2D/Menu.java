@@ -30,6 +30,8 @@ public class Menu extends AbstractEntity3D{
 	private boolean estAfficher;
 	private TextureManager textureManagerFond;
 	private TextureManager textureManagerBoutons;
+	private float[] boutonsLimites;
+	private float[] boutonsTextureCoordonnes;
 	
 	public Menu(){
 		this.estAfficher = true;
@@ -38,14 +40,35 @@ public class Menu extends AbstractEntity3D{
 		this.vboVertexHandle = glGenBuffers();
 		this.textureManagerFond = new TextureManager("res/Menu.png");
 		this.textureManagerBoutons = new TextureManager("res/Menue.png");
+		this.boutonsLimites = this.generationBoutonsLimites();
+		this.boutonsTextureCoordonnes = this.generationBoutonsTextureCoordonnes();
 	}
 	
+	private float[] generationBoutonsTextureCoordonnes() {
+		return new float[]{0f,    0f,    0.2f,  0.2f,
+						   0,2f,  0,2f,  0.4f,  0.4f,
+						   0,4f,  0,4f,  0.6f,  0.6f,
+						   0,6f,  0,6f,  0.8f,  0.8f,
+						   0,8f,  0,8f,  1f,    1f
+		};
+	}
+
 	public void generationMenuFond() {
 		this.vertexDataFond.put(new float[]{   
 			Display.getWidth(), Display.getHeight(),	Display.getWidth(), 0,		0, 0,
 			0, 0,										0, Display.getHeight(),		Display.getWidth(), Display.getHeight(),
 		});
 		this.vertexDataFond.flip();
+	}
+	
+	private float[] generationBoutonsLimites() {
+		return new float[]{ 0.9875f*Display.getWidth(), 0.6375f*Display.getWidth(), 
+							0.10f*Display.getHeight(), 0.20f*Display.getHeight(),
+							0.22f*Display.getHeight(), 0.32f*Display.getHeight(),
+							0.34f*Display.getHeight(), 0.44f*Display.getHeight(),
+							0.46f*Display.getHeight(), 0.56f*Display.getHeight(),
+							0.58f*Display.getHeight(), 0.68f*Display.getHeight(),
+		};
 	}
 	
 	public void generationMenuBoutons() {
@@ -83,18 +106,13 @@ public class Menu extends AbstractEntity3D{
 
 	@Override
 	public void draw() {
-		//glColor3f(0f, 0.28f, 0.84f);
-		//glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 		
-		//GL11.glLoadIdentity();
-		//GL11.glMatrixMode(GL11.GL_PROJECTION);
-		//GLU.gluOrtho2D(0.0f, Display.getWidth(), Display.getHeight(), 0.0f);
 		
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.textureManagerFond.getID());
 		GL11.glBegin(GL_TRIANGLES);
-		//this.generationMenu();
+
 		GL11.glTexCoord2d(1,1); GL11.glVertex2d(Display.getWidth(), Display.getHeight());
 		GL11.glTexCoord2d(1,0); GL11.glVertex2d(Display.getWidth(), 0);
 		GL11.glTexCoord2d(0,0); GL11.glVertex2d(0, 0);
@@ -184,7 +202,15 @@ public class Menu extends AbstractEntity3D{
 	public FloatBuffer getVertexData() {
 		return this.vertexDataFond;
 	}
+	
+	public float[] getBoutonsLimites() {
+		return boutonsLimites;
+	}
 
+	public float[] getBoutonsTextureCoordonnes() {
+		return boutonsTextureCoordonnes;
+	}
+	
 	public boolean getEstAfficher() {
 		return this.estAfficher;
 	}
@@ -192,5 +218,5 @@ public class Menu extends AbstractEntity3D{
 	public void inverserEstAfficher() {
 		this.estAfficher = !(this.estAfficher);
 	}
-	
+
 }
