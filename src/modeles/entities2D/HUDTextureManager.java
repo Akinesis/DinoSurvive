@@ -155,13 +155,13 @@ public class HUDTextureManager {
 		return new float[]{
 				//pointe vers le  haut
 				0f, 0f,
-				0f, 0.024f,
-				0.017f, 0.024f,
+				0f, 0.0266f,
+				0.0266f, 0.0266f,
 				
 				//triangle sup du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.025f,
-				0f, 0.27f,
+				0.0275f, 0.301f,
+				0.0275f, 0.0275f,
+				0f, 0.0275f,
 				
 				//triangle inf du grand rectangle
 				0.017f, 0.025f,
