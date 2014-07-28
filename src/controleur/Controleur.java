@@ -14,6 +14,7 @@ import modeles.MapReader;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
 import modeles.entities2D.HUDManager;
+import modeles.entities2D.HUDTextureManager;
 
 import org.lwjgl.input.Keyboard;
 
@@ -35,6 +36,7 @@ public class Controleur implements Parametres{
 	private CollisionManager collision;
 	private TerrainGenerator terrGen;
 	private HUDManager hud;
+	private HUDTextureManager hudtexManager;
 
 	/**
 	 * Constructeur du controleur
@@ -57,6 +59,7 @@ public class Controleur implements Parametres{
 		display.create();
 		hud = new HUDManager(this);
 		texManager = new TextureManager();	
+		hudtexManager = new HUDTextureManager();
 		
 		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			
@@ -64,10 +67,11 @@ public class Controleur implements Parametres{
 			glLoadIdentity();
 			input.check();
 			matrices.init2D();
-			this.hud.draw();//peut-etre cree et utilise un drawMenu()
 			display.update();
 		}
-		
+
+		hud.genHUD(hudtexManager);
+		hud.draw(hudtexManager);
 		matrices.init3D();
 		terrGen.buildStart();
 		terrGen.genFond(1, -5, 0);
@@ -76,6 +80,7 @@ public class Controleur implements Parametres{
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
+		
 		
 		while(!Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			matrices.setSize(display.getHeight(), display.getWidth());
@@ -101,13 +106,14 @@ public class Controleur implements Parametres{
 			//texManager.undindTexture();
 			
 			matrices.init2D();
-			hud.draw();
+			this.hud.draw(hudtexManager);
 
 			display.update(); //met à jour la fenêtre, aucun rapport avec les chunks
 		}
 		
 		chunkManager.unbindAll();
 		texManager.deleteText();
+		hudtexManager.deleteText();
 		display.end();
 	}
 	

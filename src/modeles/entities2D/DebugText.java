@@ -38,8 +38,7 @@ public class DebugText extends AbstractEntity2D{
 	}
 
 
-	@Override
-	public void draw() {
+	public void draw(HUDTextureManager hudtex) {
 		// TODO Auto-generated method stub
 		//affiche la position de la caméra et le chunk actuel (ou -1,-1,-1 si pas de chunk)
 		float[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
@@ -75,6 +74,17 @@ public class DebugText extends AbstractEntity2D{
 	public void disable() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public float[] getCoord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getType() {
+		return 0;
 	}
 
 }

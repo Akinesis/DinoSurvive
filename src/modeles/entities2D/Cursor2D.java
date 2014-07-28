@@ -36,7 +36,7 @@ public class Cursor2D extends AbstractEntity2D{
 	 * dessin du curseur
 	 * 4
 	 */
-	public void draw(){
+	public void draw(HUDTextureManager hudtex){
 		glDrawArrays(GL_LINES, 0, verticiesNum);
 	}
 	
@@ -92,5 +92,16 @@ public class Cursor2D extends AbstractEntity2D{
 	public void destroy() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public float[] getCoord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getType() {
+		return 6;
 	}
 }
