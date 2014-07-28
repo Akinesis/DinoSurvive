@@ -21,7 +21,6 @@ public class Cursor2D extends AbstractEntity2D{
 	//ce qui est dessiné (le buffer)
 	private int vboVertexHandle;
 	//coordonnées des points
-	private FloatBuffer vertexData;
 
 	/**
 	 * Constructeur du curseur

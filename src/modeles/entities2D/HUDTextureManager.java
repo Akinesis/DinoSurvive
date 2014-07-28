@@ -72,8 +72,8 @@ public class HUDTextureManager {
 		case 5:
 			return genHotBarText();
 			//return genMenuJeu();
-		//case 6:
-		//	return genCurseur2D();
+		case 6:
+			return genCurseur2D();
 		case 7: 
 			return genPortrait();
 		default:
@@ -83,6 +83,17 @@ public class HUDTextureManager {
 
 	private float[] genMenuJeu() {
 		return new float[]{};
+	}
+	
+	private float[] genCurseur2D(){
+		return new float[]{
+				0.36333333f/2, 0.033333333f/2,
+				0.36333333f/2, 0.003333333f/2,
+				0.33333f/2, 0.003333333f/2,
+				
+				0.36333333333f/2, 0.03333333333f/2,
+				0.33333f/2, 0.003333333f/2,
+				0.33333333333f/2, 0.03333333333f/2};
 	}
 
 	private float[] genInventaire2D() {
@@ -97,8 +108,8 @@ public class HUDTextureManager {
 		return new float[]{
 				//pointe vers le  haut
 				0f, 0f,
-				0f, 0.0266f,
-				0.0266f, 0.0266f,
+				0f, 0.0533f,
+				0.0533f, 0.0533f,
 				
 				//triangle sup du grand rectangle
 				0.0275f, 0.301f,
@@ -183,8 +194,8 @@ public class HUDTextureManager {
 		return new float[]{
 				//pointe vers le  haut
 				0f, 0f,
-				0f, 0.0266f,
-				0.0266f, 0.0266f,
+				0f, 16/600f,
+				16/600f, 16/600f,
 				
 				//triangle sup du grand rectangle
 				0.0275f, 0.301f,
