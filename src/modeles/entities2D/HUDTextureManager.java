@@ -21,7 +21,7 @@ public class HUDTextureManager {
 
 	public HUDTextureManager() {
 		try {
-			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/hud-text.png"));
+			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/hudtext.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

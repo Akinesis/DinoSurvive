@@ -70,7 +70,7 @@ public class Controleur implements Parametres{
 			display.update();
 		}
 
-		hud.genHUD();
+		hud.genHUD(hudtexManager);
 		hud.draw(hudtexManager);
 		matrices.init3D();
 		terrGen.buildStart();

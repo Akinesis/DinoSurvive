@@ -95,7 +95,7 @@ public class HUDManager extends AbstractEntity2D{
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(2, GL_FLOAT,4*4, 0L);
 		glClientActiveTexture(GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, hudText.getID());
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, hudtexManager.getID());
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glTexCoordPointer(2, GL_FLOAT, 4*4, 2*4 );
 		glDrawArrays(GL_TRIANGLES, 0, sizeBuffer);
@@ -104,8 +104,8 @@ public class HUDManager extends AbstractEntity2D{
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);		
 	}
 	
-	public void genHUD(){
-		this.genHUDBuffer(hudText);
+	public void genHUD(HUDTextureManager hudtexManager){
+		this.genHUDBuffer(hudtexManager);
 		this.genVBO();
 		
 	}
@@ -163,6 +163,7 @@ public class HUDManager extends AbstractEntity2D{
 		sizeBuffer = 0;
 		for (AbstractEntity2D entity : entitiesaAfficher){
 			sizeBuffer+=entity.getCoord().length;
+			sizeBuffer+=2;
 		}
 		interleavedBuffer = BufferUtils.createFloatBuffer(sizeBuffer);
 		
