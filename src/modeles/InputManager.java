@@ -49,8 +49,9 @@ public class InputManager {
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 		delta = getDelta();
 		
-		//neutralise tout les mouvements (sauf ceux de la souris(camera peut tourne)) tant que le menu principal est present  
+		//neutralise tout les mouvements
 		if(this.clone.getHUDManager().getMenu().getEstAfficher()){
+			//this.clone.changeGragMouse();
 			if(Keyboard.isKeyDown(Keyboard.KEY_M)){
 				this.clone.getHUDManager().getMenu().inverserEstAfficher();
 			}
