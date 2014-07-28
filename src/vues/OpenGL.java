@@ -78,9 +78,7 @@ public class OpenGL implements Parametres {
 		glLoadIdentity();
 		glOrtho(0, larg, haut, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
-
 		glLoadIdentity();
-
 		glDisable(GL_DEPTH_TEST);
 	}
 

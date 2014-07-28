@@ -64,14 +64,6 @@ public class Inventaire2D extends AbstractEntity2D{
 	 */
 
 	@Override
-	public void draw() {
-		glColor3f(0.45f, 1f, 1f);
-		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
-		//reset colour
-		glColor3f(1f, 1f, 1f);
-	}
-
-	@Override
 	public void setUp() {
 		// TODO Auto-generated method stub
 		
@@ -100,27 +92,15 @@ public class Inventaire2D extends AbstractEntity2D{
 				vertexData.flip();
 	}
 
-	public void bindBuffer() {
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
-		glBufferData(GL_ARRAY_BUFFER, vertexData, GL_STATIC_DRAW);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-		
+	@Override
+	public float[] getCoord() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public void bindDrawInventory() {
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandle);
-        glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);	
-		
-	}
-
-	public void enableInventory() {
-		glEnableClientState(GL_VERTEX_ARRAY);
-		
-	}
-
-	public void disableInventory() {
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	@Override
+	public int getType() {
+		return 4;
 	}
 
 

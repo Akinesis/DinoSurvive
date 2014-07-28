@@ -1,6 +1,25 @@
 package modeles.entities2D;
 
+import static org.lwjgl.opengl.GL11.GL_FLOAT;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_COORD_ARRAY;
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
+import static org.lwjgl.opengl.GL11.glDisableClientState;
+import static org.lwjgl.opengl.GL11.glDrawArrays;
+import static org.lwjgl.opengl.GL11.glEnableClientState;
+import static org.lwjgl.opengl.GL11.glTexCoordPointer;
+import static org.lwjgl.opengl.GL11.glVertexPointer;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glClientActiveTexture;
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.glBindBuffer;
+
+import java.nio.FloatBuffer;
+import java.util.Vector;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL15;
 
 import controleur.Controleur;
 
@@ -20,6 +39,13 @@ public class HUDManager extends AbstractEntity2D{
 	private BarreSac barreSac;
 	private MenuJeu menuJeu;
 	
+	
+	private HUDTextureManager hudText;
+	private int vboVertexHandleHUD;
+	private FloatBuffer interleavedBuffer;
+	private Vector<AbstractEntity2D> entitiesaAfficher;
+	private int sizeBuffer;
+	
 	/*
 	 * Constructeur
 	 */
@@ -30,15 +56,12 @@ public class HUDManager extends AbstractEntity2D{
 		barreEtat = new BarreEtat();
 		barreSac = new BarreSac();
 		menuJeu = new MenuJeu();
-		
-		curseur.genCurseur();
-		inventaire.genInventaire();
-		hotbar.genHotbar();
-		barreEtat.genBarreEtat();
-		barreSac.genBarreSac();
-		menuJeu.genMenuJeu();
-		
+
 		debug = new DebugText(contr);
+		
+		entitiesaAfficher = new Vector<AbstractEntity2D>();
+		entitiesaAfficher.add(hotbar);
+		
 		
 		this.menu = new Menu();
 		this.menu.generationMenuFond();
@@ -66,6 +89,26 @@ public class HUDManager extends AbstractEntity2D{
 	/*
 	 * Méthodes
 	 */	
+	
+	public void draw(HUDTextureManager hudtexManager) {
+		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(2, GL_FLOAT,4*4, 0L);
+		glClientActiveTexture(GL_TEXTURE0);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, hudtexManager.getID());
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_FLOAT, 4*4, 2*4 );
+		glDrawArrays(GL_TRIANGLES, 0, sizeBuffer);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);		
+	}
+	
+	public void genHUD(HUDTextureManager hudtexManager){
+		this.genHUDBuffer(hudtexManager);
+		this.genVBO();
+	}
+	
 	public void drawMenu(){
 		this.menu.bindBufferMenu();;
 		this.menu.bindDrawMenu();
@@ -73,69 +116,15 @@ public class HUDManager extends AbstractEntity2D{
 		this.menu.draw();
 		this.menu.disableMenu();
 	}
+
 	
 	@Override
-	public void draw() {
-		//affichage de l'inventaire
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		if(debug.getModeDebug()){
-			debug.setUp();
-			debug.draw();
-			debug.disable();
-		}
-		//hotfix du conflit debug/2d
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		
-			if (inventaire.getaffichInventaire()){
-				inventaire.bindBuffer();
-				inventaire.bindDrawInventory();
-				inventaire.enableInventory();
-				inventaire.draw();
-				inventaire.disableInventory();
-			}
-			if(menuJeu.getAffichMenu()){
-				menuJeu.bindBuffer();
-				menuJeu.bindDrawMenuJeu();
-				menuJeu.enableMenuJeu();
-				menuJeu.draw();
-				menuJeu.disableMenuJeu();
-			}
-			curseur.bindBuffer();	
-			curseur.bindDrawCursor();
-			curseur.enableCursor();
-			curseur.draw();
-			curseur.disableCursor();
-			
-			hotbar.bindBuffer();
-			hotbar.bindDrawHotbar();
-			hotbar.enableHotbar();
-			hotbar.draw();
-			hotbar.disableHotbar();
-			
-			barreEtat.bindBuffer();
-			barreEtat.bindDrawBarreEtat();
-			barreEtat.enableBarreEtat();
-			barreEtat.draw();
-			barreEtat.disableBarreEtat();
-			
-			barreSac.bindBuffer();
-			barreSac.bindDrawBarreSac();
-			barreSac.enableBarreSac();
-			barreSac.draw();
-			barreSac.disableBarreSac();
-		
-		
-	}
-
-	@Override
 	public void setUp() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -146,5 +135,60 @@ public class HUDManager extends AbstractEntity2D{
 
 	public Menu getMenu() {
 		return this.menu;
+	}
+
+	@Override
+	public float[] getCoord() {
+		return null;
+	}
+
+	@Override
+	public int getType() {
+		return 0;
+	}
+	
+	/**
+	 * VBos
+	 */
+	public void genVBO(){
+		vboVertexHandleHUD = GL15.glGenBuffers();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleHUD);		
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+	}
+
+	public void unbindVbo(){
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+		GL15.glDeleteBuffers(vboVertexHandleHUD);
+		if(interleavedBuffer!=null){
+			interleavedBuffer.clear();
+		}
+	}
+	
+	public void genHUDBuffer(HUDTextureManager texMan){
+		float cubeCoord[],texCoord[];
+		int j= 0;
+		sizeBuffer = 0;
+		for (AbstractEntity2D entity : entitiesaAfficher){
+			sizeBuffer+=entity.getCoord().length ;
+			sizeBuffer+=texMan.genText(entity.getType()).length;
+		}
+		interleavedBuffer = BufferUtils.createFloatBuffer(sizeBuffer);
+		
+		for(AbstractEntity2D entity : entitiesaAfficher){
+			cubeCoord=entity.getCoord();
+			texCoord=texMan.genText(entity.getType());
+			for(int i = 0; i< cubeCoord.length; i+=2){
+				interleavedBuffer.put(cubeCoord[i]);
+				interleavedBuffer.put(cubeCoord[i+1]);
+
+				interleavedBuffer.put(texCoord[j]);
+				interleavedBuffer.put(texCoord[j+1]);
+
+				j+=2;
+			}
+			j=0;
+		}
+		interleavedBuffer.flip();		
 	}
 }

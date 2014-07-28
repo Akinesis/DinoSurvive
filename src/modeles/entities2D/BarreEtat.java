@@ -38,8 +38,7 @@ public class BarreEtat extends AbstractEntity2D {
 		vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 		vboVertexHandle = glGenBuffers();
 	}
-	@Override
-	public void draw() {
+	public void draw(HUDTextureManager hudtex) {
 		glColor3f(0.1f, 0.1f, 1f);
 		glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 		glColor3f(1f,1f,1f);
@@ -117,6 +116,15 @@ public class BarreEtat extends AbstractEntity2D {
 				});
 				vertexData.flip();
 		
+	}
+	@Override
+	public float[] getCoord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getType() {
+		return 2;
 	}
 
 }

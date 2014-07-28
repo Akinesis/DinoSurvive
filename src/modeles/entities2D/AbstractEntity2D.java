@@ -27,7 +27,10 @@ public abstract class AbstractEntity2D{
 	/*
 	 * Abstract methods
 	 */
-	public abstract void draw();
 	public abstract void setUp();
 	public abstract void destroy() ;
+	
+	public abstract float[] getCoord();
+	//arbitrairement hotbar = 1, barreEtat = 2, barreSac = 3, Inventaire2D = 4, MenuJeu = 5, au cas où cursor2D = 6, le reste 0
+	public abstract int getType();
 }
