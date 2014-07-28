@@ -66,6 +66,14 @@ public class HUDManager extends AbstractEntity2D{
 	/*
 	 * Méthodes
 	 */	
+	public void drawMenu(){
+		this.menu.bindBufferMenu();;
+		this.menu.bindDrawMenu();
+		this.menu.enableMenu();
+		this.menu.draw();
+		this.menu.disableMenu();
+	}
+	
 	@Override
 	public void draw() {
 		//affichage de l'inventaire
@@ -78,16 +86,6 @@ public class HUDManager extends AbstractEntity2D{
 		//hotfix du conflit debug/2d
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
-
-		if (this.menu.getEstAfficher()){
-			this.menu.bindBufferMenu();;
-			this.menu.bindDrawMenu();
-			this.menu.enableMenu();
-			this.menu.draw();
-			this.menu.disableMenu();
-		}else{
-			//inhibe le curseur tantque e menu principale est present
-			//affichage des données en plus (pour test et compagnie)
 			if (inventaire.getaffichInventaire()){
 				inventaire.bindBuffer();
 				inventaire.bindDrawInventory();
@@ -125,7 +123,7 @@ public class HUDManager extends AbstractEntity2D{
 			barreSac.enableBarreSac();
 			barreSac.draw();
 			barreSac.disableBarreSac();
-		}
+		
 		
 	}
 

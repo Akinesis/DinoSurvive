@@ -64,7 +64,7 @@ public class Controleur implements Parametres{
 			glLoadIdentity();
 			input.check();
 			matrices.init2D();
-			this.hud.draw();//peut-etre cree et utilise un drawMenu()
+			this.hud.drawMenu();
 			display.update();
 		}
 		
