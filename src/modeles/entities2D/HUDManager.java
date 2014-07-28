@@ -162,8 +162,8 @@ public class HUDManager extends AbstractEntity2D{
 		int j= 0;
 		sizeBuffer = 0;
 		for (AbstractEntity2D entity : entitiesaAfficher){
-			sizeBuffer+=entity.getCoord().length;
-			sizeBuffer+=2;
+			sizeBuffer+=entity.getCoord().length ;
+			sizeBuffer+=texMan.genText(entity.getType()).length;
 		}
 		interleavedBuffer = BufferUtils.createFloatBuffer(sizeBuffer);
 		
