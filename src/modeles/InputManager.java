@@ -75,6 +75,7 @@ public class InputManager {
 					clone.getHUDManager().update(clone.getHUDTextManager());
 				}
 				if(keyChap){
+					clone.changeGragMouse();
 					clone.getHUDManager().getMenuJeu().changeVisible();
 					clone.getHUDManager().update(clone.getHUDTextManager());
 				}
