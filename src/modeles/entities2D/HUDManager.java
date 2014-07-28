@@ -93,7 +93,7 @@ public class HUDManager extends AbstractEntity2D{
 	public void draw(HUDTextureManager hudtexManager) {
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleHUD);
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(2, GL_FLOAT, 4*4, 0L);
+		glVertexPointer(2, GL_FLOAT,4*4, 0L);
 		glClientActiveTexture(GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, hudText.getID());
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -105,7 +105,6 @@ public class HUDManager extends AbstractEntity2D{
 	}
 	
 	public void genHUD(){
-		this.unbindVbo();
 		this.genHUDBuffer(hudText);
 		this.genVBO();
 		
