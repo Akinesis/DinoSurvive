@@ -59,13 +59,12 @@ public class Controleur implements Parametres{
 		texManager = new TextureManager();	
 		
 		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
-			
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
-			input.check();
-			matrices.init2D();
+			this.input.check();
+			this.matrices.init2D();
 			this.hud.drawMenu();
-			display.update();
+			this.display.update();
 		}
 		
 		matrices.init3D();
