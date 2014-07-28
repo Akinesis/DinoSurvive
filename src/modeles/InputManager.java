@@ -67,13 +67,16 @@ public class InputManager {
 				if(keyBas)
 					moveY(1);
 				if(keyI){
-					clone.getHUDManager().getInventaire().changerEtatInventaire();
+					clone.getHUDManager().getInventaire().changeVisible();
+					clone.getHUDManager().update(clone.getHUDTextManager());
 				}
 				if(keyINSERT){
-					clone.getHUDManager().getModeDebug().changeDebug();
+					clone.getHUDManager().getModeDebug().changeVisible();
+					clone.getHUDManager().update(clone.getHUDTextManager());
 				}
 				if(keyChap){
-					clone.getHUDManager().getMenuJeu().changeAffichMenu();
+					clone.getHUDManager().getMenuJeu().changeVisible();
+					clone.getHUDManager().update(clone.getHUDTextManager());
 				}
 			
 			}

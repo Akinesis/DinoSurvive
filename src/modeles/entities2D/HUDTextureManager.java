@@ -60,14 +60,18 @@ public class HUDTextureManager {
 		switch (type) {
 		case 1:
 			return genHotBarText();
+			//return genHotBarText();
 		case 2:
 			return genBarreEtat();
 		case 3:
-			return genBarreSac();
+			return genHotBarText();
+			//return genBarreSac();
 		case 4:
-			return genInventaire2D();
+			return genHotBarText();
+			//return genInventaire2D();
 		case 5:
-			return genMenuJeu();
+			return genHotBarText();
+			//return genMenuJeu();
 		//case 6:
 		//	return genCurseur2D();
 		default:
@@ -88,7 +92,63 @@ public class HUDTextureManager {
 	}
 
 	private float[] genBarreEtat() {
-		return new float[]{};
+		
+		return new float[]{		
+				//pointe vers le  haut
+				0f, 0f,
+				0f, 0.024f,
+				0.017f, 0.024f,
+				
+				//triangle sup du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.025f,
+				0f, 0.27f,
+				
+				//triangle inf du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.27f, 
+				0.017f, 0.27f,
+				
+				//pointe vers le bas
+				0.017f, 0.27f,
+				0f, 0.27f,
+				0f, 0.29f,
+				//triangle inf du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.27f, 
+				0.017f, 0.27f,
+				
+				//pointe vers le bas
+				0.017f, 0.27f,
+				0f, 0.27f,
+				0f, 0.29f,				//triangle inf du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.27f, 
+				0.017f, 0.27f,
+				
+				//pointe vers le bas
+				0.017f, 0.27f,
+				0f, 0.27f,
+				0f, 0.29f,
+				//triangle inf du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.27f, 
+				0.017f, 0.27f,
+				
+				//pointe vers le bas
+				0.017f, 0.27f,
+				0f, 0.27f,
+				0f, 0.29f,
+				//triangle inf du grand rectangle
+				0.017f, 0.025f,
+				0f, 0.27f, 
+				0.017f, 0.27f,
+				
+				//pointe vers le bas
+				0.017f, 0.27f,
+				0f, 0.27f,
+				0f, 0.29f,
+				};
 	}
 
 	private float[] genHotBarText() {

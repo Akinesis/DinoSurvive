@@ -161,5 +161,9 @@ public class Controleur implements Parametres{
 		display.changeGrabeMouse();
 	}
 
+	public HUDTextureManager getHUDTextManager() {
+		return this.hudtexManager;
+	}
+
 	
 }

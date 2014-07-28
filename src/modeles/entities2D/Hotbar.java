@@ -8,6 +8,7 @@ public class Hotbar extends AbstractEntity2D{
 	 * 
 	 */
 	public Hotbar(){
+		visible = true;
 	}
 
 	@Override

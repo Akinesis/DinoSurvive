@@ -4,6 +4,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public abstract class AbstractEntity2D{
 	protected Vector2f pos;
+	protected boolean visible;
 	
 	/*
 	 * Getters & Setters
@@ -33,4 +34,10 @@ public abstract class AbstractEntity2D{
 	public abstract float[] getCoord();
 	//arbitrairement hotbar = 1, barreEtat = 2, barreSac = 3, Inventaire2D = 4, MenuJeu = 5, au cas où cursor2D = 6, le reste 0
 	public abstract int getType();
+	public boolean isVisible() { 
+		return visible;
+	}
+	public void changeVisible() {
+		this.visible = !(this.visible);
+	}
 }

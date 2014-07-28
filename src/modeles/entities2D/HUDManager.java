@@ -40,10 +40,10 @@ public class HUDManager extends AbstractEntity2D{
 	private MenuJeu menuJeu;
 	
 	
-	private HUDTextureManager hudText;
 	private int vboVertexHandleHUD;
 	private FloatBuffer interleavedBuffer;
 	private Vector<AbstractEntity2D> entitiesaAfficher;
+	private Vector<AbstractEntity2D> entitiesTotales;
 	private int sizeBuffer;
 	
 	/*
@@ -60,7 +60,17 @@ public class HUDManager extends AbstractEntity2D{
 		debug = new DebugText(contr);
 		
 		entitiesaAfficher = new Vector<AbstractEntity2D>();
+		entitiesTotales = new Vector<AbstractEntity2D>();
+		entitiesTotales.add(curseur);
+		entitiesTotales.add(inventaire);
+		entitiesTotales.add(hotbar);
+		entitiesTotales.add(barreEtat);
+		entitiesTotales.add(barreSac);
+		entitiesTotales.add(menuJeu);
+		
 		entitiesaAfficher.add(hotbar);
+		entitiesaAfficher.add(barreSac);
+		entitiesaAfficher.add(barreEtat);
 		
 		
 		this.menu = new Menu();
@@ -190,5 +200,19 @@ public class HUDManager extends AbstractEntity2D{
 			j=0;
 		}
 		interleavedBuffer.flip();		
+	}
+	public void checkVisible(){
+		entitiesaAfficher.clear();
+		for (AbstractEntity2D entity : entitiesTotales){
+			if (entity.isVisible()){
+				entitiesaAfficher.add(entity);
+			}
+		}
+	}
+	public void update(HUDTextureManager tex){
+		checkVisible();
+		unbindVbo();
+		genHUD(tex);
+		genVBO();
 	}
 }
