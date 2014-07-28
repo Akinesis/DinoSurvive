@@ -54,5 +54,9 @@ public class GameDisplay implements Parametres{
 	public int getWidth(){
 		return Display.getWidth();
 	}
+	
+	public boolean isResized(){
+		return Display.wasResized();
+	}
 
 }

@@ -82,6 +82,10 @@ public class InputManager {
 				}
 			
 			}
+			
+			if(clone.getDisplay().isResized()){
+				clone.getHUDManager().update(clone.getHUDTextManager());
+			}
 		
 			mouse();
 			move();
