@@ -70,11 +70,13 @@ public class HUDManager extends AbstractEntity2D{
 		entitiesTotales.add(barreSac);
 		entitiesTotales.add(menuJeu);
 		entitiesTotales.add(portrait);
+		entitiesTotales.add(curseur);
 		
 		entitiesaAfficher.add(hotbar);
 		entitiesaAfficher.add(barreSac);
 		entitiesaAfficher.add(barreEtat);
 		entitiesaAfficher.add(portrait);
+		entitiesaAfficher.add(curseur);
 		
 		
 		this.menu = new Menu();

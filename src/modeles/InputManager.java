@@ -79,6 +79,7 @@ public class InputManager {
 					clone.changeGragMouse();
 					clone.getHUDManager().getMenuJeu().changeVisible();
 					clone.getHUDManager().update(clone.getHUDTextManager());
+					
 				}
 			
 			}
