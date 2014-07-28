@@ -67,10 +67,11 @@ public class Controleur implements Parametres{
 			glLoadIdentity();
 			input.check();
 			matrices.init2D();
-			this.hud.draw(hudtexManager);
 			display.update();
 		}
-		
+
+		hud.genHUD();
+		hud.draw(hudtexManager);
 		matrices.init3D();
 		terrGen.buildStart();
 		terrGen.genFond(1, -5, 0);
@@ -79,7 +80,7 @@ public class Controleur implements Parametres{
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
-		hud.genHUD();
+		
 		
 		while(!Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			matrices.setSize(display.getHeight(), display.getWidth());

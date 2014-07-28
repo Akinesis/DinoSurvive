@@ -7,7 +7,6 @@ import org.lwjgl.opengl.Display;
 public class MenuJeu extends AbstractEntity2D {
 	//au départ l'inventaire n'est pas affiché
 	boolean onScreen = false;
-	private static int verticiesNum = 6;
 	//ce qui est dessiné (le buffer)
 	//coordonnées des points
 	private FloatBuffer vertexData;
