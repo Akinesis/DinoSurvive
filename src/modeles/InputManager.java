@@ -77,9 +77,9 @@ public class InputManager {
 				}
 				if(keyChap){
 					clone.changeGragMouse();
+					clone.getHUDManager().getCurseur().changeVisible();
 					clone.getHUDManager().getMenuJeu().changeVisible();
-					clone.getHUDManager().update(clone.getHUDTextManager());
-					
+					clone.getHUDManager().update(clone.getHUDTextManager());					
 				}
 			
 			}
