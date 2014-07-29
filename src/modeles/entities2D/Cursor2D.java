@@ -44,14 +44,14 @@ public class Cursor2D extends AbstractEntity2D{
 		float c_vert = Display.getHeight()/2;
 		return new float[]{
 				//triangle sup
-				c_hor+10, c_vert +10,
-				c_hor +10, c_vert-10,
-				c_hor -10, c_vert -10,
+				c_hor+15, c_vert +15,
+				c_hor +15, c_vert-15,
+				c_hor -15, c_vert -15,
 				
 				//triangle inf
-				c_hor+10, c_vert +10,
-				c_hor -10, c_vert -10,
-				c_hor -10, c_vert +10
+				c_hor+15, c_vert +15,
+				c_hor -15, c_vert -15,
+				c_hor -15, c_vert +15
 		};
 	}
 
