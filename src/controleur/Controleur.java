@@ -17,6 +17,7 @@ import modeles.entities2D.HUDManager;
 import modeles.entities2D.HUDTextureManager;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector3f;
 
 import parametres.Parametres;
 import vues.GameDisplay;
@@ -77,6 +78,8 @@ public class Controleur implements Parametres{
 		terrGen.genFond(1, -5, 0);
 		//terrGen.genWall(1, -5, 0);
 		camera.spawn(chunkManager.getHigherPointAt(8, 8));
+		
+		camera.setCurrentChunk(chunkManager.getChunkAt(camera.getPos().x, camera.getPos().y, camera.getPos().z));
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();

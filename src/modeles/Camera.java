@@ -12,7 +12,7 @@ import controleur.Controleur;
 public class Camera {
 	
 	private Controleur clone;
-	private Vector3f position, rotation;
+	private Vector3f position, rotation, curentChunk;
 	
 	//constructeur de la caméra, initialise la position
 	public Camera(Controleur contr){
@@ -20,6 +20,7 @@ public class Camera {
 		clone.getCamera();
 		position = new Vector3f(-0.5f, -3.75f, -1.5f);
 		rotation = new Vector3f(0, 0, 0);
+		curentChunk = new Vector3f();
 	}
 	
 	public void spawn(int y){
@@ -49,6 +50,16 @@ public class Camera {
 	
 	public void setRot(Vector3f rot){
 		rotation=rot;
+	}
+	
+	public Vector3f getCurrentChunk(){
+		return curentChunk;
+	}
+	
+	public void setCurrentChunk(float[] chunk){
+		curentChunk.x=chunk[0];
+		curentChunk.y=chunk[1];
+		curentChunk.z=chunk[2];
 	}
 
 }

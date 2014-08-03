@@ -8,7 +8,9 @@ import java.util.Vector;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
+import org.lwjgl.util.vector.Vector3f;
 
+import parametres.Parametres;
 import modeles.entities.*;
 import controleur.Controleur;
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
@@ -24,13 +26,12 @@ import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glClientActiveTexture;
 import static org.lwjgl.opengl.GL15.*;
 
-public class Chunk {
+public class Chunk implements Parametres{
 	private Cube3dVbo[][][] cubes;
 	private Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
 	private int vboVertexHandleChunk;
 	private FloatBuffer interleavedBuffer;
-	//private FloatBuffer vertexData, vertexTexture;
 	private int floatByteSize = 4;
 	private int positionFloatCount = 3;
 	private int floatsPerVertex = positionFloatCount*3;
@@ -78,6 +79,14 @@ public class Chunk {
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
 
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+
+	}
+	
+	private void updateVBO(){
+
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
+		GL15.glBufferSubData(GL_ARRAY_BUFFER, 5*4*renderCubes.size()*6*2, interleavedBuffer);
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 
 	}
@@ -154,6 +163,13 @@ public class Chunk {
 				}
 			}
 		}
+	}
+	
+	public boolean checkPos(Vector3f current){
+		if(Math.abs(current.x-x)>chunkFar || Math.abs(current.y-y)>chunkFar || Math.abs(current.z-z)>chunkFar){
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -252,8 +268,9 @@ public class Chunk {
 	}
 
 	public void unbindVbo(){
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		GL15.glDeleteBuffers(vboVertexHandleChunk);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		if(interleavedBuffer!=null){
 			interleavedBuffer.clear();
 		}

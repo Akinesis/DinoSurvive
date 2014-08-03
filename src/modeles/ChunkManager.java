@@ -163,9 +163,9 @@ public class ChunkManager {
 		}
 	}
 
-	private void checkRender(){
+	public void checkRender(){
 		for(Chunk ck : chunks){
-			if(!chunksurround(ck)){
+			if(!chunksurround(ck)&&ck.checkPos(clone.getCamera().getCurrentChunk())){
 				renderChunks.add(ck);
 			}
 		}

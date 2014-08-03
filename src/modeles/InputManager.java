@@ -4,6 +4,7 @@ package modeles;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.util.vector.Vector3f;
 
 import controleur.Controleur;
 
@@ -22,12 +23,14 @@ public class InputManager {
 	private float hauteurSaut, lastJump;
 	private long lastFrame;
 	private int delta;
+	private Vector3f curentChunk;
 
 	public InputManager(Controleur contr){
 		clone = contr;
 		clone.getMap();//à changer; inutile
 		isJumping = false;
 		lastFrame=getTime();
+		curentChunk= new Vector3f();
 	}
 
 	public void setCam(Camera cam){
@@ -39,7 +42,7 @@ public class InputManager {
 	 * TODO: alléger et améliorer
 	 */
 	public void check(){
-		
+
 		boolean keyChap = Keyboard.isKeyDown(Keyboard.KEY_ESCAPE);
 		boolean keyI = Keyboard.isKeyDown(Keyboard.KEY_I);
 		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_INSERT);
@@ -48,7 +51,7 @@ public class InputManager {
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 		delta = getDelta();
-		
+
 		//neutralise tout les mouvements
 		if(this.clone.getHUDManager().getMenu().getEstAfficher()){
 			//this.clone.changeGragMouse();
@@ -81,18 +84,18 @@ public class InputManager {
 					clone.getHUDManager().getMenuJeu().changeVisible();
 					clone.getHUDManager().update(clone.getHUDTextManager());					
 				}
-			
+
 			}
-			
+
 			if(clone.getDisplay().isResized()){
 				clone.getHUDManager().update(clone.getHUDTextManager());
 			}
-		
+
 			mouse();
 			move();
 
 			jump(keyJump);
-		
+
 			if(!clone.getCollision().gravity(camera) && !isJumping){
 				//camera.getPos().y += 0.12;
 			}
@@ -130,10 +133,10 @@ public class InputManager {
 	private void mouse(){
 		boolean leftClik = Mouse.isButtonDown(0);
 		boolean rightClik = Mouse.isButtonDown(1);
-		
+
 		float mouseDX = Mouse.getDX() * 1 * 0.16f;
 		float mouseDY = Mouse.getDY() * 1 * 0.16f;
-		
+
 		//mouvement de la souris
 		if(Mouse.isGrabbed()){
 			if (camera.getRot().y + mouseDX >= 360) {
@@ -150,18 +153,18 @@ public class InputManager {
 				camera.getRot().x = 85;
 			}
 		}
-		
+
 		while(Mouse.next()){
 			if(leftClik){
 				clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				clone.getChunkManager().update();
 			}
-			
+
 			if(rightClik){
 				clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z, 1);
 				clone.getChunkManager().update();	
 			}
-			
+
 		}				
 	}
 
@@ -182,6 +185,12 @@ public class InputManager {
 
 		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
+
+		if(!compareChunk()){
+			clone.getChunkManager().checkRender();
+			clone.getChunkManager().update();
+			System.out.println("yo");
+		}
 
 	}
 
@@ -214,12 +223,32 @@ public class InputManager {
 	private static long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}
-	
+
 	private int getDelta() {
 		long currentTime = getTime();
 		int delta = (int) (currentTime - lastFrame);
 		lastFrame = getTime();
 		return delta;
+	}
+
+	private boolean compareChunk(){
+		if(curentChunk==null){
+			curentChunk.x=1;
+			curentChunk.y=1;
+			curentChunk.z=1;
+		}
+		Vector3f temp = clone.getCamera().getCurrentChunk();
+		if(temp.x!=curentChunk.x || temp.y!=curentChunk.y || temp.z!=curentChunk.z){
+			curentChunk = temp;
+			return true;
+		}
+		return false;
+	}
+
+	public void setCurrentChunk(float[] chunk){
+		curentChunk.x=chunk[0];
+		curentChunk.y=chunk[1];
+		curentChunk.z=chunk[2];
 	}
 
 }
