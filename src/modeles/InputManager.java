@@ -186,12 +186,11 @@ public class InputManager {
 		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
-		if(compareChunk()){
+		if(compareChunk() || Keyboard.isKeyDown(Keyboard.KEY_P)){
 			clone.getChunkManager().checkRender();
 			clone.getChunkManager().update();
 			System.out.println("yo");
 		}
-
 	}
 
 	private void moveY(float amt){
@@ -233,9 +232,9 @@ public class InputManager {
 
 	private boolean compareChunk(){
 		if(curentChunk==null){
-			curentChunk.x=1;
-			curentChunk.y=1;
-			curentChunk.z=1;
+			//curentChunk.x=1;
+			//curentChunk.y=1;
+			//curentChunk.z=1;
 		}
 		Vector3f temp = clone.getCamera().getCurrentChunk();
 		if(temp.x!=curentChunk.x || temp.y!=curentChunk.y || temp.z!=curentChunk.z){
