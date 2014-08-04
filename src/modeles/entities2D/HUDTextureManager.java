@@ -10,6 +10,7 @@ import static org.lwjgl.opengl.GL11.glTexParameteri;
 
 import java.io.IOException;
 
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -64,8 +65,7 @@ public class HUDTextureManager {
 		case 2:
 			return genBarreEtat();
 		case 3:
-			return genHotBarText();
-			//return genBarreSac();
+			return genBarreSac();
 		case 4:
 			return genHotBarText();
 			//return genInventaire2D();
@@ -101,93 +101,70 @@ public class HUDTextureManager {
 	}
 
 	private float[] genBarreSac() {
-		return new float[]{};
+		float lar = Display.getWidth();
+		float hau = Display.getHeight();
+		return new float[]{	
+				//triangle qui dépasse
+				(32+1)/512f, (428+1)/512f,
+				(32+1)/512f, (396+1)/512f,
+				(0+1)/512f, (428+1)/512f,				
+				//triangle sup  de la barre
+				(197+1)/512f, (396+1)/512f,
+				(32+1)/512f, (396+1)/512f,
+				(32+1)/512f, (428+1)/512f,
+				//triangle inf de la barre
+				(197+1)/512f, (396+1)/512f,
+				(32+1)/512f, (428+1)/512f,
+				(197+1)/512f, (428+1)/512f,
+				};
 	}
 	
 	private float[] genPortrait(){
 		return new float[]{
-				//pointe vers le  haut
-				0f, 0f,
-				0f, 0.0533f,
-				0.0533f, 0.0533f,
+				//triangle du haut
+				(85+1)/512f, (73+1)/512f,
+				(36+1)/512f, (73+1)/512f,
+				(36+1)/512f, (122+1)/512f,
 				
 				//triangle sup du grand rectangle
-				0.0275f, 0.301f,
-				0.0275f, 0.0275f,
-				0f, 0.0275f,
-				
-				//triangle inf du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.27f, 
-				0.017f, 0.27f,
-				
-				//pointe vers le bas
-				0.017f, 0.27f,
-				0f, 0.27f,
-				0f, 0.29f,
-				
-				
+				(36+1)/512f, (122+1)/512f,
+				(85+1)/512f, (122+1)/512f,
+				(85+1)/512f, (73+1)/512f,
 		};
 	}
 
 	private float[] genBarreEtat() {
-		
-		return new float[]{		
-				//pointe vers le  haut
-				0f, 0f,
-				0f, 0.024f,
-				0.017f, 0.024f,
-				
-				//triangle sup du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.025f,
-				0f, 0.27f,
-				
-				//triangle inf du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.27f, 
-				0.017f, 0.27f,
-				
-				//pointe vers le bas
-				0.017f, 0.27f,
-				0f, 0.27f,
-				0f, 0.29f,
-				//triangle inf du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.27f, 
-				0.017f, 0.27f,
-				
-				//pointe vers le bas
-				0.017f, 0.27f,
-				0f, 0.27f,
-				0f, 0.29f,				//triangle inf du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.27f, 
-				0.017f, 0.27f,
-				
-				//pointe vers le bas
-				0.017f, 0.27f,
-				0f, 0.27f,
-				0f, 0.29f,
-				//triangle inf du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.27f, 
-				0.017f, 0.27f,
-				
-				//pointe vers le bas
-				0.017f, 0.27f,
-				0f, 0.27f,
-				0f, 0.29f,
-				//triangle inf du grand rectangle
-				0.017f, 0.025f,
-				0f, 0.27f, 
-				0.017f, 0.27f,
-				
-				//pointe vers le bas
-				0.017f, 0.27f,
-				0f, 0.27f,
-				0f, 0.29f,
-				};
+		float lar = Display.getWidth();
+		float hau = Display.getHeight();
+		return new float[]{
+				//barre supérieure (santé)
+				//triangle sup
+				(141+1)/512f, (51+1)/512f,
+				(141+1)/512f, (36+1)/512f,
+				(36+1)/512f, (36+1)/512f,			
+				//triangle inf
+				(141+1)/512f, (51+1)/512f,
+				(36+1)/512f, (36+1)/512f,
+				(36+1)/512f, (51+1)/512f,
+				//barre middle (anti matière)
+				//triangle sup
+				(141+1)/512f, (69+1)/512f,
+				(141+1)/512f, (54+1)/512f,
+				(36+1)/512f, (54+1)/512f,			
+				//triangle inf
+				(141+1)/512f, (69+1)/512f,
+				(36+1)/512f, (54+1)/512f,			
+				(36+1)/512f, (69+1)/512f,
+				//barre inf (endurance)
+				//triangle sup
+				(141+1)/512f, (69+1)/512f,
+				(141+1)/512f, (54+1)/512f,
+				(36+1)/512f, (54+1)/512f,				
+				//triangle inf
+				(141+1)/512f, (69+1)/512f,
+				(36+1)/512f, (54+1)/512f,			
+				(36+1)/512f, (69+1)/512f,
+		};
 	}
 
 	private float[] genHotBarText() {
