@@ -40,14 +40,14 @@ public class Inventaire2D extends AbstractEntity2D{
 		float hau = Display.getHeight();
 		return new float[]{
 				//premier triangle (counterclockwise)
-				lar, 0.9f*hau,
-				lar, 0.1f*hau,
-				0.75f*lar, 0.1f*hau,
+				lar, 0.93f*hau,
+				lar, 0.11f*hau,
+				0.65f*lar, 0.11f*hau,
 				
 				//deuxième triangle
-				0.75f*lar, 0.1f*hau,
-				0.75f*lar, 0.9f*hau,
-				lar, 0.9f*hau						
+				0.65f*lar, 0.11f*hau,
+				0.65f*lar, 0.93f*hau,
+				lar, 0.93f*hau						
 		};
 	}
 
