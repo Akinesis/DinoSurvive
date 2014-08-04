@@ -24,14 +24,14 @@ public class BarreSac extends AbstractEntity2D {
 		return(new float[]{
 				//triangle qui dépasse
 				0.65f*lar, 1f*hau,
-				0.65f*lar, 0.93f*hau,
-				0.60f*lar, 1f*hau,				
+				0.65f*lar, 1f*hau-0.07f*lar,
+				0.58f*lar, 1f*hau,				
 				//triangle sup  de la barre
-				1f*lar, 0.93f*hau,
-				0.65f*lar, 0.93f*hau,
+				1f*lar, 1f*hau-0.07f*lar,
+				0.65f*lar, 1f*hau-0.07f*lar,
 				0.65f*lar, 1f*hau,
 				//triangle inf de la barre
-				1f*lar, 0.93f*hau,
+				1f*lar, 1f*hau-0.07f*lar,
 				0.65f*lar, 1f*hau,
 				1f*lar, 1f*hau,		
 		});
