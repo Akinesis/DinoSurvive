@@ -58,6 +58,36 @@ public class InputManager {
 			if(Keyboard.isKeyDown(Keyboard.KEY_M)){
 				this.clone.getHUDManager().getMenu().inverserEstAfficher();
 			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD0)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsDark(0);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsDark(1);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsDark(2);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsDark(3);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsDark(4);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD1)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(0);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD3)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(1);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD5)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(2);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(3);
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(4);
+			}
 		}else{
 			//inversion de la souris
 			while(Keyboard.next()){

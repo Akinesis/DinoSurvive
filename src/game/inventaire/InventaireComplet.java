@@ -43,7 +43,7 @@ public class InventaireComplet implements Inventaire {
 	/* voir comment {Sac<Armes>, Sac<Armures>, Sac<Consommables>, Sac<Cubes>,  Sac<Outils>}
 	 * faciliterait cette methode grace a l'identifiant des Items ( 0xxx armes, 1xxx armures, ... )
 	 */
-	@Override
+
 	public boolean addItem(Item item, Inventaire inventaire) {
 		boolean done = false;
 		if(inventaire.contains(item)){
@@ -52,7 +52,7 @@ public class InventaireComplet implements Inventaire {
 		}
 		return done;
 	}
-	@Override
+	
 	public boolean addItem(Item item, int position, Inventaire inventaire) {
 		Item temp;
 		try {
@@ -66,27 +66,27 @@ public class InventaireComplet implements Inventaire {
 		
 		return false;
 	}
-	@Override
+	
 	public boolean addInventaire(Inventaire inventaire) {
 		
 		return false;
 	}
-	@Override
+	
 	public void removeItem(Item item) {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+	
 	public void transferItem(Inventaire inventaire, Item item) {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+	
 	public void moveItem(Item item, int position) {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+	
 	public boolean contains(Item item) {
 		// TODO Auto-generated method stub
 		return false;
