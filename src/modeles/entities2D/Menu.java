@@ -47,7 +47,7 @@ public class Menu extends AbstractEntity3D{
 	}
 	
 	private float[] generationBoutonsEtats() {
-		return new float[]{1, 1, 1, 1, 1};
+		return new float[]{2, 1, 1, 1, 1};
 	}
 
 	public void boutonsEtatsNormale(int i) {

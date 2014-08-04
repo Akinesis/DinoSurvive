@@ -57,20 +57,25 @@ public class Controleur implements Parametres{
 
 	//le coeur du jeu, ma méthode contenant la boucle de jeu.
 	public void init(){
+		int position;
+		
+		position = 0;
 		display.create();
 		hud = new HUDManager(this);
 		texManager = new TextureManager();	
 		hudtexManager = new HUDTextureManager();
 		
+		this.changeGragMouse();
 		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
-			this.input.check();
+			position = this.input.checkMenu(position);
 			this.matrices.init2D();
 			this.hud.drawMenu();
 			this.display.update();
 		}
-
+		this.changeGragMouse();
+		
 		hud.genHUD(hudtexManager);
 		hud.draw(hudtexManager);
 		matrices.init3D();

@@ -53,86 +53,121 @@ public class InputManager {
 		delta = getDelta();
 
 		//neutralise tout les mouvements
-		if(this.clone.getHUDManager().getMenu().getEstAfficher()){
-			//this.clone.changeGragMouse();
-			if(Keyboard.isKeyDown(Keyboard.KEY_M)){
-				this.clone.getHUDManager().getMenu().inverserEstAfficher();
+		
+		//this.clone.changeGragMouse();
+			
+		//inversion de la souris
+		while(Keyboard.next()){
+			if(keydol){
+				coef*=-1;
 			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD0)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsDark(0);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsDark(1);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsDark(2);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsDark(3);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsDark(4);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD1)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(0);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD3)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(1);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD5)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(2);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(3);
-			}
-			if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(4);
-			}
-		}else{
-			//inversion de la souris
-			while(Keyboard.next()){
-				if(keydol){
-					coef*=-1;
-				}
-				if(keyReturn){
-					clone.changeGragMouse();
-				}
-
-				if(keyBas)
-					moveY(1);
-				if(keyI){
-					clone.getHUDManager().getPortrait().changeVisible();
-					clone.getHUDManager().getInventaire().changeVisible();
-					clone.getHUDManager().update(clone.getHUDTextManager());
-				}
-				if(keyINSERT){
-					clone.getHUDManager().getModeDebug().changeVisible();
-					clone.getHUDManager().update(clone.getHUDTextManager());
-				}
-				if(keyChap){
-					clone.changeGragMouse();
-					clone.getHUDManager().getCurseur().changeVisible();
-					clone.getHUDManager().getMenuJeu().changeVisible();
-					clone.getHUDManager().update(clone.getHUDTextManager());					
-				}
-
+			if(keyReturn){
+				clone.changeGragMouse();
 			}
 
-			if(clone.getDisplay().isResized()){
+			if(keyBas)
+				moveY(1);
+			if(keyI){
+				clone.getHUDManager().getPortrait().changeVisible();
+				clone.getHUDManager().getInventaire().changeVisible();
 				clone.getHUDManager().update(clone.getHUDTextManager());
 			}
-
-			mouse();
-			move();
-
-			jump(keyJump);
-
-			if(!clone.getCollision().gravity(camera) && !isJumping){
-				//camera.getPos().y += 0.12;
+			if(keyINSERT){
+				clone.getHUDManager().getModeDebug().changeVisible();
+				clone.getHUDManager().update(clone.getHUDTextManager());
 			}
+			if(keyChap){
+				clone.changeGragMouse();
+				clone.getHUDManager().getCurseur().changeVisible();
+				clone.getHUDManager().getMenuJeu().changeVisible();
+				clone.getHUDManager().update(clone.getHUDTextManager());					
+			}
+
 		}
+
+		if(clone.getDisplay().isResized()){
+			clone.getHUDManager().update(clone.getHUDTextManager());
+		}
+
+		mouse();
+		move();
+		jump(keyJump);
+			
+		if(!clone.getCollision().gravity(camera) && !isJumping){
+			//camera.getPos().y += 0.12;
+		}
+		
 	}
 
+	public int checkMenu(int position){
+		int boutons[] = new int[]{0,1,2,3,4};
+		//int position;
+		while (Keyboard.next()) {
+			if (Keyboard.getEventKey() == Keyboard.KEY_DOWN){
+				if(Keyboard.getEventKeyState()){
+					this.clone.getHUDManager().getMenu().boutonsEtatsNormale(position);
+					if(position != 4){
+						position = boutons[position+1];
+					}else{
+						position = boutons[0];
+					}
+				}
+			}
+			if (Keyboard.getEventKey() == Keyboard.KEY_UP){
+				if(Keyboard.getEventKeyState()){
+					this.clone.getHUDManager().getMenu().boutonsEtatsNormale(position);
+					if(position != 0){
+						position = boutons[position-1];
+					}else{
+						position = boutons[4];
+					}
+				}
+			}
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
+			if(Keyboard.getEventKey() == Keyboard.KEY_RETURN){
+				if(Keyboard.getEventKeyState()){
+					this.clone.getHUDManager().getMenu().boutonsEtatsDark(position);
+				}
+			}
+		}
+		
+		if(Keyboard.isKeyDown(Keyboard.KEY_M)){
+			this.clone.getHUDManager().getMenu().inverserEstAfficher();
+		}
+		
+		//test changement couleur
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD0)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsDark(0);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsDark(1);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsDark(2);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsDark(3);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsDark(4);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD1)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(0);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD3)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(1);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD5)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(2);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(3);
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9)){
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(4);
+		}
+		return position;
+	}
 	private void move(){
 		/*
 		 * verification du clavier
