@@ -23,14 +23,14 @@ public class Portrait extends AbstractEntity2D {
 		
 		return new float[]{
 				//triangle du haut
-				0.98f*lar, 0.09f*hau,
-				0.98f*lar, 0.01f*hau,
-				0.91f*lar, 0.01f*hau,
+				1f*lar, 0.11f*hau,
+				1f*lar-0.15f*hau, 0.11f*hau,
+				1f*lar-0.15f*hau, 0.26f*hau,
 				
 				//triangle du bas
-				0.98f*lar, 0.09f*hau,
-				0.91f*lar, 0.01f*hau,
-				0.91f*lar, 0.09f*hau
+				1f*lar-0.15f*hau, 0.26f*hau,
+				1f*lar, 0.26f*hau,
+				1f*lar, 0.11f*hau
 				
 		};
 	}

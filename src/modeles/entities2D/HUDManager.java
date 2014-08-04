@@ -221,4 +221,8 @@ public class HUDManager extends AbstractEntity2D{
 		genHUD(tex);
 		genVBO();
 	}
+
+	public Portrait getPortrait() {
+		return portrait;
+	}
 }

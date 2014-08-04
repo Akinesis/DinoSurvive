@@ -71,6 +71,7 @@ public class InputManager {
 				if(keyBas)
 					moveY(1);
 				if(keyI){
+					clone.getHUDManager().getPortrait().changeVisible();
 					clone.getHUDManager().getInventaire().changeVisible();
 					clone.getHUDManager().update(clone.getHUDTextManager());
 				}
