@@ -53,7 +53,7 @@ public class Inventaire2D extends AbstractEntity2D{
 
 	@Override
 	public int getType() {
-		return 0;
+		return 4;
 	}
 
 

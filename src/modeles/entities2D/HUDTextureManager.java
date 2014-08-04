@@ -67,8 +67,7 @@ public class HUDTextureManager {
 		case 3:
 			return genBarreSac();
 		case 4:
-			return genHotBarText();
-			//return genInventaire2D();
+			return genInventaire2D();
 		case 5:
 			return genHotBarText();
 			//return genMenuJeu();
@@ -97,7 +96,15 @@ public class HUDTextureManager {
 	}
 
 	private float[] genInventaire2D() {
-		return new float[]{};
+		return new float[]{
+				1f, 492/512f,
+				1f, 0f,
+				302/512f, 0f,
+				
+				302/512f, 0f,
+				302/512f, 492/512f,
+				1f, 492/512f,
+		};
 	}
 
 	private float[] genBarreSac() {
