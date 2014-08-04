@@ -4,6 +4,7 @@ package modeles;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
 import controleur.Controleur;
@@ -134,9 +135,55 @@ public class InputManager {
 		if(Keyboard.isKeyDown(Keyboard.KEY_M)){
 			this.clone.getHUDManager().getMenu().inverserEstAfficher();
 		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_Z)){
+			Mouse.setCursorPosition((int) (0.15f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_E)){
+			Mouse.setCursorPosition((int) (0.30f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_R)){
+			Mouse.setCursorPosition((int) (0.40f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_T)){
+			Mouse.setCursorPosition((int) (0.50f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
+		}
+		if(Keyboard.isKeyDown(Keyboard.KEY_Y)){
+			Mouse.setCursorPosition((int) (0.60f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
+		}
+		
+		if( (Mouse.getY() < 0.9875f*Display.getWidth()) && (Mouse.getY() > 0.6375f*Display.getWidth()) ){
+			if( (Mouse.getX() < 0.2f*Display.getHeight()) && (Mouse.getX() > 0.1f*Display.getHeight()) ){
+				position = 1;
+				System.out.println(position);
+			}
+			if( (Mouse.getX() < 0.32f*Display.getHeight()) && (Mouse.getX() > 0.22f*Display.getHeight()) ){
+				position = 2;
+				System.out.println(position);
+
+			}
+			if( (Mouse.getX() < 0.44f*Display.getHeight()) && (Mouse.getX() > 0.34f*Display.getHeight()) ){
+				position = 3;
+				System.out.println(position);
+
+			}
+			if( (Mouse.getX() < 0.56f*Display.getHeight()) && (Mouse.getX() > 0.46f*Display.getHeight()) ){
+				position = 4;
+				System.out.println(position);
+
+			}
+			if( (Mouse.getX() < 0.68f*Display.getHeight()) && (Mouse.getX() > 0.58f*Display.getHeight()) ){
+				position = 5;
+				System.out.println(position);
+
+			}
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
+		}
+		
+		
+		
 		
 		//test changement couleur
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD0)){
+		/*if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD0)){
 			this.clone.getHUDManager().getMenu().boutonsEtatsDark(0);
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)){
@@ -165,7 +212,7 @@ public class InputManager {
 		}
 		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9)){
 			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(4);
-		}
+		}*/
 		return position;
 	}
 	private void move(){
