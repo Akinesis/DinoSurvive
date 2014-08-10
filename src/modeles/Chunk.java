@@ -135,29 +135,12 @@ public class Chunk implements Parametres{
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
 					if(cubes[i][j][k]!=null){
-						if(cubes[i][j][k].getState()){
-							renderCubes.add(cubes[i][j][k]);
-						}else{
-							nonRenderCubes.add(cubes[i][j][k]);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Met a jours les cubes a rendre ou non
-	 */
-	public void updateStates(){
-		for(int i=0; i<16; i++){
-			for(int j =0; j<16; j++){
-				for(int k=0; k<16; k++){
-					if(cubes[i][j][k]!=null){
 						if(surround(i,j,k)){
 							cubes[i][j][k].setEtat(false);
+							nonRenderCubes.add(cubes[i][j][k]);
 						}else{
 							cubes[i][j][k].setEtat(true);
+							renderCubes.add(cubes[i][j][k]);
 						}
 					}
 				}
@@ -177,7 +160,7 @@ public class Chunk implements Parametres{
 	 * Puis suprimer les ancien buffer pour les recrée avec les nouvelles valeurs.
 	 */
 	public void update(){
-		updateStates();
+		//updateStates();
 		checkState();
 		unbindVbo();
 		genCubes(clone.getTexManager());
