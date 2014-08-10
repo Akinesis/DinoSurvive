@@ -107,7 +107,7 @@ public class ChunkManager {
 
 	public void updateStates(){
 		for(Chunk chunk : chunks){
-			chunk.updateStates();
+			//chunk.updateStates();
 		}
 	}
 
@@ -156,7 +156,7 @@ public class ChunkManager {
 		checkRender();
 		for(Chunk chunk : renderChunks){
 			chunk.addCubes();
-			chunk.updateStates();
+			//chunk.updateStates();
 			chunk.checkState();
 			chunk.genCubes(clone.getTexManager());
 			chunk.genVBO();
