@@ -106,12 +106,12 @@ public class Chunk implements Parametres{
 		return cubes[tempX][tempY][tempZ];
 	}
 
-	public void delCube(float x, float y, float z){
-		int tempX = (int)(Math.abs(x)+((x<0)?-1:0))%16;
-		int tempY = (int)Math.abs(y)%16;
-		int tempZ = (int)(Math.abs(z)+((z<0)?-1:0))%16;
+	public void delCube(int x, int y, int z){
+		//int tempX = (int)(Math.abs(x)+((x<0)?-1:0))%16;
+		//int tempY = (int)Math.abs(y)%16;
+		//int tempZ = (int)(Math.abs(z)+((z<0)?-1:0))%16;
 
-		cubes[tempX][tempY][tempZ]=null;
+		cubes[x][y][z]=null;
 		updated=false;
 	}
 
@@ -148,6 +148,28 @@ public class Chunk implements Parametres{
 		}
 	}
 	
+	public void checkStateAt(int x, int y, int z){
+		
+		for(int i=(x>0)?x-1:0; i<=((x<15)?x+1:15); i++){
+			for(int j=(y>0)?y-1:0; j<=((y<15)?y+1:15); j++){
+				for(int k=(z>0)?z-1:0; k<=((z<15)?z+1:15); k++){
+					System.out.println("x: "+i+" y: "+y+" z: "+z);
+					if(cubes[i][j][k]!=null){
+						nonRenderCubes.remove(cubes[i][j][k]);
+						renderCubes.remove(cubes[i][j][k]);
+						if(surround(i,j,k)){
+							cubes[i][j][k].setEtat(false);
+							nonRenderCubes.add(cubes[i][j][k]);
+						}else{
+							cubes[i][j][k].setEtat(true);
+							renderCubes.add(cubes[i][j][k]);
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public boolean checkPos(Vector3f current){
 		if(Math.abs(Math.abs(current.x)-Math.abs(x))>chunkFar || Math.abs(Math.abs(current.y)-Math.abs(y))>chunkFar || Math.abs(Math.abs(current.z)-Math.abs(z))>chunkFar){
 			return true;
@@ -160,8 +182,19 @@ public class Chunk implements Parametres{
 	 * Puis suprimer les ancien buffer pour les recrée avec les nouvelles valeurs.
 	 */
 	public void update(){
-		//updateStates();
 		checkState();
+		unbindVbo();
+		genCubes(clone.getTexManager());
+		genVBO();
+	}
+	
+	public void updateAt(float x, float y, float z){
+		
+		int i = (int)Math.abs(x)%16;
+		int j = (int)Math.abs(y)%16;
+		int k = (int)Math.abs(z)%16;
+		
+		checkStateAt(i,j,k);
 		unbindVbo();
 		genCubes(clone.getTexManager());
 		genVBO();
@@ -247,7 +280,6 @@ public class Chunk implements Parametres{
 		int posZ = (Math.abs(cube.getZ())+((cube.getZ()<0)?-1:0))%16;
 
 		cubes[posX][posY][posZ] = cube;
-		updated=false;
 	}
 
 	public void unbindVbo(){
