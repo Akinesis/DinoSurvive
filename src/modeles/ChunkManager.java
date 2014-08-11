@@ -76,7 +76,7 @@ public class ChunkManager {
 
 		for(Chunk ck : chunks){
 			if( (ck.getX() == xChunk) && (ck.getY() == yChunk) && (ck.getZ() == zChunk) ){
-				ck.delCube(x, y, z);
+				ck.delCube((int)x, (int)y, (int)z);
 			}
 		}
 	}
@@ -106,9 +106,6 @@ public class ChunkManager {
 	}
 
 	public void updateStates(){
-		for(Chunk chunk : chunks){
-			//chunk.updateStates();
-		}
 	}
 
 	public void update(){
@@ -119,6 +116,23 @@ public class ChunkManager {
 			for(Chunk chunk : chunksToRender){
 				if(i<6){
 					chunk.update();
+					temp.add(chunk);
+					i++;
+					chunk.haveBeenUpdated(true);
+				}
+			}
+			chunksToRender.removeAll(temp);
+		}
+	}
+	
+	public void updateAt(float x, float y, float z){
+		chunksToRender.addAll(getChunkToUpdate());
+		Vector<Chunk> temp = new Vector<Chunk>();
+		int i = 0;
+		if(!(chunksToRender.isEmpty())){
+			for(Chunk chunk : chunksToRender){
+				if(i<6){
+					chunk.updateAt(x, y, z);
 					temp.add(chunk);
 					i++;
 					chunk.haveBeenUpdated(true);

@@ -46,7 +46,7 @@ public class InputManager {
 
 		boolean keyChap = Keyboard.isKeyDown(Keyboard.KEY_ESCAPE);
 		boolean keyI = Keyboard.isKeyDown(Keyboard.KEY_I);
-		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_INSERT);
+		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_K);
 		boolean keydol = Keyboard.isKeyDown(Keyboard.KEY_HOME); 
 		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
@@ -54,9 +54,9 @@ public class InputManager {
 		delta = getDelta();
 
 		//neutralise tout les mouvements
-		
+
 		//this.clone.changeGragMouse();
-			
+
 		//inversion de la souris
 		while(Keyboard.next()){
 			if(keydol){
@@ -93,16 +93,15 @@ public class InputManager {
 		mouse();
 		move();
 		jump(keyJump);
-			
+
 		if(!clone.getCollision().gravity(camera) && !isJumping){
 			//camera.getPos().y += 0.12;
 		}
-		
+
 	}
 
 	public int checkMenu(int position){
 		int boutons[] = new int[]{0,1,2,3,4};
-		//int position;
 		while (Keyboard.next()) {
 			if (Keyboard.getEventKey() == Keyboard.KEY_DOWN){
 				if(Keyboard.getEventKeyState()){
@@ -131,7 +130,7 @@ public class InputManager {
 				}
 			}
 		}
-		
+
 		if(Keyboard.isKeyDown(Keyboard.KEY_M)){
 			this.clone.getHUDManager().getMenu().inverserEstAfficher();
 		}
@@ -150,7 +149,7 @@ public class InputManager {
 		if(Keyboard.isKeyDown(Keyboard.KEY_Y)){
 			Mouse.setCursorPosition((int) (0.60f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
 		}
-		
+
 		if( (Mouse.getY() < 0.9875f*Display.getWidth()) && (Mouse.getY() > 0.6375f*Display.getWidth()) ){
 			if( (Mouse.getX() < 0.2f*Display.getHeight()) && (Mouse.getX() > 0.1f*Display.getHeight()) ){
 				position = 1;
@@ -178,10 +177,10 @@ public class InputManager {
 			}
 			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
 		}
-		
-		
-		
-		
+
+
+
+
 		//test changement couleur
 		/*if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD0)){
 			this.clone.getHUDManager().getMenu().boutonsEtatsDark(0);
@@ -267,18 +266,15 @@ public class InputManager {
 			}
 		}
 
-		while(Mouse.next()){
-			if(leftClik){
-				clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
-				clone.getChunkManager().update();
-			}
+		if(leftClik){
+			clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+			clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+		}
 
-			if(rightClik){
-				clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z, 1);
-				clone.getChunkManager().update();	
-			}
-
-		}				
+		if(rightClik){
+			clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z, 1);
+			clone.getChunkManager().update();	
+		}			
 	}
 
 	/**
