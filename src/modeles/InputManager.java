@@ -1,6 +1,8 @@
 package modeles;
 
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -132,89 +134,38 @@ public class InputManager {
 			}
 		}
 		
-		if(Keyboard.isKeyDown(Keyboard.KEY_M)){
-			this.clone.getHUDManager().getMenu().inverserEstAfficher();
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_Z)){
-			Mouse.setCursorPosition((int) (0.15f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_E)){
-			Mouse.setCursorPosition((int) (0.30f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_R)){
-			Mouse.setCursorPosition((int) (0.40f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_T)){
-			Mouse.setCursorPosition((int) (0.50f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_Y)){
-			Mouse.setCursorPosition((int) (0.60f*Display.getHeight()), (int) (0.75f*Display.getWidth()));
-		}
-		
-		if( (Mouse.getY() < 0.9875f*Display.getWidth()) && (Mouse.getY() > 0.6375f*Display.getWidth()) ){
-			if( (Mouse.getX() < 0.2f*Display.getHeight()) && (Mouse.getX() > 0.1f*Display.getHeight()) ){
+		if( (Mouse.getX() < 0.9875f*Display.getWidth()) && (Mouse.getX() > 0.6375f*Display.getWidth()) ){
+			if( (Mouse.getY() > Display.getHeight() - 0.2f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.1f*Display.getHeight()) ){
+				position = 0;
+			}
+			if( (Mouse.getY() >  Display.getHeight() - 0.32f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.22f*Display.getHeight()) ){
 				position = 1;
-				System.out.println(position);
+
 			}
-			if( (Mouse.getX() < 0.32f*Display.getHeight()) && (Mouse.getX() > 0.22f*Display.getHeight()) ){
+			if( (Mouse.getY() > Display.getHeight() - 0.44f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.34f*Display.getHeight()) ){
 				position = 2;
-				System.out.println(position);
 
 			}
-			if( (Mouse.getX() < 0.44f*Display.getHeight()) && (Mouse.getX() > 0.34f*Display.getHeight()) ){
+			if( (Mouse.getY() > Display.getHeight() - 0.56f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.46f*Display.getHeight()) ){
 				position = 3;
-				System.out.println(position);
 
 			}
-			if( (Mouse.getX() < 0.56f*Display.getHeight()) && (Mouse.getX() > 0.46f*Display.getHeight()) ){
+			if( (Mouse.getY() > Display.getHeight() - 0.68f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.58f*Display.getHeight()) ){
 				position = 4;
-				System.out.println(position);
 
 			}
-			if( (Mouse.getX() < 0.68f*Display.getHeight()) && (Mouse.getX() > 0.58f*Display.getHeight()) ){
-				position = 5;
-				System.out.println(position);
-
-			}
+			this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
 			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
+			System.out.println(position);
 		}
 		
+		if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Mouse.isButtonDown(0)){
+			this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
+		}
 		
-		
-		
-		//test changement couleur
-		/*if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD0)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsDark(0);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD2)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsDark(1);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD4)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsDark(2);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD6)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsDark(3);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD8)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsDark(4);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD1)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(0);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD3)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(1);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD5)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(2);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD7)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(3);
-		}
-		if(Keyboard.isKeyDown(Keyboard.KEY_NUMPAD9)){
-			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(4);
-		}*/
 		return position;
 	}
+	
 	private void move(){
 		/*
 		 * verification du clavier
