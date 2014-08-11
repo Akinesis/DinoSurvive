@@ -70,11 +70,9 @@ public class Controleur implements Parametres{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
 			position = this.input.checkMenu(position);
-			if( ! this.getHUDManager().getMenu().isDisplayIsClose()){
-				this.matrices.init2D();
-				this.hud.drawMenu();
-				this.display.update();
-			}
+			this.matrices.init2D();
+			this.hud.drawMenu();
+			this.display.update();
 		}
 		this.changeGragMouse();
 		

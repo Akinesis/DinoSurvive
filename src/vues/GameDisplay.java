@@ -34,10 +34,6 @@ public class GameDisplay implements Parametres{
 		return Display.isCloseRequested();
 	}
 	
-	public void close(){
-		Display.destroy();
-	}
-	
 	public void update(){
 		Display.update();
 		Display.sync(60);

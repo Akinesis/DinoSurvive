@@ -1,8 +1,6 @@
 package modeles;
 
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -133,6 +131,10 @@ public class InputManager {
 			}
 		}
 
+		if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Mouse.isButtonDown(0)){
+			this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
+		}
+		
 		if( (Mouse.getX() < 0.9875f*Display.getWidth()) && (Mouse.getX() > 0.6375f*Display.getWidth()) ){
 			if( (Mouse.getY() > Display.getHeight() - 0.2f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.1f*Display.getHeight()) ){
 				position = 0;
@@ -153,13 +155,13 @@ public class InputManager {
 			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
 			System.out.println(position);
 		}
+		
 		if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Mouse.isButtonDown(0)){
 			this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
 		}
 		
 		return position;
 	}
-	
 	private void move(){
 		/*
 		 * verification du clavier
