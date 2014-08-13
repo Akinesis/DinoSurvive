@@ -918,6 +918,115 @@ public class TextureManager {
 		};
 	}
 	
+	private float[] genNailedPlank(float indiceTextX, float indiceTextY){	
+
+		indiceTextX = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+		
+		return new float[]{
+				//south
+				0.15625f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.1875f+indiceTextY,
+
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.21875f+indiceTextY,
+
+				//top
+				0.15625f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.1875f+indiceTextY,
+
+				//bottom
+				0.125f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.21875f+indiceTextY,
+
+				0.15625f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.1875f+indiceTextY,
+
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.1875f+indiceTextY,
+				0.15625f+indiceTextX, 0.21875f+indiceTextY,
+				0.15625f+indiceTextX, 0.1875f+indiceTextY,
+				0.125f+indiceTextX, 0.21875f+indiceTextY,
+
+		};
+		
+	}
+	
+	private float[] genClayTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+		
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
+		return new float[]{
+				//south
+				0.21875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.1875f+indiceTextY,
+
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.21875f+indiceTextY,
+
+				//top
+				0.21875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.1875f+indiceTextY,
+
+				//bottom
+				0.1875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.21875f+indiceTextY,
+
+				0.21875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.1875f+indiceTextY,
+
+				0.1875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.1875f+indiceTextY,
+				0.21875f+indiceTextX, 0.21875f+indiceTextY,
+				0.21875f+indiceTextX, 0.1875f+indiceTextY,
+				0.1875f+indiceTextX, 0.21875f+indiceTextY
+		};
+		
+	}
 	
 	public int getID(){
 		return texture.getTextureID();
@@ -965,6 +1074,10 @@ public class TextureManager {
 			return genPlankTexture();
 		case 16:
 			return genWorkbenchTexture();
+		case 17:
+			return genNailedPlank(x,y);
+		case 18:
+			return genClayTexture(x,y);
 		default:
 			return genGrassTexture(x, y);
 		}
