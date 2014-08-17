@@ -289,17 +289,16 @@ public class InputManager {
 		
 		Vector3f temp = clone.getCamera().getCurrentChunk();
 		if(temp.x!=curentChunk.x || temp.y!=curentChunk.y || temp.z!=curentChunk.z){
-			curentChunk = temp;
-			//clone.getCamera().setCurrentChunk();
+			setCurrentChunk(temp);
 			return true;
 		}
 		return false;
 	}
 
-	public void setCurrentChunk(float[] chunk){
-		curentChunk.x=chunk[0];
-		curentChunk.y=chunk[1];
-		curentChunk.z=chunk[2];
+	public void setCurrentChunk(Vector3f chunk){
+		curentChunk.x=chunk.x;
+		curentChunk.y=chunk.y;
+		curentChunk.z=chunk.z;
 	}
 
 }
