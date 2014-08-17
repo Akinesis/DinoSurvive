@@ -241,7 +241,7 @@ public class InputManager {
 		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
-		if(compareChunk() || Keyboard.isKeyDown(Keyboard.KEY_P)){
+		if(compareChunk()){
 			//clone.getChunkManager().checkRender();
 			//clone.getChunkManager().update();
 			System.out.println("yo");
@@ -254,6 +254,7 @@ public class InputManager {
 		}else{
 			camera.getPos().y += amt;
 		}
+		
 	}
 
 	private void jump(boolean space){

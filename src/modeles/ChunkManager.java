@@ -167,6 +167,7 @@ public class ChunkManager {
 	 * Initialise les chunks
 	 */
 	public void initChunks(){
+		clearRender();
 		checkRender();
 		for(Chunk chunk : renderChunks){
 			chunk.addCubes();
@@ -177,11 +178,16 @@ public class ChunkManager {
 	}
 
 	public void checkRender(){
+		clearRender();
 		for(Chunk ck : chunks){
 			if(!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())){
 				renderChunks.add(ck);
 			}
 		}
+	}
+	
+	private void clearRender(){
+		renderChunks.clear();
 	}
 
 
