@@ -66,7 +66,7 @@ public class Controleur implements Parametres{
 		hudtexManager = new HUDTextureManager();
 		
 		this.changeGragMouse();
-		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
+		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !this.display.isClose()){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
 			position = this.input.checkMenu(position);

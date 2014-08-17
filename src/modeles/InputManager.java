@@ -132,7 +132,7 @@ public class InputManager {
 		}
 
 		if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Mouse.isButtonDown(0)){
-			//this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
+			this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
 		}
 		
 		if( (Mouse.getX() < 0.9875f*Display.getWidth()) && (Mouse.getX() > 0.6375f*Display.getWidth()) ){
@@ -151,17 +151,15 @@ public class InputManager {
 			if( (Mouse.getY() > Display.getHeight() - 0.68f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.58f*Display.getHeight()) ){
 				position = 4;
 			}
-			//this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
+			this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
 			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
 			System.out.println(position);
 		}
 		
-		if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Mouse.isButtonDown(0)){
-			//this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
-		}
-		
 		return position;
 	}
+	
+	
 	private void move(){
 		/*
 		 * verification du clavier
