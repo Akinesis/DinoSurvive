@@ -79,7 +79,7 @@ public class HUDManager extends AbstractEntity2D{
 		entitiesaAfficher.add(curseur);
 		
 		
-		this.menu = new Menu();
+		this.menu = new Menu(contr);
 		this.menu.generationMenuFond();
 		this.menu.generationMenuBoutons();
 	}

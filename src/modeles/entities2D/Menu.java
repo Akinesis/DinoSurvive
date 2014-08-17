@@ -21,6 +21,8 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import controleur.Controleur;
+
 public class Menu extends AbstractEntity3D{
 	//private static int verticiesNum = 36;
 	private int vertexSize = 2;
@@ -33,8 +35,11 @@ public class Menu extends AbstractEntity3D{
 	private float[] boutonsLimites;
 	private float[] boutonsTextureCoordonnes;
 	private float[] boutonsEtats;
+	private Controleur controleurClone;
+	private boolean displayIsClose;
 	
-	public Menu(){
+	public Menu(Controleur controleur){
+		this.controleurClone = controleur;
 		this.estAfficher = true;
 		this.vertexDataFond = BufferUtils.createFloatBuffer(6 * this.vertexSize);
 		this.vertexDataBoutons = BufferUtils.createFloatBuffer(30 * this.vertexSize);
@@ -44,12 +49,23 @@ public class Menu extends AbstractEntity3D{
 		this.boutonsLimites = this.generationBoutonsLimites();
 		this.boutonsTextureCoordonnes = this.generationBoutonsTextureCoordonnes();
 		this.boutonsEtats = this.generationBoutonsEtats();
+		this.displayIsClose = false;
 	}
 	
 	private float[] generationBoutonsEtats() {
 		return new float[]{2, 1, 1, 1, 1};
 	}
 
+	public void boutonsEtatsReset(int i) {
+		int j = 0;
+		while(j < 5){
+			if(j != i){
+				this.boutonsEtats[j] = 1f;
+			}
+			j++;
+		}
+	}
+	
 	public void boutonsEtatsNormale(int i) {
 		this.boutonsEtats[i] = 1f;
 	}
@@ -63,6 +79,25 @@ public class Menu extends AbstractEntity3D{
 	
 	private float[] generationBoutonsTextureCoordonnes() {
 		return new float[]{0f, 0.19f, 0.20f, 0.39f, 0.40f, 0.585f, 0.59f, 0.78f, 0.79f, 0.98f};
+	}
+
+	public void MenuBoutonsFonctionaliter(int position) {
+		if(position == 0){
+			this.inverserEstAfficher();
+		}
+		if(position == 1){
+			System.out.println("blurf");
+		}
+		if(position == 2){
+			System.out.println("check");
+		}
+		if(position == 3){
+			System.out.println("niark");
+		}
+		if(position == 4){
+			//this.controleurClone.getDisplay().end();
+			this.displayIsClose = true;
+		}
 	}
 
 	public void generationMenuFond() {
@@ -247,6 +282,10 @@ public class Menu extends AbstractEntity3D{
 		return this.estAfficher;
 	}
 
+	public boolean isDisplayIsClose() {
+		return displayIsClose;
+	}
+	
 	public void inverserEstAfficher() {
 		this.estAfficher = !(this.estAfficher);
 	}
