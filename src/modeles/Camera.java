@@ -53,13 +53,19 @@ public class Camera {
 	}
 	
 	public Vector3f getCurrentChunk(){
+		setCurrentChunk();
 		return curentChunk;
 	}
 	
-	public void setCurrentChunk(float[] chunk){
-		curentChunk.x=chunk[0];
-		curentChunk.y=chunk[1];
-		curentChunk.z=chunk[2];
+	public void setCurrentChunk(){
+		
+		float xChunk = (float)Math.ceil(position.x / 16);
+		float yChunk = (float)Math.ceil(position.y / 16);
+		float zChunk = (float)Math.ceil(position.z / 16);
+		
+		curentChunk.x=xChunk;
+		curentChunk.y=yChunk;
+		curentChunk.z=zChunk;
 	}
 
 }

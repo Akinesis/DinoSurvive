@@ -84,7 +84,7 @@ public class Controleur implements Parametres{
 		terrGen.genWall(1, -5, 0);
 		camera.spawn(chunkManager.getHigherPointAt(8, 8));
 		
-		camera.setCurrentChunk(chunkManager.getChunkAt(camera.getPos().x, camera.getPos().y, camera.getPos().z));
+		camera.setCurrentChunk();
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();

@@ -244,8 +244,8 @@ public class InputManager {
 		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
 		if(compareChunk() || Keyboard.isKeyDown(Keyboard.KEY_P)){
-			clone.getChunkManager().checkRender();
-			clone.getChunkManager().update();
+			//clone.getChunkManager().checkRender();
+			//clone.getChunkManager().update();
 			System.out.println("yo");
 		}
 	}
@@ -288,14 +288,11 @@ public class InputManager {
 	}
 
 	private boolean compareChunk(){
-		if(curentChunk==null){
-			//curentChunk.x=1;
-			//curentChunk.y=1;
-			//curentChunk.z=1;
-		}
+		
 		Vector3f temp = clone.getCamera().getCurrentChunk();
 		if(temp.x!=curentChunk.x || temp.y!=curentChunk.y || temp.z!=curentChunk.z){
 			curentChunk = temp;
+			//clone.getCamera().setCurrentChunk();
 			return true;
 		}
 		return false;

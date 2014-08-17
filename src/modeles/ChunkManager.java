@@ -170,7 +170,6 @@ public class ChunkManager {
 		checkRender();
 		for(Chunk chunk : renderChunks){
 			chunk.addCubes();
-			//chunk.updateStates();
 			chunk.checkState();
 			chunk.genCubes(clone.getTexManager());
 			chunk.genVBO();
@@ -179,7 +178,7 @@ public class ChunkManager {
 
 	public void checkRender(){
 		for(Chunk ck : chunks){
-			if(!chunksurround(ck)&&ck.checkPos(clone.getCamera().getCurrentChunk())){
+			if(!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())){
 				renderChunks.add(ck);
 			}
 		}
