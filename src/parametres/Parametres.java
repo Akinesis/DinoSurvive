@@ -7,7 +7,7 @@ public interface Parametres {
 	
 	float fov = 50;
 	float near = 0.01f;
-	float far = 45f;
+	float far = 70f;
 	int chunkFar=2;
 	
 }

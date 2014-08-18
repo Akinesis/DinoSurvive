@@ -40,7 +40,7 @@ public class Chunk implements Parametres{
 	private Controleur clone;
 	private int x,y,z,id;
 
-	private boolean updated;
+	private boolean updated, checked;
 
 	/**
 	 * Constructeur du chunk
@@ -56,6 +56,7 @@ public class Chunk implements Parametres{
 		nonRenderCubes = new Vector<Cube3dVbo>();
 		clone = contr;
 		updated = true;
+		checked = false;
 
 		this.x = x;
 		this.y = y;
@@ -131,6 +132,7 @@ public class Chunk implements Parametres{
 	 */
 	public void checkState(){
 		clearChunk();
+		checked = true;
 		for(int i=0; i<16; i++){
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
@@ -149,6 +151,7 @@ public class Chunk implements Parametres{
 	}
 	
 	public void checkStateAt(int x, int y, int z){
+		checked = true;
 		
 		for(int i=(x>0)?x-1:0; i<=((x<15)?x+1:15); i++){
 			for(int j=(y>0)?y-1:0; j<=((y<15)?y+1:15); j++){
@@ -323,6 +326,10 @@ public class Chunk implements Parametres{
 
 	public void haveBeenUpdated(boolean status){
 		updated = status;
+	}
+	
+	public boolean getChecked(){
+		return checked;
 	}
 
 }

@@ -242,8 +242,8 @@ public class InputManager {
 		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
 		if(compareChunk()){
-			//clone.getChunkManager().checkRender();
-			//clone.getChunkManager().update();
+			clone.getChunkManager().checkRender();
+			clone.getChunkManager().reloadChunks();
 			System.out.println("yo");
 		}
 	}

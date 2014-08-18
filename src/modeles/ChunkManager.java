@@ -176,6 +176,17 @@ public class ChunkManager {
 			chunk.genVBO();
 		}
 	}
+	
+	public void reloadChunks(){
+		for(Chunk chunk : renderChunks){
+			chunk.unbindVbo();
+			if(!chunk.getChecked()){
+				chunk.checkState();
+			}
+			chunk.genCubes(clone.getTexManager());
+			chunk.genVBO();
+		}
+	}
 
 	public void checkRender(){
 		clearRender();
