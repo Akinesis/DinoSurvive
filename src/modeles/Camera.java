@@ -23,8 +23,9 @@ public class Camera {
 		curentChunk = new Vector3f();
 	}
 	
-	public void spawn(int y){
-		position = new Vector3f(-8f, (y-1)*16-2.75f, -8f);
+	public void spawn(float y){
+		//position = new Vector3f(-8f, y-2.75f, -8f);
+		position = new Vector3f(-8f, (-5*16)-2.75f, -8f);
 	}
 	
 	//met à jour la position et la rotation

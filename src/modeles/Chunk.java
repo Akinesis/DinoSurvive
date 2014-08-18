@@ -59,7 +59,7 @@ public class Chunk implements Parametres{
 		checked = false;
 
 		this.x = x;
-		this.y = y;
+		this.y = y;//tous négatifs
 		this.z = z;
 		//pour l'instant : id = ligne dans le programme, changer √ßa !!! (extrapoler l'iD des XYZ)
 		this.id = id;
@@ -330,6 +330,25 @@ public class Chunk implements Parametres{
 	
 	public boolean getChecked(){
 		return checked;
+	}
+	
+	public float getHigher(){
+		
+		float tempY = -1;
+				
+		for(int i=0; i<16; i++){
+			for(int j =0; j<16; j++){
+				for(int k=0; k<16; k++){
+					if(cubes[i][j][k]!=null){
+						if(cubes[i][j][k].getY()<tempY){
+							tempY=cubes[i][j][k].getY();
+						}
+					}
+				}
+			}
+		}
+		
+		return tempY;
 	}
 
 }

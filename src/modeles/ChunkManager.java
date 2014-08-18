@@ -208,18 +208,20 @@ public class ChunkManager {
 		}
 	}
 
-	public int getHigherPointAt(int x, int z){
+	public float getHigherPointAt(int x, int z){
 		int higherY = 0;
+		Chunk temp=null;
 		float xChunk = (float)Math.ceil(x / 16);
 		float zChunk = (float)Math.ceil(z / 16);
 
 		for(Chunk ck : chunks){
 			if( (ck.getX() == xChunk) && (ck.getZ() == zChunk) && ck.getY()<higherY){
 				higherY = ck.getY();
+				temp = ck;
 			}
 		}
 
-		return higherY;
+		return temp.getHigher();
 
 	}
 
