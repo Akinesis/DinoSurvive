@@ -348,6 +348,7 @@ public class Chunk implements Parametres{
 			}
 		}
 		
+		System.out.println(tempY);
 		return tempY;
 	}
 

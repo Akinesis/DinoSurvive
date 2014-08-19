@@ -82,13 +82,12 @@ public class Controleur implements Parametres{
 		terrGen.buildStart();
 		terrGen.genFond(1, -5, 0);
 		terrGen.genWall(1, -5, 0);
-		camera.spawn(chunkManager.getHigherPointAt(8, 8));
 		
+		camera.spawn(chunkManager.getHigherPointAt(8, 8));
 		camera.setCurrentChunk();
 		
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
-		
 		
 		while(!Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			matrices.setSize(display.getHeight(), display.getWidth());
