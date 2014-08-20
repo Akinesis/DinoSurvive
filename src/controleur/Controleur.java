@@ -58,13 +58,13 @@ public class Controleur implements Parametres{
 	//le coeur du jeu, ma méthode contenant la boucle de jeu.
 	public void init(){
 		int position;
-		
+
 		position = 0;
 		display.create();
 		hud = new HUDManager(this);
 		texManager = new TextureManager();	
 		hudtexManager = new HUDTextureManager();
-		
+
 		this.changeGragMouse();
 		while(this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !this.display.isClose()){
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -75,24 +75,26 @@ public class Controleur implements Parametres{
 			this.display.update();
 		}
 		this.changeGragMouse();
-		
+
 		hud.genHUD(hudtexManager);
 		hud.draw(hudtexManager);
+
 		matrices.init3D();
 		terrGen.buildStart();
 		terrGen.genFond(1, -5, 0);
 		terrGen.genWall(1, -5, 0);
-		
-		camera.spawn(chunkManager.getHigherPointAt(8, 8));
-		camera.setCurrentChunk();
-		
+
 		//initialise les chunks une première fois et met les cubes dans le buffer
 		chunkManager.initChunks();
-		
+
+		//spawn de du joueur au point le plus haut en 8,X,8
+		camera.spawn(chunkManager.getHigherPointAt(8, 8));
+		camera.setCurrentChunk();
+
 		while(!Keyboard.isKeyDown(Keyboard.KEY_F10) && !display.isClose()){
 			matrices.setSize(display.getHeight(), display.getWidth());
 			//texManager.bindText();
-			
+
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			//initialise la matrice 3D
@@ -105,25 +107,25 @@ public class Controleur implements Parametres{
 
 			//tout ce qui à rapport aux input
 			input.check();
-			
-			
+
+
 			//dessine tout les chunks
 			chunkManager.drawChunks(texManager);
-			
+
 			//texManager.undindTexture();
-			
+
 			matrices.init2D();
 			this.hud.draw(hudtexManager);
 
 			display.update(); //met à jour la fenêtre, aucun rapport avec les chunks
 		}
-		
+
 		chunkManager.unbindAll();
 		texManager.deleteText();
 		hudtexManager.deleteText();
 		display.end();
 	}
-	
+
 	/*
 	 * Getters
 	 */
@@ -154,16 +156,16 @@ public class Controleur implements Parametres{
 	public MapReader getMapRead(){
 		return mapRead;
 	}
-	
+
 	public CollisionManager getCollision(){
 		return collision;
 	}
-	
+
 	public HUDManager getHUDManager(){
 		return hud;
 	}
 
- 	public void changeGragMouse(){
+	public void changeGragMouse(){
 		display.changeGrabeMouse();
 	}
 
@@ -171,5 +173,5 @@ public class Controleur implements Parametres{
 		return this.hudtexManager;
 	}
 
-	
+
 }
