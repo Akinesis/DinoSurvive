@@ -918,7 +918,7 @@ public class TextureManager {
 		};
 	}
 	
-	private float[] genNailedPlank(float indiceTextX, float indiceTextY){	
+	private float[] genNailedPlankTexture(float indiceTextX, float indiceTextY){	
 
 		indiceTextX = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
 		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
@@ -1028,6 +1028,61 @@ public class TextureManager {
 		
 	}
 	
+	private float[] genBricksTexture(float indiceTextX, float indiceTextY){	
+
+		indiceTextX = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+		
+		return new float[]{
+				//south
+				0.09375f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.25f+indiceTextY,
+
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.28125f+indiceTextY,
+
+				//top
+				0.09375f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.25f+indiceTextY,
+
+				//bottom
+				0.0625f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.28125f+indiceTextY,
+
+				0.09375f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.25f+indiceTextY,
+
+				0.0625f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.25f+indiceTextY,
+				0.09375f+indiceTextX, 0.28125f+indiceTextY,
+				0.09375f+indiceTextX, 0.25f+indiceTextY,
+				0.0625f+indiceTextX, 0.28125f+indiceTextY
+
+		};
+		
+	}
+	
 	public int getID(){
 		return texture.getTextureID();
 	}
@@ -1075,9 +1130,11 @@ public class TextureManager {
 		case 16:
 			return genWorkbenchTexture();
 		case 17:
-			return genNailedPlank(x,y);
+			return genNailedPlankTexture(x,y);
 		case 18:
 			return genClayTexture(x,y);
+		case 19:
+			return genBricksTexture(x,y);
 		default:
 			return genGrassTexture(x, y);
 		}

@@ -2,6 +2,8 @@ package modeles;
 
 import java.util.Vector;
 
+import org.lwjgl.util.vector.Vector3f;
+
 import controleur.Controleur;
 import modeles.entities.Cube3dVbo;
 
@@ -324,6 +326,14 @@ public class ChunkManager {
 			}
 		}
 		return false;
+	}
+	
+	public void createChunks(){
+		Vector3f pos = clone.getCamera().getCurrentChunk();
+		
+		if(chunkExist((int)pos.x, (int)pos.y+1, (int)pos.z)){
+			
+		}
 	}
 	
 	/**
