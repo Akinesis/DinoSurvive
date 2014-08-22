@@ -208,6 +208,13 @@ public class ChunkManager {
 		}
 	}
 
+	
+	/**
+	 * Trouve le plus "haut" chunk, génère les cubes puis luis demande sont plus haut point.
+	 * @param x Coordonée X de la caméra
+	 * @param z Coordonée Z de la caméra
+	 * @return Le plus haut Y du Chunk le plus haut.
+	 */
 	public float getHigherPointAt(int x, int z){
 		int higherY = 0;
 		Chunk temp=null;
@@ -221,8 +228,25 @@ public class ChunkManager {
 			}
 		}
 
+		temp.addCubes();
+		temp.checkState();
 		return temp.getHigher();
 
+	}
+	
+	public Chunk getHigherChunk(){
+		
+		int higherY = 0;
+		Chunk temp=null;
+		
+		for(Chunk ck : chunks){
+			if(ck.getY()<higherY){
+				higherY = ck.getY();
+				temp = ck;
+			}
+		}
+		
+		return temp;
 	}
 
 	public Chunk getChunk(int x, int y, int z){
@@ -301,7 +325,16 @@ public class ChunkManager {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Renvoie vrais si toute une face est remplie.
+	 * 
+	 * @param xCh Les X du chunk
+	 * @param yCh Les Y du chunk
+	 * @param zCh Les Z du chunk
+	 * @param face Indice de la face à analyser
+	 * @return vrais si la face est pleine.
+	 */
 	private boolean completeFace(int xCh, int yCh, int zCh, int face){
 		int i = 1;
 		int j = 1;

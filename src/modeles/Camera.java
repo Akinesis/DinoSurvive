@@ -23,9 +23,13 @@ public class Camera {
 		curentChunk = new Vector3f();
 	}
 	
+	/**
+	 * Initialise la première position de la caméra.
+	 * @param y le plus haut point du plus haut chunk (en x=8, z=8)
+	 */
 	public void spawn(float y){
 		//position = new Vector3f(-8f, y-2.75f, -8f);
-		position = new Vector3f(-8f, (-5*16)-2.75f, -8f);
+		position = new Vector3f(-8f, y-2.75f, -8f);
 	}
 	
 	//met à jour la position et la rotation

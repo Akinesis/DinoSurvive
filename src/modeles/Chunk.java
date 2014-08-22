@@ -44,11 +44,11 @@ public class Chunk implements Parametres{
 
 	/**
 	 * Constructeur du chunk
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param id
-	 * @param contr
+	 * @param x X Par raport aux autres Chunks.
+	 * @param y Y Par raport aux autres Chunks. Toujours négatif.
+	 * @param z Z Par raport aux autres Chunks.
+	 * @param id L'indentifiant de ce chunk.
+	 * @param contr Le controleur 
 	 */
 	public Chunk(int x,int y,int z, int id, Controleur contr){
 		cubes = new Cube3dVbo[16][16][16];
@@ -59,7 +59,7 @@ public class Chunk implements Parametres{
 		checked = false;
 
 		this.x = x;
-		this.y = y;//tous n�gatifs
+		this.y = y;//tous n�gatifs
 		this.z = z;
 		//pour l'instant : id = ligne dans le programme, changer ça !!! (extrapoler l'iD des XYZ)
 		this.id = id;
@@ -83,7 +83,7 @@ public class Chunk implements Parametres{
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 
 	}
-	
+
 	private void updateVBO(){
 
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
@@ -149,10 +149,10 @@ public class Chunk implements Parametres{
 			}
 		}
 	}
-	
+
 	public void checkStateAt(int x, int y, int z){
 		checked = true;
-		
+
 		for(int i=(x>0)?x-1:0; i<=((x<15)?x+1:15); i++){
 			for(int j=(y>0)?y-1:0; j<=((y<15)?y+1:15); j++){
 				for(int k=(z>0)?z-1:0; k<=((z<15)?z+1:15); k++){
@@ -172,7 +172,7 @@ public class Chunk implements Parametres{
 			}
 		}
 	}
-	
+
 	public boolean checkPos(Vector3f current){
 		if(Math.abs(Math.abs(current.x)-Math.abs(x))>=chunkFar || Math.abs(Math.abs(current.y)-Math.abs(y))>=chunkFar || Math.abs(Math.abs(current.z)-Math.abs(z))>=chunkFar){
 			return false;
@@ -190,13 +190,13 @@ public class Chunk implements Parametres{
 		genCubes(clone.getTexManager());
 		genVBO();
 	}
-	
+
 	public void updateAt(float x, float y, float z){
-		
+
 		int i = (int)Math.abs(x)%16;
 		int j = (int)Math.abs(y)%16;
 		int k = (int)Math.abs(z)%16;
-		
+
 		checkStateAt(i,j,k);
 		unbindVbo();
 		genCubes(clone.getTexManager());
@@ -327,29 +327,33 @@ public class Chunk implements Parametres{
 	public void haveBeenUpdated(boolean status){
 		updated = status;
 	}
-	
+
 	public boolean getChecked(){
 		return checked;
 	}
-	
+
+	/**
+	 * Trouve le plus haut point du Chunk. A defaut de block, renvoi la hauteur de son "sol".
+	 * @return Le point le plus haut du chunk.
+	 */
 	public float getHigher(){
-		
+
 		float tempY = -1;
-				
+
 		for(int i=0; i<16; i++){
-			for(int j =0; j<16; j++){
-				for(int k=0; k<16; k++){
-					if(cubes[i][j][k]!=null){
-						if(cubes[i][j][k].getY()<tempY){
-							tempY=cubes[i][j][k].getY();
-						}
-					}
+			if(cubes[8][i][8]!=null){
+				if(cubes[8][i][8].getY()>tempY){
+					tempY=cubes[8][i][8].getY();
 				}
 			}
 		}
-		
+
+		if(tempY==-1){
+			tempY=-(this.y*16)-1;
+		}
+
 		System.out.println(tempY);
-		return tempY;
+		return -(tempY+1);
 	}
 
 }
