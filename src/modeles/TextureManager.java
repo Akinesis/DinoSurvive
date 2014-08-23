@@ -1504,6 +1504,57 @@ public class TextureManager {
 
 	}
 
+	private float[] genSteelChestTexture(){
+		return new float[]{
+				//south
+				0.375f, 0.09375f,
+				0.375f, 0.0625f,
+				0.34375f, 0.09375f,
+				0.34375f, 0.09375f,
+				0.375f, 0.0625f,
+				0.34375f, 0.0625f,
+				
+				//face sud inverser
+				0.34375f, 0.0625f,
+				0.375f, 0.0625f,
+				0.375f, 0.09375f,
+				0.34375f, 0.0625f,
+				0.375f, 0.09375f,
+				0.34375f, 0.09375f,
+
+				//top
+				0.34375f, 0.125f,
+				0.34375f, 0.09375f,
+				0.3125f, 0.125f,
+				0.3125f, 0.125f,
+				0.34375f, 0.09375f,
+				0.3125f, 0.09375f,
+
+				//bottom
+				0.3125f, 0.09375f,
+				0.3125f, 0.125f,
+				0.34375f, 0.09375f,
+				0.34375f, 0.09375f,
+				0.3125f, 0.125f,
+				0.34375f, 0.125f,
+
+				0.34375f, 0.09375f,
+				0.34375f, 0.0625f,
+				0.3125f, 0.09375f,
+				0.3125f, 0.09375f,
+				0.34375f, 0.0625f,
+				0.3125f, 0.0625f,
+
+				0.34375f, 0.125f,
+				0.375f, 0.09375f,
+				0.34375f, 0.09375f,
+				0.375f, 0.125f,
+				0.375f, 0.09375f,
+				0.34375f, 0.125f
+		};
+
+	}
+	
 	public int getID(){
 		return texture.getTextureID();
 	}
@@ -1572,6 +1623,8 @@ public class TextureManager {
 			return genElectricPanelTexture();
 		case 27:
 			return genChestTexture();
+		case 28:
+			return genSteelChestTexture();
 		default:
 			return genGrassTexture(x, y);
 		}
