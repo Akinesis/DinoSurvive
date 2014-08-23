@@ -30,20 +30,6 @@ public class Cube3dVbo extends Cube3D {
         glDrawArrays(GL_TRIANGLES, 0, verticiesNum);
 	}
 	
-	public void bindDrawCube(int vboChunk){
-		glBindBuffer(GL_ARRAY_BUFFER, vboChunk);
-        glVertexPointer(vertexSize, GL_FLOAT, 0, 0L);
-	}
-	
-	public void enableCube(){
-		glEnableClientState(GL_VERTEX_ARRAY);
-	}
-	
-	public void disableCube(){
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-	
 	public void delCube(int vboChunk){
 		glDeleteBuffers(vboChunk);
 	}
