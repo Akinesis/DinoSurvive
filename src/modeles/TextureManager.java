@@ -1555,6 +1555,116 @@ public class TextureManager {
 
 	}
 	
+	private float[] genSandTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
+		return new float[]{
+				//south
+				0.34375f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.125f+indiceTextY,
+
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.15625f+indiceTextY,
+
+				//top
+				0.34375f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.125f+indiceTextY,
+
+				//bottom
+				0.3125f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.15625f+indiceTextY,
+
+				0.34375f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.125f+indiceTextY,
+
+				0.3125f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.125f+indiceTextY,
+				0.34375f+indiceTextX, 0.15625f+indiceTextY,
+				0.34375f+indiceTextX, 0.125f+indiceTextY,
+				0.3125f+indiceTextX, 0.15625f+indiceTextY
+		};
+
+	}
+	
+	private float[] genSteeroniumTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
+		return new float[]{
+				//south
+				0.28125f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.25f+indiceTextY,
+
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.28125f+indiceTextY,
+
+				//top
+				0.28125f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.25f+indiceTextY,
+
+				//bottom
+				0.25f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.28125f+indiceTextY,
+
+				0.28125f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.25f+indiceTextY,
+
+				0.25f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.25f+indiceTextY,
+				0.28125f+indiceTextX, 0.28125f+indiceTextY,
+				0.28125f+indiceTextX, 0.25f+indiceTextY,
+				0.25f+indiceTextX, 0.28125f+indiceTextY
+		};
+
+	}
+	
 	public int getID(){
 		return texture.getTextureID();
 	}
@@ -1625,6 +1735,10 @@ public class TextureManager {
 			return genChestTexture();
 		case 28:
 			return genSteelChestTexture();
+		case 29:
+			return genSandTexture(x,y);
+		case 30:
+			return genSteeroniumTexture(x,y);
 		default:
 			return genGrassTexture(x, y);
 		}
