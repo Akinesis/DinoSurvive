@@ -172,6 +172,10 @@ public class Controleur implements Parametres{
 	public HUDTextureManager getHUDTextManager() {
 		return this.hudtexManager;
 	}
+	
+	public TerrainGenerator getTerrainGenerator(){
+		return terrGen;
+	}
 
 
 }

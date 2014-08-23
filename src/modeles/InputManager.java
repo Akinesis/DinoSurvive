@@ -25,12 +25,15 @@ public class InputManager {
 	private long lastFrame;
 	private int delta;
 	private Vector3f curentChunk;
+	private long lastFPS;
+	private int fps;
 
 	public InputManager(Controleur contr){
 		clone = contr;
 		clone.getMap();//à changer; inutile
 		isJumping = false;
 		lastFrame=getTime();
+		lastFPS = getTime();
 		curentChunk= new Vector3f();
 	}
 
@@ -52,12 +55,9 @@ public class InputManager {
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 		delta = getDelta();
+		
+		//updateFPS();
 
-		//neutralise tout les mouvements
-
-		//this.clone.changeGragMouse();
-
-		//inversion de la souris
 		while(Keyboard.next()){
 			if(keydol){
 				coef*=-1;
@@ -237,15 +237,24 @@ public class InputManager {
 
 		float indiceX = ((camera.getPos().x)>posTempX )?-0.2f:+0.2f;
 		float indiceZ = ((camera.getPos().z)>posTempZ )?-0.2f:+0.2f;
-
+		
+		int facteurX=0 , facteurZ =0;
+		
 		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
-
+		
+		if(Math.abs(tempX)>=Math.abs(tempZ)){
+			facteurX=(tempX>0)?4:-4;
+		}else{
+			facteurZ=(tempZ>0)?4:-4;
+		}
+		
 		if(compareChunk()){
+			clone.getChunkManager().createChunks(facteurX, facteurZ);
 			clone.getChunkManager().checkRender();
 			clone.getChunkManager().reloadChunks();
-			System.out.println("yo");
 		}
+		
 	}
 
 	private void moveY(float amt){
@@ -300,6 +309,15 @@ public class InputManager {
 		curentChunk.x=chunk.x;
 		curentChunk.y=chunk.y;
 		curentChunk.z=chunk.z;
+	}
+	
+	public void updateFPS() {
+		if (getTime() - lastFPS > 1000) {
+			System.out.println(fps);
+			fps = 0; //reset the FPS counter
+			lastFPS += 1000; //add one second
+		}
+		fps++;
 	}
 
 }

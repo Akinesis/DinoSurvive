@@ -14,9 +14,9 @@ public class TerrainGenerator {
 	}
 	
 	public void buildStart(){
-		for(int x = -2; x<3; x++){
+		for(int x = -4; x<5; x++){
 			for(int y = 0; y>-5; y--){
-				for(int z = -2; z<3; z++){
+				for(int z = -4; z<5; z++){
 					genereTerre(x,y,z);
 					if(y==-4){
 						genCeil(x, y, z);

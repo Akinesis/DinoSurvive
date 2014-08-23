@@ -36,7 +36,7 @@ public class GameDisplay implements Parametres{
 	
 	public void update(){
 		Display.update();
-		Display.sync(60);
+		Display.sync(70);
 	}
 	
 	public void changeGrabeMouse(){

@@ -243,6 +243,7 @@ public class Chunk implements Parametres{
 			}
 			j=0;
 		}
+
 		interleavedBuffer.flip();
 	}
 

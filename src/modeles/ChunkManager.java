@@ -4,12 +4,14 @@ import java.util.Vector;
 
 import org.lwjgl.util.vector.Vector3f;
 
+import parametres.Parametres;
+import sun.util.calendar.ZoneInfo;
 import controleur.Controleur;
 import modeles.entities.Cube3dVbo;
 
 
 
-public class ChunkManager {
+public class ChunkManager implements Parametres {
 	private Vector<Chunk> chunks, renderChunks,chunksToRender;
 	private Controleur clone;
 
@@ -53,11 +55,11 @@ public class ChunkManager {
 		float xChunk = (float)Math.ceil(x / 16);
 		float yChunk = (float)Math.ceil(y / 16);
 		float zChunk = (float)Math.ceil(z / 16);
-		
+
 		x = (int)Math.abs(Math.ceil(x))%16;
 		y = (int)Math.abs(Math.ceil(y))%16;
 		z = (int)Math.abs(Math.ceil(z))%16;
-		
+
 		Cube3dVbo temp = new Cube3dVbo(x, y, z, 1, typ);
 
 		for(Chunk ck : chunks){
@@ -126,7 +128,7 @@ public class ChunkManager {
 			chunksToRender.removeAll(temp);
 		}
 	}
-	
+
 	public void updateAt(float x, float y, float z){
 		chunksToRender.addAll(getChunkToUpdate());
 		Vector<Chunk> temp = new Vector<Chunk>();
@@ -178,7 +180,7 @@ public class ChunkManager {
 			chunk.genVBO();
 		}
 	}
-	
+
 	public void reloadChunks(){
 		for(Chunk chunk : renderChunks){
 			chunk.unbindVbo();
@@ -198,7 +200,7 @@ public class ChunkManager {
 			}
 		}
 	}
-	
+
 	private void clearRender(){
 		renderChunks.clear();
 	}
@@ -210,7 +212,7 @@ public class ChunkManager {
 		}
 	}
 
-	
+
 	/**
 	 * Trouve le plus "haut" chunk, génère les cubes puis luis demande sont plus haut point.
 	 * @param x Coordonée X de la caméra
@@ -235,19 +237,19 @@ public class ChunkManager {
 		return temp.getHigher();
 
 	}
-	
+
 	public Chunk getHigherChunk(){
-		
+
 		int higherY = 0;
 		Chunk temp=null;
-		
+
 		for(Chunk ck : chunks){
 			if(ck.getY()<higherY){
 				higherY = ck.getY();
 				temp = ck;
 			}
 		}
-		
+
 		return temp;
 	}
 
@@ -327,15 +329,64 @@ public class ChunkManager {
 		}
 		return false;
 	}
-	
-	public void createChunks(){
+
+	public void createChunks(int xMove, int zMove){
 		Vector3f pos = clone.getCamera().getCurrentChunk();
 		
-		if(chunkExist((int)pos.x, (int)pos.y+1, (int)pos.z)){
-			
+		if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove)){
+			createChunksRec(xMove, zMove, 0, 0);
+		}else{
+			clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove);
+			createChunksRec(xMove, zMove, 0, 0);
 		}
 	}
-	
+
+	/**
+	 * Fonction recursive de création de chunks en marche
+	 * @param xMove
+	 * @param zMove
+	 * @param nbInstance
+	 * @param dir indice de direction : 1_x+ 2_x- 3_y+ 4_y-
+	 */
+	private void createChunksRec(int xMove, int zMove, int nbInstance, int dir){
+		Vector3f pos = clone.getCamera().getCurrentChunk();
+
+		if(nbInstance<chunkFar){
+			if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove)){
+				if(dir!=0){
+					switch (dir) {
+					case 1:
+						createChunksRec(xMove+1, zMove, nbInstance+1, dir);
+						break;
+					case 2:
+						createChunksRec(xMove-1, zMove, nbInstance+1, dir);
+						break;
+					case 3:
+						createChunksRec(xMove, zMove+1, nbInstance+1, dir);
+						break;
+					case 4:
+						createChunksRec(xMove, zMove-1, nbInstance+1, dir);
+						break;
+					default:
+						break;
+					}
+				}else{
+					if(xMove!=0){
+						System.out.println("4");
+						createChunksRec(xMove, zMove+1, nbInstance, 3);
+						createChunksRec(xMove, zMove-1, nbInstance, 4);
+					}else{
+						createChunksRec(xMove+1, zMove, nbInstance, 1);
+						createChunksRec(xMove-1, zMove, nbInstance, 2);
+					}
+				}
+			}else{
+				clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove);
+				createChunksRec(xMove, zMove, nbInstance+1, dir);
+			}
+		}
+	}
+
 	/**
 	 * Renvoie vrais si toute une face est remplie.
 	 * 
