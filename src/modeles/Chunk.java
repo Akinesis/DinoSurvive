@@ -28,16 +28,16 @@ import static org.lwjgl.opengl.GL15.*;
 
 public class Chunk implements Parametres{
 	private Cube3dVbo[][][] cubes;
-	private Vector<Cube3dVbo> renderCubes;
+	protected Vector<Cube3dVbo> renderCubes;
 	private Vector<Cube3dVbo> nonRenderCubes;
 	private int vboVertexHandleChunk;
-	private FloatBuffer interleavedBuffer;
+	protected FloatBuffer interleavedBuffer;
 	private int floatByteSize = 4;
 	private int positionFloatCount = 3;
 	private int floatsPerVertex = positionFloatCount*3;
 	int vertexFloatSizeInBytes = floatByteSize * floatsPerVertex;
 
-	private Controleur clone;
+	protected Controleur clone;
 	private int x,y,z,id;
 
 	private boolean updated, checked;
@@ -229,19 +229,23 @@ public class Chunk implements Parametres{
 		int j= 0;
 		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*(6*3+6*2)*6);
 		for(Cube3dVbo cube : renderCubes){
-			cubeCoord=cube.genCubes();
-			texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
-			for(int i = 0; i< cubeCoord.length; i+=3){
-				interleavedBuffer.put(cubeCoord[i]);
-				interleavedBuffer.put(cubeCoord[i+1]);
-				interleavedBuffer.put(cubeCoord[i+2]);
+			if(cube.getType()==12){
+				clone.getChunkManager().addTransparent(cube);
+			}else{
+				cubeCoord=cube.genCubes();
+				texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
+				for(int i = 0; i< cubeCoord.length; i+=3){
+					interleavedBuffer.put(cubeCoord[i]);
+					interleavedBuffer.put(cubeCoord[i+1]);
+					interleavedBuffer.put(cubeCoord[i+2]);
 
-				interleavedBuffer.put(texCoord[j]);
-				interleavedBuffer.put(texCoord[j+1]);
+					interleavedBuffer.put(texCoord[j]);
+					interleavedBuffer.put(texCoord[j+1]);
 
-				j+=2;
+					j+=2;
+				}
+				j=0;
 			}
-			j=0;
 		}
 
 		interleavedBuffer.flip();

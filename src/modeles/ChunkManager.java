@@ -14,6 +14,7 @@ import modeles.entities.Cube3dVbo;
 public class ChunkManager implements Parametres {
 	private Vector<Chunk> chunks, renderChunks,chunksToRender;
 	private Controleur clone;
+	private TransparentChunk transparancy;
 
 	/*
 	 * Constructeur
@@ -23,11 +24,9 @@ public class ChunkManager implements Parametres {
 		renderChunks = new Vector<Chunk>();
 		chunksToRender = new Vector<Chunk>();
 		clone = contr;
+		transparancy = new TransparentChunk(1, 1, 1, -1, clone);
 	}
 
-	/*
-	 * Getters and setters
-	 */
 
 	/**
 	 * Renvoie le cube à la position demandée
@@ -163,8 +162,11 @@ public class ChunkManager implements Parametres {
 	public void drawChunks(TextureManager textMan){
 		for(Chunk chunk : renderChunks){
 			chunk.draw(textMan);
-
 		}
+		transparancy.unbindVbo();
+		transparancy.genCubes(textMan);
+		transparancy.genVBO();
+		transparancy.draw(textMan);
 	}
 
 	/**
@@ -385,6 +387,10 @@ public class ChunkManager implements Parametres {
 				createChunksRec(xMove, zMove, nbInstance+1, dir);
 			}
 		}
+	}
+	
+	public void addTransparent(Cube3dVbo transp){
+		transparancy.addTransparent(transp);
 	}
 
 	/**

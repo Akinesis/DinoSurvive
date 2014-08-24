@@ -1665,6 +1665,61 @@ public class TextureManager {
 
 	}
 	
+	private float[] genNaildeSteelTexture(float indiceTextX, float indiceTextY){	
+
+		indiceTextX = (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
+		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+
+		return new float[]{
+				//south
+				0.34375f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.1875f+indiceTextY,
+
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.21875f+indiceTextY,
+
+				//top
+				0.34375f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.1875f+indiceTextY,
+
+				//bottom
+				0.3125f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.21875f+indiceTextY,
+
+				0.34375f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.1875f+indiceTextY,
+
+				0.3125f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.1875f+indiceTextY,
+				0.34375f+indiceTextX, 0.21875f+indiceTextY,
+				0.34375f+indiceTextX, 0.1875f+indiceTextY,
+				0.3125f+indiceTextX, 0.21875f+indiceTextY
+
+		};
+
+	}
+	
 	public int getID(){
 		return texture.getTextureID();
 	}
@@ -1739,6 +1794,8 @@ public class TextureManager {
 			return genSandTexture(x,y);
 		case 30:
 			return genSteerolitheTexture(x,y);
+		case 31:
+			return genNaildeSteelTexture(x, y);
 		default:
 			return genGrassTexture(x, y);
 		}
