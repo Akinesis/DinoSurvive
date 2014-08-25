@@ -127,12 +127,15 @@ public class InputManager {
 			if(Keyboard.getEventKey() == Keyboard.KEY_RETURN){
 				if(Keyboard.getEventKeyState()){
 					this.clone.getHUDManager().getMenu().boutonsEtatsDark(position);
+					this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
 				}
 			}
 		}
-
-		if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Mouse.isButtonDown(0)){
-			this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
+		while(Mouse.next()){
+			if(Mouse.isButtonDown(0)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsDark(position);
+				this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
+			}
 		}
 		
 		if( (Mouse.getX() < 0.9875f*Display.getWidth()) && (Mouse.getX() > 0.6375f*Display.getWidth()) ){
@@ -151,8 +154,10 @@ public class InputManager {
 			if( (Mouse.getY() > Display.getHeight() - 0.68f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.58f*Display.getHeight()) ){
 				position = 4;
 			}
-			this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
-			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
+			if(!Mouse.isButtonDown(0)){
+				this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
+				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
+			}
 			System.out.println(position);
 		}
 		
@@ -169,6 +174,9 @@ public class InputManager {
 		boolean keyLeft = Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_Q);
 		boolean keyRight = Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D);
 
+		Keyboard.isKeyDown(Keyboard.KEY_A);
+		Keyboard.isKeyDown(Keyboard.KEY_Q); Keyboard.isKeyDown(Keyboard.KEY_W); Keyboard.isKeyDown(Keyboard.KEY_E);
+		
 		/*
 		 * vitesse de déplacement
 		 */
