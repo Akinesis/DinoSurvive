@@ -1610,7 +1610,7 @@ public class TextureManager {
 
 	}
 	
-	private float[] genSteerolitheTexture(float indiceTextX, float indiceTextY){
+	private float[] genDaraniumTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 
@@ -1793,7 +1793,7 @@ public class TextureManager {
 		case 29:
 			return genSandTexture(x,y);
 		case 30:
-			return genSteerolitheTexture(x,y);
+			return genDaraniumTexture(x,y);
 		case 31:
 			return genNaildeSteelTexture(x, y);
 		default:
