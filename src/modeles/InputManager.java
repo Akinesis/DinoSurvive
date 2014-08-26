@@ -1,6 +1,8 @@
 package modeles;
 
 
+import java.util.Arrays;
+
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -159,11 +161,13 @@ public class InputManager {
 			if( (Mouse.getY() > Display.getHeight() - 0.68f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.58f*Display.getHeight()) ){
 				position = 4;
 			}
-			if(!Mouse.isButtonDown(0)){
-				this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
-				this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
-			}
-			System.out.println(position);
+			//System.out.println(position);
+		}
+		float[] test = new float[]{1, 1, 1, 1, 1} ;
+		test[position] = this.clone.getHUDManager().getMenu().getBoutonsEtats()[position];
+		if( (!Mouse.isButtonDown(0) && !(Keyboard.getEventKey() == Keyboard.KEY_RETURN)) || !Arrays.equals(this.clone.getHUDManager().getMenu().getBoutonsEtats(),test) ){
+			this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
+			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
 		}
 
 		return position;

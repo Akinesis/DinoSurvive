@@ -282,6 +282,30 @@ public class Menu extends AbstractEntity3D{
 		return this.estAfficher;
 	}
 
+	public FloatBuffer getVertexDataFond() {
+		return vertexDataFond;
+	}
+
+	public FloatBuffer getVertexDataBoutons() {
+		return vertexDataBoutons;
+	}
+
+	public TextureManager getTextureManagerFond() {
+		return textureManagerFond;
+	}
+
+	public TextureManager getTextureManagerBoutons() {
+		return textureManagerBoutons;
+	}
+
+	public float[] getBoutonsEtats() {
+		return boutonsEtats;
+	}
+
+	public Controleur getControleurClone() {
+		return controleurClone;
+	}
+
 	public boolean isDisplayIsClose() {
 		return displayIsClose;
 	}
