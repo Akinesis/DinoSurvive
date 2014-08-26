@@ -334,12 +334,24 @@ public class ChunkManager implements Parametres {
 
 	public void createChunks(int xMove, int zMove){
 		Vector3f pos = clone.getCamera().getCurrentChunk();
-		
-		if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove)){
-			createChunksRec(xMove, zMove, 0, 0);
+		if(Math.abs(xMove)<Math.abs(zMove)){
+			for(int i=1; i<=Math.abs(zMove) ; i++){
+				if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i))){
+					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
+				}else{
+					clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i));
+					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
+				}
+			}
 		}else{
-			clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove);
-			createChunksRec(xMove, zMove, 0, 0);
+			for(int i=1; i<=Math.abs(xMove) ; i++){
+				if(chunkExist((int)pos.x+(int)(Math.signum(xMove)*i), (int)pos.y+1, (int)pos.z+zMove)){
+					createChunksRec((int)(Math.signum(xMove)*i), zMove, 0, 0);
+				}else{
+					clone.getTerrainGenerator().genereTerre((int)pos.x+(int)(Math.signum(xMove)*i), (int)pos.y+1, (int)pos.z+zMove);
+					createChunksRec((int)(Math.signum(xMove)*i), zMove, 0, 0);
+				}
+			}
 		}
 	}
 
