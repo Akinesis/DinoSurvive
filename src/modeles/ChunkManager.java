@@ -355,7 +355,7 @@ public class ChunkManager implements Parametres {
 	 * @param xMove Facteur de déplacement X
 	 * @param zMove Facteur de déplacement Y
 	 */
-	public void createChunks(int xMove, int zMove){
+	public void createChunksInit(int xMove, int zMove){
 		Vector3f pos = clone.getCamera().getCurrentChunk();
 		
 		if(Math.abs(xMove)<Math.abs(zMove)){
@@ -427,6 +427,18 @@ public class ChunkManager implements Parametres {
 		}
 	}
 
+	public void createChunks(){
+		Vector<Chunk> temp = new Vector<>();
+		int i=0;
+		for(Chunk ck : chunksToCreate){
+			if(i<2){
+				clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
+				temp.add(ck);
+				i++;
+			}
+		}
+		chunksToCreate.removeAll(temp);
+	}
 	public void addTransparent(Cube3dVbo transp){
 		transparancy.addTransparent(transp);
 	}
