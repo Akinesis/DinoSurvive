@@ -96,10 +96,10 @@ public class InputManager {
 		move();
 		jump(keyJump);
 		
-		if (getTime() - lastFPS > 150) {
+		if (getTime() - lastFPS > 100) {
 			clone.getChunkManager().reloadChunks();
 			clone.getChunkManager().createChunks();
-			lastFPS += 150; //
+			lastFPS += 100;
 		}
 		
 		if(!clone.getCollision().gravity(camera) && !isJumping){

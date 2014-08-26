@@ -41,6 +41,7 @@ public class Chunk implements Parametres{
 	private int x,y,z,id;
 
 	private boolean updated, checked;
+	private boolean xPlus, xMinus, yPlus, yMinus, zPlus, zMinus;
 
 	/**
 	 * Constructeur du chunk
@@ -57,6 +58,8 @@ public class Chunk implements Parametres{
 		clone = contr;
 		updated = true;
 		checked = false;
+
+		xPlus = true; xMinus = true; yPlus = true; yMinus = true; zPlus = true; zMinus = true;
 
 		this.x = x;
 		this.y = y;//tous n�gatifs
@@ -145,6 +148,31 @@ public class Chunk implements Parametres{
 							cubes[i][j][k].setEtat(true);
 							renderCubes.add(cubes[i][j][k]);
 						}
+					}else{
+						switch(whichFace(i,j,k)){
+						case 1:
+							xPlus=true;
+							break;
+						case 2:
+							xMinus=true;
+							break;
+						case 3:
+							yMinus=true;
+							break;
+						case 4:
+							yPlus=true;
+							break;
+						case 5:
+							zPlus=true;
+							break;
+						case 6:
+							zMinus=true;
+							break;
+						default:
+							break;
+						}
+
+
 					}
 				}
 			}
@@ -363,6 +391,53 @@ public class Chunk implements Parametres{
 
 		System.out.println(tempY);
 		return -(tempY+1);
+	}
+
+	private int whichFace(int i, int j, int k){
+
+		if(i==0){
+			return 5;
+		}else if(i==15){
+			return 6;
+		}
+
+		if(j==0){
+			return 3;
+		}else if(j==15){
+			return 4;
+		}
+
+		if(k==0){
+			return 1;
+		}else if(k==15){
+			return 2;
+		}
+
+		return 0;
+	}
+
+	public boolean isxPlus() {
+		return xPlus;
+	}
+
+	public boolean isxMinus() {
+		return xMinus;
+	}
+
+	public boolean isyPlus() {
+		return yPlus;
+	}
+
+	public boolean isyMinus() {
+		return yMinus;
+	}
+
+	public boolean iszPlus() {
+		return zPlus;
+	}
+
+	public boolean iszMinus() {
+		return zMinus;
 	}
 
 }

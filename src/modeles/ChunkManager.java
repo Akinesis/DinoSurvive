@@ -29,6 +29,21 @@ public class ChunkManager implements Parametres {
 		transparancy = new TransparentChunk(1, 1, 1, -1, clone);
 	}
 
+	/**
+	 * Initialise les chunks
+	 */
+	public void initChunks(){
+		clearRender();
+		checkRender();
+		for(Chunk chunk : renderChunks){
+			chunk.addCubes();
+			chunk.checkState();
+			chunk.genCubes(clone.getTexManager());
+			chunk.genVBO();
+		}
+		
+		createLoadInit();
+	}
 
 	/**
 	 * Renvoie le cube à la position demandée
@@ -178,20 +193,6 @@ public class ChunkManager implements Parametres {
 		transparancy.draw(textMan);
 	}
 
-	/**
-	 * Initialise les chunks
-	 */
-	public void initChunks(){
-		clearRender();
-		checkRender();
-		for(Chunk chunk : renderChunks){
-			chunk.addCubes();
-			chunk.checkState();
-			chunk.genCubes(clone.getTexManager());
-			chunk.genVBO();
-		}
-	}
-
 	public void reloadChunks(){
 		int i =0;
 		ArrayList<Chunk> temp = new ArrayList<>();
@@ -216,7 +217,11 @@ public class ChunkManager implements Parametres {
 		for(Chunk ck : chunks){
 			if(!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())){
 				renderChunks.add(ck);
+				if(!chunksToLoad.contains(ck)){
+					chunksToLoad.add(ck);
+				}
 			}else{
+				chunksToLoad.remove(ck);
 			}
 		}
 	}
@@ -225,13 +230,11 @@ public class ChunkManager implements Parametres {
 		renderChunks.clear();
 	}
 
-
 	public void unbindAll(){
 		for(Chunk ck : chunks){
 			ck.unbindVbo();
 		}
 	}
-
 
 	/**
 	 * Trouve le plus "haut" chunk, génère les cubes puis luis demande sont plus haut point.
@@ -327,15 +330,20 @@ public class ChunkManager implements Parametres {
 
 		boolean temp=true;
 
-		temp = (chunkExist(xCh+1,yCh,zCh))?temp && completeFace(xCh+1,yCh,zCh, 5):false;
-		temp = (chunkExist(xCh-1,yCh,zCh))?temp && completeFace(xCh-1,yCh,zCh, 6):false;
+		//temp = (chunkExist(xCh+1,yCh,zCh))?temp && completeFace(xCh+1,yCh,zCh, 5):false;
+		temp = (chunkExist(xCh+1,yCh,zCh))?temp && ck.isxPlus():false;
+		//temp = (chunkExist(xCh-1,yCh,zCh))?temp && completeFace(xCh-1,yCh,zCh, 6):false;
+		temp = (chunkExist(xCh-1,yCh,zCh))?temp && ck.isxMinus():false;
 
-		temp = (chunkExist(xCh,yCh+1,zCh))?temp && completeFace(xCh,yCh+1,zCh, 4)|| yCh+1>0:false;
-		temp = (chunkExist(xCh,yCh-1,zCh))?temp && completeFace(xCh,yCh-1,zCh, 3):false;
+		//temp = (chunkExist(xCh,yCh+1,zCh))?temp && completeFace(xCh,yCh+1,zCh, 4)|| yCh+1>0:false;
+		temp = (chunkExist(xCh,yCh+1,zCh))?temp && ck.isyMinus():false;
+		//temp = (chunkExist(xCh,yCh-1,zCh))?temp && completeFace(xCh,yCh-1,zCh, 3):false;
+		temp = (chunkExist(xCh,yCh-1,zCh))?temp && ck.isyPlus():false;
 
-		temp = (chunkExist(xCh,yCh,zCh+1))?temp && completeFace(xCh,yCh,zCh+1, 1):false;
-		temp = (chunkExist(xCh,yCh,zCh-1))?temp && completeFace(xCh,yCh,zCh-1, 2):false;
-
+		//temp = (chunkExist(xCh,yCh,zCh+1))?temp && completeFace(xCh,yCh,zCh+1, 1):false;
+		temp = (chunkExist(xCh,yCh,zCh+1))?temp && ck.iszPlus():false;
+		//temp = (chunkExist(xCh,yCh,zCh-1))?temp && completeFace(xCh,yCh,zCh-1, 2):false;
+		temp = (chunkExist(xCh,yCh,zCh-1))?temp && ck.iszMinus():false;
 
 		return  temp;
 	}
@@ -357,7 +365,7 @@ public class ChunkManager implements Parametres {
 	 */
 	public void createChunksInit(int xMove, int zMove){
 		Vector3f pos = clone.getCamera().getCurrentChunk();
-		
+
 		if(Math.abs(xMove)<Math.abs(zMove)){
 			for(int i=1; i<=Math.abs(zMove) ; i++){
 				if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i))){
@@ -439,6 +447,29 @@ public class ChunkManager implements Parametres {
 		}
 		chunksToCreate.removeAll(temp);
 	}
+
+	private void createLoadInit(){
+
+		ArrayList<Chunk> temp = new ArrayList<>();
+		for(Chunk chunk : chunksToLoad){
+			chunk.unbindVbo();
+			if(!chunk.getChecked()){
+				chunk.checkState();
+			}
+			chunk.genCubes(clone.getTexManager());
+			chunk.genVBO();
+			temp.add(chunk);
+		}
+		chunksToLoad.removeAll(temp);
+
+		Vector<Chunk> temp2 = new Vector<>();
+		for(Chunk ck : chunksToCreate){
+			clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
+			temp2.add(ck);
+		}
+		chunksToCreate.removeAll(temp2);
+	}
+
 	public void addTransparent(Cube3dVbo transp){
 		transparancy.addTransparent(transp);
 	}
