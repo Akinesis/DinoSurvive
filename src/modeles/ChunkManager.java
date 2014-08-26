@@ -432,7 +432,7 @@ public class ChunkManager implements Parametres {
 
 
 	public void createChunks(){
-		Vector<Chunk> temp = new Vector<>();
+		Vector<Chunk> temp = new Vector<Chunk>();
 		int i=0;
 		for(Chunk ck : chunksToCreate){
 			if(i<2){
