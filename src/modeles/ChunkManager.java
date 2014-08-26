@@ -24,8 +24,8 @@ public class ChunkManager implements Parametres {
 		chunks = new Vector<Chunk>();
 		renderChunks = new Vector<Chunk>();
 		chunksToRender = new Vector<Chunk>();
-		chunksToLoad = new Vector<>();
-		chunksToCheck = new Vector<>();
+		chunksToLoad = new Vector<Chunk>();
+		chunksToCheck = new Vector<Chunk>();
 		clone = contr;
 		transparancy = new TransparentChunk(1, 1, 1, -1, clone);
 	}
@@ -198,7 +198,7 @@ public class ChunkManager implements Parametres {
 
 	public void reloadChunks(){
 		int i =0;
-		ArrayList<Chunk> temp = new ArrayList<>();
+		ArrayList<Chunk> temp = new ArrayList<Chunk>();
 		for(Chunk chunk : chunksToLoad){
 			if(i<2){
 				chunk.unbindVbo();
