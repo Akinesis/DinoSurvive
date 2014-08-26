@@ -55,7 +55,7 @@ public class InputManager {
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
 		boolean keyBas = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 		delta = getDelta();
-		
+
 		//updateFPS();
 
 		while(Keyboard.next()){
@@ -93,9 +93,14 @@ public class InputManager {
 		mouse();
 		move();
 		jump(keyJump);
-
+		
+		if (getTime() - lastFPS > 100) {
+			clone.getChunkManager().reloadChunks();
+			lastFPS += 100; //
+		}
+		
 		if(!clone.getCollision().gravity(camera) && !isJumping){
-			//camera.getPos().y += 0.12;
+			camera.getPos().y += 0.12;
 		}
 
 	}
@@ -137,7 +142,7 @@ public class InputManager {
 				this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(position);
 			}
 		}
-		
+
 		if( (Mouse.getX() < 0.9875f*Display.getWidth()) && (Mouse.getX() > 0.6375f*Display.getWidth()) ){
 			if( (Mouse.getY() > Display.getHeight() - 0.2f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.1f*Display.getHeight()) ){
 				position = 0;
@@ -160,11 +165,10 @@ public class InputManager {
 			}
 			System.out.println(position);
 		}
-		
+
 		return position;
 	}
-	
-	
+
 	private void move(){
 		/*
 		 * verification du clavier
@@ -176,7 +180,7 @@ public class InputManager {
 
 		Keyboard.isKeyDown(Keyboard.KEY_A);
 		Keyboard.isKeyDown(Keyboard.KEY_Q); Keyboard.isKeyDown(Keyboard.KEY_W); Keyboard.isKeyDown(Keyboard.KEY_E);
-		
+
 		/*
 		 * vitesse de déplacement
 		 */
@@ -245,24 +249,23 @@ public class InputManager {
 
 		float indiceX = ((camera.getPos().x)>posTempX )?-0.2f:+0.2f;
 		float indiceZ = ((camera.getPos().z)>posTempZ )?-0.2f:+0.2f;
-		
+
 		int facteurX=0 , facteurZ =0;
-		
+
 		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
-		
+
 		if(Math.abs(tempX)>=Math.abs(tempZ)){
 			facteurX=(tempX>0)?4:-4;
 		}else{
 			facteurZ=(tempZ>0)?4:-4;
 		}
-		
+
 		if(compareChunk()){
 			clone.getChunkManager().createChunks(facteurX, facteurZ);
 			clone.getChunkManager().checkRender();
-			clone.getChunkManager().reloadChunks();
 		}
-		
+
 	}
 
 	private void moveY(float amt){
@@ -271,7 +274,7 @@ public class InputManager {
 		}else{
 			camera.getPos().y += amt;
 		}
-		
+
 	}
 
 	private void jump(boolean space){
@@ -304,7 +307,7 @@ public class InputManager {
 	}
 
 	private boolean compareChunk(){
-		
+
 		Vector3f temp = clone.getCamera().getCurrentChunk();
 		if(temp.x!=curentChunk.x || temp.y!=curentChunk.y || temp.z!=curentChunk.z){
 			setCurrentChunk(temp);
@@ -318,7 +321,7 @@ public class InputManager {
 		curentChunk.y=chunk.y;
 		curentChunk.z=chunk.z;
 	}
-	
+
 	public void updateFPS() {
 		if (getTime() - lastFPS > 1000) {
 			System.out.println(fps);

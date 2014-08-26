@@ -76,12 +76,13 @@ public class Chunk implements Parametres{
 
 	public void genVBO(){
 
-		vboVertexHandleChunk = GL15.glGenBuffers();
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
+		if(!renderCubes.isEmpty()){
+			vboVertexHandleChunk = GL15.glGenBuffers();
+			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
+			GL15.glBufferData(GL15.GL_ARRAY_BUFFER, interleavedBuffer, GL15.GL_STATIC_DRAW);
 
-		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-
+			GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+		}
 	}
 
 	private void updateVBO(){
@@ -225,30 +226,31 @@ public class Chunk implements Parametres{
 	 * 	DOIT ETRE ASSOCIEE A UNE METHODE DE RESET DES BUFFER !!
 	 */
 	public void genCubes(TextureManager texMan){
-		float cubeCoord[],texCoord[];
-		int j= 0;
-		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*(6*3+6*2)*6);
-		for(Cube3dVbo cube : renderCubes){
-			if(cube.getType()==12){
-				clone.getChunkManager().addTransparent(cube);
-			}else{
-				cubeCoord=cube.genCubes();
-				texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
-				for(int i = 0; i< cubeCoord.length; i+=3){
-					interleavedBuffer.put(cubeCoord[i]);
-					interleavedBuffer.put(cubeCoord[i+1]);
-					interleavedBuffer.put(cubeCoord[i+2]);
+		if(!renderCubes.isEmpty()){
+			float cubeCoord[],texCoord[];
+			int j= 0;
+			interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*(6*3+6*2)*6);
+			for(Cube3dVbo cube : renderCubes){
+				if(cube.getType()==12){
+					clone.getChunkManager().addTransparent(cube);
+				}else{
+					cubeCoord=cube.genCubes();
+					texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
+					for(int i = 0; i< cubeCoord.length; i+=3){
+						interleavedBuffer.put(cubeCoord[i]);
+						interleavedBuffer.put(cubeCoord[i+1]);
+						interleavedBuffer.put(cubeCoord[i+2]);
 
-					interleavedBuffer.put(texCoord[j]);
-					interleavedBuffer.put(texCoord[j+1]);
+						interleavedBuffer.put(texCoord[j]);
+						interleavedBuffer.put(texCoord[j+1]);
 
-					j+=2;
+						j+=2;
+					}
+					j=0;
 				}
-				j=0;
 			}
+			interleavedBuffer.flip();
 		}
-
-		interleavedBuffer.flip();
 	}
 
 	/**
@@ -256,17 +258,19 @@ public class Chunk implements Parametres{
 	 * @param texMan
 	 */
 	public void draw(TextureManager texMan){
-		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, 5*4, 0L);
-		glClientActiveTexture(GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texMan.getID());
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_FLOAT, 5*4, 3*4 );
-		glDrawArrays(GL_TRIANGLES, 0, renderCubes.size()*6*6);
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		if(!renderCubes.isEmpty()){
+			glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleChunk);
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glVertexPointer(3, GL_FLOAT, 5*4, 0L);
+			glClientActiveTexture(GL_TEXTURE0);
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, texMan.getID());
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glTexCoordPointer(2, GL_FLOAT, 5*4, 3*4 );
+			glDrawArrays(GL_TRIANGLES, 0, renderCubes.size()*6*6);
+			glDisableClientState(GL_VERTEX_ARRAY);
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		}
 	}
 
 	/**

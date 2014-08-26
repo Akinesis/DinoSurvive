@@ -39,7 +39,7 @@ public class TerrainGenerator {
 				}
 			}
 		}
-		clone.getChunkManager().addChunk(temp);
+		clone.getChunkManager().addChunkToLoad(temp);
 	}
 
 	/**

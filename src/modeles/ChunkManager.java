@@ -1,5 +1,6 @@
 package modeles;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -12,7 +13,7 @@ import modeles.entities.Cube3dVbo;
 
 
 public class ChunkManager implements Parametres {
-	private Vector<Chunk> chunks, renderChunks,chunksToRender;
+	private Vector<Chunk> chunks, renderChunks,chunksToRender, chunksToLoad, chunksToCheck;
 	private Controleur clone;
 	private TransparentChunk transparancy;
 
@@ -23,6 +24,8 @@ public class ChunkManager implements Parametres {
 		chunks = new Vector<Chunk>();
 		renderChunks = new Vector<Chunk>();
 		chunksToRender = new Vector<Chunk>();
+		chunksToLoad = new Vector<>();
+		chunksToCheck = new Vector<>();
 		clone = contr;
 		transparancy = new TransparentChunk(1, 1, 1, -1, clone);
 	}
@@ -96,6 +99,16 @@ public class ChunkManager implements Parametres {
 	public void addChunk(Chunk chu){
 		if(!chunks.contains(chu)){
 			chunks.add(chu);
+		}
+	}
+
+	/**
+	 * Ajoute un chunk dans la liste de chunks à charger
+	 * @param chu
+	 */
+	public void addChunkToLoad(Chunk chu){
+		if(!chunksToLoad.contains(chu)){
+			chunksToLoad.add(chu);
 		}
 	}
 
@@ -184,14 +197,24 @@ public class ChunkManager implements Parametres {
 	}
 
 	public void reloadChunks(){
-		for(Chunk chunk : renderChunks){
-			chunk.unbindVbo();
-			if(!chunk.getChecked()){
-				chunk.checkState();
+		int i =0;
+		ArrayList<Chunk> temp = new ArrayList<>();
+		for(Chunk chunk : chunksToLoad){
+			if(i<2){
+				chunk.unbindVbo();
+				if(!chunk.getChecked() && !chunksToCheck.contains(chunk)){
+					chunk.checkState();
+				}
+				chunk.genCubes(clone.getTexManager());
+				chunk.genVBO();
+				temp.add(chunk);
+				i++;
 			}
-			chunk.genCubes(clone.getTexManager());
-			chunk.genVBO();
 		}
+		chunksToLoad.removeAll(temp);
+	}
+
+	public void checkAllStates(){
 	}
 
 	public void checkRender(){
@@ -332,6 +355,11 @@ public class ChunkManager implements Parametres {
 		return false;
 	}
 
+	/**
+	 * Fonction initiale de récursive. Vérifie tout les chunk entre le joueur et le chunk à vérifier.
+	 * @param xMove Facteur de déplacement X
+	 * @param zMove Facteur de déplacement Y
+	 */
 	public void createChunks(int xMove, int zMove){
 		Vector3f pos = clone.getCamera().getCurrentChunk();
 		if(Math.abs(xMove)<Math.abs(zMove)){
@@ -400,7 +428,7 @@ public class ChunkManager implements Parametres {
 			}
 		}
 	}
-	
+
 	public void addTransparent(Cube3dVbo transp){
 		transparancy.addTransparent(transp);
 	}
