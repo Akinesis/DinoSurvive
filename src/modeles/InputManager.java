@@ -98,6 +98,7 @@ public class InputManager {
 		
 		if (getTime() - lastFPS > 150) {
 			clone.getChunkManager().reloadChunks();
+			clone.getChunkManager().createChunks();
 			lastFPS += 150; //
 		}
 		
@@ -266,7 +267,7 @@ public class InputManager {
 		}
 
 		if(compareChunk()){
-			clone.getChunkManager().createChunks(facteurX, facteurZ);
+			clone.getChunkManager().createChunksInit(facteurX, facteurZ);
 			clone.getChunkManager().checkRender();
 		}
 
