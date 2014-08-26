@@ -6,14 +6,13 @@ import java.util.Vector;
 import org.lwjgl.util.vector.Vector3f;
 
 import parametres.Parametres;
-import sun.util.calendar.ZoneInfo;
 import controleur.Controleur;
 import modeles.entities.Cube3dVbo;
 
 
 
 public class ChunkManager implements Parametres {
-	private Vector<Chunk> chunks, renderChunks,chunksToRender, chunksToLoad, chunksToCheck;
+	private Vector<Chunk> chunks, renderChunks,chunksToRender, chunksToLoad, chunksToCreate;
 	private Controleur clone;
 	private TransparentChunk transparancy;
 
@@ -25,7 +24,7 @@ public class ChunkManager implements Parametres {
 		renderChunks = new Vector<Chunk>();
 		chunksToRender = new Vector<Chunk>();
 		chunksToLoad = new Vector<>();
-		chunksToCheck = new Vector<>();
+		chunksToCreate = new Vector<>();
 		clone = contr;
 		transparancy = new TransparentChunk(1, 1, 1, -1, clone);
 	}
@@ -121,9 +120,6 @@ public class ChunkManager implements Parametres {
 		}
 	}
 
-	public void updateStates(){
-	}
-
 	public void update(){
 		chunksToRender.addAll(getChunkToUpdate());
 		Vector<Chunk> temp = new Vector<Chunk>();
@@ -202,7 +198,7 @@ public class ChunkManager implements Parametres {
 		for(Chunk chunk : chunksToLoad){
 			if(i<2){
 				chunk.unbindVbo();
-				if(!chunk.getChecked() && !chunksToCheck.contains(chunk)){
+				if(!chunk.getChecked()){
 					chunk.checkState();
 				}
 				chunk.genCubes(clone.getTexManager());
@@ -214,14 +210,13 @@ public class ChunkManager implements Parametres {
 		chunksToLoad.removeAll(temp);
 	}
 
-	public void checkAllStates(){
-	}
 
 	public void checkRender(){
 		clearRender();
 		for(Chunk ck : chunks){
 			if(!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())){
 				renderChunks.add(ck);
+			}else{
 			}
 		}
 	}
@@ -362,12 +357,14 @@ public class ChunkManager implements Parametres {
 	 */
 	public void createChunks(int xMove, int zMove){
 		Vector3f pos = clone.getCamera().getCurrentChunk();
+		
 		if(Math.abs(xMove)<Math.abs(zMove)){
 			for(int i=1; i<=Math.abs(zMove) ; i++){
 				if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i))){
 					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
 				}else{
-					clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i));
+					//clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i));
+					chunksToCreate.add(getChunk((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i)));
 					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
 				}
 			}
@@ -376,7 +373,8 @@ public class ChunkManager implements Parametres {
 				if(chunkExist((int)pos.x+(int)(Math.signum(xMove)*i), (int)pos.y+1, (int)pos.z+zMove)){
 					createChunksRec((int)(Math.signum(xMove)*i), zMove, 0, 0);
 				}else{
-					clone.getTerrainGenerator().genereTerre((int)pos.x+(int)(Math.signum(xMove)*i), (int)pos.y+1, (int)pos.z+zMove);
+					//clone.getTerrainGenerator().genereTerre((int)pos.x+(int)(Math.signum(xMove)*i), (int)pos.y+1, (int)pos.z+zMove);
+					chunksToCreate.add(getChunk((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i)));
 					createChunksRec((int)(Math.signum(xMove)*i), zMove, 0, 0);
 				}
 			}
@@ -414,7 +412,6 @@ public class ChunkManager implements Parametres {
 					}
 				}else{
 					if(xMove!=0){
-						System.out.println("4");
 						createChunksRec(xMove, zMove+1, nbInstance, 3);
 						createChunksRec(xMove, zMove-1, nbInstance, 4);
 					}else{
@@ -423,7 +420,8 @@ public class ChunkManager implements Parametres {
 					}
 				}
 			}else{
-				clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove);
+				//clone.getTerrainGenerator().genereTerre((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove);
+				chunksToCreate.add(getChunk((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+zMove));
 				createChunksRec(xMove, zMove, nbInstance+1, dir);
 			}
 		}
