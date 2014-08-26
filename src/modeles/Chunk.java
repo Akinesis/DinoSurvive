@@ -175,7 +175,7 @@ public class Chunk implements Parametres{
 	}
 
 	public boolean checkPos(Vector3f current){
-		if(Math.abs(Math.abs(current.x)-Math.abs(x))>=chunkFar || Math.abs(Math.abs(current.y)-Math.abs(y))>=chunkFar || Math.abs(Math.abs(current.z)-Math.abs(z))>=chunkFar){
+		if(Math.abs(current.x-x)>=chunkFar || Math.abs(current.y-y)>=chunkFar || Math.abs(current.z-z)>=chunkFar){
 			return false;
 		}
 		return true;
