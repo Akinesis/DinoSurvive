@@ -42,7 +42,7 @@ public class Menu extends AbstractEntity3D{
 		this.controleurClone = controleur;
 		this.estAfficher = true;
 		this.vertexDataFond = BufferUtils.createFloatBuffer(6 * this.vertexSize);
-		this.vertexDataBoutons = BufferUtils.createFloatBuffer(30 * this.vertexSize);
+		this.vertexDataBoutons = BufferUtils.createFloatBuffer(36 * this.vertexSize);
 		this.vboVertexHandle = glGenBuffers();
 		this.textureManagerFond = new TextureManager("res/Menu.png");
 		this.textureManagerBoutons = new TextureManager("res/Boutons_v2.png");
@@ -53,12 +53,12 @@ public class Menu extends AbstractEntity3D{
 	}
 	
 	private float[] generationBoutonsEtats() {
-		return new float[]{2, 1, 1, 1, 1};
+		return new float[]{2, 1, 1, 1, 1, 1};
 	}
 
 	public void boutonsEtatsReset(int i) {
 		int j = 0;
-		while(j < 5){
+		while(j < 6){
 			if(j != i){
 				this.boutonsEtats[j] = 1f;
 			}
@@ -78,9 +78,7 @@ public class Menu extends AbstractEntity3D{
 	
 	
 	private float[] generationBoutonsTextureCoordonnes() {
-		//return new float[]{0f, 0.19f, 0.20f, 0.39f, 0.40f, 0.585f, 0.59f, 0.78f, 0.79f, 0.98f};
 		return new float[]{0f, 0.15625f, 0.3125f, 0.46875f, 0.625f, 0.78125f, 0.9375f};
-		//la 6eme coordonnee 0.9375f et la pour le bouton retour.
 	}
 
 	public void MenuBoutonsFonctionaliter(int position) {
@@ -88,17 +86,20 @@ public class Menu extends AbstractEntity3D{
 			this.inverserEstAfficher();
 		}
 		if(position == 1){
-			System.out.println("blurf");
+			System.out.println("new game");
 		}
 		if(position == 2){
-			System.out.println("check");
+			System.out.println("charge");
 		}
 		if(position == 3){
-			System.out.println("niark");
+			System.out.println("option");
 		}
 		if(position == 4){
 			//this.controleurClone.getDisplay().end();
 			this.displayIsClose = true;
+		}
+		if(position == 5){
+			System.out.println("back");
 		}
 	}
 
@@ -308,7 +309,7 @@ public class Menu extends AbstractEntity3D{
 		return controleurClone;
 	}
 
-	public boolean isDisplayIsClose() {
+	public boolean getDisplayIsClose() {
 		return displayIsClose;
 	}
 	
