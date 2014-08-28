@@ -45,7 +45,7 @@ public class Menu extends AbstractEntity3D{
 		this.vertexDataBoutons = BufferUtils.createFloatBuffer(30 * this.vertexSize);
 		this.vboVertexHandle = glGenBuffers();
 		this.textureManagerFond = new TextureManager("res/Menu.png");
-		this.textureManagerBoutons = new TextureManager("res/Boutons.png");
+		this.textureManagerBoutons = new TextureManager("res/Boutons_v2.png");
 		this.boutonsLimites = this.generationBoutonsLimites();
 		this.boutonsTextureCoordonnes = this.generationBoutonsTextureCoordonnes();
 		this.boutonsEtats = this.generationBoutonsEtats();
@@ -78,7 +78,9 @@ public class Menu extends AbstractEntity3D{
 	
 	
 	private float[] generationBoutonsTextureCoordonnes() {
-		return new float[]{0f, 0.19f, 0.20f, 0.39f, 0.40f, 0.585f, 0.59f, 0.78f, 0.79f, 0.98f};
+		//return new float[]{0f, 0.19f, 0.20f, 0.39f, 0.40f, 0.585f, 0.59f, 0.78f, 0.79f, 0.98f};
+		return new float[]{0f, 0.15625f, 0.3125f, 0.46875f, 0.625f, 0.78125f, 0.9375f};
+		//la 6eme coordonnee 0.9375f et la pour le bouton retour.
 	}
 
 	public void MenuBoutonsFonctionaliter(int position) {
@@ -193,42 +195,42 @@ public class Menu extends AbstractEntity3D{
 		i = this.boutonsEtats[1] * modulo;
 		j = (this.boutonsEtats[1] - 1) * modulo;
 		
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.32f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.32f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.22f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.22f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.22f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.32f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.32f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.32f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[1]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.22f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[1]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.22f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[1]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.22f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.32f*Display.getHeight());
 		//3
 		i = this.boutonsEtats[2] * modulo;
 		j = (this.boutonsEtats[2] - 1) * modulo;
 		
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[5]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.44f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[5]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.44f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.34f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.34f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.34f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[5]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.44f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.44f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.44f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.34f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.34f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[2]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.34f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.44f*Display.getHeight());
 		//4
 		i = this.boutonsEtats[3] * modulo;
 		j = (this.boutonsEtats[3] - 1) * modulo;
 
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[7]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.56f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[7]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.56f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[6]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.46f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[6]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.46f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[6]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.46f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[7]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.56f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.56f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.56f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.46f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.46f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[3]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.46f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.56f*Display.getHeight());
 		//5
 		i = this.boutonsEtats[4] * modulo;
 		j = (this.boutonsEtats[4] - 1) * modulo;
 
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[9]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.68f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[9]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.68f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[8]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.58f*Display.getHeight());
-		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[8]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.58f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[8]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.58f*Display.getHeight());
-		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[9]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.68f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[5]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.68f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[5]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.68f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.58f*Display.getHeight());
+		GL11.glTexCoord2d(j,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.6375f*Display.getWidth(), 0.58f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[4]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.58f*Display.getHeight());
+		GL11.glTexCoord2d(i,this.boutonsTextureCoordonnes[5]); GL11.glVertex2d(0.9875f*Display.getWidth(), 0.68f*Display.getHeight());
 		
 		GL11.glEnd();
 		
