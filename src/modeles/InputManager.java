@@ -146,7 +146,7 @@ public class InputManager {
 			}
 		}
 
-		if( (Mouse.getX() < 0.9875f*Display.getWidth()) && (Mouse.getX() > 0.6375f*Display.getWidth()) ){
+		if( (Mouse.getX() < 0.9875f*Display.getWidth()) && (Mouse.getX() > 1.216875f*this.clone.getHUDManager().getMenu().getDisplayHeight()) ){
 			if( (Mouse.getY() > Display.getHeight() - 0.2f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.1f*Display.getHeight()) ){
 				position = 0;
 			}
