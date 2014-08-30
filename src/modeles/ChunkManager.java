@@ -331,8 +331,8 @@ public class ChunkManager implements Parametres {
 
 		//temp = (chunkExist(xCh,yCh+1,zCh))?temp && completeFace(xCh,yCh+1,zCh, 4)|| yCh+1>0:false;
 		temp = (chunkExist(xCh,yCh+1,zCh))?temp && ck.isyMinus():false;
-		temp = (chunkExist(xCh,yCh-1,zCh))?temp && completeFace(xCh,yCh-1,zCh, 3):false;
-		//temp = (chunkExist(xCh,yCh-1,zCh))?temp && ck.isyPlus():false;
+		//temp = (chunkExist(xCh,yCh-1,zCh))?temp && completeFace(xCh,yCh-1,zCh, 3):false;
+		temp = (chunkExist(xCh,yCh-1,zCh))?temp && ck.isyPlus():false;
 
 		//temp = (chunkExist(xCh,yCh,zCh+1))?temp && completeFace(xCh,yCh,zCh+1, 1):false;
 		temp = (chunkExist(xCh,yCh,zCh+1))?temp && ck.iszPlus():false;

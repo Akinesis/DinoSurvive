@@ -252,13 +252,13 @@ public class InputManager {
 		float posTempZ = camera.getPos().z+(float)tempZ;
 		float posTempX = camera.getPos().x+(float)tempX;
 
-		float indiceX = ((camera.getPos().x)>posTempX )?-0.15f:+0.15f;
-		float indiceZ = ((camera.getPos().z)>posTempZ )?-0.15f:+0.15f;
+		float indiceX = ((camera.getPos().x)>posTempX )?-0.2f:+0.2f;
+		float indiceZ = ((camera.getPos().z)>posTempZ )?-0.2f:+0.2f;
 
 		int facteurX=0 , facteurZ =0;
 
-		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
-		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
+		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
+		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
 
 		if(Math.abs(tempX)>=Math.abs(tempZ)){
 			facteurX=(tempX>0)?4:-4;

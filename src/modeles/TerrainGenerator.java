@@ -12,40 +12,18 @@ public class TerrainGenerator {
 	public TerrainGenerator(Controleur contr){
 		clone = contr;
 	}
-
+	
 	public void buildStart(){
 		for(int x = -4; x<5; x++){
 			for(int y = 0; y>-5; y--){
 				for(int z = -4; z<5; z++){
+					genereTerre(x,y,z);
 					if(y==-4){
-						genRandTop(x, y, z);
-					}else{
-						genereTerre(x,y,z);
+						genCeil(x, y, z);
 					}
 				}
 			}
 		}
-	}
-
-	private void genRandTop(int x, int y, int z){
-		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
-		int originX = x*16;
-		int originY = y*16;
-		int originZ = z*16;
-
-		for(int i = originX; i>originX-16; --i){
-			for(int j = originY; j>originY-16; --j){
-				for(int k = originZ; k>originZ-16; --k){
-					if(j<originY-13){
-						int l = 13 + (int)(Math.random() * ((15 - 13) + 1));
-						temp.addCube3dVbo(new Cube3dVbo(i, -originY+l, k, 1, 1));
-					}else{
-						temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 2));
-					}
-				}
-			}
-		}
-		clone.getChunkManager().addChunkToLoad(temp);
 	}
 
 	public void genereTerre(int x, int y, int z){
@@ -81,7 +59,7 @@ public class TerrainGenerator {
 			}
 		}
 	}
-
+	
 	/**
 	 * Fonction permettant la generation d'un sol d'herbe, tout beau tout propre.
 	 */
@@ -97,7 +75,7 @@ public class TerrainGenerator {
 			}
 		}
 	}
-
+	
 	/**
 	 * Fonction permettant la generation d'un plafond d'herbe, tout beau tout propre.
 	 */
@@ -113,7 +91,7 @@ public class TerrainGenerator {
 			}
 		}
 	}
-
+	
 	/**
 	 * Fonction permettant la génération d'un arbre dont le premier bloc de tronc est en position x,y,z
 	 * @param x : position du cube selon les x
@@ -128,11 +106,11 @@ public class TerrainGenerator {
 		//wouhou aléatoire !
 
 		Chunk temp = clone.getChunkManager().getChunk(chX,chY,chZ);
-
+		
 		float x = chX*16+12;
 		float y = chY*16;
 		float z = chZ*16+12;
-
+		
 		int taille = (int)((6-3)*Math.random()) +3;
 		int size = 1;
 
