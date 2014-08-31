@@ -1,5 +1,6 @@
 package modeles;
 
+import modeles.entities.Cube3dVbo;
 import controleur.Controleur;
 
 public class CollisionManager {
@@ -11,9 +12,21 @@ public class CollisionManager {
 	}
 	
 	public boolean colideX(Camera cam, float posX){
-		return (((clone.getChunkManager().getCubeAt(cam.getPos().x+posX, cam.getPos().y, cam.getPos().z))!=null)||
-				((clone.getChunkManager().getCubeAt(cam.getPos().x+posX, cam.getPos().y+1.1f, cam.getPos().z))!=null)||
-				((clone.getChunkManager().getCubeAt(cam.getPos().x+posX, cam.getPos().y+2.1f, cam.getPos().z))!=null));
+		System.out.println(cam.getPos());
+		int tempX;
+		if(cam.getPos().x>0){
+			tempX = (int)Math.abs(Math.floor(cam.getPos().x))%16;
+		}else{
+			tempX = (int)Math.abs(Math.ceil(cam.getPos().x))%16;
+		}
+		
+		int tempY = (int)Math.abs(Math.ceil(cam.getPos().y+1.1f))%16;
+		int tempZ = (int)Math.abs(Math.ceil(cam.getPos().z))%16;
+		System.out.println("Cube : "+tempX+" "+tempY+" "+tempZ);
+		
+		Cube3dVbo[] temp = clone.getChunkManager().getBody(cam.getPos().x+posX, cam.getPos().y, cam.getPos().z);
+		
+		return (temp[0]!=null || temp[1]!=null || temp[2]!=null);
 	}
 	
 	public boolean colideZ(Camera cam, float posZ){

@@ -56,7 +56,9 @@ public class ChunkManager implements Parametres {
 		float xChunk = (float) Math.ceil(x / 16);
 		float yChunk = (float) Math.ceil(y / 16);
 		float zChunk = (float) Math.ceil(z / 16);
+		
 		Cube3dVbo cube = null;
+		
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
@@ -64,6 +66,15 @@ public class ChunkManager implements Parametres {
 			}
 		}
 		return cube;
+	}
+	
+	public Cube3dVbo[] getBody(float x, float y, float z) {
+		Cube3dVbo[] temp = new Cube3dVbo[3];
+		
+		temp[0] = getCubeAt(x,y,z);
+		temp[1] = getCubeAt(x,y+1.1f,z);
+		temp[2] = getCubeAt(x,y+2.1f,z);
+		return temp;
 	}
 
 	// marche pas
