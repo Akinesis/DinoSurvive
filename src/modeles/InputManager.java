@@ -102,9 +102,9 @@ public class InputManager {
 			lastFPS += 150; //
 		}
 		
-		if(!clone.getCollision().gravity(camera) && !isJumping){
-			camera.getPos().y += 0.12;
-		}
+		//if(!clone.getCollision().gravity(camera) && !isJumping){
+			//camera.getPos().y += 0.12;
+		//}
 
 	}
 
@@ -257,8 +257,8 @@ public class InputManager {
 
 		int facteurX=0 , facteurZ =0;
 
-		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
-		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
+		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
+		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 
 		if(Math.abs(tempX)>=Math.abs(tempZ)){
 			facteurX=(tempX>0)?4:-4;
@@ -267,7 +267,7 @@ public class InputManager {
 		}
 
 		if(compareChunk()){
-			clone.getChunkManager().createChunksInit(facteurX, facteurZ);
+			//clone.getChunkManager().createChunksInit(facteurX, facteurZ);
 			clone.getChunkManager().checkRender();
 		}
 

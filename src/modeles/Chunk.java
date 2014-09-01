@@ -96,6 +96,20 @@ public class Chunk implements Parametres{
 
 	}
 
+	
+	/**
+	 * Méthode ajoutant un cube dans le chunk
+	 * TODO : vérification que le cube a le droit d'être dans ce cube
+	 * @param cube
+	 */
+	public void addCube3dVbo(Cube3dVbo cube){
+		int posX = (int)Math.abs(Math.ceil(cube.getX()))%16;
+		int posY = Math.abs(cube.getY())%16;
+		int posZ = (int)Math.abs(Math.ceil(cube.getZ()))%16;
+
+		cubes[posX][posY][posZ] = cube;
+	}
+	
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z
 	 * @param x
@@ -104,7 +118,9 @@ public class Chunk implements Parametres{
 	 * @return un Cube3dVbo
 	 */
 	public Cube3dVbo getCube(float x, float y, float z) {
-		int tempX = (int)Math.abs(Math.ceil(x))%16;
+		int tempX, tempConv;
+		
+		tempX = (int)Math.abs(Math.ceil(x))%16;
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
 		int tempZ = (int)Math.abs(Math.ceil(z))%16;
 
@@ -112,11 +128,11 @@ public class Chunk implements Parametres{
 	}
 
 	public void delCube(int x, int y, int z){
-		//int tempX = (int)(Math.abs(x)+((x<0)?-1:0))%16;
-		//int tempY = (int)Math.abs(y)%16;
-		//int tempZ = (int)(Math.abs(z)+((z<0)?-1:0))%16;
+		int tempX = (int)(Math.abs(x)+((x<0)?-1:0))%16;
+		int tempY = (int)Math.abs(y)%16;
+		int tempZ = (int)(Math.abs(z)+((z<0)?-1:0))%16;
 
-		cubes[x][y][z]=null;
+		cubes[tempX][tempY][tempZ]=null;
 		updated=false;
 	}
 
@@ -309,19 +325,6 @@ public class Chunk implements Parametres{
 		nonRenderCubes.clear();
 	}
 
-	/**
-	 * Méthode ajoutant un cube dans le chunk
-	 * TODO : vérification que le cube a le droit d'être dans ce cube
-	 * @param cube
-	 */
-	public void addCube3dVbo(Cube3dVbo cube){
-		int posX = (Math.abs(cube.getX())+((cube.getX()<0)?-1:0))%16;
-		int posY = Math.abs(cube.getY())%16;
-		int posZ = (Math.abs(cube.getZ())+((cube.getZ()<0)?-1:0))%16;
-
-		cubes[posX][posY][posZ] = cube;
-	}
-
 	public void unbindVbo(){
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		GL15.glDeleteBuffers(vboVertexHandleChunk);
@@ -438,6 +441,12 @@ public class Chunk implements Parametres{
 
 	public boolean iszMinus() {
 		return zMinus;
+	}
+	
+	private float convertCoord(float nb, float fact){
+		float temp;
+		temp = ((float)Math.floor(nb)-(16*fact))+1;
+		return temp;
 	}
 
 }
