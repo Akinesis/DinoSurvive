@@ -21,7 +21,7 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 	private boolean etat;
 	
 	public Cube3D(float x, float y, float z, float size){
-		pos = new Vector3f(x, y, z); //y positifs.
+		pos = new Vector3f(-x, y, -z); //y positifs.
 		pos2 = new Vector3f(pos.x+size, pos.y+size, pos.z+size);
 		this.size=size;
 		

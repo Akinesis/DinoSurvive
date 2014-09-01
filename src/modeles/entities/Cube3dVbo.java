@@ -16,7 +16,7 @@ public class Cube3dVbo extends Cube3D {
 	private float indiceTextX, indiceTextY;
 
 	public Cube3dVbo(float x,float  y,float z,float size, int typ){
-		super(-x,y,-z,size);
+		super(x,y,z,size);
 		type=typ;
 
 		//vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
@@ -106,6 +106,21 @@ public class Cube3dVbo extends Cube3D {
 	
 	public float getTextY(){
 		return indiceTextY;
+	}
+	
+	@Override
+	public int getX() {
+		return (int)pos.x;
+	}
+
+	@Override
+	public int getY() {
+		return  (int)pos.y;
+	}
+
+	@Override
+	public int getZ() {
+		return (int)pos.z;
 	}
 	
 }

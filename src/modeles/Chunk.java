@@ -95,6 +95,20 @@ public class Chunk implements Parametres{
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 
 	}
+	
+	/**
+	 * Méthode ajoutant un cube dans le chunk
+	 * TODO : vérification que le cube a le droit d'être dans ce cube
+	 * @param cube
+	 */
+	public void addCube3dVbo(Cube3dVbo cube){
+		int posX = convertCoord(cube.getX());
+		int posY = Math.abs(cube.getY())%16;
+		int posZ = convertCoord(cube.getZ());
+
+		cubes[posX][posY][posZ] = cube;
+	}
+	
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z
 	 * @param x
@@ -103,9 +117,9 @@ public class Chunk implements Parametres{
 	 * @return un Cube3dVbo
 	 */
 	public Cube3dVbo getCube(float x, float y, float z) {
-		int tempX = (int)Math.abs(Math.ceil(x))%16;
+		int tempX = convertCoord(x);
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
-		int tempZ = (int)Math.abs(Math.ceil(z))%16;
+		int tempZ = convertCoord(z);
 
 		return cubes[tempX][tempY][tempZ];
 	}
@@ -308,19 +322,6 @@ public class Chunk implements Parametres{
 		nonRenderCubes.clear();
 	}
 
-	/**
-	 * Méthode ajoutant un cube dans le chunk
-	 * TODO : vérification que le cube a le droit d'être dans ce cube
-	 * @param cube
-	 */
-	public void addCube3dVbo(Cube3dVbo cube){
-		int posX = (Math.abs(cube.getX())+((cube.getX()<0)?-1:0))%16;
-		int posY = Math.abs(cube.getY())%16;
-		int posZ = (Math.abs(cube.getZ())+((cube.getZ()<0)?-1:0))%16;
-
-		cubes[posX][posY][posZ] = cube;
-	}
-
 	public void unbindVbo(){
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		GL15.glDeleteBuffers(vboVertexHandleChunk);
@@ -443,7 +444,11 @@ public class Chunk implements Parametres{
 		float temp;
 		
 		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
-		temp = -(temp%16)-1;
+		temp = (temp%16);
+		if(temp<0){
+			temp += 16;
+		}
+		temp = -temp;
 		temp = temp%16;
 		if(temp<0){
 			temp += 16;
