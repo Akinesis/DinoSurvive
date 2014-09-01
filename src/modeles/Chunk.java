@@ -102,9 +102,9 @@ public class Chunk implements Parametres{
 	 * @param cube
 	 */
 	public void addCube3dVbo(Cube3dVbo cube){
-		int posX = convertCoord(cube.getX());
+		int posX = convertCoordAdd(cube.getX());
 		int posY = Math.abs(cube.getY())%16;
-		int posZ = convertCoord(cube.getZ());
+		int posZ = convertCoordAdd(cube.getZ());
 
 		cubes[posX][posY][posZ] = cube;
 	}
@@ -117,9 +117,9 @@ public class Chunk implements Parametres{
 	 * @return un Cube3dVbo
 	 */
 	public Cube3dVbo getCube(float x, float y, float z) {
-		int tempX = convertCoord(x);
+		int tempX = convertCoordGet(x);
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
-		int tempZ = convertCoord(z);
+		int tempZ = convertCoordGet(z);
 
 		return cubes[tempX][tempY][tempZ];
 	}
@@ -440,7 +440,7 @@ public class Chunk implements Parametres{
 		return zMinus;
 	}
 	
-	private int convertCoord(float nb){
+	private int convertCoordGet(float nb){
 		float temp;
 		
 		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
@@ -448,12 +448,24 @@ public class Chunk implements Parametres{
 		if(temp<0){
 			temp += 16;
 		}
-		temp = -temp;
+		temp = -temp-((nb>0)?1:0);
 		temp = temp%16;
 		if(temp<0){
 			temp += 16;
 		}
 		
+		return (int)temp;
+	}
+	
+	private int convertCoordAdd(float nb){
+		float temp;
+		
+		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
+		temp = (temp%16);
+		if(temp<0){
+			temp += 16;
+		}
+	
 		return (int)temp;
 	}
 

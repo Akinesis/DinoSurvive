@@ -17,7 +17,7 @@ public class TerrainGenerator {
 		for(int x = -4; x<5; x++){
 			for(int y = 0; y>-5; y--){
 				for(int z = -4; z<5; z++){
-					if(y==-4 & x==1){
+					if(y==-4 & z==1){
 						genRandTop2(x, y, z);
 					}else{
 						genereTerre(x,y,z);
@@ -115,7 +115,7 @@ public class TerrainGenerator {
 
 		for(int i = originY+1; i>originY-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
-				temp.addCube3dVbo(new Cube3dVbo(originX, -i, j, 1, 17));
+				temp.addCube3dVbo(new Cube3dVbo(originX-2, -i, j, 1, 17));
 			}
 		}
 	}
