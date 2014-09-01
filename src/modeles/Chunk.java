@@ -110,16 +110,31 @@ public class Chunk implements Parametres{
 	}
 	
 	/**
-	 * Renvoie un cube aux coordonnées x,y,z
+	 * Renvoie un cube aux coordonnées x,y,z de la caméra
 	 * @param x
 	 * @param y
 	 * @param z
 	 * @return un Cube3dVbo
 	 */
-	public Cube3dVbo getCube(float x, float y, float z) {
+	public Cube3dVbo getCubeCam(float x, float y, float z) {
 		int tempX = convertCoordGet(x);
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
 		int tempZ = convertCoordGet(z);
+
+		return cubes[tempX][tempY][tempZ];
+	}
+	
+	/**
+	 * Renvoie un cube aux coordonnées x,y,z par raport à la matrice de déssin
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @return un Cube3dVbo
+	 */
+	public Cube3dVbo getCubeDraw(float x, float y, float z) {
+		int tempX = convertCoordAdd(x);
+		int tempY = (int)Math.abs(y)%16;
+		int tempZ = convertCoordAdd(z);
 
 		return cubes[tempX][tempY][tempZ];
 	}
@@ -250,14 +265,17 @@ public class Chunk implements Parametres{
 	 */
 	private boolean surround(int x, int y, int z){
 		boolean temp;
+		int xCube = cubes[x][y][z].getX();
+		int yCube = cubes[x][y][z].getY();
+		int zCube = cubes[x][y][z].getZ();
 
-		temp = (x>0) ? cubes[x-1][y][z]!=null : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()+1, cubes[x][y][z].getY(), cubes[x][y][z].getZ());
-		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()+1, cubes[x][y][z].getZ()) && temp || this.y!=0;
-		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()+1) && temp;
+		temp = (x>0) ? cubes[x-1][y][z]!=null : clone.getChunkManager().cubeExist(xCube-1, yCube, zCube);
+		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube-1, zCube) && temp;
+		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube, zCube-1) && temp;
 
-		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX()-1, cubes[x][y][z].getY(), cubes[x][y][z].getZ()) && temp;
-		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY()-1, cubes[x][y][z].getZ()) && temp;
-		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : !clone.getChunkManager().cubeExist(cubes[x][y][z].getX(), cubes[x][y][z].getY(), cubes[x][y][z].getZ()-1) && temp;
+		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().cubeExist(xCube+1, yCube, zCube) && temp;
+		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube+1, zCube) && temp;
+		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube, zCube+1) && temp;
 
 		return  temp;
 	}
@@ -330,7 +348,6 @@ public class Chunk implements Parametres{
 			interleavedBuffer.clear();
 		}
 	}
-
 
 	/*
 	 * Getters

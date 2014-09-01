@@ -62,7 +62,7 @@ public class ChunkManager implements Parametres {
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
-				cube = ck.getCube(x, y, z);
+				cube = ck.getCubeCam(x, y, z);
 			}
 		}
 		return cube;
@@ -315,14 +315,16 @@ public class ChunkManager implements Parametres {
 	}
 
 	public boolean cubeExist(int x, int y, int z) {
-		float xChunk = (float) Math.ceil(x / 16);
-		float yChunk = (float) Math.ceil(y / 16);
-		float zChunk = (float) Math.ceil(z / 16);
+		float xChunk = (float) Math.ceil((float)(x*-1) / 16);
+		float yChunk = (float) Math.ceil((float)(y*-1) / 16);
+		float zChunk = (float) Math.ceil((float)(z*-1) / 16);
+		
 		boolean temp = false;
+		
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
-				temp = ck.getCube(x, y, z) != null;
+				temp = ck.getCubeDraw(x, y, z) != null;
 			}
 		}
 		return temp;
@@ -514,7 +516,7 @@ public class ChunkManager implements Parametres {
 						&& chun.getZ() == zCh) {
 					for (i = 0; i < 15; i++) {
 						for (j = 0; j < 15; j++) {
-							if (chun.getCube(i, j, 0) == null) {
+							if (chun.getCubeCam(i, j, 0) == null) {
 								return false;
 							}
 						}
@@ -528,7 +530,7 @@ public class ChunkManager implements Parametres {
 						&& chun.getZ() == zCh) {
 					for (i = 0; i < 15; i++) {
 						for (j = 0; j < 15; j++) {
-							if (chun.getCube(i, j, 15) == null) {
+							if (chun.getCubeCam(i, j, 15) == null) {
 								return false;
 							}
 						}
@@ -542,7 +544,7 @@ public class ChunkManager implements Parametres {
 						&& chun.getZ() == zCh) {
 					for (i = 0; i < 15; i++) {
 						for (j = 0; j < 15; j++) {
-							if (chun.getCube(i, 0, j) == null) {
+							if (chun.getCubeCam(i, 0, j) == null) {
 								return false;
 							}
 						}
@@ -556,7 +558,7 @@ public class ChunkManager implements Parametres {
 						&& chun.getZ() == zCh) {
 					for (i = 0; i < 15; i++) {
 						for (j = 0; j < 15; j++) {
-							if (chun.getCube(i, 15, j) == null) {
+							if (chun.getCubeCam(i, 15, j) == null) {
 								return false;
 							}
 						}
@@ -570,7 +572,7 @@ public class ChunkManager implements Parametres {
 						&& chun.getZ() == zCh) {
 					for (i = 0; i < 15; i++) {
 						for (j = 0; j < 15; j++) {
-							if (chun.getCube(0, i, j) == null) {
+							if (chun.getCubeCam(0, i, j) == null) {
 								return false;
 							}
 						}
@@ -584,7 +586,7 @@ public class ChunkManager implements Parametres {
 						&& chun.getZ() == zCh) {
 					for (i = 0; i < 15; i++) {
 						for (j = 0; j < 15; j++) {
-							if (chun.getCube(15, i, j) == null) {
+							if (chun.getCubeCam(15, i, j) == null) {
 								return false;
 							}
 						}
