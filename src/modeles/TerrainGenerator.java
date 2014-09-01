@@ -17,8 +17,8 @@ public class TerrainGenerator {
 		for(int x = -4; x<5; x++){
 			for(int y = 0; y>-5; y--){
 				for(int z = -4; z<5; z++){
-					if(y==-4){
-						genRandTop(x, y, z);
+					if(y==-4 & x==1){
+						genRandTop2(x, y, z);
 					}else{
 						genereTerre(x,y,z);
 					}
@@ -44,6 +44,28 @@ public class TerrainGenerator {
 					}
 				}
 			}
+		}
+		clone.getChunkManager().addChunkToLoad(temp);
+	}
+
+	private void genRandTop2(int x, int y, int z){
+		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
+		int originX = x*16;
+		int originY = y*16;
+		int originZ = z*16;
+
+		for(int i = originX; i>originX-16; --i){
+			for(int j = originY; j>originY-14; --j){
+				for(int k = originZ; k>originZ-16; --k){
+					if(i==originX-8 && k==originZ-8){
+						temp.addCube3dVbo(new Cube3dVbo(i, -originY+15, k, 1, 1));
+					}else{
+						temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 2));
+					}
+				}
+			}
+
+			temp.addCube3dVbo(new Cube3dVbo(originX-1, -originY+15, originZ-1, 1, 14));
 		}
 		clone.getChunkManager().addChunkToLoad(temp);
 	}

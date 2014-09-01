@@ -102,9 +102,9 @@ public class InputManager {
 			lastFPS += 150; //
 		}
 		
-		//if(!clone.getCollision().gravity(camera) && !isJumping){
-			//camera.getPos().y += 0.12;
-		//}
+		if(!clone.getCollision().gravity(camera) && !isJumping){
+			camera.getPos().y += 0.12;
+		}
 
 	}
 
@@ -267,7 +267,7 @@ public class InputManager {
 		}
 
 		if(compareChunk()){
-			//clone.getChunkManager().createChunksInit(facteurX, facteurZ);
+			clone.getChunkManager().createChunksInit(facteurX, facteurZ);
 			clone.getChunkManager().checkRender();
 		}
 
