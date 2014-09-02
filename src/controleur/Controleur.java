@@ -4,12 +4,12 @@ import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
-
 import modeles.Camera;
 import modeles.ChunkManager;
 import modeles.CollisionManager;
 import modeles.InputManager;
 import modeles.MapReader;
+import modeles.RayPicker;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
 import modeles.entities2D.HUDManager;
@@ -35,6 +35,7 @@ public class Controleur implements Parametres {
 	private TerrainGenerator terrGen;
 	private HUDManager hud;
 	private HUDTextureManager hudtexManager;
+	private RayPicker rayPick;
 
 	/**
 	 * Constructeur du controleur
@@ -50,6 +51,7 @@ public class Controleur implements Parametres {
 		chunkManager = new ChunkManager(this);
 		chunkManager.setChunksList(mapRead.setChunks());
 		terrGen = new TerrainGenerator(this);
+		rayPick = new RayPicker(this);
 	}
 
 	// le coeur du jeu, ma méthode contenant la boucle de jeu.
@@ -109,6 +111,9 @@ public class Controleur implements Parametres {
 
 				// dessine tout les chunks
 				chunkManager.drawChunks(texManager);
+				
+				//fait toute les orpération pour le cube de pixking.
+				rayPick.pick();
 
 				// texManager.undindTexture();
 
@@ -175,6 +180,10 @@ public class Controleur implements Parametres {
 
 	public TerrainGenerator getTerrainGenerator() {
 		return terrGen;
+	}
+	
+	public OpenGL getMatrices(){
+		return matrices;
 	}
 
 }
