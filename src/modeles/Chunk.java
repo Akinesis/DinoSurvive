@@ -147,6 +147,21 @@ public class Chunk implements Parametres{
 		cubes[tempX][tempY][tempZ]=null;
 		updated=false;
 	}
+	
+	public void createCubeAt(float x, float y, float z){
+		int tempX = convertCoordGet(x-1);
+		int tempY = convertCoordGet(y);
+		int tempZ = convertCoordGet(z);
+		
+		int xCube = this.x*16-tempX;
+		int yCube = this.y*16-tempY;
+		int zCube = this.z*16-tempZ;
+		
+		System.out.println(yCube);
+
+		cubes[tempX][tempY][tempZ] = new Cube3dVbo(xCube, -yCube, zCube, 1, 1);
+		updated=false;
+	}
 
 	/*
 	 * Methodes
@@ -406,7 +421,6 @@ public class Chunk implements Parametres{
 			tempY=-(this.y*16)-1;
 		}
 
-		System.out.println(tempY);
 		return -(tempY+1);
 	}
 

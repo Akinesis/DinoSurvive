@@ -81,7 +81,7 @@ public class Controleur implements Parametres {
 			matrices.init3D();
 			terrGen.buildStart();
 			terrGen.genFond(1, -5, 0);
-			terrGen.genWall(1, -5, 0);
+			terrGen.genWall(-1, -5, 1);
 
 			// spawn de du joueur au point le plus haut en 8,X,8
 			camera.spawn(chunkManager.getHigherPointAt(8, 8));

@@ -112,9 +112,11 @@ public class TerrainGenerator {
 		int originX = x*16;
 		int originY = y*16;
 		int originZ = z*16;
+		System.out.println(originX);
 
-		for(int i = originY+1; i>originY-16; --i){
+		for(int i = originY; i>originY-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
+				System.out.println(i);
 				temp.addCube3dVbo(new Cube3dVbo(originX-2, -i, j, 1, 17));
 			}
 		}

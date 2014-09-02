@@ -235,7 +235,7 @@ public class InputManager {
 
 		if(rightClik){
 			clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z, 1);
-			clone.getChunkManager().update();	
+			clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);	
 		}			
 	}
 
@@ -256,8 +256,8 @@ public class InputManager {
 
 		int facteurX=0 , facteurZ =0;
 
-		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
-		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
+		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
+		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 
 		if(Math.abs(tempX)>=Math.abs(tempZ)){
 			facteurX=(tempX>0)?4:-4;

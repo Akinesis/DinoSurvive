@@ -82,14 +82,12 @@ public class ChunkManager implements Parametres {
 		float xChunk = (float) Math.ceil(x / 16);
 		float yChunk = (float) Math.ceil(y / 16);
 		float zChunk = (float) Math.ceil(z / 16);
-		x = (int) Math.abs(Math.ceil(x)) % 16;
-		y = (int) Math.abs(Math.ceil(y)) % 16;
-		z = (int) Math.abs(Math.ceil(z)) % 16;
-		Cube3dVbo temp = new Cube3dVbo(x, y, z, 1, typ);
+		
+		
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
-				ck.addCube3dVbo(temp);
+				ck.createCubeAt(x,y,z);
 			}
 		}
 	}

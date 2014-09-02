@@ -30,6 +30,7 @@ public class Camera {
 	public void spawn(float y){
 		//position = new Vector3f(-8f, y-2.75f, -8f);
 		position = new Vector3f(-8f, y-2.75f, -8f);
+		System.out.println(y);
 	}
 
 	//met à jour la position et la rotation
