@@ -139,12 +139,12 @@ public class Chunk implements Parametres{
 		return cubes[tempX][tempY][tempZ];
 	}
 
-	public void delCube(int x, int y, int z){
-		//int tempX = (int)(Math.abs(x)+((x<0)?-1:0))%16;
-		//int tempY = (int)Math.abs(y)%16;
-		//int tempZ = (int)(Math.abs(z)+((z<0)?-1:0))%16;
+	public void delCube(float x, float y, float z){
+		int tempX = convertCoordGet(x);
+		int tempY = (int)Math.abs(Math.ceil(y))%16;
+		int tempZ = convertCoordGet(z);
 
-		cubes[x][y][z]=null;
+		cubes[tempX][tempY][tempZ]=null;
 		updated=false;
 	}
 
@@ -210,19 +210,18 @@ public class Chunk implements Parametres{
 	public void checkStateAt(int x, int y, int z){
 		checked = true;
 
-		for(int i=(x>0)?x-1:0; i<=((x<15)?x+1:15); i++){
-			for(int j=(y>0)?y-1:0; j<=((y<15)?y+1:15); j++){
-				for(int k=(z>0)?z-1:0; k<=((z<15)?z+1:15); k++){
-					System.out.println("x: "+i+" y: "+y+" z: "+z);
-					if(cubes[i][j][k]!=null){
-						nonRenderCubes.remove(cubes[i][j][k]);
-						renderCubes.remove(cubes[i][j][k]);
-						if(surround(i,j,k)){
-							cubes[i][j][k].setEtat(false);
-							nonRenderCubes.add(cubes[i][j][k]);
+		for(int i=-1; i<2; i++){
+			for(int j=-1; j<2; j++){
+				for(int k=-1; k<2; k++){
+					if(getCubeCam(x+i, y+j, z+k)!=null){
+						nonRenderCubes.remove(getCubeCam(x+i, y+j, z+k));
+						renderCubes.remove(getCubeCam(x+i, y+j, z+k));
+						if(surround(convertCoordGet(x+i),convertCoordGet(y+j),convertCoordGet(z+k))){
+							getCubeCam(x+i, y+j, z+k).setEtat(false);
+							nonRenderCubes.add(getCubeCam(x+i, y+j, z+k));
 						}else{
-							cubes[i][j][k].setEtat(true);
-							renderCubes.add(cubes[i][j][k]);
+							getCubeCam(x+i, y+j, z+k).setEtat(true);
+							renderCubes.add(getCubeCam(x+i, y+j, z+k));
 						}
 					}
 				}
@@ -250,11 +249,12 @@ public class Chunk implements Parametres{
 
 	public void updateAt(float x, float y, float z){
 
-		int i = (int)Math.abs(x)%16;
-		int j = (int)Math.abs(y)%16;
-		int k = (int)Math.abs(z)%16;
+		int i = convertCoordGet(x);
+		int j = (int)Math.abs(Math.ceil(y))%16;
+		int k = convertCoordGet(z);
 
-		checkStateAt(i,j,k);
+		//checkStateAt(i,j,k);
+		checkState();
 		unbindVbo();
 		genCubes(clone.getTexManager());
 		genVBO();

@@ -162,7 +162,6 @@ public class InputManager {
 			if( (Mouse.getY() > Display.getHeight() - 0.68f*Display.getHeight()) && (Mouse.getY() < Display.getHeight() - 0.58f*Display.getHeight()) ){
 				position = 4;
 			}
-			//System.out.println(position);
 		}
 		float[] test = new float[]{1, 1, 1, 1, 1} ;
 		test[position] = this.clone.getHUDManager().getMenu().getBoutonsEtats()[position];
@@ -265,8 +264,6 @@ public class InputManager {
 		}else{
 			facteurZ=(tempZ>0)?4:-4;
 		}
-		
-		System.out.println(clone.getCamera().getCurrentChunk());
 		
 		if(compareChunk()){
 			//clone.getChunkManager().createChunksInit(facteurX, facteurZ);
