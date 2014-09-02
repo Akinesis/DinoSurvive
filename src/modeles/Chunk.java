@@ -156,10 +156,8 @@ public class Chunk implements Parametres{
 		int xCube = this.x*16-tempX;
 		int yCube = this.y*16-tempY;
 		int zCube = this.z*16-tempZ;
-		
-		System.out.println(yCube);
 
-		cubes[tempX][tempY][tempZ] = new Cube3dVbo(xCube, -yCube, zCube, 1, 1);
+		cubes[tempX][tempY][tempZ] = new Cube3dVbo(xCube, -yCube, zCube, 1, clone.getInput().getBlockType());
 		updated=false;
 	}
 

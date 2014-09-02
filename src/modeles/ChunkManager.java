@@ -77,19 +77,20 @@ public class ChunkManager implements Parametres {
 		return temp;
 	}
 
-	// marche pas
-	public void addCubeAt(float x, float y, float z, int typ) {
-		float xChunk = (float) Math.ceil(x / 16);
-		float yChunk = (float) Math.ceil(y / 16);
-		float zChunk = (float) Math.ceil(z / 16);
+	/**
+	 * Ajoute le cube au coordonées envoyées (Par raport à la caméra). 
+	 * @param x Les x du cube
+	 * @param y Les y du cube
+	 * @param z Les z du cube
+	 */
+	public void addCubeAt(float x, float y, float z) {
+		int xChunk = (int) Math.ceil(x / 16);
+		int yChunk = (int) Math.ceil(y / 16);
+		int zChunk = (int) Math.ceil(z / 16);
 		
+		Chunk temp = getChunk(xChunk, yChunk, zChunk);
 		
-		for (Chunk ck : chunks) {
-			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
-					&& (ck.getZ() == zChunk)) {
-				ck.createCubeAt(x,y,z);
-			}
-		}
+		temp.createCubeAt(x,y,z);
 	}
 
 	public void delCubeAt(float x, float y, float z) {
@@ -160,6 +161,7 @@ public class ChunkManager implements Parametres {
 	public void updateAt(float x, float y, float z) {
 		chunksToRender.addAll(getChunkToUpdate());
 		Vector<Chunk> temp = new Vector<Chunk>();
+		checkRender();
 		int i = 0;
 		if (!(chunksToRender.isEmpty())) {
 			for (Chunk chunk : chunksToRender) {

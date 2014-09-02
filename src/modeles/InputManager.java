@@ -29,6 +29,7 @@ public class InputManager {
 	private Vector3f curentChunk;
 	private long lastFPS;
 	private int fps;
+	private int block;
 
 	public InputManager(Controleur contr){
 		clone = contr;
@@ -37,6 +38,7 @@ public class InputManager {
 		lastFrame=getTime();
 		lastFPS = getTime();
 		curentChunk= new Vector3f();
+		block = 1;
 	}
 
 	public void setCam(Camera cam){
@@ -92,6 +94,7 @@ public class InputManager {
 			clone.getHUDManager().update(clone.getHUDTextManager());
 		}
 
+		pick();
 		mouse();
 		move();
 		jump(keyJump);
@@ -234,7 +237,7 @@ public class InputManager {
 		}
 
 		if(rightClik){
-			clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z, 1);
+			clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 			clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);	
 		}			
 	}
@@ -256,8 +259,8 @@ public class InputManager {
 
 		int facteurX=0 , facteurZ =0;
 
-		camera.getPos().x += (clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
-		camera.getPos().z += (clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
+		camera.getPos().x += tempX;//(clone.getCollision().colideX(camera, (float)tempX+indiceX))?0:(float)tempX;
+		camera.getPos().z += tempZ;//(clone.getCollision().colideZ(camera, (float)tempZ+indiceZ))?0:(float)tempZ;
 
 		if(Math.abs(tempX)>=Math.abs(tempZ)){
 			facteurX=(tempX>0)?4:-4;
@@ -272,6 +275,21 @@ public class InputManager {
 
 	}
 
+	private void pick(){
+		
+		int dWheel = Mouse.getDWheel();
+	    if (dWheel < 0) {
+	        System.out.println("DOWN");
+	        block -= 1;
+	        block = (block==-1)?31:block;
+	    } else if (dWheel > 0){
+	        System.out.println("UP");
+	        block += 1;
+	        block = (block==32)?1:block;
+	        
+	   }
+	}
+	
 	private void moveY(float amt){
 		if(clone.getCollision().colideY(camera, amt)){
 			isJumping = false;
@@ -333,6 +351,10 @@ public class InputManager {
 			lastFPS += 1000; //add one second
 		}
 		fps++;
+	}
+	
+	public int getBlockType(){
+		return block;
 	}
 
 }
