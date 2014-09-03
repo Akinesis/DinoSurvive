@@ -490,6 +490,10 @@ public class ChunkManager implements Parametres {
 	public void addTransparent(Cube3dVbo transp){
 		transparancy.addTransparent(transp);
 	}
+	
+	public void dellTransparent(Cube3dVbo transp){
+		transparancy.delTransparent(transp);
+	}
 
 	/**
 	 * Renvoie vrais si toute une face est remplie.

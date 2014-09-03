@@ -14,6 +14,10 @@ public class TransparentChunk extends Chunk {
 	public void addTransparent(Cube3dVbo transp){
 		renderCubes.add(transp);
 	}
+	
+	public void delTransparent(Cube3dVbo transp){
+		renderCubes.remove(transp);
+	}
 
 	/**
 	 * Methode générant les cubes dans le buffer
@@ -40,6 +44,10 @@ public class TransparentChunk extends Chunk {
 		}
 
 		interleavedBuffer.flip();
+	}
+	
+	private boolean iVisible(){
+		return true;
 	}
 
 }

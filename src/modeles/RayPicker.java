@@ -89,7 +89,16 @@ public class RayPicker {
 	
 	private void setRayCoord(){
 		
-		picker.setPos(-(float)Math.ceil(posCam.getX()), -(float)Math.floor(posCam.getY()), -(float)Math.ceil(posCam.getZ()));
+		float xStart = -(float)Math.ceil(posCam.getX());
+		float yStart = -(float)Math.floor(posCam.getY());
+		float zStart = -(float)Math.ceil(posCam.getZ());
+		
+		Vector3f origine = new Vector3f(xStart, yStart, zStart);
+		Vector3f temp = ray;
+		ray.scale(5);
+		ray.add(ray, origine, ray);
+		
+		picker.setPos(ray.x, yStart, ray.z);
 
 	}
 	

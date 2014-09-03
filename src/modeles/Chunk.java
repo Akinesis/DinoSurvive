@@ -95,7 +95,7 @@ public class Chunk implements Parametres{
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 
 	}
-	
+
 	/**
 	 * Méthode ajoutant un cube dans le chunk
 	 * TODO : vérification que le cube a le droit d'être dans ce cube
@@ -108,7 +108,7 @@ public class Chunk implements Parametres{
 
 		cubes[posX][posY][posZ] = cube;
 	}
-	
+
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z de la caméra
 	 * @param x
@@ -123,7 +123,7 @@ public class Chunk implements Parametres{
 
 		return cubes[tempX][tempY][tempZ];
 	}
-	
+
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z par raport à la matrice de déssin
 	 * @param x
@@ -144,15 +144,20 @@ public class Chunk implements Parametres{
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
 		int tempZ = convertCoordGet(z);
 
+		if(cubes[tempX][tempY][tempZ]!=null){
+			if(cubes[tempX][tempY][tempZ].getType()==12){
+				clone.getChunkManager().dellTransparent(cubes[tempX][tempY][tempZ]);
+			}
+		}
 		cubes[tempX][tempY][tempZ]=null;
 		updated=false;
 	}
-	
+
 	public void createCubeAt(float x, float y, float z){
 		int tempX = convertCoordGet(x-1);
 		int tempY = convertCoordGet(y);
 		int tempZ = convertCoordGet(z);
-		
+
 		int xCube = this.x*16-tempX;
 		int yCube = this.y*16-tempY;
 		int zCube = this.z*16-tempZ;
@@ -468,10 +473,10 @@ public class Chunk implements Parametres{
 	public boolean iszMinus() {
 		return zMinus;
 	}
-	
+
 	private int convertCoordGet(float nb){
 		float temp;
-		
+
 		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
 		temp = (temp%16);
 		if(temp<0){
@@ -482,19 +487,19 @@ public class Chunk implements Parametres{
 		if(temp<0){
 			temp += 16;
 		}
-		
+
 		return (int)temp;
 	}
-	
+
 	private int convertCoordAdd(float nb){
 		float temp;
-		
+
 		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
 		temp = (temp%16);
 		if(temp<0){
 			temp += 16;
 		}
-	
+
 		return (int)temp;
 	}
 

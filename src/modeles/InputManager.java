@@ -231,14 +231,16 @@ public class InputManager {
 			}
 		}
 
-		if(leftClik){
-			clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
-			clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
-		}
+		while(Mouse.next()){
+			if(leftClik){
+				clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+				clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+			}
 
-		if(rightClik){
-			clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
-			clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);	
+			if(rightClik){
+				clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+				clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);	
+			}
 		}
 		
 	}
