@@ -12,10 +12,15 @@ public class TransparentChunk extends Chunk {
 	}
 
 	public void addTransparent(Cube3dVbo transp){
-		renderCubes.add(transp);
+		if(!renderCubes.contains(transp)){
+			renderCubes.add(transp);
+		}
 	}
 	
 	public void delTransparent(Cube3dVbo transp){
+		if(renderCubes.contains(transp)){
+			System.out.println("oui");
+		}
 		renderCubes.remove(transp);
 	}
 

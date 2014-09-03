@@ -105,7 +105,7 @@ public class Chunk implements Parametres{
 		int posX = convertCoordAdd(cube.getX());
 		int posY = Math.abs(cube.getY())%16;
 		int posZ = convertCoordAdd(cube.getZ());
-
+		
 		cubes[posX][posY][posZ] = cube;
 	}
 
@@ -161,6 +161,12 @@ public class Chunk implements Parametres{
 		int xCube = this.x*16-tempX;
 		int yCube = this.y*16-tempY;
 		int zCube = this.z*16-tempZ;
+		
+		if(cubes[tempX][tempY][tempZ]!=null){
+			if(cubes[tempX][tempY][tempZ].getType()==12){
+				clone.getChunkManager().dellTransparent(cubes[tempX][tempY][tempZ]);
+			}
+		}
 
 		cubes[tempX][tempY][tempZ] = new Cube3dVbo(xCube, -yCube, zCube, 1, clone.getInput().getBlockType());
 		updated=false;
