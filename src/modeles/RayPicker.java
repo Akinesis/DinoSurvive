@@ -89,7 +89,7 @@ public class RayPicker {
 	
 	private void setRayCoord(){
 		
-		picker.setPos(-8, picker.getY(), -8);
+		picker.setPos(-(float)Math.ceil(posCam.getX()), -(float)Math.floor(posCam.getY()), -(float)Math.ceil(posCam.getZ()));
 
 	}
 	
