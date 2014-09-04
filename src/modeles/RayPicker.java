@@ -21,6 +21,7 @@ import modeles.entities.WiredCube3D;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
+import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 import controleur.Controleur;
@@ -31,18 +32,38 @@ public class RayPicker {
 	private Vector3f ray,posCam;
 	private WiredCube3D picker;
 	private int vboVertexHandle;
-	protected FloatBuffer interleavedBuffer;
+	private FloatBuffer interleavedBuffer;
+	private Matrix4f direction;
 
 	public RayPicker(Controleur clone){
 		this.clone = clone;
 		ray = new Vector3f();
 		picker = new WiredCube3D(12, 83, -8, 1);
+		direction = new Matrix4f();
+		
+		direction.m00 = 1;
+		direction.m01 = 0;
+		direction.m02 = 0;
+		
+		direction.m10 = 0;
+		direction.m11 = 1;
+		direction.m12 = 0;
+		
+		direction.m20 = 0;
+		direction.m21 = 0;
+		direction.m22 = -1;
 	}
 
 	public void pick(){
 		ray =  getRay();
 		posCam = clone.getCamera().getPos();
 		drawPicker();
+	}
+	
+	public void rotateMatrix(Vector3f rot){
+		direction.rotate(rot.x, new Vector3f(1,0,0));
+		direction.rotate(rot.y, new Vector3f(0,1,0));
+		direction.rotate(rot.z, new Vector3f(0,0,1));
 	}
 	
 	private Vector3f getRay(){
@@ -80,6 +101,7 @@ public class RayPicker {
 	}
 	
 	private void drawPicker(){
+		rotateMatrix(clone.getCamera().getRot());
 		setRayCoord();
 		unbinde();
 		genCube();
@@ -94,9 +116,12 @@ public class RayPicker {
 		float zStart = -(float)Math.ceil(posCam.getZ());
 		
 		Vector3f origine = new Vector3f(xStart, yStart, zStart);
-		Vector3f temp = ray;
-		ray.scale(5);
-		ray.add(ray, origine, ray);
+		
+		ray.x *= 5;
+		ray.z *= 5;
+		
+		ray.x += origine.x;
+		ray.z += origine.z;
 		
 		picker.setPos(ray.x, yStart, ray.z);
 
