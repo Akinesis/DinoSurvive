@@ -34,6 +34,7 @@ public class TransparentChunk extends Chunk {
 		interleavedBuffer = BufferUtils.createFloatBuffer(renderCubes.size()*(6*3+6*2)*6);
 		for(Cube3dVbo cube : renderCubes){
 			cubeCoord=cube.genCubes();
+			isVisible(cube);
 			texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
 			for(int i = 0; i< cubeCoord.length; i+=3){
 				interleavedBuffer.put(cubeCoord[i]);
@@ -51,7 +52,13 @@ public class TransparentChunk extends Chunk {
 		interleavedBuffer.flip();
 	}
 	
-	private boolean iVisible(){
+	private boolean isVisible(Cube3dVbo cube){
+		float xChunk = (float) Math.ceil(cube.getX() / 16);
+		float yChunk = (float) Math.ceil(cube.getY() / 16);
+		float zChunk = (float) Math.ceil(cube.getZ() / 16);
+		
+		System.out.println(xChunk);
+		
 		return true;
 	}
 

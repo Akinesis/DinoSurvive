@@ -89,6 +89,7 @@ public class ChunkManager implements Parametres {
 		int zChunk = (int) Math.ceil(z / 16);
 		
 		Chunk temp = getChunk(xChunk, yChunk, zChunk);
+		renderChunks.add(temp);
 		
 		temp.createCubeAt(x,y,z);
 	}
@@ -161,7 +162,6 @@ public class ChunkManager implements Parametres {
 	public void updateAt(float x, float y, float z) {
 		chunksToRender.addAll(getChunkToUpdate());
 		Vector<Chunk> temp = new Vector<Chunk>();
-		checkRender();
 		int i = 0;
 		if (!(chunksToRender.isEmpty())) {
 			for (Chunk chunk : chunksToRender) {
@@ -174,6 +174,7 @@ public class ChunkManager implements Parametres {
 			}
 			chunksToRender.removeAll(temp);
 		}
+		checkRender();
 	}
 
 	private Vector<Chunk> getChunkToUpdate() {
