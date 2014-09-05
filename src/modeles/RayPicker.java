@@ -111,9 +111,9 @@ public class RayPicker {
 	
 	private void setRayCoord(){
 		
-		float xStart = -(float)Math.ceil(posCam.getX());
-		float yStart = -(float)Math.floor(posCam.getY());
-		float zStart = -(float)Math.ceil(posCam.getZ());
+		float xStart = -(float)posCam.getX();
+		float yStart = -(float)posCam.getY();
+		float zStart = -(float)posCam.getZ();
 		
 		Vector3f origine = new Vector3f(xStart, yStart, zStart);
 		
@@ -123,7 +123,7 @@ public class RayPicker {
 		ray.x += origine.x;
 		ray.z += origine.z;
 		
-		picker.setPos(ray.x, yStart, ray.z);
+		picker.setPos((float)Math.ceil(ray.x), yStart, (float)Math.ceil(ray.z));
 
 	}
 	
