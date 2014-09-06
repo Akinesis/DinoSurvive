@@ -122,7 +122,7 @@ public class RayPicker {
 		
 		ray.x += origine.x;
 		ray.z += origine.z;
-		
+
 		picker.setPos((float)Math.ceil(ray.x), yStart, (float)Math.ceil(ray.z));
 
 	}
