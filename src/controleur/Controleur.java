@@ -58,7 +58,7 @@ public class Controleur implements Parametres {
 	public void init() {
 		int position;
 
-		position = 0;
+		position = 5;
 		display.create();
 		hud = new HUDManager(this);
 		texManager = new TextureManager();
@@ -68,7 +68,17 @@ public class Controleur implements Parametres {
 		while (this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !this.display.isClose() && !this.hud.getMenu().getDisplayIsClose()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
-			position = this.input.checkMenu(position);
+			if(this.getHUDManager().getMenu().getMenuIsOnScreen()){		
+				position = this.input.checkMenu(position);
+			}else if(position == 1 && !this.getHUDManager().getMenu().getMenuIsOnScreen()){
+				this.input.checkMenuNouvellePartie();
+			}else if(position == 2 && !this.getHUDManager().getMenu().getMenuIsOnScreen()){
+				this.input.checkMenuChargement();
+			}else if(position == 3 && !this.getHUDManager().getMenu().getMenuIsOnScreen()){
+				this.input.checkMenuOption();
+			}//else if(position == 5 && !this.getHUDManager().getMenu().getMenuIsOnScreen()){
+				//this.input.checkMenuNewGame();
+			//}
 			this.matrices.init2D();
 			this.hud.drawMenu();
 			this.display.update();

@@ -166,16 +166,60 @@ public class InputManager {
 				position = 4;
 			}
 		}
-		float[] test = new float[]{1, 1, 1, 1, 1} ;
+	
+		float[] test = new float[]{1, 1, 1, 1, 1, 1} ;
 		test[position] = this.clone.getHUDManager().getMenu().getBoutonsEtats()[position];
-		if( (!Mouse.isButtonDown(0) && !(Keyboard.getEventKey() == Keyboard.KEY_RETURN)) || !Arrays.equals(this.clone.getHUDManager().getMenu().getBoutonsEtats(),test) ){
+		if( (!Mouse.isButtonDown(0) && !(Keyboard.getEventKey() == Keyboard.KEY_RETURN)) || !compareArrayFloat(this.clone.getHUDManager().getMenu().getBoutonsEtats(),test) ){
 			this.clone.getHUDManager().getMenu().boutonsEtatsReset(position);
 			this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(position);
 		}
 
 		return position;
 	}
+	
+	private void checkMenuRetour(){
+		if( (Mouse.getX() < this.clone.getHUDManager().getMenu().getBoutonsLimites()[14]) && (Mouse.getX() > this.clone.getHUDManager().getMenu().getBoutonsLimites()[15]) ){
+			if( (Mouse.getY() > Display.getHeight() - this.clone.getHUDManager().getMenu().getBoutonsLimites()[11]) && (Mouse.getY() < Display.getHeight() - this.clone.getHUDManager().getMenu().getBoutonsLimites()[10]) ){
+				if( (!Mouse.isButtonDown(0) && !(Keyboard.getEventKey() == Keyboard.KEY_RETURN)) ){
+					this.clone.getHUDManager().getMenu().boutonsEtatsHighlight(5);
+				}else{
+					this.clone.getHUDManager().getMenu().boutonsEtatsDark(5);
+					this.clone.getHUDManager().getMenu().MenuBoutonsFonctionaliter(5);
+				}
+			}
+		}
+		this.clone.getHUDManager().getMenu().boutonsEtatsReset(5);
+	}
+	
+	public void checkMenuNouvellePartie() {
+		this.checkMenuRetour();
+	}
 
+	public void checkMenuChargement() {
+		this.checkMenuRetour();
+	}
+
+	public void checkMenuOption() {
+		this.checkMenuRetour();
+	}
+
+	private boolean compareArrayFloat(float[] tab1, float [] tab2){
+		boolean test = true;
+		int i = 0;
+		if(tab1.length != tab2.length){
+			test = false;
+		}else{
+			while(test && i < tab1.length){
+				if(tab1[i] != tab2[i]){
+					test = false;
+				}else{
+					i = i+1;
+				}
+			}
+		}
+		return test;
+	}
+	
 	private void move(){
 		/*
 		 * verification du clavier
