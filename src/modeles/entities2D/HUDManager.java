@@ -117,7 +117,10 @@ public class HUDManager extends AbstractEntity2D{
 		glDrawArrays(GL_TRIANGLES, 0, sizeBuffer);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);		
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);	
+		if(debug.isVisible()){
+			debug.draw();
+		}
 	}
 	
 	public void genHUD(HUDTextureManager hudtexManager){

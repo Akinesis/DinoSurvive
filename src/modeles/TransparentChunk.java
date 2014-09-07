@@ -57,7 +57,6 @@ public class TransparentChunk extends Chunk {
 		float yChunk = (float) Math.ceil(cube.getY() / 16);
 		float zChunk = (float) Math.ceil(cube.getZ() / 16);
 		
-		System.out.println(xChunk);
 		
 		return true;
 	}

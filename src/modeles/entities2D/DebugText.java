@@ -57,7 +57,6 @@ public class DebugText extends AbstractEntity2D{
 		font.drawString(10, 50, "Block : "+type[0]+", "+type[1]+", "+type[2] , Color.white);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		
 	}
 
 	@Override

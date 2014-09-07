@@ -14,6 +14,7 @@ import static org.lwjgl.opengl.GL13.glClientActiveTexture;
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.glBindBuffer;
 
+import java.io.IOException;
 import java.nio.FloatBuffer;
 
 import modeles.entities.WiredCube3D;
@@ -117,11 +118,18 @@ public class RayPicker {
 		
 		Vector3f origine = new Vector3f(xStart, yStart, zStart);
 		
+		System.out.println("avant : "+ray);
+		System.out.println("Caméra : "+xStart +", "+zStart);
+		System.out.println("=====");
+		
 		ray.x *= 5;
 		ray.z *= 5;
 		
 		ray.x += origine.x;
 		ray.z += origine.z;
+		
+		System.out.println(ray);
+		System.out.println("---------------------------------");
 
 		picker.setPos((float)Math.ceil(ray.x), yStart, (float)Math.ceil(ray.z));
 

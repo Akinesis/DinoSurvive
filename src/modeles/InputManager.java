@@ -53,7 +53,7 @@ public class InputManager {
 
 		boolean keyChap = Keyboard.isKeyDown(Keyboard.KEY_ESCAPE);
 		boolean keyI = Keyboard.isKeyDown(Keyboard.KEY_I);
-		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_K);
+		boolean keyINSERT = Keyboard.isKeyDown(Keyboard.KEY_INSERT);
 		boolean keydol = Keyboard.isKeyDown(Keyboard.KEY_HOME); 
 		boolean keyReturn = Keyboard.isKeyDown(Keyboard.KEY_RETURN);
 		boolean keyJump = Keyboard.isKeyDown(Keyboard.KEY_SPACE); 
