@@ -205,7 +205,7 @@ public class ChunkManager implements Parametres {
 
 	public void reloadChunks(){
 		int i =0;
-		ArrayList<Chunk> temp = new ArrayList<>();
+		ArrayList<Chunk> temp = new ArrayList<Chunk>();
 		for(Chunk chunk : chunksToLoad){
 			if(i<2){
 				chunk.unbindVbo();
@@ -468,7 +468,7 @@ public class ChunkManager implements Parametres {
 
 	private void createLoadInit(){
 
-		ArrayList<Chunk> temp = new ArrayList<>();
+		ArrayList<Chunk> temp = new ArrayList<Chunk>();
 		for(Chunk chunk : chunksToLoad){
 			chunk.unbindVbo();
 			if(!chunk.getChecked()){
@@ -480,7 +480,7 @@ public class ChunkManager implements Parametres {
 		}
 		chunksToLoad.removeAll(temp);
 
-		Vector<Chunk> temp2 = new Vector<>();
+		Vector<Chunk> temp2 = new Vector<Chunk>();
 		for(Chunk ck : chunksToCreate){
 			clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
 			temp2.add(ck);
