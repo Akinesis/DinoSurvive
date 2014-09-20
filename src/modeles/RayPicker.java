@@ -116,6 +116,9 @@ public class RayPicker {
 		float yStart = -(float)posCam.getY();
 		float zStart = -(float)posCam.getZ();
 		
+		boolean xNeg = ray.x<0;
+		boolean zPos = ray.z>0;
+		
 		Vector3f origine = new Vector3f(xStart, yStart, zStart);
 		
 		System.out.println("avant : "+ray);
@@ -128,10 +131,23 @@ public class RayPicker {
 		ray.x += origine.x;
 		ray.z += origine.z;
 		
+		if(xNeg){
+			ray.x = (float)Math.floor(ray.x);
+		}else{
+			ray.x = (float)Math.ceil(ray.x);
+		}
+		
+		if(zPos){
+			ray.z = (float)Math.floor(ray.z)-1;
+		}else{
+			ray.z = (float)Math.ceil(ray.z);
+		}
+		
+		
 		System.out.println(ray);
 		System.out.println("---------------------------------");
 
-		picker.setPos((float)Math.ceil(ray.x), yStart, (float)Math.ceil(ray.z));
+		picker.setPos(ray.x, yStart, ray.z);
 
 	}
 	
