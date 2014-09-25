@@ -41,15 +41,15 @@ public class RayPicker {
 		ray = new Vector3f();
 		picker = new WiredCube3D(12, 83, -8, 1);
 		direction = new Matrix4f();
-		
+
 		direction.m00 = 1;
 		direction.m01 = 0;
 		direction.m02 = 0;
-		
+
 		direction.m10 = 0;
 		direction.m11 = 1;
 		direction.m12 = 0;
-		
+
 		direction.m20 = 0;
 		direction.m21 = 0;
 		direction.m22 = -1;
@@ -60,13 +60,13 @@ public class RayPicker {
 		posCam = clone.getCamera().getPos();
 		drawPicker();
 	}
-	
+
 	public void rotateMatrix(Vector3f rot){
 		direction.rotate(rot.x, new Vector3f(1,0,0));
 		direction.rotate(rot.y, new Vector3f(0,1,0));
 		direction.rotate(rot.z, new Vector3f(0,0,1));
 	}
-	
+
 	private Vector3f getRay(){
 		return clone.getMatrices().getPickingRay(clone.getDisplay().getHeight()/2, clone.getDisplay().getWidth()/2);
 	}
@@ -79,13 +79,13 @@ public class RayPicker {
 
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 	}
-	
+
 	private void genCube(){
 		interleavedBuffer = BufferUtils.createFloatBuffer(24*3*4);
 		interleavedBuffer.put(picker.genCubes());
 		interleavedBuffer.flip();
 	}
-	
+
 	public void draw(){
 		GL11.glLineWidth(5f);
 		GL11.glColor3f(0.011f, 0.31f, 0.58f);
@@ -100,7 +100,7 @@ public class RayPicker {
 		GL11.glLineWidth(1f);
 		GL11.glColor3f(1, 1, 1);
 	}
-	
+
 	private void drawPicker(){
 		rotateMatrix(clone.getCamera().getRot());
 		setRayCoord();
@@ -109,48 +109,42 @@ public class RayPicker {
 		genVBO();
 		draw();
 	}
-	
+
 	private void setRayCoord(){
-		
+
 		float xStart = -(float)posCam.getX();
 		float yStart = -(float)posCam.getY();
 		float zStart = -(float)posCam.getZ();
 		
+		double rayX = ray.x;
+		double rayZ = ray.z;
+
 		boolean xNeg = ray.x<0;
 		boolean zPos = ray.z>0;
-		
+
 		Vector3f origine = new Vector3f(xStart, yStart, zStart);
-		
+
 		System.out.println("avant : "+ray);
 		System.out.println("Caméra : "+xStart +", "+zStart);
 		System.out.println("=====");
-		
+
 		ray.x *= 5;
 		ray.z *= 5;
-		
+
 		ray.x += origine.x;
 		ray.z += origine.z;
 		
-		if(xNeg){
-			ray.x = (float)Math.floor(ray.x);
-		}else{
-			ray.x = (float)Math.ceil(ray.x);
-		}
-		
-		if(zPos){
-			ray.z = (float)Math.floor(ray.z)-1;
-		}else{
-			ray.z = (float)Math.ceil(ray.z);
-		}
-		
-		
+		//ray.x += (xNeg)?rayX*10:0;
+		//ray.z -= (zPos)?rayZ*10:0;
+
+
 		System.out.println(ray);
 		System.out.println("---------------------------------");
 
 		picker.setPos(ray.x, yStart, ray.z);
 
 	}
-	
+
 	private void unbinde(){
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandle);
 		GL15.glDeleteBuffers(vboVertexHandle);
@@ -159,10 +153,10 @@ public class RayPicker {
 			interleavedBuffer.clear();
 		}
 	}
-	
+
 	private int convertCoordGet(float nb){
 		float temp;
-		
+
 		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
 		temp = (temp%16);
 		if(temp<0){
@@ -173,7 +167,7 @@ public class RayPicker {
 		if(temp<0){
 			temp += 16;
 		}
-		
+
 		return (int)temp;
 	}
 }
