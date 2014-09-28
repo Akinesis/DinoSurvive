@@ -62,32 +62,29 @@ public class InputManager {
 
 		//updateFPS();
 
-		while(Keyboard.next()){
-			if(keydol){
-				coef*=-1;
-			}
-			if(keyReturn){
-				clone.changeGragMouse();
-			}
+		if(keydol){
+			coef*=-1;
+		}
+		if(keyReturn){
+			clone.changeGragMouse();
+		}
 
-			if(keyBas)
-				moveY(1);
-			if(keyI){
-				clone.getHUDManager().getPortrait().changeVisible();
-				clone.getHUDManager().getInventaire().changeVisible();
-				clone.getHUDManager().update(clone.getHUDTextManager());
-			}
-			if(keyINSERT){
-				clone.getHUDManager().getModeDebug().changeVisible();
-				clone.getHUDManager().update(clone.getHUDTextManager());
-			}
-			if(keyChap){
-				clone.changeGragMouse();
-				clone.getHUDManager().getCurseur().changeVisible();
-				clone.getHUDManager().getMenuJeu().changeVisible();
-				clone.getHUDManager().update(clone.getHUDTextManager());					
-			}
-
+		if(keyBas)
+			moveY(1);
+		if(keyI){
+			clone.getHUDManager().getPortrait().changeVisible();
+			clone.getHUDManager().getInventaire().changeVisible();
+			clone.getHUDManager().update(clone.getHUDTextManager());
+		}
+		if(keyINSERT){
+			clone.getHUDManager().getModeDebug().changeVisible();
+			clone.getHUDManager().update(clone.getHUDTextManager());
+		}
+		if(keyChap){
+			clone.changeGragMouse();
+			clone.getHUDManager().getCurseur().changeVisible();
+			clone.getHUDManager().getMenuJeu().changeVisible();
+			clone.getHUDManager().update(clone.getHUDTextManager());					
 		}
 
 		if(clone.getDisplay().isResized()){
