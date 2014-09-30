@@ -566,7 +566,7 @@ public class ChunkManager implements Parametres {
 							}
 						}
 					}
-				}
+			 	}
 			}
 			break;
 		case 5:
