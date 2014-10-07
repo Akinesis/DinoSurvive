@@ -110,6 +110,8 @@ public class RayPicker {
 		draw();
 	}
 
+	
+	//c'est cette fonction qui fait chier.
 	private void setRayCoord(){
 
 		float xStart = -(float)posCam.getX();
