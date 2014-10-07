@@ -109,7 +109,6 @@ public class RayPicker {
 		genVBO();
 		draw();
 	}
-
 	
 	//c'est cette fonction qui fait chier.
 	private void setRayCoord(){
