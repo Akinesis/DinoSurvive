@@ -95,8 +95,10 @@ public class OpenGL implements Parametres {
         glGetFloat(GL_PROJECTION_MATRIX, projection);
         glGetInteger(GL_VIEWPORT, viewport);
         float winX = (float) cursorX;
+        //float winX = haut/2;
         // convert window coordinates to opengl coordinates (top left to bottom left for (0,0)
         float winY = (float) viewport.get(3) - (float) cursorY;
+        //float winY = larg/2;
        
         // now unproject this to get the  vector in to the screen
         // take the frustrm and unproject in to the screen
