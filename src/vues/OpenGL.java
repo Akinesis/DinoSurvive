@@ -74,7 +74,7 @@ public class OpenGL implements Parametres {
 		glFogi(GL_FOG_MODE, GL_LINEAR);
 		glHint(GL_FOG_HINT, GL_NICEST);
 		glFogf(GL_FOG_START, 5);
-		glFogf(GL_FOG_END, 20);
+		glFogf(GL_FOG_END, 5);
 		glFogf(GL_FOG_DENSITY, 0.05f);
 
 	}

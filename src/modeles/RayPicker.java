@@ -17,25 +17,26 @@ import modeles.entities.WiredCube3D;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
-import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
+import javax.vecmath.Matrix3f;
 
 import controleur.Controleur;
 
 public class RayPicker {
 
 	private Controleur clone;
-	private Vector3f ray,posCam;
+	private Vector3f ray,posCam, rayMatrix;
 	private WiredCube3D picker;
 	private int vboVertexHandle;
 	private FloatBuffer interleavedBuffer;
-	private Matrix4f direction;
+	private Matrix3f direction;
 
 	public RayPicker(Controleur clone){
 		this.clone = clone;
 		ray = new Vector3f();
+		rayMatrix = new Vector3f();
 		picker = new WiredCube3D(12, 83, -8, 1);
-		direction = new Matrix4f();
+		direction = new Matrix3f();
 
 		direction.m00 = 1;
 		direction.m01 = 0;
@@ -57,9 +58,12 @@ public class RayPicker {
 	}
 
 	public void rotateMatrix(Vector3f rot){
-		direction.rotate(rot.x, new Vector3f(1,0,0));
-		direction.rotate(rot.y, new Vector3f(0,1,0));
-		direction.rotate(rot.z, new Vector3f(0,0,1));
+		direction.rotX(rot.x);
+		direction.rotY(rot.y);
+		direction.rotZ(rot.z);
+		rayMatrix.x = direction.m20;
+		rayMatrix.y = direction.m21;
+		rayMatrix.z = direction.m22;
 	}
 
 	private Vector3f getRay(){
@@ -121,7 +125,7 @@ public class RayPicker {
 		Vector3f origine = new Vector3f(xStart, yStart, zStart);
 
 		System.out.println("avant : "+ray);
-		System.out.println("Caméra : "+xStart +", "+zStart);
+		System.out.println("Caméra : "+xStart +", "+yStart+", "+zStart);
 		System.out.println("=====");
 
 		ray.x *= 5;
@@ -135,9 +139,10 @@ public class RayPicker {
 
 
 		System.out.println(ray);
+		System.out.println(picker.getSpacePos());
 		System.out.println("---------------------------------");
 
-		picker.setPos(ray.x, yStart, ray.z);
+		picker.setPos(ray.x, (int)Math.ceil(yStart), ray.z);
 
 	}
 
@@ -165,5 +170,9 @@ public class RayPicker {
 		}
 
 		return (int)temp;
+	}
+	
+	public Vector3f getPosCube(){
+		return picker.getSpacePos();
 	}
 }

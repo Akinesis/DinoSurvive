@@ -195,5 +195,9 @@ public class Controleur implements Parametres {
 	public OpenGL getMatrices(){
 		return matrices;
 	}
+	
+	public RayPicker getRayPicker(){
+		return rayPick;
+	}
 
 }

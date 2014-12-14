@@ -2,6 +2,8 @@ package modeles.entities;
 
 import java.nio.FloatBuffer;
 
+import org.lwjgl.util.vector.Vector3f;
+
 public class WiredCube3D extends Cube3D {
 	
 	public WiredCube3D(float x, float y, float z, float size){
@@ -60,6 +62,11 @@ public class WiredCube3D extends Cube3D {
 				pos.x+size, pos.y, pos.z,
 				pos.x+size, pos.y, pos.z+size,};
 		
+	}
+
+	public Vector3f getSpacePos() {
+		Vector3f ret = new Vector3f(-pos.x, (-pos.y)+1, -pos.z);
+		return ret;
 	}
 
 }

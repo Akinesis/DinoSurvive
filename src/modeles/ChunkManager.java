@@ -106,6 +106,19 @@ public class ChunkManager implements Parametres {
 			}
 		}
 	}
+	
+	public void delCubeAt(Vector3f pos) {
+		float xChunk = (float) Math.ceil(pos.x / 16);
+		float yChunk = (float) Math.ceil(pos.y / 16);
+		float zChunk = (float) Math.ceil(pos.z / 16);
+		
+		for (Chunk ck : chunks) {
+			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
+					&& (ck.getZ() == zChunk)) {
+				ck.delCube(pos.x, pos.y, pos.z);
+			}
+		}
+	}
 
 	public void setChunksList(Vector<Chunk> chun) {
 		chunks = chun;
@@ -167,6 +180,24 @@ public class ChunkManager implements Parametres {
 			for (Chunk chunk : chunksToRender) {
 				if (i < 6) {
 					chunk.updateAt(x, y, z);
+					temp.add(chunk);
+					i++;
+					chunk.haveBeenUpdated(true);
+				}
+			}
+			chunksToRender.removeAll(temp);
+		}
+		checkRender();
+	}
+	
+	public void updateAt(Vector3f pos) {
+		chunksToRender.addAll(getChunkToUpdate());
+		Vector<Chunk> temp = new Vector<Chunk>();
+		int i = 0;
+		if (!(chunksToRender.isEmpty())) {
+			for (Chunk chunk : chunksToRender) {
+				if (i < 6) {
+					chunk.updateAt(pos.x, pos.y, pos.z);
 					temp.add(chunk);
 					i++;
 					chunk.haveBeenUpdated(true);
