@@ -281,8 +281,10 @@ public class InputManager {
 			}
 
 			if(rightClik){
-				clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
-				clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+				//clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+				//clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
+				clone.getChunkManager().addCubeAt(clone.getRayPicker().getPosCube());
+				clone.getChunkManager().updateAt(clone.getRayPicker().getPosCube());
 			}
 		}
 		

@@ -65,7 +65,7 @@ public class WiredCube3D extends Cube3D {
 	}
 
 	public Vector3f getSpacePos() {
-		Vector3f ret = new Vector3f(-pos.x, (-pos.y)+1, -pos.z);
+		Vector3f ret = new Vector3f(-pos.x, -pos.y+1, -pos.z);
 		return ret;
 	}
 

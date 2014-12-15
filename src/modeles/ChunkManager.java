@@ -93,6 +93,17 @@ public class ChunkManager implements Parametres {
 		
 		temp.createCubeAt(x,y,z);
 	}
+	
+	public void addCubeAt(Vector3f pos) {
+		int xChunk = (int) Math.ceil(pos.x / 16);
+		int yChunk = (int) Math.ceil(pos.y / 16);
+		int zChunk = (int) Math.ceil(pos.z / 16);
+		
+		Chunk temp = getChunk(xChunk, yChunk, zChunk);
+		renderChunks.add(temp);
+		
+		temp.createCubeAt(pos.x,pos.y,pos.z);
+	}
 
 	public void delCubeAt(float x, float y, float z) {
 		float xChunk = (float) Math.ceil(x / 16);

@@ -125,13 +125,15 @@ public class RayPicker {
 		Vector3f origine = new Vector3f(xStart, yStart, zStart);
 
 		System.out.println("avant : "+ray);
-		System.out.println("Caméra : "+xStart +", "+yStart+", "+zStart);
+		System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
 		System.out.println("=====");
 
 		ray.x *= 5;
+		ray.y *= 5;
 		ray.z *= 5;
 
 		ray.x += origine.x;
+		ray.y += origine.y+2;
 		ray.z += origine.z;
 		
 		//ray.x += (xNeg)?rayX*10:0;
@@ -142,7 +144,7 @@ public class RayPicker {
 		System.out.println(picker.getSpacePos());
 		System.out.println("---------------------------------");
 
-		picker.setPos(ray.x, (int)Math.ceil(yStart), ray.z);
+		picker.setPos(ray.x, ray.y/*(int)Math.ceil(yStart)*/, ray.z);
 
 	}
 
