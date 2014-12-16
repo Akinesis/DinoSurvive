@@ -144,7 +144,7 @@ public class RayPicker {
 		System.out.println(picker.getSpacePos());
 		System.out.println("---------------------------------");
 
-		picker.setPos(ray.x, ray.y/*(int)Math.ceil(yStart)*/, ray.z);
+		picker.setPos(ray.x, (int)Math.floor(ray.y), ray.z);
 
 	}
 

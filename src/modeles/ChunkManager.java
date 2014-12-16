@@ -11,7 +11,7 @@ import modeles.entities.Cube3dVbo;
 
 public class ChunkManager implements Parametres {
 	private Vector<Chunk> chunks, renderChunks, chunksToRender, chunksToLoad,
-			chunksToCreate;
+	chunksToCreate;
 	private Controleur clone;
 	private TransparentChunk transparancy;
 
@@ -40,7 +40,7 @@ public class ChunkManager implements Parametres {
 			chunk.genCubes(clone.getTexManager());
 			chunk.genVBO();
 		}
-		
+
 		createLoadInit();
 	}
 
@@ -56,9 +56,9 @@ public class ChunkManager implements Parametres {
 		float xChunk = (float) Math.ceil(x / 16);
 		float yChunk = (float) Math.ceil(y / 16);
 		float zChunk = (float) Math.ceil(z / 16);
-		
+
 		Cube3dVbo cube = null;
-		
+
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
@@ -67,10 +67,10 @@ public class ChunkManager implements Parametres {
 		}
 		return cube;
 	}
-	
+
 	public Cube3dVbo[] getBody(float x, float y, float z) {
 		Cube3dVbo[] temp = new Cube3dVbo[3];
-		
+
 		temp[0] = getCubeAt(x,y,z);
 		temp[1] = getCubeAt(x,y+1.1f,z);
 		temp[2] = getCubeAt(x,y+2.1f,z);
@@ -87,29 +87,54 @@ public class ChunkManager implements Parametres {
 		int xChunk = (int) Math.ceil(x / 16);
 		int yChunk = (int) Math.ceil(y / 16);
 		int zChunk = (int) Math.ceil(z / 16);
-		
-		Chunk temp = getChunk(xChunk, yChunk, zChunk);
-		renderChunks.add(temp);
-		
-		temp.createCubeAt(x,y,z);
+		boolean find = false;
+
+
+		for (Chunk ck : chunks) {
+			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
+					&& (ck.getZ() == zChunk)) {
+				ck.createCubeAt(x, y, z);
+				find = true;
+			}
+		}
+
+		if(!find){
+			Chunk temp = getChunk(xChunk, yChunk, zChunk);
+			chunks.add(temp);
+			renderChunks.add(temp);
+			temp.createCubeAt(x, y, z);
+		}
 	}
-	
+
 	public void addCubeAt(Vector3f pos) {
 		int xChunk = (int) Math.ceil(pos.x / 16);
 		int yChunk = (int) Math.ceil(pos.y / 16);
 		int zChunk = (int) Math.ceil(pos.z / 16);
-		
-		Chunk temp = getChunk(xChunk, yChunk, zChunk);
-		renderChunks.add(temp);
-		
-		temp.createCubeAt(pos.x,pos.y,pos.z);
+		boolean find = false;
+
+
+		for (Chunk ck : chunks) {
+			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
+					&& (ck.getZ() == zChunk)) {
+				ck.createCubeAt(pos.x, pos.y, pos.z);
+				find = true;
+			}
+		}
+
+		if(!find){
+			Chunk temp = getChunk(xChunk, yChunk, zChunk);
+			chunks.add(temp);
+			renderChunks.add(temp);
+			temp.createCubeAt(pos.x,pos.y,pos.z);
+		}
+
 	}
 
 	public void delCubeAt(float x, float y, float z) {
 		float xChunk = (float) Math.ceil(x / 16);
 		float yChunk = (float) Math.ceil(y / 16);
 		float zChunk = (float) Math.ceil(z / 16);
-		
+
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
@@ -117,12 +142,12 @@ public class ChunkManager implements Parametres {
 			}
 		}
 	}
-	
+
 	public void delCubeAt(Vector3f pos) {
 		float xChunk = (float) Math.ceil(pos.x / 16);
 		float yChunk = (float) Math.ceil(pos.y / 16);
 		float zChunk = (float) Math.ceil(pos.z / 16);
-		
+
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
@@ -200,7 +225,7 @@ public class ChunkManager implements Parametres {
 		}
 		checkRender();
 	}
-	
+
 	public void updateAt(Vector3f pos) {
 		chunksToRender.addAll(getChunkToUpdate());
 		Vector<Chunk> temp = new Vector<Chunk>();
@@ -359,9 +384,9 @@ public class ChunkManager implements Parametres {
 		float xChunk = (float) Math.ceil((float)(x*-1) / 16);
 		float yChunk = (float) Math.ceil((float)(y*-1) / 16);
 		float zChunk = (float) Math.ceil((float)(z*-1) / 16);
-		
+
 		boolean temp = false;
-		
+
 		for (Chunk ck : chunks) {
 			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
 					&& (ck.getZ() == zChunk)) {
@@ -533,7 +558,7 @@ public class ChunkManager implements Parametres {
 	public void addTransparent(Cube3dVbo transp){
 		transparancy.addTransparent(transp);
 	}
-	
+
 	public void dellTransparent(Cube3dVbo transp){
 		transparancy.delTransparent(transp);
 	}
@@ -608,7 +633,7 @@ public class ChunkManager implements Parametres {
 							}
 						}
 					}
-			 	}
+				}
 			}
 			break;
 		case 5:
