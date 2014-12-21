@@ -18,6 +18,9 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.util.vector.Vector3f;
+
+import com.sun.management.VMOption.Origin;
+
 import javax.vecmath.Matrix3f;
 
 import controleur.Controleur;
@@ -116,14 +119,24 @@ public class RayPicker {
 		float yStart = -(float)posCam.getY();
 		float zStart = -(float)posCam.getZ();
 		
-		double rayX = ray.x;
-		double rayZ = ray.z;
 
 		boolean xNeg = ray.x<0;
-		boolean zPos = ray.z>0;
-
-		Vector3f origine = new Vector3f(xStart, yStart, zStart);
-
+		boolean zNeg = ray.z<0;
+		
+		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
+/*
+		if(xNeg){
+			origine.x = origine.x - 1;
+		}else{
+			origine.x = origine.x + 1;
+		}
+		
+		if(zNeg){
+			origine.z = origine.z + 1;
+		}else{
+			origine.z = origine.z - 1;
+		}
+	*/	
 		System.out.println("avant : "+ray);
 		System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
 		System.out.println("=====");
@@ -144,6 +157,20 @@ public class RayPicker {
 		System.out.println(picker.getSpacePos());
 		System.out.println("---------------------------------");
 
+		if(xNeg && zNeg){ //  +  +
+			ray.x = (float)Math.ceil(ray.x)+1;
+			ray.z = (float)Math.floor(ray.z)-1;
+		}else if(xNeg && !zNeg){//  -  + 
+			ray.x = (float)Math.floor(ray.x)-1;
+			ray.z = (float)Math.floor(ray.z)-1;
+		}else if(!xNeg && zNeg){ // +  - work ?
+			ray.x = (float)Math.ceil(ray.x);
+			ray.z = (float)Math.ceil(ray.z);
+		}else{// -  - work?
+			ray.x = (float)Math.floor(ray.x);
+			ray.z = (float)Math.ceil(ray.z);
+		}
+		
 		picker.setPos(ray.x, (int)Math.floor(ray.y), ray.z);
 
 	}

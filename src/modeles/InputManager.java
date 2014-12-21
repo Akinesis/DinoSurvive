@@ -61,49 +61,50 @@ public class InputManager {
 		delta = getDelta();
 
 		//updateFPS();
+		while(Keyboard.next()){
+			if(keydol){
+				coef*=-1;
+			}
+			if(keyReturn){
+				clone.changeGragMouse();
+			}
 
-		if(keydol){
-			coef*=-1;
-		}
-		if(keyReturn){
-			clone.changeGragMouse();
-		}
+			if(keyBas)
+				moveY(1);
+			if(keyI){
+				clone.getHUDManager().getPortrait().changeVisible();
+				clone.getHUDManager().getInventaire().changeVisible();
+				clone.getHUDManager().update(clone.getHUDTextManager());
+			}
+			if(keyINSERT){
+				clone.getHUDManager().getModeDebug().changeVisible();
+				clone.getHUDManager().update(clone.getHUDTextManager());
+			}
+			if(keyChap){
+				clone.changeGragMouse();
+				clone.getHUDManager().getCurseur().changeVisible();
+				clone.getHUDManager().getMenuJeu().changeVisible();
+				clone.getHUDManager().update(clone.getHUDTextManager());					
+			}
 
-		if(keyBas)
-			moveY(1);
-		if(keyI){
-			clone.getHUDManager().getPortrait().changeVisible();
-			clone.getHUDManager().getInventaire().changeVisible();
-			clone.getHUDManager().update(clone.getHUDTextManager());
-		}
-		if(keyINSERT){
-			clone.getHUDManager().getModeDebug().changeVisible();
-			clone.getHUDManager().update(clone.getHUDTextManager());
-		}
-		if(keyChap){
-			clone.changeGragMouse();
-			clone.getHUDManager().getCurseur().changeVisible();
-			clone.getHUDManager().getMenuJeu().changeVisible();
-			clone.getHUDManager().update(clone.getHUDTextManager());					
-		}
-
-		if(clone.getDisplay().isResized()){
-			clone.getHUDManager().update(clone.getHUDTextManager());
+			if(clone.getDisplay().isResized()){
+				clone.getHUDManager().update(clone.getHUDTextManager());
+			}
 		}
 
 		pick();
 		mouse();
 		move();
 		jump(keyJump);
-		
+
 		if (getTime() - lastFPS > 150) {
 			clone.getChunkManager().reloadChunks();
 			clone.getChunkManager().createChunks();
 			lastFPS += 150; //
 		}
-		
+
 		//if(!clone.getCollision().gravity(camera) && !isJumping){
-			//camera.getPos().y += 0.12;
+		//camera.getPos().y += 0.12;
 		//}
 
 	}
@@ -163,7 +164,7 @@ public class InputManager {
 				position = 4;
 			}
 		}
-	
+
 		float[] test = new float[]{1, 1, 1, 1, 1, 1} ;
 		test[position] = this.clone.getHUDManager().getMenu().getBoutonsEtats()[position];
 		if( (!Mouse.isButtonDown(0) && !(Keyboard.getEventKey() == Keyboard.KEY_RETURN)) || !compareArrayFloat(this.clone.getHUDManager().getMenu().getBoutonsEtats(),test) ){
@@ -173,7 +174,7 @@ public class InputManager {
 
 		return position;
 	}
-	
+
 	private void checkMenuRetour(){
 		if( (Mouse.getX() < this.clone.getHUDManager().getMenu().getBoutonsLimites()[14]) && (Mouse.getX() > this.clone.getHUDManager().getMenu().getBoutonsLimites()[15]) ){
 			if( (Mouse.getY() > Display.getHeight() - this.clone.getHUDManager().getMenu().getBoutonsLimites()[11]) && (Mouse.getY() < Display.getHeight() - this.clone.getHUDManager().getMenu().getBoutonsLimites()[10]) ){
@@ -187,7 +188,7 @@ public class InputManager {
 		}
 		this.clone.getHUDManager().getMenu().boutonsEtatsReset(5);
 	}
-	
+
 	public void checkMenuNouvellePartie() {
 		this.checkMenuRetour();
 	}
@@ -216,7 +217,7 @@ public class InputManager {
 		}
 		return test;
 	}
-	
+
 	private void move(){
 		/*
 		 * verification du clavier
@@ -287,9 +288,9 @@ public class InputManager {
 				clone.getChunkManager().updateAt(clone.getRayPicker().getPosCube());
 			}
 		}
-		
+
 		//clone.getRayPicker().rotateMatrix(camera.getRot());
-		
+
 	}
 
 	/**
@@ -317,29 +318,29 @@ public class InputManager {
 		}else{
 			facteurZ=(tempZ>0)?4:-4;
 		}
-		
+
 		if(compareChunk()){
-			//clone.getChunkManager().createChunksInit(facteurX, facteurZ);
+			clone.getChunkManager().createChunksInit(facteurX, facteurZ);
 			clone.getChunkManager().checkRender();
 		}
 
 	}
 
 	private void pick(){
-		
+
 		int dWheel = Mouse.getDWheel();
-	    if (dWheel < 0) {
-	        System.out.println("DOWN");
-	        block -= 1;
-	        block = (block==-1)?31:block;
-	    } else if (dWheel > 0){
-	        System.out.println("UP");
-	        block += 1;
-	        block = (block==32)?1:block;
-	        
-	   }
+		if (dWheel < 0) {
+			System.out.println("DOWN");
+			block -= 1;
+			block = (block==-1)?31:block;
+		} else if (dWheel > 0){
+			System.out.println("UP");
+			block += 1;
+			block = (block==32)?1:block;
+
+		}
 	}
-	
+
 	private void moveY(float amt){
 		if(clone.getCollision().colideY(camera, amt)){
 			isJumping = false;
@@ -402,7 +403,7 @@ public class InputManager {
 		}
 		fps++;
 	}
-	
+
 	public int getBlockType(){
 		return block;
 	}
