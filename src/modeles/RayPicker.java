@@ -137,9 +137,9 @@ public class RayPicker {
 			origine.z = origine.z - 1;
 		}
 	*/	
-		System.out.println("avant : "+ray);
-		System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
-		System.out.println("=====");
+		//System.out.println("avant : "+ray);
+		//System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
+		//System.out.println("=====");
 
 		ray.x *= 5;
 		ray.y *= 5;
@@ -153,9 +153,9 @@ public class RayPicker {
 		//ray.z -= (zPos)?rayZ*10:0;
 
 
-		System.out.println(ray);
-		System.out.println(picker.getSpacePos());
-		System.out.println("---------------------------------");
+		//System.out.println(ray);
+		//System.out.println(picker.getSpacePos());
+		//System.out.println("---------------------------------");
 
 		if(xNeg && zNeg){ //  +  +
 			ray.x = (float)Math.ceil(ray.x)+1;

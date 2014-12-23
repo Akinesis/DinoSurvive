@@ -2,6 +2,7 @@ package modeles;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import java.lang.*;
 
 import org.lwjgl.util.vector.Vector3f;
 
@@ -13,19 +14,21 @@ public class ChunkManager implements Parametres {
 	private Vector<Chunk> chunks, renderChunks, chunksToRender, chunksToLoad,
 	chunksToCreate;
 	private Controleur clone;
+	private TreeChunk arbre;
 	private TransparentChunk transparancy;
 
 	/*
 	 * Constructeur
 	 */
 	public ChunkManager(Controleur contr) {
-		chunks = new Vector<Chunk>();
+		//chunks = new Vector<Chunk>();
 		renderChunks = new Vector<Chunk>();
 		chunksToRender = new Vector<Chunk>();
 		chunksToLoad = new Vector<Chunk>();
 		chunksToCreate = new Vector<Chunk>();
 		clone = contr;
 		transparancy = new TransparentChunk(1, 1, 1, -1, clone);
+		arbre = new TreeChunk();
 	}
 
 	/**
@@ -302,7 +305,22 @@ public class ChunkManager implements Parametres {
 
 			}
 		}
+		//arbre.parcourPref(this);
 	}
+
+	public void checkRenderTree(Chunk ck){
+		if (!chunksurround(ck)
+				&& ck.checkPos(clone.getCamera().getCurrentChunk())) {
+			renderChunks.add(ck);
+			if(!chunksToLoad.contains(ck)){
+				chunksToLoad.add(ck);
+			}
+		}else{
+			chunksToLoad.remove(ck);
+
+		}
+	}
+
 
 	private void clearRender() {
 		renderChunks.clear();
@@ -359,8 +377,15 @@ public class ChunkManager implements Parametres {
 				return ck;
 			}
 		}
-		Chunk temp = new Chunk(x, y, z, chunks.size(), clone);
+
+		Chunk temp = new Chunk(x, y, z, makeID(x, y, z), clone);
+		//Chunk ret = arbre.findChunk(temp);
+
 		chunks.add(temp);
+		//if(ret != null){
+			//return ret;
+		//}
+		//arbre.setRacine(arbre.ajouter(temp, arbre.getRacine()));
 		return temp;
 	}
 
@@ -414,9 +439,9 @@ public class ChunkManager implements Parametres {
 		//temp = (chunkExist(xCh,yCh-1,zCh))?temp && ck.isyPlus():false;
 
 		//temp = (chunkExist(xCh,yCh,zCh+1))?temp && completeFace(xCh,yCh,zCh+1, 1):false;
-		temp = (chunkExist(xCh,yCh,zCh+1))?temp && ck.iszPlus():false;
+		temp = (chunkExist(xCh,yCh,zCh+1))?temp && ck.iszMinus():false;
 		//temp = (chunkExist(xCh,yCh,zCh-1))?temp && completeFace(xCh,yCh,zCh-1, 2):false;
-		temp = (chunkExist(xCh,yCh,zCh-1))?temp && ck.iszMinus():false;
+		temp = (chunkExist(xCh,yCh,zCh-1))?temp && ck.iszPlus():false;
 
 		return  temp;
 	}
@@ -666,5 +691,17 @@ public class ChunkManager implements Parametres {
 			break;
 		}
 		return true;
+	}
+
+	private int makeID(int x, int y, int z){
+		/*int temp;
+		x = Math.abs(x);
+		y = Math.abs(y);
+		z = Math.abs(z);
+
+		temp = Integer.parseInt(Integer.toString(x)+Integer.toString(y)+Integer.toString(z));
+		System.out.println(temp);*/
+
+		return x;
 	}
 }

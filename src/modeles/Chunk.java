@@ -508,6 +508,10 @@ public class Chunk implements Parametres{
 
 		return (int)temp;
 	}
+	
+	public int getId(){
+		return id;
+	}
 
 
 }
