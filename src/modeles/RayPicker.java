@@ -114,65 +114,48 @@ public class RayPicker {
 	
 	//c'est cette fonction qui fait chier.
 	private void setRayCoord(){
-
+		
 		float xStart = -(float)posCam.getX();
 		float yStart = -(float)posCam.getY();
 		float zStart = -(float)posCam.getZ();
-		
+
+		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
 
 		boolean xNeg = ray.x<0;
 		boolean zNeg = ray.z<0;
 		
-		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
-/*
-		if(xNeg){
-			origine.x = origine.x - 1;
-		}else{
-			origine.x = origine.x + 1;
-		}
+		//coordonnée x et z reflétant l'angle de la souris par rapport à l'axe de la carte (très particulier cet axe)
+		float x = ray.x;
+		float z = ray.z;
 		
-		if(zNeg){
-			origine.z = origine.z + 1;
-		}else{
-			origine.z = origine.z - 1;
-		}
-	*/	
-		//System.out.println("avant : "+ray);
-		//System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
-		//System.out.println("=====");
-
-		ray.x *= 5;
-		ray.y *= 5;
-		ray.z *= 5;
-
-		ray.x += origine.x;
-		ray.y += origine.y+2;
-		ray.z += origine.z;
-		
-		//ray.x += (xNeg)?rayX*10:0;
-		//ray.z -= (zPos)?rayZ*10:0;
-
-
-		//System.out.println(ray);
-		//System.out.println(picker.getSpacePos());
-		//System.out.println("---------------------------------");
-
-		if(xNeg && zNeg){ //  +  +
-			ray.x = (float)Math.ceil(ray.x)+1;
-			ray.z = (float)Math.floor(ray.z)-1;
+		if(xNeg && zNeg){ //  -  -
+			x = /*distance du centre de la caméra jusqu'au pointeur :*/5 * /*le moins c'est par rapport au fait que l'angle est négatif je crois. On cherche le sinus de l'angle :*/-(float)Math.sin(/*angle de la souris par rapport à l'axe fixe : tan(teta) = ray.x/ray.z donc teta =*/Math.atan(ray.x/ray.z)) + /*pour que tout soit calculer selon la position de la caméra :*/origine.x;
+			z = 5 * -(float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
 		}else if(xNeg && !zNeg){//  -  + 
-			ray.x = (float)Math.floor(ray.x)-1;
-			ray.z = (float)Math.floor(ray.z)-1;
-		}else if(!xNeg && zNeg){ // +  - work ?
-			ray.x = (float)Math.ceil(ray.x);
-			ray.z = (float)Math.ceil(ray.z);
-		}else{// -  - work?
-			ray.x = (float)Math.floor(ray.x);
-			ray.z = (float)Math.ceil(ray.z);
+			x = 5 * (float)Math.sin(Math.atan(ray.x/ray.z)) + origine.x;
+			z = 5 * (float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
+		}else if(!xNeg && zNeg){ // +  - 
+			x = 5 * -(float)Math.sin(Math.atan(ray.x/ray.z)) + origine.x;
+			z = 5 * -(float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
+		}else{// +  + 
+			x = 5 * (float)Math.sin(Math.atan(ray.x/ray.z)) + origine.x;
+			z = 5 * (float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
 		}
 		
-		picker.setPos(ray.x, (int)Math.floor(ray.y), ray.z);
+		ray.y = 5*ray.y + origine.y+2;
 
+		System.out.println("origine x : " + origine.x);
+		System.out.println("origine z : " + origine.z);
+		System.out.println("ray.x : " + ray.x);
+		System.out.println("ray.z : " + ray.z);
+		System.out.println("x : " + x);
+		System.out.println("z : " + z);
+		System.out.println("angle : " + Math.cos((Math.atan(ray.x/ray.z))));
+		System.out.println("------------------------------");
+		
+		
+		picker.setPos((int)Math.floor(x), (int)Math.floor(ray.y), (int)Math.floor(z));
+		//L'EFFET ELASTIQUE EST TOUJOURS PRESENT !
 	}
 
 	private void unbinde(){
