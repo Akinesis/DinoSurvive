@@ -57,6 +57,18 @@ public class Camera {
 	public void setRot(Vector3f rot){
 		rotation=rot;
 	}
+	
+	public void setRotX(float x){
+		rotation.x = x;
+	}
+	
+	public void setRotY(float y){
+		rotation.x = y;
+	}
+	
+	public void setRotZ(float z){
+		rotation.x = z;
+	}
 
 	public Vector3f getCurrentChunk(){
 		setCurrentChunk();

@@ -1,7 +1,5 @@
 package modeles.entities;
 
-import java.nio.FloatBuffer;
-
 import org.lwjgl.util.vector.Vector3f;
 
 public class WiredCube3D extends Cube3D {

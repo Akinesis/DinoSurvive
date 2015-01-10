@@ -14,7 +14,7 @@ public class ChunkManager implements Parametres {
 	private Vector<Chunk> chunks, renderChunks, chunksToRender, chunksToLoad,
 	chunksToCreate;
 	private Controleur clone;
-	private TreeChunk arbre;
+	//private TreeChunk arbre;
 	private TransparentChunk transparancy;
 
 	/*
@@ -28,7 +28,7 @@ public class ChunkManager implements Parametres {
 		chunksToCreate = new Vector<Chunk>();
 		clone = contr;
 		transparancy = new TransparentChunk(1, 1, 1, -1, clone);
-		arbre = new TreeChunk();
+		//arbre = new TreeChunk();
 	}
 
 	/**

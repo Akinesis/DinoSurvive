@@ -4,14 +4,17 @@ import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glRotatef;
 import modeles.Camera;
 import modeles.ChunkManager;
 import modeles.CollisionManager;
+import modeles.DropManager;
 import modeles.InputManager;
 import modeles.MapReader;
 import modeles.RayPicker;
 import modeles.TerrainGenerator;
 import modeles.TextureManager;
+import modeles.entities.FlatItemVBO;
 import modeles.entities2D.HUDManager;
 import modeles.entities2D.HUDTextureManager;
 
@@ -36,6 +39,7 @@ public class Controleur implements Parametres {
 	private HUDManager hud;
 	private HUDTextureManager hudtexManager;
 	private RayPicker rayPick;
+	private DropManager dropManager;
 
 	/**
 	 * Constructeur du controleur
@@ -52,6 +56,7 @@ public class Controleur implements Parametres {
 		chunkManager.setChunksList(mapRead.setChunks());
 		terrGen = new TerrainGenerator(this);
 		rayPick = new RayPicker(this);
+		dropManager = new DropManager();
 	}
 
 	// le coeur du jeu, ma méthode contenant la boucle de jeu.
@@ -94,6 +99,9 @@ public class Controleur implements Parametres {
 			terrGen.buildStart();
 			terrGen.genFond(1, -5, 0);
 			terrGen.genWall(-1, -5, 1);
+			
+			dropManager.addDrop(new FlatItemVBO(-2, 85, -2, 1));
+			dropManager.gen();
 
 			// spawn de du joueur au point le plus haut en 8,X,8
 			camera.spawn(chunkManager.getHigherPointAt(8, 8));

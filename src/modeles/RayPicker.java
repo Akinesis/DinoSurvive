@@ -61,6 +61,7 @@ public class RayPicker {
 	}
 
 	public void rotateMatrix(Vector3f rot){
+		System.out.println(rot);
 		direction.rotX(rot.x);
 		direction.rotY(rot.y);
 		direction.rotZ(rot.z);
@@ -124,7 +125,7 @@ public class RayPicker {
 		boolean zNeg = ray.z<0;
 		
 		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
-/*
+
 		if(xNeg){
 			origine.x = origine.x - 1;
 		}else{
@@ -136,10 +137,11 @@ public class RayPicker {
 		}else{
 			origine.z = origine.z - 1;
 		}
-	*/	
-		//System.out.println("avant : "+ray);
-		//System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
+	
+		System.out.println("avant : "+rayMatrix);
+		System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
 		//System.out.println("=====");
+		//ray = rayMatrix;
 
 		ray.x *= 5;
 		ray.y *= 5;
@@ -154,8 +156,8 @@ public class RayPicker {
 
 
 		//System.out.println(ray);
-		//System.out.println(picker.getSpacePos());
-		//System.out.println("---------------------------------");
+		System.out.println(picker.getSpacePos());
+		System.out.println("---------------------------------");
 
 		if(xNeg && zNeg){ //  +  +
 			ray.x = (float)Math.ceil(ray.x)+1;
