@@ -9,6 +9,7 @@ import modeles.Camera;
 import modeles.ChunkManager;
 import modeles.CollisionManager;
 import modeles.DropManager;
+import modeles.DropTextureManager;
 import modeles.InputManager;
 import modeles.MapReader;
 import modeles.RayPicker;
@@ -40,6 +41,7 @@ public class Controleur implements Parametres {
 	private HUDTextureManager hudtexManager;
 	private RayPicker rayPick;
 	private DropManager dropManager;
+	private DropTextureManager dropTextManager;
 
 	/**
 	 * Constructeur du controleur
@@ -68,8 +70,10 @@ public class Controleur implements Parametres {
 		hud = new HUDManager(this);
 		texManager = new TextureManager();
 		hudtexManager = new HUDTextureManager();
+		dropTextManager = new DropTextureManager();
 
 		this.changeGragMouse();
+		
 		while (this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !this.display.isClose() && !this.hud.getMenu().getDisplayIsClose()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
@@ -100,8 +104,8 @@ public class Controleur implements Parametres {
 			terrGen.genFond(1, -5, 0);
 			terrGen.genWall(-1, -5, 1);
 			
-			dropManager.addDrop(new FlatItemVBO(-2, 85, -2, 1));
-			dropManager.gen();
+			dropManager.addDrop(new FlatItemVBO(-2, 80.2f, -2, 1));
+			dropManager.gen(dropTextManager);
 
 			// spawn de du joueur au point le plus haut en 8,X,8
 			camera.spawn(chunkManager.getHigherPointAt(8, 8));
@@ -126,11 +130,12 @@ public class Controleur implements Parametres {
 
 				// tout ce qui à rapport aux input
 				input.check();
-
-				dropManager.drawn();
 				
 				// dessine tout les chunks
 				chunkManager.drawChunks(texManager);
+				
+				//dropManager.unbind();
+				dropManager.draw(dropTextManager);
 				
 				//fait toute les orpération pour le cube de pixking.
 				rayPick.pick();
@@ -138,7 +143,7 @@ public class Controleur implements Parametres {
 				// texManager.undindTexture();
 
 				matrices.init2D();
-				this.hud.draw(hudtexManager);
+				hud.draw(hudtexManager);
 
 				display.update(); // met à jour la fenêtre, aucun rapport avec
 									// les chunks

@@ -13,7 +13,7 @@ public class TextureManager {
 
 	public TextureManager() {
 		try {
-			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res//text.png"));
+			texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("res/text.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
