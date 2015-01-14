@@ -127,6 +127,8 @@ public class Controleur implements Parametres {
 				// tout ce qui à rapport aux input
 				input.check();
 
+				dropManager.drawn();
+				
 				// dessine tout les chunks
 				chunkManager.drawChunks(texManager);
 				
