@@ -1,1 +1,1 @@
-drop schema dinoadata restrict;
+alter table DINODATA.items add column COORDONEE VARCHAR(9) unique;
