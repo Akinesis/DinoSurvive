@@ -5,6 +5,10 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glRotatef;
+
+import java.sql.SQLException;
+
+import modeles.BDDConector;
 import modeles.Camera;
 import modeles.ChunkManager;
 import modeles.CollisionManager;
@@ -42,6 +46,7 @@ public class Controleur implements Parametres {
 	private RayPicker rayPick;
 	private DropManager dropManager;
 	private DropTextureManager dropTextManager;
+	private BDDConector database;
 
 	/**
 	 * Constructeur du controleur
@@ -59,6 +64,7 @@ public class Controleur implements Parametres {
 		terrGen = new TerrainGenerator(this);
 		rayPick = new RayPicker(this);
 		dropManager = new DropManager();
+		database = new BDDConector();
 	}
 
 	// le coeur du jeu, ma méthode contenant la boucle de jeu.
@@ -71,6 +77,18 @@ public class Controleur implements Parametres {
 		texManager = new TextureManager();
 		hudtexManager = new HUDTextureManager();
 		dropTextManager = new DropTextureManager();
+		
+		try {
+			database.connexionBDD();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		database.arretBDD();
 
 		this.changeGragMouse();
 		
