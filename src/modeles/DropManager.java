@@ -21,9 +21,6 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-import modeles.entities.Cube3dVbo;
 import modeles.entities.FlatItemVBO;
 
 public class DropManager {
@@ -38,6 +35,10 @@ public class DropManager {
 
 	public void addDrop(FlatItemVBO item){
 		drops.add(item);
+	}
+	
+	public void removeDrop(FlatItemVBO item){
+		drops.remove(item);
 	}
 	
 	public void draw(DropTextureManager texMan){	

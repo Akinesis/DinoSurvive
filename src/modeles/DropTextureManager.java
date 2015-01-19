@@ -46,11 +46,6 @@ public class DropTextureManager {
 				fact*x, fact*(y+15),
 				fact*(x+15), fact*(y+15),
 				
-				
-				
-				
-				
-				
 				fact*(x+15), fact*y,
 				fact*x, fact*y,
 				fact*(x+15), fact*(y+15),
@@ -58,8 +53,6 @@ public class DropTextureManager {
 				fact*x, fact*(y+15),
 				fact*(x+15), fact*(y+15),
 		};
-		
-		
 	}
 	
 
