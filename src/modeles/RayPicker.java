@@ -119,7 +119,7 @@ public class RayPicker {
 		float yStart = -(float)posCam.getY();
 		float zStart = -(float)posCam.getZ();
 
-		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
+		Vector3f origine = new Vector3f((float)Math.floor(xStart)-0.5f, yStart, (float)Math.floor(zStart)-0.5f);
 
 		boolean xNeg = ray.x<0;
 		boolean zNeg = ray.z<0;
@@ -148,13 +148,17 @@ public class RayPicker {
 		System.out.println("origine z : " + origine.z);
 		System.out.println("ray.x : " + ray.x);
 		System.out.println("ray.z : " + ray.z);
+		System.out.println("angle : " + (Math.atan(ray.x/ray.z)*180/Math.PI));
 		System.out.println("x : " + x);
 		System.out.println("z : " + z);
-		System.out.println("angle : " + Math.cos((Math.atan(ray.x/ray.z))));
+		System.out.println("x arrondis : " + Math.ceil(x));
+		System.out.println("z arrondis : " + Math.ceil(z));
 		System.out.println("------------------------------");
 		
-		
-		picker.setPos((int)Math.floor(x), (int)Math.floor(ray.y), (int)Math.floor(z));
+		//floor ou ceil
+		//floor arrondis supérieur normalement mais arrondis inférieur finalement
+		//ceil arrondis supérieur
+		picker.setPos((int)(x), (int)Math.floor(ray.y), (int)(z));
 		//L'EFFET ELASTIQUE EST TOUJOURS PRESENT !
 	}
 

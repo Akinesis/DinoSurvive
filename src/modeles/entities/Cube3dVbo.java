@@ -1,16 +1,17 @@
 package modeles.entities;
 
-
+import org.lwjgl.util.vector.Vector3f;
 
 public class Cube3dVbo extends Cube3D {
 
 	private int type;
 	private float indiceTextX, indiceTextY;
+	private Vector3f posInter;
 
 	public Cube3dVbo(float x,float  y,float z,float size, int typ){
 		super(x,y,z,size);
 		type=typ;
-
+		posInter = new Vector3f(this.pos.x/2, this.pos.y/2, this.pos.z/2);
 		//vertexData = BufferUtils.createFloatBuffer(verticiesNum * vertexSize);
 		indiceTextX = (float)(Math.random());
 		indiceTextY = (float)(Math.random());
@@ -109,5 +110,8 @@ public class Cube3dVbo extends Cube3D {
 		return (int)pos.z;
 	}
 	
+	public Vector3f getPosInter(){
+		return posInter;
+	}
 }
 
