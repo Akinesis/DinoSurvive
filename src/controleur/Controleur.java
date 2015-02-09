@@ -15,6 +15,7 @@ import modeles.CollisionManager;
 import modeles.DropManager;
 import modeles.DropTextureManager;
 import modeles.InputManager;
+import modeles.ItemManager;
 import modeles.MapReader;
 import modeles.RayPicker;
 import modeles.TerrainGenerator;
@@ -46,7 +47,7 @@ public class Controleur implements Parametres {
 	private RayPicker rayPick;
 	private DropManager dropManager;
 	private DropTextureManager dropTextManager;
-	private BDDConector database;
+	private ItemManager itemManager;
 
 	/**
 	 * Constructeur du controleur
@@ -64,7 +65,7 @@ public class Controleur implements Parametres {
 		terrGen = new TerrainGenerator(this);
 		rayPick = new RayPicker(this);
 		dropManager = new DropManager();
-		database = new BDDConector();
+		itemManager = new ItemManager(this);
 	}
 
 	// le coeur du jeu, ma méthode contenant la boucle de jeu.
@@ -77,18 +78,6 @@ public class Controleur implements Parametres {
 		texManager = new TextureManager();
 		hudtexManager = new HUDTextureManager();
 		dropTextManager = new DropTextureManager();
-		
-		try {
-			database.connexionBDD();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		database.arretBDD();
 
 		this.changeGragMouse();
 		

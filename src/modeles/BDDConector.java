@@ -41,5 +41,9 @@ public class BDDConector {
 			//e.printStackTrace();
 		}
 	}
+	
+	public Connection getConnetion(){
+		return connexion;
+	}
 
 }

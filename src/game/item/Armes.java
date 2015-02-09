@@ -2,7 +2,7 @@ package game.item;
 
 public class Armes extends Item {
 
-	public Armes(String identifiant, String nom) {
+	public Armes(int identifiant, String nom) {
 		super(identifiant, nom);
 		// TODO Auto-generated constructor stub
 	}
