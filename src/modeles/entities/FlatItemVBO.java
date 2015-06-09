@@ -49,18 +49,10 @@ public class FlatItemVBO extends AbstractEntity3D {
 				pos2.x, pos2.y, pos.z,
 				pos.x, pos2.y, pos.z,
 				pos2.x, pos.y, pos.z,
+				
 				pos2.x, pos.y, pos.z,
 				pos.x, pos2.y, pos.z,
 				pos.x, pos.y, pos.z,
-				
-
-				//south
-				pos2.x, pos.y, pos2.z,
-				pos.x, pos.y, pos2.z,
-				pos2.x, pos2.y, pos2.z,
-				pos.x, pos.y, pos2.z,
-				pos.x, pos2.y, pos2.z,
-				pos2.x, pos2.y, pos2.z,
 
 		};
 	}

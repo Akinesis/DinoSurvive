@@ -39,19 +39,17 @@ public class DropTextureManager {
 		float fact = 1/2048f;
 		
 		return new float[]{
-				fact*x, fact*y,
-				fact*x, fact*(y+15),
-				fact*(x+15), fact*y,
-				fact*(x+15), fact*y,
-				fact*x, fact*(y+15),
-				fact*(x+15), fact*(y+15),
 				
-				fact*(x+15), fact*y,
+				fact*(x+16), fact*y,
 				fact*x, fact*y,
-				fact*(x+15), fact*(y+15),
+				fact*(x+16), fact*(y+16),
+				
+				fact*(x+16), fact*(y+16),
 				fact*x, fact*y,
-				fact*x, fact*(y+15),
-				fact*(x+15), fact*(y+15),
+				fact*x, fact*(y+16),
+				
+				
+				
 		};
 	}
 	

@@ -1,11 +1,13 @@
 package modeles;
 
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_COORD_ARRAY;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import static org.lwjgl.opengl.GL11.GL_VERTEX_ARRAY;
 import static org.lwjgl.opengl.GL11.glDisableClientState;
 import static org.lwjgl.opengl.GL11.glDrawArrays;
+import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glEnableClientState;
 import static org.lwjgl.opengl.GL11.glTexCoordPointer;
 import static org.lwjgl.opengl.GL11.glVertexPointer;
@@ -41,7 +43,8 @@ public class DropManager {
 		drops.remove(item);
 	}
 	
-	public void draw(DropTextureManager texMan){	
+	public void draw(DropTextureManager texMan){
+		org.lwjgl.opengl.GL11.glDisable(GL_CULL_FACE);
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleDrop);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3, GL_FLOAT, 5*4, 0L);
@@ -53,6 +56,7 @@ public class DropManager {
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+		glEnable(GL_CULL_FACE);
 	}
 	
 	public void gen(DropTextureManager texMan){
