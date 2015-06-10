@@ -30,9 +30,13 @@ public class DropManager {
 	private ArrayList<FlatItemVBO> drops;
 	protected FloatBuffer interleavedBuffer;
 	private int vboVertexHandleDrop;
+	private float bump;
+	private boolean bumpUp;
 
 	public DropManager(){
 		drops = new ArrayList<FlatItemVBO>();
+		bump = 0;
+		bumpUp = true;
 	}
 
 	public void addDrop(FlatItemVBO item){
@@ -59,7 +63,7 @@ public class DropManager {
 		glEnable(GL_CULL_FACE);
 	}
 	
-	public void gen(DropTextureManager texMan){
+	public void initDrop(DropTextureManager texMan){
 		genDrop(texMan);
 		genVBO();
 	}
@@ -101,12 +105,42 @@ public class DropManager {
 		}
 	}
 	
-	public void unbind(){
+	private void unbind(){
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleDrop);
 		GL15.glDeleteBuffers(vboVertexHandleDrop);
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 		if(interleavedBuffer!=null){
 			interleavedBuffer.clear();
+		}
+	}
+	
+	public void drawDrop(DropTextureManager texMan){
+		unbind();
+		makeBump();
+		genDrop(texMan);
+		genVBO();
+		draw(texMan);
+	}
+	
+	private void makeBump(){
+		float temp;
+		
+		if(bumpUp){
+			bump += 0.003;
+			temp = 0.003f;
+			if(bump  > 0.15){
+				bumpUp = false;
+			}
+		}else{
+			bump -= 0.003;
+			temp = -0.003f;
+			if(bump < 0){
+				bumpUp = true;
+			}
+		}
+		
+		for(FlatItemVBO drop : drops){
+			drop.updateY(temp);
 		}
 	}
 }
