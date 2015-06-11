@@ -127,6 +127,11 @@ public class RayPicker {
 		//coordonnée x et z reflétant l'angle de la souris par rapport à l'axe de la carte (très particulier cet axe)
 		float x = ray.x;
 		float z = ray.z;
+		float y = ray.y;
+		
+		//direction.rotX((float)Math.atan(ray.x/ray.z));
+		direction.rotY((float)Math.atan(ray.x/ray.z));
+		//direction.rotZ((float)Math.atan(ray.x/ray.z));
 		
 		if(xNeg && zNeg){ //  -  -
 			x = /*distance du centre de la caméra jusqu'au pointeur :*/5 * /*le moins c'est par rapport au fait que l'angle est négatif je crois. On cherche le sinus de l'angle :*/-(float)Math.sin(/*angle de la souris par rapport à l'axe fixe : tan(teta) = ray.x/ray.z donc teta =*/Math.atan(ray.x/ray.z)) + /*pour que tout soit calculer selon la position de la caméra :*/origine.x;
@@ -142,23 +147,26 @@ public class RayPicker {
 			z = 5 * (float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
 		}
 		
-		ray.y = 5*ray.y + origine.y+2;
+		y = 5*ray.y + origine.y;
 
 		System.out.println("origine x : " + origine.x);
 		System.out.println("origine z : " + origine.z);
 		System.out.println("ray.x : " + ray.x);
 		System.out.println("ray.z : " + ray.z);
+		System.out.println("ray.y : " + ray.y);
 		System.out.println("angle : " + (Math.atan(ray.x/ray.z)*180/Math.PI));
 		System.out.println("x : " + x);
 		System.out.println("z : " + z);
 		System.out.println("x arrondis : " + Math.ceil(x));
 		System.out.println("z arrondis : " + Math.ceil(z));
+		System.out.println("taile de ray : " + ray.length());
+		System.out.println("taile squared de ray : " + ray.lengthSquared());
 		System.out.println("------------------------------");
 		
 		//floor ou ceil
 		//floor arrondis supérieur normalement mais arrondis inférieur finalement
 		//ceil arrondis supérieur
-		picker.setPos((int)(x), (int)Math.floor(ray.y), (int)(z));
+		picker.setPos((int)(x), (int)Math.floor(y), (int)(z));
 		//L'EFFET ELASTIQUE EST TOUJOURS PRESENT !
 	}
 
