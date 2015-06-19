@@ -489,7 +489,7 @@ public class TextureManager {
 
 	}
 
-	private float[] genTitaneTexture(float indiceTextX, float indiceTextY){
+	private float[] genTitaniumTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
 
@@ -819,52 +819,59 @@ public class TextureManager {
 
 	}
 
-	private float[] genPlankTexture(){
+	private float[] genPlankTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
+
 		return new float[]{
 				//south
-				0.21875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.15625f,
-				0.1875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.125f,
+				0.34375f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.25f+indiceTextY,
 
-				0.21875f, 0.125f,
-				0.1875f, 0.125f,
-				0.1875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.15625f,
-				0.21875f, 0.15625f,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.28125f+indiceTextY,
 
 				//top
-				0.21875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.15625f,
-				0.1875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.125f,
+				0.34375f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.25f+indiceTextY,
 
 				//bottom
-				0.1875f, 0.125f,
-				0.1875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.21875f, 0.125f,
-				0.1875f, 0.15625f,
-				0.21875f, 0.15625f,
+				0.3125f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.28125f+indiceTextY,
 
-				0.21875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.15625f,
-				0.1875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.125f,
+				0.34375f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.25f+indiceTextY,
 
-				0.1875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.125f,
-				0.21875f, 0.15625f,
-				0.21875f, 0.125f,
-				0.1875f, 0.15625f
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.25f+indiceTextY,
+				0.34375f+indiceTextX, 0.28125f+indiceTextY,
+				0.34375f+indiceTextX, 0.25f+indiceTextY,
+				0.3125f+indiceTextX, 0.28125f+indiceTextY,
+
+
 		};
 
 	}
@@ -1513,7 +1520,7 @@ public class TextureManager {
 				0.34375f, 0.09375f,
 				0.375f, 0.0625f,
 				0.34375f, 0.0625f,
-				
+
 				//face sud inverser
 				0.34375f, 0.0625f,
 				0.375f, 0.0625f,
@@ -1554,7 +1561,7 @@ public class TextureManager {
 		};
 
 	}
-	
+
 	private float[] genSandTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
@@ -1609,7 +1616,7 @@ public class TextureManager {
 		};
 
 	}
-	
+
 	private float[] genDaraniumTexture(float indiceTextX, float indiceTextY){
 		indiceTextX *= 0.03125f;
 		indiceTextY *= 0.03125f;
@@ -1664,7 +1671,7 @@ public class TextureManager {
 		};
 
 	}
-	
+
 	private float[] genNaildeSteelTexture(float indiceTextX, float indiceTextY){	
 
 		indiceTextX = (int)(indiceTextX * ((1 - 0) + 1))*0.03125f;
@@ -1719,7 +1726,62 @@ public class TextureManager {
 		};
 
 	}
-	
+
+	private float[] genRubyTexture(float indiceTextX, float indiceTextY){
+		indiceTextX *= 0.03125f;
+		indiceTextY *= 0.03125f;
+
+		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
+		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
+		return new float[]{
+				//south
+				0.03125f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.3125f+indiceTextY,
+
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.34375f+indiceTextY,
+
+				//top
+				0.03125f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.3125f+indiceTextY,
+
+				//bottom
+				0.0f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.34375f+indiceTextY,
+
+				0.03125f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.3125f+indiceTextY,
+
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.3125f+indiceTextY,
+				0.03125f+indiceTextX, 0.34375f+indiceTextY,
+				0.03125f+indiceTextX, 0.3125f+indiceTextY,
+				0.0f+indiceTextX, 0.34375f+indiceTextY,
+		};
+
+	}
+
 	public int getID(){
 		return texture.getTextureID();
 	}
@@ -1751,7 +1813,7 @@ public class TextureManager {
 		case 8:
 			return genCopperTexture(x, y);
 		case 9:
-			return genTitaneTexture(x, y);
+			return genTitaniumTexture(x, y);
 		case 10:
 			return genUraniumTexture(x, y);
 		case 11:
@@ -1763,7 +1825,7 @@ public class TextureManager {
 		case 14:
 			return genLavaTexture(x, y);
 		case 15:
-			return genPlankTexture();
+			return genPlankTexture(x,y);
 		case 16:
 			return genWorkbenchTexture();
 		case 17:
@@ -1796,6 +1858,8 @@ public class TextureManager {
 			return genDaraniumTexture(x,y);
 		case 31:
 			return genNaildeSteelTexture(x, y);
+		case 32:
+			return genRubyTexture(x,y);
 		default:
 			return genGrassTexture(x, y);
 		}
