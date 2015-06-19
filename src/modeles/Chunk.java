@@ -74,6 +74,7 @@ public class Chunk implements Parametres{
 				}
 			}
 		}
+		
 
 	}
 
@@ -185,6 +186,7 @@ public class Chunk implements Parametres{
 
 	/**
 	 * Vérifie quels cubes sont actifs (visible ou non) et les met dans la liste de rendu
+	 * méthode trop lourde !!
 	 */
 	public void checkState(){
 		clearChunk();
@@ -253,6 +255,11 @@ public class Chunk implements Parametres{
 		}
 	}
 
+	/**
+	 * vérifie que le chunk est à portée de vue
+	 * @param current la position du joueur (caméra)
+	 * @return
+	 */
 	public boolean checkPos(Vector3f current){
 		if(Math.abs(current.x-x)>=chunkFar || Math.abs(current.y-y)>=chunkFar || Math.abs(current.z-z)>=chunkFar){
 			return false;
@@ -260,17 +267,14 @@ public class Chunk implements Parametres{
 		return true;
 	}
 
+
 	/**
 	 * Met a jours tout les étas des cubes,
 	 * Puis suprimer les ancien buffer pour les recrée avec les nouvelles valeurs.
+	 * @param x
+	 * @param y
+	 * @param z
 	 */
-	public void update(){
-		checkState();
-		unbindVbo();
-		genCubes(clone.getTexManager());
-		genVBO();
-	}
-
 	public void updateAt(float x, float y, float z){
 
 		int i = convertCoordGet(x);
@@ -320,14 +324,14 @@ public class Chunk implements Parametres{
 					cubeCoord=cube.genCubes();
 					texCoord=texMan.genText(cube.getType(), cube.getTextX(), cube.getTextY());
 					for(int i = 0; i< cubeCoord.length; i+=3){
-						interleavedBuffer.put(cubeCoord[i]);
-						interleavedBuffer.put(cubeCoord[i+1]);
-						interleavedBuffer.put(cubeCoord[i+2]);
+								interleavedBuffer.put(cubeCoord[i]);
+								interleavedBuffer.put(cubeCoord[i+1]);
+								interleavedBuffer.put(cubeCoord[i+2]);
 
-						interleavedBuffer.put(texCoord[j]);
-						interleavedBuffer.put(texCoord[j+1]);
-
-						j+=2;
+								interleavedBuffer.put(texCoord[j]);
+								interleavedBuffer.put(texCoord[j+1]);
+								j+=2;
+								
 					}
 					j=0;
 				}
@@ -512,6 +516,5 @@ public class Chunk implements Parametres{
 	public int getId(){
 		return id;
 	}
-
 
 }

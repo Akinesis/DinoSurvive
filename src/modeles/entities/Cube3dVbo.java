@@ -44,7 +44,7 @@ public class Cube3dVbo extends Cube3D {
 				pos.x, pos.y, pos2.z,
 				pos2.x, pos.y, pos2.z,
 
-				//bottom
+				//top
 				pos.x, pos2.y, pos.z,
 				pos.x, pos2.y, pos2.z,
 				pos2.x, pos2.y, pos.z,
@@ -52,7 +52,7 @@ public class Cube3dVbo extends Cube3D {
 				pos.x, pos2.y, pos2.z,
 				pos2.x, pos2.y, pos2.z,
 
-				//top
+				//tbottom
 				pos.x, pos.y, pos.z,
 				pos2.x, pos.y, pos.z,
 				pos.x, pos.y, pos2.z,

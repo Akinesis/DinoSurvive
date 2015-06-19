@@ -4,13 +4,9 @@ import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL11.glRotatef;
 
-import java.sql.SQLException;
-
-import modeles.BDDConector;
 import modeles.Camera;
-import modeles.ChunkManager;
+import modeles.ChunkManagerHash;
 import modeles.CollisionManager;
 import modeles.DropManager;
 import modeles.DropTextureManager;
@@ -25,7 +21,6 @@ import modeles.entities2D.HUDManager;
 import modeles.entities2D.HUDTextureManager;
 
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.util.vector.Vector3f;
 
 import parametres.Parametres;
 import vues.GameDisplay;
@@ -35,7 +30,7 @@ public class Controleur implements Parametres {
 
 	private GameDisplay display;
 	private OpenGL matrices;
-	private ChunkManager chunkManager;
+	private ChunkManagerHash chunkManager;
 	private Camera camera;
 	private InputManager input;
 	private MapReader mapRead;
@@ -60,7 +55,8 @@ public class Controleur implements Parametres {
 		collision = new CollisionManager(this);
 		input.setCam(camera);
 		mapRead = new MapReader(this);
-		chunkManager = new ChunkManager(this);
+		//chunkManager = new ChunkManager(this);
+		chunkManager = new ChunkManagerHash(this);
 		chunkManager.setChunksList(mapRead.setChunks());
 		terrGen = new TerrainGenerator(this);
 		rayPick = new RayPicker(this);
@@ -115,12 +111,12 @@ public class Controleur implements Parametres {
 			dropManager.addDrop(new FlatItemVBO(-5, 80.2f, -3, 1));
 			dropManager.initDrop(dropTextManager);
 
-			// spawn de du joueur au point le plus haut en 8,X,8
+			// spawn de du joueur au point le plus haut en 8,Y,8
 			camera.spawn(chunkManager.getHigherPointAt(8, 8));
 			camera.setCurrentChunk();
 
 			// initialise les chunks une première fois et met les cubes dans le
-			// buffer
+			// buffer, la position de la caméra doit êre connue.
 			chunkManager.initChunks();
 
 			while (!Keyboard.isKeyDown(Keyboard.KEY_F10) && !this.display.isClose() && !this.hud.getMenu().getDisplayIsClose()) {
@@ -176,7 +172,7 @@ public class Controleur implements Parametres {
 		return display;
 	}
 
-	public ChunkManager getChunkManager() {
+	public ChunkManagerHash getChunkManager() {
 		return chunkManager;
 	}
 

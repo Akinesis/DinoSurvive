@@ -10,7 +10,7 @@ import parametres.Parametres;
 import controleur.Controleur;
 import modeles.entities.Cube3dVbo;
 
-public class ChunkManager implements Parametres {
+public class OldChunkManager implements Parametres {
 	private Vector<Chunk> chunks, renderChunks, chunksToRender, chunksToLoad,
 	chunksToCreate;
 	private Controleur clone;
@@ -20,7 +20,7 @@ public class ChunkManager implements Parametres {
 	/*
 	 * Constructeur
 	 */
-	public ChunkManager(Controleur contr) {
+	public OldChunkManager(Controleur contr) {
 		//chunks = new Vector<Chunk>();
 		renderChunks = new Vector<Chunk>();
 		chunksToRender = new Vector<Chunk>();
@@ -86,29 +86,6 @@ public class ChunkManager implements Parametres {
 	 * @param y Les y du cube
 	 * @param z Les z du cube
 	 */
-	public void addCubeAt(float x, float y, float z) {
-		int xChunk = (int) Math.ceil(x / 16);
-		int yChunk = (int) Math.ceil(y / 16);
-		int zChunk = (int) Math.ceil(z / 16);
-		boolean find = false;
-
-
-		for (Chunk ck : chunks) {
-			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
-					&& (ck.getZ() == zChunk)) {
-				ck.createCubeAt(x, y, z);
-				find = true;
-			}
-		}
-
-		if(!find){
-			Chunk temp = getChunk(xChunk, yChunk, zChunk);
-			chunks.add(temp);
-			renderChunks.add(temp);
-			temp.createCubeAt(x, y, z);
-		}
-	}
-
 	public void addCubeAt(Vector3f pos) {
 		int xChunk = (int) Math.ceil(pos.x / 16);
 		int yChunk = (int) Math.ceil(pos.y / 16);
@@ -131,19 +108,6 @@ public class ChunkManager implements Parametres {
 			temp.createCubeAt(pos.x,pos.y,pos.z);
 		}
 
-	}
-
-	public void delCubeAt(float x, float y, float z) {
-		float xChunk = (float) Math.ceil(x / 16);
-		float yChunk = (float) Math.ceil(y / 16);
-		float zChunk = (float) Math.ceil(z / 16);
-
-		for (Chunk ck : chunks) {
-			if ((ck.getX() == xChunk) && (ck.getY() == yChunk)
-					&& (ck.getZ() == zChunk)) {
-				ck.delCube(x, y, z);
-			}
-		}
 	}
 
 	public void delCubeAt(Vector3f pos) {
@@ -185,51 +149,8 @@ public class ChunkManager implements Parametres {
 		}
 	}
 
-	/**
-	 * V�rifie l'�tat des cubes du chunk
-	 */
-	public void checkState() {
-		for (Chunk chunk : chunks) {
-			chunk.checkState();
-		}
-	}
-
-	public void update() {
-		chunksToRender.addAll(getChunkToUpdate());
-		Vector<Chunk> temp = new Vector<Chunk>();
-		int i = 0;
-		if (!(chunksToRender.isEmpty())) {
-			for (Chunk chunk : chunksToRender) {
-				if (i < 6) {
-					chunk.update();
-					temp.add(chunk);
-					i++;
-					chunk.haveBeenUpdated(true);
-				}
-			}
-			chunksToRender.removeAll(temp);
-		}
-	}
-
-	public void updateAt(float x, float y, float z) {
-		chunksToRender.addAll(getChunkToUpdate());
-		Vector<Chunk> temp = new Vector<Chunk>();
-		int i = 0;
-		if (!(chunksToRender.isEmpty())) {
-			for (Chunk chunk : chunksToRender) {
-				if (i < 6) {
-					chunk.updateAt(x, y, z);
-					temp.add(chunk);
-					i++;
-					chunk.haveBeenUpdated(true);
-				}
-			}
-			chunksToRender.removeAll(temp);
-		}
-		checkRender();
-	}
-
 	public void updateAt(Vector3f pos) {
+		Vector<Chunk> chunksToRender = new Vector<Chunk>();
 		chunksToRender.addAll(getChunkToUpdate());
 		Vector<Chunk> temp = new Vector<Chunk>();
 		int i = 0;
@@ -244,7 +165,7 @@ public class ChunkManager implements Parametres {
 			}
 			chunksToRender.removeAll(temp);
 		}
-		checkRender();
+		checkRender(chunksToRender);
 	}
 
 	private Vector<Chunk> getChunkToUpdate() {
@@ -294,8 +215,7 @@ public class ChunkManager implements Parametres {
 	public void checkRender() {
 		clearRender();
 		for (Chunk ck : chunks) {
-			if (!chunksurround(ck)
-					&& ck.checkPos(clone.getCamera().getCurrentChunk())) {
+			if (!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())) {
 				renderChunks.add(ck);
 				if(!chunksToLoad.contains(ck)){
 					chunksToLoad.add(ck);
@@ -305,19 +225,24 @@ public class ChunkManager implements Parametres {
 
 			}
 		}
-		//arbre.parcourPref(this);
 	}
+	
+	/**
+	 * 
+	 * @param liste les chunks ayant été modifiers
+	 */
+	private void checkRender(Vector<Chunk> liste){
+		renderChunks.removeAll(liste);
+		for(Chunk ck : liste){
+			if (!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())){
+				renderChunks.add(ck);
+				if(!chunksToLoad.contains(ck)){
+					chunksToLoad.add(ck);
+				}
+			}else{
+				chunksToLoad.remove(ck);
 
-	public void checkRenderTree(Chunk ck){
-		if (!chunksurround(ck)
-				&& ck.checkPos(clone.getCamera().getCurrentChunk())) {
-			renderChunks.add(ck);
-			if(!chunksToLoad.contains(ck)){
-				chunksToLoad.add(ck);
 			}
-		}else{
-			chunksToLoad.remove(ck);
-
 		}
 	}
 
@@ -354,21 +279,8 @@ public class ChunkManager implements Parametres {
 				temp = ck;
 			}
 		}
-		temp.addCubes();
-		temp.checkState();
-		return temp.getHigher();
-	}
 
-	public Chunk getHigherChunk() {
-		int higherY = 0;
-		Chunk temp = null;
-		for (Chunk ck : chunks) {
-			if (ck.getY() < higherY) {
-				higherY = ck.getY();
-				temp = ck;
-			}
-		}
-		return temp;
+		return temp.getHigher();
 	}
 
 	public Chunk getChunk(int x, int y, int z) {

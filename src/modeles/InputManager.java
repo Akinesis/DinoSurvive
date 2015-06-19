@@ -319,10 +319,10 @@ public class InputManager {
 			facteurZ=(tempZ>0)?4:-4;
 		}
 
-		/*if(compareChunk()){
+		if(compareChunk()){
 			clone.getChunkManager().createChunksInit(facteurX, facteurZ);
 			clone.getChunkManager().checkRender();
-		}*/
+		}
 
 	}
 

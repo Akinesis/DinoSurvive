@@ -26,13 +26,13 @@ public class TreeChunk {
 		return null;
 	}
 
-	public void parcourPref(ChunkManager cm){
+	public void parcourPref(OldChunkManager cm){
 		parcourPrefRec(cm, racine_);
 	}
 
-	private void parcourPrefRec(ChunkManager cm, Noeud noeud){
+	private void parcourPrefRec(OldChunkManager cm, Noeud noeud){
 		if(noeud != null) {
-			cm.checkRenderTree(noeud.getChunk());
+			//cm.checkRenderTree(noeud.getChunk());
 
 			if(noeud.getDroit()!=null){
 				parcourPrefRec(cm, noeud.getDroit());
