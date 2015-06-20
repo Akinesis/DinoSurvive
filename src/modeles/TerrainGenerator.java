@@ -27,27 +27,6 @@ public class TerrainGenerator {
 		}
 	}
 
-	private void genRandTop(int x, int y, int z){
-		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
-		int originX = x*16;
-		int originY = y*16;
-		int originZ = z*16;
-
-		for(int i = originX; i>originX-16; --i){
-			for(int j = originY; j>originY-16; --j){
-				for(int k = originZ; k>originZ-16; --k){
-					if(j<originY-13){
-						int l = 13 + (int)(Math.random() * ((15 - 13) + 1));
-						temp.addCube3dVbo(new Cube3dVbo(i, -originY+l, k, 1, 1));
-					}else{
-						temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 2));
-					}
-				}
-			}
-		}
-		clone.getChunkManager().addChunkToLoad(temp);
-	}
-
 	private void genRandTop2(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
 		int originX = x*16;
@@ -117,7 +96,7 @@ public class TerrainGenerator {
 		for(int i = originY; i>originY-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
 				System.out.println(i);
-				temp.addCube3dVbo(new Cube3dVbo(originX-2, -i, j, 1, 15));
+				temp.addCube3dVbo(new Cube3dVbo(originX-2, -i, j, 1, 34));
 			}
 		}
 	}

@@ -140,8 +140,6 @@ public class RayPicker {
 	
 		System.out.println("avant : "+rayMatrix);
 		System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
-		//System.out.println("=====");
-		//ray = rayMatrix;
 
 		ray.x *= 5;
 		ray.y *= 5;
@@ -150,10 +148,6 @@ public class RayPicker {
 		ray.x += origine.x;
 		ray.y += origine.y+2;
 		ray.z += origine.z;
-		
-		//ray.x += (xNeg)?rayX*10:0;
-		//ray.z -= (zPos)?rayZ*10:0;
-
 
 		//System.out.println(ray);
 		System.out.println(picker.getSpacePos());
