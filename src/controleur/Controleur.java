@@ -154,6 +154,7 @@ public class Controleur implements Parametres {
 									// les chunks
 			}
 
+			chunkManager.taille();
 			chunkManager.unbindAll();
 		}
 		texManager.deleteText();

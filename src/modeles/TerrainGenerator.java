@@ -14,9 +14,9 @@ public class TerrainGenerator {
 	}
 
 	public void buildStart(){
-		for(int x = -4; x<5; x++){
+		for(int x = -4; x<4; x++){
 			for(int y = 0; y>-5; y--){
-				for(int z = -4; z<5; z++){
+				for(int z = -4; z<4; z++){
 					if(y==-4 & z==1){
 						genRandTop2(x, y, z);
 					}else{

@@ -106,7 +106,7 @@ public class RayPicker {
 
 	private void drawPicker(){
 		rotateMatrix(clone.getCamera().getRot());
-		setRayCoord();
+		setRayCoordBis();
 		unbinde();
 		genCube();
 		genVBO();
@@ -169,6 +169,24 @@ public class RayPicker {
 		
 		picker.setPos(ray.x, (int)Math.floor(ray.y), ray.z);
 
+	}
+	
+	private void setRayCoordBis(){
+		float xStart = -(float)posCam.getX()+0.5f;
+		float yStart = -(float)posCam.getY()+0.5f;
+		float zStart = -(float)posCam.getZ()+0.5f;
+		
+		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
+		
+		ray.x *= 5;
+		ray.y *= 5;
+		ray.z *= 5;
+
+		ray.x += origine.x;
+		ray.y += origine.y+2;
+		ray.z += origine.z;
+		
+		picker.setPos(ray.x, (int)Math.floor(ray.y), ray.z);
 	}
 
 	private void unbinde(){

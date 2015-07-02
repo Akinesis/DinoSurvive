@@ -568,7 +568,7 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	private int hash(int x, int y, int z){
-		return (Math.abs(x)+Math.abs(y))%100;
+		return (Math.abs(x)%45+Math.abs(y)%10+Math.abs(z)%45)%100;
 	}
 
 	private void initHash(){
@@ -577,7 +577,7 @@ public class ChunkManagerHash implements Parametres {
 		}
 	}
 	
-	private void taille(){
+	public void taille(){
 		for(int i = 0; i<100; i++){
 			System.out.println(chunksHash[i].getListe().size());
 		}
