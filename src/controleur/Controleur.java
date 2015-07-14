@@ -129,20 +129,20 @@ public class Controleur implements Parametres {
 				matrices.reset3D();
 				glLoadIdentity();
 
-				// bouge la came�ra
+				// bouge la caméra
 				camera.useView();
 
 				// tout ce qui à rapport aux input
 				input.check();
 				
-				// dessine tout les chunks
+				// dessine tous les chunks
 				chunkManager.drawChunks(texManager);
 				
-				//déssine tout le drop
+				//dessine tout le drop
 				//à remplacer par l'ItemManager
 				dropManager.drawDrop(dropTextManager);
 				
-				//fait toute les orpération pour le cube de pixking.
+				//fait toutes les opérations pour le cube de picking.
 				rayPick.pick();
 
 				// texManager.undindTexture();

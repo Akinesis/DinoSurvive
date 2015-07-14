@@ -27,6 +27,11 @@ import org.lwjgl.opengl.GL11;
 
 import controleur.Controleur;
 
+/**
+ * Classe qui gère le menu avant le jeu 
+ * 
+ *
+ */
 public class Menu extends AbstractEntity3D{
 	//private static int verticiesNum = 36;
 	private int vertexSize = 2;

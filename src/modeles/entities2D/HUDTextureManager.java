@@ -15,7 +15,10 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
-
+/**
+ * Classe qui gère les associations de textures pour le HUD (menu de jeu, inventaires, portrait, barres d'états etc)
+ * 
+ */
 public class HUDTextureManager {
 	
 	private Texture texture;
@@ -61,16 +64,14 @@ public class HUDTextureManager {
 		switch (type) {
 		case 1:
 			return genHotBarText();
-			//return genHotBarText();
 		case 2:
 			return genBarreEtat();
 		case 3:
 			return genBarreSac();
 		case 4:
 			return genInventaire2D();
-		case 5:
-			return genHotBarText();
-			//return genMenuJeu();
+		case 5:		
+			return genMenuJeu();
 		case 6:
 			return genCurseur2D();
 		case 7: 
@@ -81,7 +82,59 @@ public class HUDTextureManager {
 	}
 
 	private float[] genMenuJeu() {
-		return new float[]{};
+		return new float[]{
+				//TODO: mettre les bonnes textures
+				//bouton Menu
+				//triangle sup
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				//triangle inf
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				(158+1)/512f, (358+1)/512f,
+				
+				//bouton Options
+				//triangle sup
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				//triangle inf
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				(158+1)/512f, (358+1)/512f,
+				
+				//bouton Réglages
+				//triangle sup
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				//triangle inf
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				(158+1)/512f, (358+1)/512f,
+				
+				//texture du bouton Quitter
+				//triangle sup
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				//triangle inf
+				(158+1)/512f, (329+1)/512f,
+				(36+1)/512f, (358+1)/512f,
+				(158+1)/512f, (358+1)/512f,
+	
+				//texture du fond
+				//triangle sup
+				(235+1)/512f, (126+1)/512f,
+				(36+1)/512f, (126+1)/512f,
+				(36+1)/512f, (325+1)/512f,
+				//triangle inf
+				(36+1)/512f, (325+1)/512f,
+				(235+1)/512f, (325+1)/512f,
+				(235+1)/512f, (126+1)/512f,
+
+		};
 	}
 	
 	private float[] genCurseur2D(){
@@ -133,7 +186,7 @@ public class HUDTextureManager {
 				(36+1)/512f, (73+1)/512f,
 				(36+1)/512f, (122+1)/512f,
 				
-				//triangle sup du grand rectangle
+				//triangle inférieur
 				(36+1)/512f, (122+1)/512f,
 				(85+1)/512f, (122+1)/512f,
 				(85+1)/512f, (73+1)/512f,
