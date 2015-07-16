@@ -16,14 +16,14 @@ public abstract class AbstractEntity2D{
 		return  (int)pos.y;
 	}
 	public void setX(float x) {
-		this.pos.x=x;
+		pos.x=x;
 	}
 	public void setY(float y) {
-		this.pos.y=y;
+		pos.y=y;
 	}
 	public void setPos(float x, float y) {
-		this.pos.x=x;
-		this.pos.y=y;
+		pos.x=x;
+		pos.y=y;
 	}
 	/*
 	 * Abstract methods
@@ -38,6 +38,6 @@ public abstract class AbstractEntity2D{
 		return visible;
 	}
 	public void changeVisible() {
-		this.visible = !(this.visible);
+		visible = !(visible);
 	}
 }

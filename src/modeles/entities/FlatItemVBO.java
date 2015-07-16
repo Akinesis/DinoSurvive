@@ -13,7 +13,7 @@ public class FlatItemVBO extends AbstractEntity3D {
 	public FlatItemVBO(float x, float y, float z, int identifiant){
 		size = 0.5f;
 		pos = new Vector3f(-x, y, -z);
-		pos2 = new Vector3f(pos.x+size, pos.y+size, pos.z);
+		pos2 = new Vector3f(pos.getX()+size, pos.getY()+size, pos.getZ());
 		id = identifiant;
 		coord = new Vector2f();
 		
@@ -46,13 +46,13 @@ public class FlatItemVBO extends AbstractEntity3D {
 	public float[] genCubes(){
 		return new float[]{
 				//north
-				pos2.x, pos2.y, pos.z,
-				pos.x, pos2.y, pos.z,
-				pos2.x, pos.y, pos.z,
+				pos2.getX(), pos2.y, pos.getZ(),
+				pos.getX(), pos2.getY(), pos.getZ(),
+				pos2.getX(), pos.getY(), pos.getZ(),
 				
-				pos2.x, pos.y, pos.z,
-				pos.x, pos2.y, pos.z,
-				pos.x, pos.y, pos.z,
+				pos2.getX(), pos.getY(), pos.getZ(),
+				pos.getX(), pos2.getY(), pos.getZ(),
+				pos.getX(), pos.getY(), pos.getZ(),
 
 		};
 	}

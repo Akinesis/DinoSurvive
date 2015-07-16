@@ -6,7 +6,7 @@ public interface Entity3D {
 	public int getZ();
 	public void setX(float x);
 	public void setY(float y);
-	public void setz(float z);
+	public void setZ(float z);
 	public void setPos(float x, float y, float z);
 	
 	public void draw();

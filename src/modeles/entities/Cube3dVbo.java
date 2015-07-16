@@ -29,52 +29,52 @@ public class Cube3dVbo extends Cube3D {
 	public float[] genCubes(){
 		return new float[]{
 				//south
-				pos.x, pos.y, pos.z,
-				pos.x, pos2.y, pos.z,
-				pos2.x, pos.y, pos.z,
-				pos2.x, pos.y, pos.z,
-				pos.x, pos2.y, pos.z,
-				pos2.x, pos2.y, pos.z,
+				pos.getX(), pos.getY(), pos.getZ(),
+				pos.getX(), pos2.getY(), pos.getZ(),
+				pos2.getX(), pos.getY(), pos.getZ(),
+				pos2.getX(), pos.getY(), pos.getZ(),
+				pos.getX(), pos2.getY(), pos.getZ(),
+				pos2.getX(), pos2.getY(), pos.getZ(),
 
 				//north
-				pos2.x, pos2.y, pos2.z,
-				pos.x, pos2.y, pos2.z,
-				pos.x, pos.y, pos2.z,
-				pos2.x, pos2.y, pos2.z,
-				pos.x, pos.y, pos2.z,
-				pos2.x, pos.y, pos2.z,
+				pos2.getX(), pos2.getY(), pos2.getZ(),
+				pos.getX(), pos2.getY(), pos2.getZ(),
+				pos.getX(), pos.getY(), pos2.getZ(),
+				pos2.getX(), pos2.getY(), pos2.getZ(),
+				pos.getX(), pos.getY(), pos2.getZ(),
+				pos2.getX(), pos.getY(), pos2.getZ(),
 
 				//top
-				pos.x, pos2.y, pos.z,
-				pos.x, pos2.y, pos2.z,
-				pos2.x, pos2.y, pos.z,
-				pos2.x, pos2.y, pos.z,
-				pos.x, pos2.y, pos2.z,
-				pos2.x, pos2.y, pos2.z,
+				pos.getX(), pos2.getY(), pos.getZ(),
+				pos.getX(), pos2.getY(), pos2.getZ(),
+				pos2.getX(), pos2.getY(), pos.getZ(),
+				pos2.getX(), pos2.getY(), pos.getZ(),
+				pos.getX(), pos2.getY(), pos2.getZ(),
+				pos2.getX(), pos2.getY(), pos2.getZ(),
 
 				//tbottom
-				pos.x, pos.y, pos.z,
-				pos2.x, pos.y, pos.z,
-				pos.x, pos.y, pos2.z,
-				pos.x, pos.y, pos2.z,
-				pos2.x, pos.y, pos.z,
-				pos2.x, pos.y, pos2.z,	
+				pos.getX(), pos.getY(), pos.getZ(),
+				pos2.getX(), pos.getY(), pos.getZ(),
+				pos.getX(), pos.getY(), pos2.getZ(),
+				pos.getX(), pos.getY(), pos2.getZ(),
+				pos2.getX(), pos.getY(), pos.getZ(),
+				pos2.getX(), pos.getY(), pos2.getZ(),	
 
 				//east
-				pos2.x, pos.y, pos.z,
-				pos2.x, pos2.y, pos.z,
-				pos2.x, pos.y, pos2.z,
-				pos2.x, pos.y, pos2.z,
-				pos2.x, pos2.y, pos.z,
-				pos2.x, pos2.y, pos2.z,
+				pos2.getX(), pos.getY(), pos.getZ(),
+				pos2.getX(), pos2.getY(), pos.getZ(),
+				pos2.getX(), pos.getY(), pos2.getZ(),
+				pos2.getX(), pos.getY(), pos2.getZ(),
+				pos2.getX(), pos2.getY(), pos.getZ(),
+				pos2.getX(), pos2.getY(), pos2.getZ(),
 
 				//west
-				pos.x, pos.y, pos.z,
-				pos.x, pos2.y, pos2.z,
-				pos.x, pos2.y, pos.z,
-				pos.x, pos.y, pos2.z,
-				pos.x, pos2.y, pos2.z,
-				pos.x, pos.y, pos.z
+				pos.getX(), pos.getY(), pos.getZ(),
+				pos.getX(), pos2.getY(), pos2.getZ(),
+				pos.getX(), pos2.getY(), pos.getZ(),
+				pos.getX(), pos.getY(), pos2.getZ(),
+				pos.getX(), pos2.getY(), pos2.getZ(),
+				pos.getX(), pos.getY(), pos.getZ()
 		};
 	}
 	
@@ -96,17 +96,17 @@ public class Cube3dVbo extends Cube3D {
 	
 	@Override
 	public int getX() {
-		return (int)pos.x;
+		return (int)pos.getX();
 	}
 
 	@Override
 	public int getY() {
-		return  (int)pos.y;
+		return  (int)pos.getY();
 	}
 
 	@Override
 	public int getZ() {
-		return (int)pos.z;
+		return (int)pos.getZ();
 	}
 	
 }

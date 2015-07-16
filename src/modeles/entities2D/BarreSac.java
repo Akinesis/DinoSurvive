@@ -22,7 +22,7 @@ public class BarreSac extends AbstractEntity2D {
 		float lar = Display.getWidth();
 		float hau = Display.getHeight();
 		return(new float[]{
-				//triangle qui dépasse
+				//triangle qui dépasse à gauche
 				0.65f*lar, 1f*hau,
 				0.65f*lar, 1f*hau-0.07f*lar,
 				0.58f*lar, 1f*hau,				

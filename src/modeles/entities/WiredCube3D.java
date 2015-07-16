@@ -20,50 +20,50 @@ public class WiredCube3D extends Cube3D {
 	public float[] genCubes(){
 
 		return new float[]{
-				pos.x, pos.y, pos.z,
-				pos.x, pos.y-size, pos.z,
+				pos.getX(), pos.getY(), pos.getZ(),
+				pos.getX(), pos.getY()-size, pos.getZ(),
 				
-				pos.x, pos.y, pos.z,
-				pos.x+size, pos.y, pos.z,
+				pos.getX(), pos.getY(), pos.getZ(),
+				pos.getX()+size, pos.getY(), pos.getZ(),
 				
-				pos.x, pos.y-size, pos.z,
-				pos.x+size, pos.y-size, pos.z,
+				pos.getX(), pos.getY()-size, pos.getZ(),
+				pos.getX()+size, pos.getY()-size, pos.getZ(),
 
-				pos.x+size, pos.y-size, pos.z,
-				pos.x+size, pos.y, pos.z,
+				pos.getX()+size, pos.getY()-size, pos.getZ(),
+				pos.getX()+size, pos.getY(), pos.getZ(),
 
 				//north face
-				pos.x, pos.y, pos.z+size,
-				pos.x, pos.y-size, pos.z+size,
+				pos.getX(), pos.getY(), pos.getZ()+size,
+				pos.getX(), pos.getY()-size, pos.getZ()+size,
 
-				pos.x, pos.y, pos.z+size,
-				pos.x+size, pos.y, pos.z+size,
+				pos.getX(), pos.getY(), pos.getZ()+size,
+				pos.getX()+size, pos.getY(), pos.getZ()+size,
 
-				pos.x, pos.y-size, pos.z+size,
-				pos.x+size, pos.y-size, pos.z+size,
+				pos.getX(), pos.getY()-size, pos.getZ()+size,
+				pos.getX()+size, pos.getY()-size, pos.getZ()+size,
 
-				pos.x+size, pos.y-size, pos.z+size,
-				pos.x+size, pos.y, pos.z+size,
+				pos.getX()+size, pos.getY()-size, pos.getZ()+size,
+				pos.getX()+size, pos.getY(), pos.getZ()+size,
 
 				//bottom face
-				pos.x, pos.y-size, pos.z,
-				pos.x, pos.y-size, pos.z+size,
+				pos.getX(), pos.getY()-size, pos.getZ(),
+				pos.getX(), pos.getY()-size, pos.getZ()+size,
 
-				pos.x+size, pos.y-size, pos.z,
-				pos.x+size, pos.y-size, pos.z+size,
+				pos.getX()+size, pos.getY()-size, pos.getZ(),
+				pos.getX()+size, pos.getY()-size, pos.getZ()+size,
 
 
 				//top face
-				pos.x, pos.y, pos.z,
-				pos.x, pos.y, pos.z+size,
+				pos.getX(), pos.getY(), pos.getZ(),
+				pos.getX(), pos.getY(), pos.getZ()+size,
 
-				pos.x+size, pos.y, pos.z,
-				pos.x+size, pos.y, pos.z+size,};
+				pos.getX()+size, pos.getY(), pos.getZ(),
+				pos.getX()+size, pos.getY(), pos.getZ()+size,};
 		
 	}
 
 	public Vector3f getSpacePos() {
-		Vector3f ret = new Vector3f(-pos.x, -pos.y+1, -pos.z);
+		Vector3f ret = new Vector3f(-pos.getX(), -pos.getY()+1, -pos.getZ());
 		return ret;
 	}
 

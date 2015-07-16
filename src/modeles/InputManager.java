@@ -76,10 +76,11 @@ public class InputManager {
 				clone.getHUDManager().getInventaire().changeVisible();
 				clone.getHUDManager().update(clone.getHUDTextManager());
 			}
-			if(keyINSERT){
+	/*		if(keyINSERT){
 				clone.getHUDManager().getModeDebug().changeVisible();
 				clone.getHUDManager().update(clone.getHUDTextManager());
 			}
+	*/		
 			if(keyChap){
 				clone.changeGragMouse();
 				clone.getHUDManager().getCurseur().changeVisible();
@@ -382,7 +383,7 @@ public class InputManager {
 	private boolean compareChunk(){
 
 		Vector3f temp = clone.getCamera().getCurrentChunk();
-		if(temp.x!=curentChunk.x || temp.y!=curentChunk.y || temp.z!=curentChunk.z){
+		if(temp.getX()!=curentChunk.getX() || temp.getY()!=curentChunk.getY() || temp.getZ()!=curentChunk.getZ()){
 			setCurrentChunk(temp);
 			return true;
 		}
@@ -390,9 +391,9 @@ public class InputManager {
 	}
 
 	public void setCurrentChunk(Vector3f chunk){
-		curentChunk.x=chunk.x;
-		curentChunk.y=chunk.y;
-		curentChunk.z=chunk.z;
+		curentChunk.setX(chunk.getX());
+		curentChunk.setY(chunk.getY());
+		curentChunk.setZ(chunk.getZ());
 	}
 
 	public void updateFPS() {

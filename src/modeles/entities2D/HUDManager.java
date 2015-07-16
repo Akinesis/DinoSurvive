@@ -43,7 +43,13 @@ public class HUDManager extends AbstractEntity2D{
 	
 	private int vboVertexHandleHUD;
 	private FloatBuffer interleavedBuffer;
+	/**
+	 * Vecteur contenant les entités à afficher sur le HUD à un moment donné
+	 */
 	private Vector<AbstractEntity2D> entitiesaAfficher;
+	/**
+	 * Vecteur contenant toutes les entités du HUD
+	 */
 	private Vector<AbstractEntity2D> entitiesTotales;
 	private int sizeBuffer;
 	
@@ -59,7 +65,7 @@ public class HUDManager extends AbstractEntity2D{
 		menuJeu = new MenuJeu();
 		portrait = new Portrait();
 
-		debug = new DebugText(contr);
+	//	debug = new DebugText(contr);
 		
 		entitiesaAfficher = new Vector<AbstractEntity2D>();
 		entitiesTotales = new Vector<AbstractEntity2D>();
@@ -79,9 +85,9 @@ public class HUDManager extends AbstractEntity2D{
 		entitiesaAfficher.add(curseur);
 		
 		
-		this.menu = new Menu(contr);
-		this.menu.generationMenuFond();
-		this.menu.generationMenuBoutons();
+		menu = new Menu(contr);
+		menu.generationMenuFond();
+		menu.generationMenuBoutons();
 	}
 	
 	/*
@@ -118,22 +124,22 @@ public class HUDManager extends AbstractEntity2D{
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);	
-		if(debug.isVisible()){
-			debug.draw();
-		}
+	//	if(debug.isVisible()){
+	//		debug.draw();
+	//	}
 	}
 	
 	public void genHUD(HUDTextureManager hudtexManager){
-		this.genHUDBuffer(hudtexManager);
-		this.genVBO();
+		genHUDBuffer(hudtexManager);
+		genVBO();
 	}
 	
 	public void drawMenu(){
-		this.menu.bindBufferMenu();;
-		this.menu.bindDrawMenu();
-		this.menu.enableMenu();
-		this.menu.draw();
-		this.menu.disableMenu();
+		menu.bindBufferMenu();;
+		menu.bindDrawMenu();
+		menu.enableMenu();
+		menu.draw();
+		menu.disableMenu();
 	}
 
 	
@@ -147,13 +153,13 @@ public class HUDManager extends AbstractEntity2D{
 		
 	}
 
-	public DebugText getModeDebug() {
-		return this.debug;
+/*	public DebugText getModeDebug() {
+		return debug;
 	}
-
+*/
 
 	public Menu getMenu() {
-		return this.menu;
+		return menu;
 	}
 
 	@Override

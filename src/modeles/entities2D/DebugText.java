@@ -13,6 +13,8 @@ import controleur.Controleur;
 /**
  * Classe pour gérer l'affichage de "debug" qu'on peut vouloir, pour le moment en 
  * mode utilisation de méthodes dépreciées
+ * ne fonctionne pas pour le moment (affiche juste des rectangles blancs)
+ * TODO: un affichage de débug qui marche
  * @author Freyja
  *
  */
@@ -34,20 +36,20 @@ public class DebugText extends AbstractEntity2D{
 	}
 	
 	public void changeDebug(){
-		this.modeDebug = !(this.modeDebug);
+		modeDebug = !(modeDebug);
 	}
 
 
 	public void draw() {
 		//affiche la position de la caméra et le chunk actuel (ou -1,-1,-1 si pas de chunk)
-		float[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
+		float[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().getX(), clone.getCamera().getPos().getY(), clone.getCamera().getPos().getZ());
 		
 		//récupère les info des cubes de tête, torse et pied.
-		Cube3dVbo cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y, clone.getCamera().getPos().z);
+		Cube3dVbo cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().getX(), clone.getCamera().getPos().getY(), clone.getCamera().getPos().getZ());
 		int[] type = {(cubeTemp!=null)?cubeTemp.getType():-1,-1,-1};
-		cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y+1, clone.getCamera().getPos().z);
+		cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().getX(), clone.getCamera().getPos().getY()+1, clone.getCamera().getPos().getZ());
 		type[1] = (cubeTemp!=null)?cubeTemp.getType():-1;
-		cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().x, clone.getCamera().getPos().y+2, clone.getCamera().getPos().z);
+		cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().getX(), clone.getCamera().getPos().getY()+2, clone.getCamera().getPos().getZ());
 		type[2] = (cubeTemp!=null)?cubeTemp.getType():-1;
 		
 		font.drawString(10, 10, clone.getCamera().getPos().toString() , Color.white);

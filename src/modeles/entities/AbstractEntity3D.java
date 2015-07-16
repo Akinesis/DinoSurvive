@@ -11,42 +11,42 @@ public abstract class AbstractEntity3D implements Entity3D {
 
 	
 	public int getX() {
-		return (int)pos.x;
+		return (int)pos.getX();
 	}
 
 	
 	public int getY() {
-		return  (int)pos.y;
+		return  (int)pos.getY();
 	}
 
 	
 	public int getZ() {
-		return (int)pos.z;
+		return (int)pos.getZ();
 	}
 
 	
 	public void setX(float x) {
-		this.pos.x=x;
+		pos.setX(x);
 
 	}
 
 	
 	public void setY(float y) {
-		this.pos.y=y;
+		pos.setY(y);
 
 	}
 
 	
-	public void setz(float z) {
-		this.pos.z=z;
+	public void setZ(float z) {
+		pos.setZ(z);
 
 	}
 
 	
 	public void setPos(float x, float y, float z) {
-		this.pos.x=x;
-		this.pos.y=y;
-		this.pos.z=z;
+		pos.setX(x);
+		pos.setY(y);
+		pos.setZ(z);
 
 	}
 

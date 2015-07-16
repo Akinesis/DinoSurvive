@@ -35,10 +35,10 @@ public class Camera {
 
 	//met à jour la position et la rotation
 	public void useView(){
-		glRotatef(rotation.x, 1, 0, 0);
-		glRotatef(rotation.y, 0, 1, 0);
-		glRotatef(rotation.z, 0, 0, 1);
-		glTranslatef(position.x, position.y, position.z);
+		glRotatef(rotation.getX(), 1, 0, 0);
+		glRotatef(rotation.getY(), 0, 1, 0);
+		glRotatef(rotation.getZ(), 0, 0, 1);
+		glTranslatef(position.getX(), position.getY(), position.getZ());
 	}
 
 	//getters et setters
@@ -59,15 +59,15 @@ public class Camera {
 	}
 	
 	public void setRotX(float x){
-		rotation.x = x;
+		rotation.setX(x);
 	}
 	
 	public void setRotY(float y){
-		rotation.x = y;
+		rotation.setY(y);
 	}
 	
 	public void setRotZ(float z){
-		rotation.x = z;
+		rotation.setZ(z);
 	}
 
 	public Vector3f getCurrentChunk(){
@@ -77,13 +77,13 @@ public class Camera {
 
 	public void setCurrentChunk(){
 
-		float xChunk = (float)Math.ceil(position.x / 16);
-		float yChunk = (float)Math.ceil(position.y / 16);
-		float zChunk = (float)Math.ceil(position.z / 16);
+		float xChunk = (float)Math.ceil(position.getX() / 16);
+		float yChunk = (float)Math.ceil(position.getY() / 16);
+		float zChunk = (float)Math.ceil(position.getZ() / 16);
 
-		curentChunk.x=xChunk;
-		curentChunk.y=yChunk;
-		curentChunk.z=zChunk;
+		curentChunk.setX(xChunk);
+		curentChunk.setY(yChunk);
+		curentChunk.setZ(zChunk);
 	}
 
 }

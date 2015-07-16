@@ -22,7 +22,7 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 	
 	public Cube3D(float x, float y, float z, float size){
 		pos = new Vector3f(-x, y, -z); //y positifs.
-		pos2 = new Vector3f(pos.x+size, pos.y+size, pos.z+size);
+		pos2 = new Vector3f(pos.getX()+size, pos.getY()+size, pos.getZ()+size);
 		this.size=size;
 		
 		//cubeDisplayList = clone.getDisplayList();
@@ -49,7 +49,7 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 	public boolean equals(Object o){
 		if(o instanceof Cube3D){
 			Cube3D temp = (Cube3D)o;
-			return (temp.pos.x==pos.x && temp.pos.y == pos.y && temp.pos.z == pos.z);
+			return (temp.pos.getX()==pos.getX() && temp.pos.getY() == pos.getY() && temp.pos.getZ() == pos.getZ());
 		}
 		return false;
 	}
@@ -59,63 +59,63 @@ public class Cube3D extends AbstractEntity3D implements Parametres{
 		
 		{//south face
 			glColor3f(0.9f, 0.5f, 0.9f);
-			glVertex3f(pos.x, pos.y, pos.z);
-			glVertex3f(pos.x, pos2.y, pos.z);
-			glVertex3f(pos2.x, pos.y, pos.z);
+			glVertex3f(pos.getX(), pos.getY(), pos.getZ());
+			glVertex3f(pos.getX(), pos2.getY(), pos.getZ());
+			glVertex3f(pos2.getX(), pos.getY(), pos.getZ());
 
-			glVertex3f(pos2.x, pos.y, pos.z);
-			glVertex3f(pos.x, pos2.y, pos.z);
-			glVertex3f(pos2.x, pos2.y, pos.z);
+			glVertex3f(pos2.getX(), pos.getY(), pos.getZ());
+			glVertex3f(pos.getX(), pos2.getY(), pos.getZ());
+			glVertex3f(pos2.getX(), pos2.getY(), pos.getZ());
 		}
 		
 		{//north face
-			glVertex3f(pos.x, pos.y, pos2.z);
-			glVertex3f(pos2.x, pos.y, pos2.z);
-			glVertex3f(pos.x, pos2.y, pos2.z);
+			glVertex3f(pos.getX(), pos.getY(), pos2.getZ());
+			glVertex3f(pos2.getX(), pos.getY(), pos2.getZ());
+			glVertex3f(pos.getX(), pos2.getY(), pos2.getZ());
 			
-			glVertex3f(pos.x, pos2.y, pos2.z);
-			glVertex3f(pos2.x, pos.y, pos2.z);
-			glVertex3f(pos2.x, pos2.y, pos2.z);
+			glVertex3f(pos.getX(), pos2.getY(), pos2.getZ());
+			glVertex3f(pos2.getX(), pos.getY(), pos2.getZ());
+			glVertex3f(pos2.getX(), pos2.getY(), pos2.getZ());
 		}
 		
 		{//bottom face
-			glVertex3f(pos.x, pos2.y, pos.z);
-			glVertex3f(pos.x, pos2.y, pos2.z);
-			glVertex3f(pos2.x, pos2.y, pos.z);
+			glVertex3f(pos.getX(), pos2.getY(), pos.getZ());
+			glVertex3f(pos.getX(), pos2.getY(), pos2.getZ());
+			glVertex3f(pos2.getX(), pos2.getY(), pos.getZ());
 
-			glVertex3f(pos2.x, pos2.y, pos.z);
-			glVertex3f(pos.x, pos2.y, pos2.z);
-			glVertex3f(pos2.x, pos2.y, pos2.z);
+			glVertex3f(pos2.getX(), pos2.getY(), pos.getZ());
+			glVertex3f(pos.getX(), pos2.getY(), pos2.getZ());
+			glVertex3f(pos2.getX(), pos2.getY(), pos2.getZ());
 		}
 		
 		{//top face;
-			glVertex3f(pos.x, pos.y, pos.z);
-			glVertex3f(pos2.x, pos.y, pos.z);
-			glVertex3f(pos.x, pos.y, pos2.z);
+			glVertex3f(pos.getX(), pos.getY(), pos.getZ());
+			glVertex3f(pos2.getX(), pos.getY(), pos.getZ());
+			glVertex3f(pos.getX(), pos.getY(), pos2.getZ());
 			
-			glVertex3f(pos.x, pos.y, pos2.z);
-			glVertex3f(pos2.x, pos.y, pos.z);
-			glVertex3f(pos2.x, pos.y, pos2.z);		
+			glVertex3f(pos.getX(), pos.getY(), pos2.getZ());
+			glVertex3f(pos2.getX(), pos.getY(), pos.getZ());
+			glVertex3f(pos2.getX(), pos.getY(), pos2.getZ());		
 		}
 		
 		{//east face
-			glVertex3f(pos2.x, pos.y, pos.z);
-			glVertex3f(pos2.x, pos2.y, pos.z);
-			glVertex3f(pos2.x, pos.y, pos2.z);
+			glVertex3f(pos2.getX(), pos.getY(), pos.getZ());
+			glVertex3f(pos2.getX(), pos2.getY(), pos.getZ());
+			glVertex3f(pos2.getX(), pos.getY(), pos2.getZ());
 
-			glVertex3f(pos2.x, pos.y, pos2.z);
-			glVertex3f(pos2.x, pos2.y, pos.z);
-			glVertex3f(pos2.x, pos2.y, pos2.z);
+			glVertex3f(pos2.getX(), pos.getY(), pos2.getZ());
+			glVertex3f(pos2.getX(), pos2.getY(), pos.getZ());
+			glVertex3f(pos2.getX(), pos2.getY(), pos2.getZ());
 		}
 		
 		{//west face
-			glVertex3f(pos.x, pos.y, pos.z);
-			glVertex3f(pos.x, pos.y, pos2.z);
-			glVertex3f(pos.x, pos2.y, pos.z);
+			glVertex3f(pos.getX(), pos.getY(), pos.z);
+			glVertex3f(pos.getX(), pos.getY(), pos2.z);
+			glVertex3f(pos.getX(), pos2.getY(), pos.z);
 
-			glVertex3f(pos.x, pos2.y, pos.z);
-			glVertex3f(pos.x, pos.y, pos2.z);
-			glVertex3f(pos.x, pos2.y, pos2.z);
+			glVertex3f(pos.getX(), pos2.getY(), pos.z);
+			glVertex3f(pos.getX(), pos.getY(), pos2.z);
+			glVertex3f(pos.getX(), pos2.getY(), pos2.z);
 		}
 		
 		glEnd();

@@ -159,9 +159,9 @@ public class Chunk implements Parametres{
 		int tempY = convertCoordGet(y);
 		int tempZ = convertCoordGet(z);
 
-		int xCube = this.x*16-tempX;
-		int yCube = this.y*16-tempY;
-		int zCube = this.z*16-tempZ;
+		int xCube = this.getX()*16-tempX;
+		int yCube = this.getY()*16-tempY;
+		int zCube = this.getZ()*16-tempZ;
 		
 		if(cubes[tempX][tempY][tempZ]!=null){
 			if(cubes[tempX][tempY][tempZ].getType()==12){
@@ -261,7 +261,7 @@ public class Chunk implements Parametres{
 	 * @return
 	 */
 	public boolean checkPos(Vector3f current){
-		if(Math.abs(current.x-x)>=chunkFar || Math.abs(current.y-y)>=chunkFar || Math.abs(current.z-z)>=chunkFar){
+		if(Math.abs(current.getX()-getX())>=chunkFar || Math.abs(current.getY()-getY())>=chunkFar || Math.abs(current.getZ()-getZ())>=chunkFar){
 			return false;
 		}
 		return true;
@@ -431,7 +431,7 @@ public class Chunk implements Parametres{
 		}
 
 		if(tempY==-1){
-			tempY=-(this.y*16)-1;
+			tempY=-(getY()*16)-1;
 		}
 
 		return -(tempY+1);
