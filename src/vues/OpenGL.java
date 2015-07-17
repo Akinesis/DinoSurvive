@@ -84,8 +84,7 @@ public class OpenGL implements Parametres {
 		larg = la;
 	}
 	
-	public Vector3f getPickingRay(float cursorX,float cursorY)
-    {    
+	public Vector3f getPickingRay(float cursorX,float cursorY){    
         IntBuffer viewport = ByteBuffer.allocateDirect((Integer.SIZE/8)*16).order(ByteOrder.nativeOrder()).asIntBuffer();
         FloatBuffer modelview = ByteBuffer.allocateDirect((Float.SIZE/8)*16).order(ByteOrder.nativeOrder()).asFloatBuffer();
         FloatBuffer projection = ByteBuffer.allocateDirect((Float.SIZE/8)*16).order(ByteOrder.nativeOrder()).asFloatBuffer();
@@ -118,6 +117,61 @@ public class OpenGL implements Parametres {
         Vector3f temp = new Vector3f();
         Vector3f.sub(farVector, nearVector, temp).normalise();
         return temp;
+    }
+	
+	public Vector3f getPickingRayBis(float cursorX,float cursorY){
+		
+		float[] matModelView = new float[16], matProjView = new float[16];
+        int[] view = new int[16];
+        float mouseX = cursorX;
+        float mouseY = cursorY;
+        Vector3f start = new Vector3f();
+        Vector3f end = new Vector3f();
+
+        FloatBuffer modelBuffer = compileBuffer(matModelView);
+        FloatBuffer projBuffer = compileBuffer(matProjView);
+        FloatBuffer startBuffer = compileBuffer(new float[]{start.x, start.y, start.z, 1});
+        FloatBuffer endBuffer = compileBuffer(new float[]{end.x, end.y, end.z, 1});
+        IntBuffer viewBuffer = compileBuffer(view);
+
+        glGetFloat(GL_MODELVIEW_MATRIX, modelBuffer);
+        glGetFloat(GL_PROJECTION_MATRIX, projBuffer);
+        glGetInteger(GL_VIEWPORT, viewBuffer);
+
+        gluUnProject(mouseX, mouseY, 0.0f, modelBuffer, projBuffer, viewBuffer, startBuffer);
+        gluUnProject(mouseX, mouseY, 1.0f, modelBuffer, projBuffer, viewBuffer, endBuffer);
+
+        start = new Vector3f(startBuffer.get(0), startBuffer.get(1), startBuffer.get(2));
+        end = new Vector3f(endBuffer.get(0), endBuffer.get(1), endBuffer.get(2));
+        
+        Vector3f ret = new Vector3f();
+        ret.x = end.x - start.x;
+        ret.y = end.y - start.y;
+        ret.z = end.z - start.z;
+        
+        ret = ret.normalise(ret);
+        
+        System.out.println("******************************");
+        System.out.println(start);
+        System.out.println(end);
+        System.out.println(ret);
+        System.out.println("******************************");
+        
+        return ret;
+	}
+	
+	private FloatBuffer compileBuffer(float[] floats) {
+        FloatBuffer buffer = BufferUtils.createFloatBuffer(floats.length);
+        buffer.put(floats);
+        buffer.flip();
+        return buffer;
+    }
+
+private IntBuffer compileBuffer(int[] ints) {
+        IntBuffer buffer = BufferUtils.createIntBuffer(ints.length);
+        buffer.put(ints);
+        buffer.flip();
+        return buffer;
     }
 
 }

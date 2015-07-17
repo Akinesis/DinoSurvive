@@ -19,8 +19,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.sun.management.VMOption.Origin;
-
 import javax.vecmath.Matrix3f;
 
 import controleur.Controleur;
@@ -71,7 +69,7 @@ public class RayPicker {
 	}
 
 	private Vector3f getRay(){
-		return clone.getMatrices().getPickingRay(clone.getDisplay().getHeight()/2, clone.getDisplay().getWidth()/2);
+		return clone.getMatrices().getPickingRayBis(clone.getDisplay().getHeight()/2, clone.getDisplay().getWidth()/2);
 	}
 
 	private void genVBO(){
@@ -106,7 +104,7 @@ public class RayPicker {
 
 	private void drawPicker(){
 		rotateMatrix(clone.getCamera().getRot());
-		setRayCoordBis();
+		setRayCoord();
 		unbinde();
 		genCube();
 		genVBO();
@@ -115,17 +113,24 @@ public class RayPicker {
 	
 	//c'est cette fonction qui fait chier.
 	private void setRayCoord(){
-
-		float xStart = -(float)posCam.getX();
-		float yStart = -(float)posCam.getY();
-		float zStart = -(float)posCam.getZ();
 		
-
 		boolean xNeg = ray.x<0;
 		boolean zNeg = ray.z<0;
-		
-		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
 
+		int xStart = (xNeg)?(int)Math.ceil(posCam.getX()):(int)Math.floor(posCam.getX());
+		int yStart = (int)Math.floor(posCam.getY());
+		int zStart = (zNeg)?(int)Math.ceil(posCam.getZ()):(int)Math.floor(posCam.getZ());
+		
+		xStart *= -1;
+		yStart *= -1;
+		zStart *= -1;
+		
+
+		Vector3f origine = new Vector3f((float)xStart-(float)0.5, yStart+(float)0.5, (float)zStart-(float)0.5);
+		System.out.println("Caméra : "+ posCam.getX() +", "+ posCam.getY() +", "+ posCam.getZ());
+		System.out.println("Start : "+ origine.x +", "+ origine.y +", "+ origine.z);
+		
+		/*
 		if(xNeg){
 			origine.x = origine.x - 1;
 		}else{
@@ -166,9 +171,26 @@ public class RayPicker {
 			ray.x = (float)Math.floor(ray.x);
 			ray.z = (float)Math.ceil(ray.z);
 		}
+		*/
 		
-		picker.setPos(ray.x, (int)Math.floor(ray.y), ray.z);
+		ray.x *= 5;
+		ray.y *= 5;
+		ray.z *= 5;
 
+		ray.x += origine.x;
+		ray.y += origine.y;
+		ray.z += origine.z;
+		
+		/*ray.x += 8;
+		ray.y += 82;
+		ray.z += 8;*/
+		
+		System.out.println(ray);
+		System.out.println(picker.getSpacePos());
+		
+		picker.setPos((int)Math.ceil(ray.x), /*(int)Math.floor(ray.y)*/ 82, (int)Math.ceil(ray.z));
+
+		System.out.println("---------------------------------");
 	}
 	
 	private void setRayCoordBis(){
@@ -178,15 +200,30 @@ public class RayPicker {
 		
 		Vector3f origine = new Vector3f((float)Math.floor(xStart), yStart, (float)Math.floor(zStart));
 		
-		ray.x *= 5;
-		ray.y *= 5;
-		ray.z *= 5;
-
-		ray.x += origine.x;
-		ray.y += origine.y+2;
-		ray.z += origine.z;
+		boolean xNeg = ray.x<0;
+		boolean zNeg = ray.z<0;
 		
-		picker.setPos(ray.x, (int)Math.floor(ray.y), ray.z);
+		ray.y *= 5;
+		ray.y += origine.y+2;
+		
+		float x = ray.x;
+		float z = ray.z;
+
+		if(xNeg && zNeg){ //  -  -
+			x = /*distance du centre de la caméra jusqu'au pointeur :*/5 * /*le moins c'est par rapport au fait que l'angle est négatif je crois. On cherche le sinus de l'angle :*/-(float)Math.sin(/*angle de la souris par rapport à l'axe fixe : tan(teta) = ray.x/ray.z donc teta =*/Math.atan(ray.x/ray.z)) + /*pour que tout soit calculer selon la position de la caméra :*/origine.x;
+			z = 6 * -(float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
+		}else if(xNeg && !zNeg){//  -  +
+			x = 6 * (float)Math.sin(Math.atan(ray.x/ray.z)) + origine.x;
+			z = 6 * (float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
+		}else if(!xNeg && zNeg){ // +  -
+			x = 6 * -(float)Math.sin(Math.atan(ray.x/ray.z)) + origine.x;
+			z = 6 * -(float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
+		}else{// +  + 
+			x = 6 * (float)Math.sin(Math.atan(ray.x/ray.z)) + origine.x;
+			z = 6 * (float)Math.cos(Math.atan(ray.x/ray.z)) + origine.z;
+		}
+		
+		picker.setPos(x, (int)Math.floor(ray.y), z);
 	}
 
 	private void unbinde(){
