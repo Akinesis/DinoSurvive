@@ -4,27 +4,22 @@ import game.inventaire.Inventaire;
 
 
 //peut-�tre une Class Entiter dont EtreVivant et Item heriterai point a debattre
-public abstract class EtreVivant {
-	private String nom; //certainement inutile;
+public abstract class EtreVivant extends Entiter {
 	private Inventaire inventaire;
-	private Caracteristique caracteristique; //contient les pv, pvMax, pm, pmMax, pvg, pvgMax
-
+	private Equipement equipement;
+	
 	public EtreVivant(String nom, Inventaire inventaire, Caracteristique caracteristique) {
-		this.caracteristique = caracteristique;
-		this.nom = nom;
+		super(caracteristique, nom);
 		this.inventaire = inventaire;
-	}
-
-	public String getNom() {
-		return this.nom;
+		this.equipement = null;
 	}
 
 	public Inventaire getInventaire() {
 		return this.inventaire;
 	}
 
-	public Caracteristique getStatsistique() {
-		return this.caracteristique;
+	public void attaquer(Entiter cible){
+		
 	}
-
+	
 }

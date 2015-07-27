@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import game.item.Armes;
 import game.item.Armures;
 import game.item.Consommables;
-import game.item.Cubes;
+import game.item.CubesInventaire;
 import game.item.Item;
 import game.item.Outils;
 

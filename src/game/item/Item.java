@@ -10,18 +10,18 @@ package game.item;
 
 public abstract class Item {
 	protected int identifiant; 
-	protected String Nom;
+	protected String nom;
 		
 	public Item(int identifiant, String nom) {
-		this.identifiant = identifiant;//facilite la methode add d'InventaireComplet
-		this.Nom = nom;
+		this.identifiant = identifiant;
+		this.nom = nom;
 	}
 	
 	public int getIdentifiant() {
 		return this.identifiant;
 	}
 	public String getNom() {
-		return this.Nom;
+		return this.nom;
 	}
 
 }

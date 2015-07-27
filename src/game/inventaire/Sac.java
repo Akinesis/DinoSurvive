@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 /*
- * utilité de la classe sac reside dans la limitation de la taille i.e lors de l'utilisation de la 
+ * utilitï¿½ de la classe sac reside dans la limitation de la taille i.e lors de l'utilisation de la 
  * methode add on doit checked si le sac n'est pas remplit.
  */
 public class Sac<T> {
