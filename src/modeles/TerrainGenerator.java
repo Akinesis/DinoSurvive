@@ -4,10 +4,6 @@ import java.util.Random;
 
 import modeles.entities.Cube3dVbo;
 import controleur.Controleur;
-import libnoiseforjava.exception.ExceptionInvalidParam;
-import libnoiseforjava.module.Perlin;
-import libnoiseforjava.util.NoiseMap;
-import libnoiseforjava.util.NoiseMapBuilderPlane;
 
 
 public class TerrainGenerator {
