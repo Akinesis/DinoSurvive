@@ -484,7 +484,7 @@ public class ChunkManagerHash implements Parametres {
 		int i=0;
 		for(Chunk ck : chunksToCreate){
 			if(i<2){
-				clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
+				clone.getTerrainGenerator().genTopNoise(ck.getX(), ck.getY(), ck.getZ());
 				temp.add(ck);
 				i++;
 			}

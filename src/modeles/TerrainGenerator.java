@@ -14,7 +14,7 @@ public class TerrainGenerator {
 	public TerrainGenerator(Controleur contr){
 		clone = contr;
 		//noiseGenerator = new NoiseGenerator(1337);
-		simplexNoise = new SimplexNoise(100, 0.3, 1337);
+		simplexNoise = new SimplexNoise(100, 0.3, 137);
 	}
 
 	public void buildStartRand(){
@@ -32,7 +32,7 @@ public class TerrainGenerator {
 		}
 	}
 	
-	private void genTopNoise(int x, int y, int z) {
+	public void genTopNoise(int x, int y, int z) {
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
 		int originX = x*16;
 		int originY = y*16;
