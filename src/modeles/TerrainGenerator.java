@@ -14,7 +14,9 @@ public class TerrainGenerator {
 	public TerrainGenerator(Controleur contr){
 		clone = contr;
 		//noiseGenerator = new NoiseGenerator(1337);
-		simplexNoise = new SimplexNoise(100, 0.3, 137);
+		Random rand = new Random();
+		int randomNum = rand.nextInt((99999 - 0) + 1) + 0;
+		simplexNoise = new SimplexNoise(170, 0.5, randomNum);
 	}
 
 	public void buildStartRand(){
@@ -129,7 +131,7 @@ public class TerrainGenerator {
 	}
 
 	/**
-	 * Fonction permettant la generation d'un sol d'herbe, tout beau tout propre.
+	 * Fonction permettant la generation d'un mur d'un même type
 	 */
 	public void genWall(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
@@ -147,7 +149,7 @@ public class TerrainGenerator {
 	}
 
 	/**
-	 * Fonction permettant la generation d'un plafond d'herbe, tout beau tout propre.
+	 * Fonction permettant la generation 
 	 */
 	public void genCeil(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
@@ -171,15 +173,15 @@ public class TerrainGenerator {
 	//(pas besoin du paramètre 1 car pour un arbre les cubes font forcément 1)
 	//(potentiellement pour "jolifier" l'arbre, mettre un facteur de 0,5 pour les feuilles du dessus
 	//(aka : demi cube de feuilles)
-	public void genTree(int chX, int chY, int chZ){
+	public void genTree(int x, int z){
 		//arbre d'une taille comprise entre 3 et 6 cubes de tronc
 		//wouhou aléatoire !
 
-		Chunk temp = clone.getChunkManager().getChunk(chX,chY,chZ);
-
-		float x = chX*16+12;
-		float y = chY*16;
-		float z = chZ*16+12;
+		int y = (int) clone.getChunkManager().getHigherPointAt(x, z);
+		int xChunk = (int) Math.ceil(x / 16);
+		int yChunk = (int) Math.ceil(y / 16);
+		int zChunk = (int) Math.ceil(z / 16);
+		Chunk temp = clone.getChunkManager().getChunk(xChunk, yChunk, zChunk);
 
 		int taille = (int)((6-3)*Math.random()) +3;
 		int size = 1;

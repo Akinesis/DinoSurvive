@@ -42,7 +42,7 @@ public class DebugText extends AbstractEntity2D{
 
 	public void draw() {
 		//affiche la position de la caméra et le chunk actuel (ou -1,-1,-1 si pas de chunk)
-		float[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().getX(), clone.getCamera().getPos().getY(), clone.getCamera().getPos().getZ());
+		int[] temp = clone.getChunkManager().getChunkAt(clone.getCamera().getPos().getX(), clone.getCamera().getPos().getY(), clone.getCamera().getPos().getZ());
 		
 		//récupère les info des cubes de tête, torse et pied.
 		Cube3dVbo cubeTemp = clone.getChunkManager().getCubeAt(clone.getCamera().getPos().getX(), clone.getCamera().getPos().getY(), clone.getCamera().getPos().getZ());

@@ -322,14 +322,14 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	/**
-	 * Renvoi les coordonées du chunk à la position de la caméra
+	 * Renvoi les coordonées du chunk à la position des coordonées en entrés.
 	 * @param x Les X de la caméra
 	 * @param y
 	 * @param z
 	 * @return Les coordonée du chunk
 	 */
-	public float[] getChunkAt(float x, float y, float z) {
-		float[] temp = { -1, -1, -1 };
+	public int[] getChunkAt(float x, float y, float z) {
+		int[] temp = { -1, -1, -1 };
 		int xChunk = (int) Math.ceil(x / 16);
 		int yChunk = (int) Math.ceil(y / 16);
 		int zChunk = (int) Math.ceil(z / 16);
@@ -484,7 +484,7 @@ public class ChunkManagerHash implements Parametres {
 		int i=0;
 		for(Chunk ck : chunksToCreate){
 			if(i<2){
-				clone.getTerrainGenerator().genTopNoise(ck.getX(), ck.getY(), ck.getZ());
+				clone.getTerrainGenerator().genTopNoise(ck.getX(), ck.getY()-1, ck.getZ());
 				temp.add(ck);
 				i++;
 			}
