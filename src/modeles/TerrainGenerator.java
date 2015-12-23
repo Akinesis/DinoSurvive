@@ -4,15 +4,61 @@ import java.util.Random;
 
 import modeles.entities.Cube3dVbo;
 import controleur.Controleur;
+import libnoiseforjava.exception.ExceptionInvalidParam;
+import libnoiseforjava.module.Perlin;
+import libnoiseforjava.util.NoiseMap;
+import libnoiseforjava.util.NoiseMapBuilderPlane;
+
 
 public class TerrainGenerator {
 
 	private Controleur clone;
+	private SimplexNoise simplexNoise;
 
 	public TerrainGenerator(Controleur contr){
 		clone = contr;
+		//noiseGenerator = new NoiseGenerator(1337);
+		simplexNoise = new SimplexNoise(100, 0.3, 1337);
 	}
 
+	public void buildStartRand(){
+		for(int x = -4; x<4; x++){
+			for(int y = 0; y>-5; y--){
+				for(int z = -4; z<4; z++){
+					if(y==-4){
+						genTopNoise(x, y, z);
+						//genHeightMap(x, y, z);
+					}else{
+						genereTerre(x,y,z);
+					}
+				}
+			}
+		}
+	}
+	
+	private void genTopNoise(int x, int y, int z) {
+		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
+		int originX = x*16;
+		int originY = y*16;
+		int originZ = z*16;
+		double randHeigth;
+
+		for(int i = originX; i>originX-16; --i){
+			for(int k = originZ; k>originZ-16; --k){
+				randHeigth = simplexNoise.getNoise(i, k);
+				randHeigth = (randHeigth<0)?randHeigth*8:randHeigth*7;
+				randHeigth += 8;
+				for(int j = originY; j>originY-randHeigth; --j){
+					temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 1));
+				}
+			}
+		}
+		clone.getChunkManager().addChunkToLoad(temp);
+	}
+
+	/**
+	 * Fonction de création du'un terrain de départ.
+	 */
 	public void buildStart(){
 		for(int x = -4; x<4; x++){
 			for(int y = 0; y>-5; y--){
@@ -27,6 +73,9 @@ public class TerrainGenerator {
 		}
 	}
 
+	/**
+	 * génération d'une "tranché" dans le sol.
+	 */
 	private void genRandTop2(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
 		int originX = x*16;
@@ -66,7 +115,7 @@ public class TerrainGenerator {
 	}
 
 	/**
-	 * Fonction permettant la generation d'un sol d'herbe, tout beau tout propre.
+	 * Fonction permettant la generation d'un sol aléatoire de minerais.
 	 */
 	public void genFond(int x, int y, int z){
 		Chunk temp = clone.getChunkManager().getChunk(x,y,z);
@@ -96,7 +145,7 @@ public class TerrainGenerator {
 		for(int i = originY; i>originY-16; --i){
 			for(int j = originZ; j>originZ-16; --j){
 				System.out.println(i);
-				temp.addCube3dVbo(new Cube3dVbo(originX-2, -i, j, 1, 34));
+				temp.addCube3dVbo(new Cube3dVbo(originX-2, -i, j, 1, 19));
 			}
 		}
 	}

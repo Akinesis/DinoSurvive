@@ -77,6 +77,7 @@ public class Controleur implements Parametres {
 
 		this.changeGragMouse();
 		
+		//le menu
 		while (this.hud.getMenu().getEstAfficher() && !Keyboard.isKeyDown(Keyboard.KEY_F10) && !this.display.isClose() && !this.hud.getMenu().getDisplayIsClose()) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
@@ -96,6 +97,7 @@ public class Controleur implements Parametres {
 			this.display.update();
 		}
 
+		//le jeu
 		if (!this.display.isClose() && !this.hud.getMenu().getDisplayIsClose()) {
 			this.changeGragMouse();
 
@@ -103,7 +105,7 @@ public class Controleur implements Parametres {
 			hud.draw(hudtexManager);
 
 			matrices.init3D();
-			terrGen.buildStart();
+			terrGen.buildStartRand();
 			terrGen.genFond(1, -5, 0);
 			terrGen.genWall(-1, -5, 1);
 			
@@ -119,6 +121,7 @@ public class Controleur implements Parametres {
 			// buffer, la position de la caméra doit êre connue.
 			chunkManager.initChunks();
 
+			//la boucle de jeu
 			while (!Keyboard.isKeyDown(Keyboard.KEY_F10) && !this.display.isClose() && !this.hud.getMenu().getDisplayIsClose()) {
 				matrices.setSize(display.getHeight(), display.getWidth());
 				// texManager.bindText();

@@ -86,16 +86,16 @@ public class ChunkManagerHash implements Parametres {
 	 * @param pos.z Les z du cube
 	 */
 	public void addCubeAt(Vector3f pos) {
-		int xChunk = (int) Math.ceil(pos.getX() / 16);
-		int yChunk = (int) Math.ceil(pos.getY() / 16);
-		int zChunk = (int) Math.ceil(pos.getZ() / 16);
+		int xChunk = (int) Math.ceil(pos.x / 16);
+		int yChunk = (int) Math.ceil(pos.y / 16);
+		int zChunk = (int) Math.ceil(pos.z / 16);
 
-		Chunk temp = chunksHash[hash((int)xChunk, (int)yChunk, (int)zChunk)].containts((int)xChunk, (int)yChunk, (int)zChunk);
+		Chunk temp = chunksHash[hash(xChunk, yChunk, zChunk)].containts(xChunk, yChunk, zChunk);
 		if(temp != null){
 			temp.createCubeAt(pos.getX(), pos.getY(), pos.getZ());
 		}else{
 			temp = new Chunk(xChunk, yChunk, zChunk, makeID(xChunk, yChunk, zChunk), clone);
-			chunksHash[hash((int)xChunk, (int)yChunk, (int)zChunk)].addChunkMaill(temp);
+			chunksHash[hash(xChunk, yChunk, zChunk)].addChunkMaill(temp);
 			renderChunks.add(temp);
 			temp.createCubeAt(pos.getX(), pos.getY(), pos.getZ());
 		}
