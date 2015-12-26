@@ -156,6 +156,9 @@ public class TextureManager {
 		case 34:
 			texGenerator = new EmeraldTexture();
 			return texGenerator.genTexture(x, y);
+		case 35:
+			texGenerator = new LightPlankTexture();
+			return texGenerator.genTexture(x, y);
 		default:
 			texGenerator = new DirtTexture();
 			return texGenerator.genTexture(x, y);
