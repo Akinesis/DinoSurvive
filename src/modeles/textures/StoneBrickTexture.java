@@ -8,7 +8,7 @@ public class StoneBrickTexture implements TexturesGenerator {
 		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
 
 		return new float[]{
-				//south
+				//north
 				0.28125f+indiceTextX, 0.21875f+indiceTextY,
 				0.28125f+indiceTextX, 0.1875f+indiceTextY,
 				0.25f+indiceTextX, 0.21875f+indiceTextY,

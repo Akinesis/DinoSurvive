@@ -5,7 +5,7 @@ public class SteelChestTexture implements TexturesGenerator {
 	@Override
 	public float[] genTexture(float indiceTextX, float indiceTextY) {
 		return new float[]{
-				//south
+				//north
 				0.375f, 0.09375f,
 				0.375f, 0.0625f,
 				0.34375f, 0.09375f,

@@ -5,7 +5,7 @@ public class ElectricPanelTexture implements TexturesGenerator {
 	@Override
 	public float[] genTexture(float indiceTextX, float indiceTextY) {
 		return new float[]{
-				//south
+				//north
 				0.3125f, 0.15625f,
 				0.3125f, 0.125f,
 				0.28125f, 0.15625f,

@@ -72,7 +72,7 @@ public class Convertion {
 
 		y=4;
 
-		System.out.println("//south");
+		System.out.println("//north");
 		for(int i = 0; i<init.length; i+=2){
 			if(indice){
 				System.out.println((init[i]+(taille*x))+"f+indiceTextX, "+(init[i+1]+(taille*y))+"f+indiceTextY,");

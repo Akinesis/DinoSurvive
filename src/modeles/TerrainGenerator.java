@@ -16,7 +16,7 @@ public class TerrainGenerator {
 		//noiseGenerator = new NoiseGenerator(1337);
 		Random rand = new Random();
 		int randomNum = rand.nextInt((99999 - 0) + 1) + 0;
-		simplexNoise = new SimplexNoise(170, 0.5, randomNum);
+		simplexNoise = new SimplexNoise(100, 0.5, randomNum);
 	}
 
 	public void buildStartRand(){

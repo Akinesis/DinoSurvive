@@ -14,8 +14,8 @@ public class WoodTexture implements TexturesGenerator {
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		
 		return new float[]{
-				//south
-				0.03125f+indiceTextX, 0.21875f+indiceTextY,
+				//north
+				0.03125f, 0.21875f+indiceTextY,
 				0.03125f+indiceTextX, 0.1875f+indiceTextY,
 				0.0f+indiceTextX, 0.21875f+indiceTextY,
 				0.0f+indiceTextX, 0.21875f+indiceTextY,

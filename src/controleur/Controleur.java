@@ -146,7 +146,7 @@ public class Controleur implements Parametres {
 				dropManager.drawDrop(dropTextManager);
 				
 				//fait toutes les opérations pour le cube de picking.
-				rayPick.pick();
+				//rayPick.pick();
 
 				// texManager.undindTexture();
 

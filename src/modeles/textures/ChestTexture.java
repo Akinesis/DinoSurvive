@@ -5,7 +5,7 @@ public class ChestTexture implements TexturesGenerator {
 	@Override
 	public float[] genTexture(float indiceTextX, float indiceTextY) {
 		return new float[]{
-				//south
+				//north
 				0.375f, 0.03125f,
 				0.375f, 0.0f,
 				0.34375f, 0.03125f,
@@ -13,7 +13,7 @@ public class ChestTexture implements TexturesGenerator {
 				0.375f, 0.0f,
 				0.34375f, 0.0f,
 
-				//face sud inverser
+				//south
 				0.34375f, 0.0f,
 				0.375f, 0.0f,
 				0.375f, 0.03125f,

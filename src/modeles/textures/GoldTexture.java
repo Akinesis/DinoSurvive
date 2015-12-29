@@ -10,7 +10,7 @@ public class GoldTexture implements TexturesGenerator {
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
-				//south
+				//north
 				0.21875f+indiceTextX, 0.03125f+indiceTextY,
 				0.21875f+indiceTextX, 0.0f+indiceTextY,
 				0.1875f+indiceTextX, 0.03125f+indiceTextY,

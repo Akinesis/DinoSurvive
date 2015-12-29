@@ -22,7 +22,7 @@ public class GrassTexture implements TexturesGenerator {
 		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
 
 		return new float[]{
-				//south
+				//north
 				0.03125f+indiceTextX, 0.03125f+indiceTextY,
 				0.03125f+indiceTextX, 0+indiceTextY,
 				0+indiceTextX, 0.03125f+indiceTextY,

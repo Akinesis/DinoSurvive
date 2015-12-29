@@ -10,7 +10,7 @@ public class LightPlankTexture implements TexturesGenerator {
 		indiceTextY = (int)(indiceTextY * ((1 - 0) + 1))*0.03125f;
 
 		return new float[]{
-				//south
+				//north
 				0.28125f+indiceTextX, 0.34375f+indiceTextY,
 				0.28125f+indiceTextX, 0.3125f+indiceTextY,
 				0.25f+indiceTextX, 0.34375f+indiceTextY,

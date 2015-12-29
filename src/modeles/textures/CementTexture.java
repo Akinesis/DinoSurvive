@@ -10,7 +10,7 @@ public class CementTexture implements TexturesGenerator {
 		indiceTextX = indiceTextX-(indiceTextX%0.001953125f);
 		indiceTextY = indiceTextY-(indiceTextY%0.001953125f);
 		return new float[]{
-				//south
+				//north
 				0.03125f+indiceTextX, 0.28125f+indiceTextY,
 				0.03125f+indiceTextX, 0.25f+indiceTextY,
 				0.0f+indiceTextX, 0.28125f+indiceTextY,
