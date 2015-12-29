@@ -7,6 +7,8 @@ public class Convertion {
 	/**
 
 	 * @param args
+	 * Class qui permet de simplifier l'ajout de nouveau block dans le code. Fournit en sortie l'affichage à copier/coller dans
+	 * la nouvelle classe corespondant au nouveau cube.
 
 	 */
 
