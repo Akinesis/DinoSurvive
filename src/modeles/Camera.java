@@ -7,7 +7,12 @@ import org.lwjgl.util.vector.Vector3f;
 
 import controleur.Controleur;
 
-
+/**
+ * La caméra qui représente le joueur.
+ * Posséde tout les fonctions relative à ca possition.
+ * @author joachim
+ *
+ */
 
 public class Camera {
 
@@ -33,7 +38,9 @@ public class Camera {
 		System.out.println(y);
 	}
 
-	//met à jour la position et la rotation
+	/**
+	 * Met à jour la position et la rotation de la caméra.
+	 */
 	public void useView(){
 		glRotatef(rotation.getX(), 1, 0, 0);
 		glRotatef(rotation.getY(), 0, 1, 0);

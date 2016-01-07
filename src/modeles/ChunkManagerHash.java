@@ -9,6 +9,13 @@ import parametres.Parametres;
 import controleur.Controleur;
 import modeles.entities.Cube3dVbo;
 
+/**
+ * Le gestionaire de chunk, il possède tout les chunk.
+ * Tout tentative de communication avec un chunk passe par cette classe.
+ * @author joachim
+ *
+ */
+
 public class ChunkManagerHash implements Parametres {
 	private Vector<Chunk>  renderChunks, chunksToLoad,
 	chunksToCreate;
@@ -375,6 +382,27 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	/**
+	 * Charge une première fois tout les chuks et crée ceux qu'il faut créé
+	 */
+	private void createLoadInit(){
+
+		for(Chunk chunk : chunksToLoad){
+			chunk.unbindVbo();
+			if(!chunk.getChecked()){
+				chunk.checkState();
+			}
+			chunk.genCubes(clone.getTexManager());
+			chunk.genVBO();
+		}
+		chunksToLoad.clear();
+
+		for(Chunk ck : chunksToCreate){
+			clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
+		}
+		chunksToCreate.clear();
+	}
+	
+	/**
 	 * Fonction initiale de récursive. Vérifie tout les chunks
 	 * entre le joueur et le chunk à vérifier.
 	 * 
@@ -389,7 +417,7 @@ public class ChunkManagerHash implements Parametres {
 				if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i))){
 					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
 				}else{
-					chunksToCreate.add(getChunk((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i)));
+					addChunnksToCreate((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i));
 					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
 				}
 			}
@@ -398,7 +426,7 @@ public class ChunkManagerHash implements Parametres {
 				if (chunkExist((int) pos.x + (int) (Math.signum(xMove) * i), (int) pos.y + 1, (int) pos.z + zMove)) {
 					createChunksRec((int) (Math.signum(xMove) * i), zMove, 0, 0);
 				} else {
-					chunksToCreate.add(getChunk((int) pos.x + xMove, (int) pos.y + 1, (int) pos.z + (int) (Math.signum(zMove) * i)));
+					addChunnksToCreate((int) pos.x + xMove, (int) pos.y + 1, (int) pos.z + (int) (Math.signum(zMove) * i));
 					createChunksRec((int) (Math.signum(xMove) * i), zMove, 0, 0);
 				}
 			}
@@ -444,7 +472,7 @@ public class ChunkManagerHash implements Parametres {
 					}
 				}
 			} else {
-				chunksToCreate.add(getChunk((int) pos.x + xMove,(int) pos.y + 1, (int) pos.z + zMove));
+				addChunnksToCreate((int) pos.x + xMove ,(int) pos.y + 1, (int) pos.z + zMove);
 				createChunksRec(xMove, zMove, nbInstance + 1, dir);
 			}
 		}
@@ -466,26 +494,9 @@ public class ChunkManagerHash implements Parametres {
 		}
 		chunksToCreate.removeAll(temp);
 	}
-
-	/**
-	 * Charge une première fois tout les chuks et crée ceux qu'il faut créé
-	 */
-	private void createLoadInit(){
-
-		for(Chunk chunk : chunksToLoad){
-			chunk.unbindVbo();
-			if(!chunk.getChecked()){
-				chunk.checkState();
-			}
-			chunk.genCubes(clone.getTexManager());
-			chunk.genVBO();
-		}
-		chunksToLoad.clear();
-
-		for(Chunk ck : chunksToCreate){
-			clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
-		}
-		chunksToCreate.clear();
+	
+	private void addChunnksToCreate(int posX, int posY, int posZ){
+		chunksToCreate.add(getChunk(posX,posY, posZ));
 	}
 
 	/**
@@ -559,5 +570,6 @@ public class ChunkManagerHash implements Parametres {
 				liste.add(chunk);
 			}
 		}
+		
 	}
 }

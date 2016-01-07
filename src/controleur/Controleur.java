@@ -26,26 +26,47 @@ import parametres.Parametres;
 import vues.GameDisplay;
 import vues.OpenGL;
 
+/**
+ * Le controleur, au centre de tout le programme.
+ * Il possède tout les objets de type "Manager" et est en charge de la boucle de jeu.
+ * @author joachim
+ *
+ */
 public class Controleur implements Parametres {
 
+	//La fenêtre de jeu
 	private GameDisplay display;
+	//Le système OpenGL
 	private OpenGL matrices;
+	//Le gestionaire de chunks
 	private ChunkManagerHash chunkManager;
+	//La caméra/joueur
 	private Camera camera;
+	//Le gestionaire d'entrée clavier
 	private InputManager input;
+	//Le lecteur de sauvegarde
 	private MapReader mapRead;
+	//Le gestionaire de texture pour les blocks et les items
 	private TextureManager texManager;
+	//Le gestionaire de collisions verticale et horizontale
 	private CollisionManager collision;
+	//Le générateur de terrains
 	private TerrainGenerator terrGen;
+	//Le gestionaire de l'HUD et de son affichage
 	private HUDManager hud;
+	//Le gestionaire des textures pour l'HUD
 	private HUDTextureManager hudtexManager;
+	//La classe implémantant le Ray picking
 	private RayPicker rayPick;
+	//Le gestionaire des drops au sol et de leurs affichages
 	private DropManager dropManager;
+	//Le gestionaire des textures des drops
 	private DropTextureManager dropTextManager;
+	//NOT IN USE
 	private ItemManager itemManager;
 
 	/**
-	 * Constructeur du controleur
+	 * Constructeur du controleur, il s'occupe de la déclaration des objets
 	 */
 	public Controleur() {
 		display = new GameDisplay();
@@ -64,10 +85,14 @@ public class Controleur implements Parametres {
 		itemManager = new ItemManager(this);
 	}
 
-	// le coeur du jeu, ma méthode contenant la boucle de jeu.
+	/**
+	 * Le coeur du jeu, il initialise les gestionaire et l'openGL
+	 * puis lance la boucle de jeu.
+	 */
 	public void init() {
 		int position;
 
+		//création de la fenêtre
 		position = 5;
 		display.create();
 		hud = new HUDManager(this);
@@ -75,6 +100,7 @@ public class Controleur implements Parametres {
 		hudtexManager = new HUDTextureManager();
 		dropTextManager = new DropTextureManager();
 
+		//libération de la sourie
 		this.changeGragMouse();
 		
 		//le menu
@@ -97,14 +123,18 @@ public class Controleur implements Parametres {
 			this.display.update();
 		}
 
-		//le jeu
+		//Le jeu, suite au menu
 		if (!this.display.isClose() && !this.hud.getMenu().getDisplayIsClose()) {
+			//On vérouille la sourie
 			this.changeGragMouse();
 
 			hud.genHUD(hudtexManager);
 			hud.draw(hudtexManager);
 
+			//génération de l'openGL
 			matrices.init3D();
+			
+			//création des différantes structures initals
 			terrGen.buildStartRand();
 			terrGen.genFond(1, -5, 0);
 			terrGen.genWall(-1, -5, 1);
@@ -114,7 +144,7 @@ public class Controleur implements Parametres {
 			dropManager.addDrop(new FlatItemVBO(-5, 80.2f, -3, 1));
 			dropManager.initDrop(dropTextManager);
 
-			// spawn de du joueur au point le plus haut en 8,Y,8
+			// spawn du joueur au point le plus haut en 8,Y,8
 			camera.spawn(chunkManager.getHigherPointAt(8, 8));
 			camera.setCurrentChunk();
 
@@ -166,7 +196,7 @@ public class Controleur implements Parametres {
 		display.end();
 	}
 
-	/*
+	/**
 	 * Getters
 	 */
 	public Camera getCamera() {
