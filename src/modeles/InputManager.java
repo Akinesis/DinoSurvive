@@ -276,14 +276,14 @@ public class InputManager {
 		}
 
 		while(Mouse.next()){
-			if(leftClik){
+			if(rightClik){
 				//clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				//clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				clone.getChunkManager().delCubeAt(clone.getRayPicker().getPosCube());
 				clone.getChunkManager().updateAt(clone.getRayPicker().getPosCube());
 			}
 
-			if(rightClik){
+			if(leftClik){
 				//clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				//clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				clone.getChunkManager().addCubeAt(clone.getRayPicker().getPosCube());
