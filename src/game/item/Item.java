@@ -9,19 +9,43 @@ package game.item;
  */
 
 public abstract class Item {
-	protected int identifiant; 
+	protected String identifiant; 
 	protected String nom;
-		
-	public Item(int identifiant, String nom) {
-		this.identifiant = identifiant;
+	protected SousType sousType;
+	protected int stack;
+	protected int durabiliteMax;
+	protected int durabiliteActuelle;
+	protected float coordonnéesTextureX; 
+	protected float coordonnéesTextureY; 
+	
+	public Item(String identifiant, String nom, SousType sousType, int stack, float coordonnéesTextureX, float coordonnéesTextureY, int durabiliteMax) {
+		this.identifiant = identifiant.toLowerCase();
+		this.stack = stack;
+		this.sousType = sousType;
 		this.nom = nom;
+		this.durabiliteMax = durabiliteMax;
+		this.durabiliteActuelle = this.durabiliteMax;
 	}
 	
-	public int getIdentifiant() {
+	
+	
+	public String getIdentifiant() {
 		return this.identifiant;
 	}
 	public String getNom() {
 		return this.nom;
+	}
+
+	public SousType getSousType() {
+		return sousType;
+	}
+
+	public float getCoordonnéesTextureX() {
+		return coordonnéesTextureX;
+	}
+
+	public float getCoordonnéesTextureY() {
+		return coordonnéesTextureY;
 	}
 
 }
