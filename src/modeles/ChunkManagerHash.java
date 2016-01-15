@@ -9,6 +9,13 @@ import parametres.Parametres;
 import controleur.Controleur;
 import modeles.entities.Cube3dVbo;
 
+/**
+ * Le gestionaire de chunk, il possède tout les chunk.
+ * Tout tentative de communication avec un chunk passe par cette classe.
+ * @author joachim
+ *
+ */
+
 public class ChunkManagerHash implements Parametres {
 	private Vector<Chunk>  renderChunks, chunksToLoad,
 	chunksToCreate;
@@ -222,7 +229,7 @@ public class ChunkManagerHash implements Parametres {
 		for(int i = 0; i<100; i++){
 			Vector<Chunk> temp = chunksHash[i].getListe();
 			for (Chunk ck : temp) {
-				if (!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())) {
+				if (ck.checkPos(clone.getCamera().getCurrentChunk())) {
 					renderChunks.add(ck);
 					if(!chunksToLoad.contains(ck)){
 						chunksToLoad.add(ck);
@@ -242,7 +249,7 @@ public class ChunkManagerHash implements Parametres {
 	private void checkRender(Vector<Chunk> liste){
 		renderChunks.removeAll(liste);
 		for(Chunk ck : liste){
-			if (!chunksurround(ck) && ck.checkPos(clone.getCamera().getCurrentChunk())){
+			if (ck.checkPos(clone.getCamera().getCurrentChunk())){
 				renderChunks.add(ck);
 				if(!chunksToLoad.contains(ck)){
 					chunksToLoad.add(ck);
@@ -364,31 +371,6 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	/**
-	 * Determine si un chunk est entièrment cacher ou non
-	 * /!\ méthode à modifier !!!!!
-	 * @param ck le chunk à tester
-	 * @return Vrais si le chunk n'est pas visible
-	 */
-	private boolean chunksurround(Chunk ck) {
-		int xCh = ck.getX();
-		int yCh = ck.getY();
-		int zCh = ck.getZ();
-
-		boolean temp=true;
-
-		temp = (chunkExist(xCh+1,yCh,zCh))?temp && ck.isxPlus():false;
-		temp = (chunkExist(xCh-1,yCh,zCh))?temp && ck.isxMinus():false;
-
-		temp = (chunkExist(xCh,yCh+1,zCh))?temp && ck.isyMinus():false;
-		temp = (chunkExist(xCh,yCh-1,zCh))?temp && completeFace(xCh,yCh-1,zCh, 3):false;
-
-		temp = (chunkExist(xCh,yCh,zCh+1))?temp && ck.iszMinus():false;
-		temp = (chunkExist(xCh,yCh,zCh-1))?temp && ck.iszPlus():false;
-
-		return  temp;
-	}
-
-	/**
 	 * Determine si un Chunk est présent
 	 * @param xCh
 	 * @param yCh
@@ -399,6 +381,27 @@ public class ChunkManagerHash implements Parametres {
 		return chunksHash[hash(xCh, yCh, zCh)].containts(xCh, yCh, zCh) != null;
 	}
 
+	/**
+	 * Charge une première fois tout les chuks et crée ceux qu'il faut créé
+	 */
+	private void createLoadInit(){
+
+		for(Chunk chunk : chunksToLoad){
+			chunk.unbindVbo();
+			if(!chunk.getChecked()){
+				chunk.checkState();
+			}
+			chunk.genCubes(clone.getTexManager());
+			chunk.genVBO();
+		}
+		chunksToLoad.clear();
+
+		for(Chunk ck : chunksToCreate){
+			clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
+		}
+		chunksToCreate.clear();
+	}
+	
 	/**
 	 * Fonction initiale de récursive. Vérifie tout les chunks
 	 * entre le joueur et le chunk à vérifier.
@@ -414,7 +417,7 @@ public class ChunkManagerHash implements Parametres {
 				if(chunkExist((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i))){
 					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
 				}else{
-					chunksToCreate.add(getChunk((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i)));
+					addChunnksToCreate((int)pos.x+xMove, (int)pos.y+1, (int)pos.z+(int)(Math.signum(zMove)*i));
 					createChunksRec(xMove, (int)(Math.signum(zMove)*i), 0, 0);
 				}
 			}
@@ -423,7 +426,7 @@ public class ChunkManagerHash implements Parametres {
 				if (chunkExist((int) pos.x + (int) (Math.signum(xMove) * i), (int) pos.y + 1, (int) pos.z + zMove)) {
 					createChunksRec((int) (Math.signum(xMove) * i), zMove, 0, 0);
 				} else {
-					chunksToCreate.add(getChunk((int) pos.x + xMove, (int) pos.y + 1, (int) pos.z + (int) (Math.signum(zMove) * i)));
+					addChunnksToCreate((int) pos.x + xMove, (int) pos.y + 1, (int) pos.z + (int) (Math.signum(zMove) * i));
 					createChunksRec((int) (Math.signum(xMove) * i), zMove, 0, 0);
 				}
 			}
@@ -469,7 +472,7 @@ public class ChunkManagerHash implements Parametres {
 					}
 				}
 			} else {
-				chunksToCreate.add(getChunk((int) pos.x + xMove,(int) pos.y + 1, (int) pos.z + zMove));
+				addChunnksToCreate((int) pos.x + xMove ,(int) pos.y + 1, (int) pos.z + zMove);
 				createChunksRec(xMove, zMove, nbInstance + 1, dir);
 			}
 		}
@@ -491,26 +494,9 @@ public class ChunkManagerHash implements Parametres {
 		}
 		chunksToCreate.removeAll(temp);
 	}
-
-	/**
-	 * Charge une première fois tout les chuks et crée ceux qu'il faut créé
-	 */
-	private void createLoadInit(){
-
-		for(Chunk chunk : chunksToLoad){
-			chunk.unbindVbo();
-			if(!chunk.getChecked()){
-				chunk.checkState();
-			}
-			chunk.genCubes(clone.getTexManager());
-			chunk.genVBO();
-		}
-		chunksToLoad.clear();
-
-		for(Chunk ck : chunksToCreate){
-			clone.getTerrainGenerator().genereTerre(ck.getX(), ck.getY(), ck.getZ());
-		}
-		chunksToCreate.clear();
+	
+	private void addChunnksToCreate(int posX, int posY, int posZ){
+		chunksToCreate.add(getChunk(posX,posY, posZ));
 	}
 
 	/**
@@ -527,32 +513,6 @@ public class ChunkManagerHash implements Parametres {
 	 */
 	public void dellTransparent(Cube3dVbo transp){
 		transparancy.delTransparent(transp);
-	}
-
-	/**
-	 * Renvoie vrais si toute une face est remplie.
-	 * 
-	 * @param xCh Les X du chunk
-	 * @param yCh Les Y du chunk
-	 * @param zCh Les Z du chunk
-	 * @param face Indice de la face à analyser
-	 * @return vrais si la face est pleine.
-	 */
-	private boolean completeFace(int xCh, int yCh, int zCh, int face) {
-		int i = 1;
-		int j = 1;
-
-		Chunk chun = chunksHash[hash(xCh, yCh, zCh)].containts(xCh, yCh, zCh);
-		if(chun != null){
-			for (i = 0; i < 15; i++) {
-				for (j = 0; j < 15; j++) {
-					if (chun.getCubeCam(i, 0, j) == null) {
-						return false;
-					}
-				}
-			}
-		}
-		return true;
 	}
 
 	private int makeID(int x, int y, int z){
@@ -610,5 +570,6 @@ public class ChunkManagerHash implements Parametres {
 				liste.add(chunk);
 			}
 		}
+		
 	}
 }

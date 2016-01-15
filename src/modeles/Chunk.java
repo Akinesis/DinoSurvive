@@ -26,6 +26,13 @@ import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glClientActiveTexture;
 import static org.lwjgl.opengl.GL15.*;
 
+/**
+ * Classe posédant tout les cubes dans ça portée de 16*16*16.
+ * Tout les chunks sont possédès par le ChunkManager.
+ * 
+ * @author joachim
+ */
+
 public class Chunk implements Parametres{
 	private Cube3dVbo[][][] cubes;
 	protected Vector<Cube3dVbo> renderCubes;
@@ -40,8 +47,7 @@ public class Chunk implements Parametres{
 	protected Controleur clone;
 	private int x,y,z,id;
 
-	private boolean updated, checked;
-	private boolean xPlus, xMinus, yPlus, yMinus, zPlus, zMinus;
+	private boolean updated, checked, visible;
 
 	/**
 	 * Constructeur du chunk
@@ -58,8 +64,7 @@ public class Chunk implements Parametres{
 		clone = contr;
 		updated = true;
 		checked = false;
-
-		xPlus = true; xMinus = true; yPlus = true; yMinus = true; zPlus = true; zMinus = true;
+		visible = false;
 
 		this.x = x;
 		this.y = y;//tous n�gatifs
@@ -78,6 +83,9 @@ public class Chunk implements Parametres{
 
 	}
 
+	/**
+	 * crée le vbo pour le déssiner.
+	 */
 	public void genVBO(){
 
 		if(!renderCubes.isEmpty()){
@@ -112,10 +120,10 @@ public class Chunk implements Parametres{
 
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z de la caméra
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @return un Cube3dVbo
+	 * @param x le X de la caméra
+	 * @param y le Y de la caméra
+	 * @param z le Z de la caméra
+	 * @return le Cube3dVbo recherché
 	 */
 	public Cube3dVbo getCubeCam(float x, float y, float z) {
 		int tempX = convertCoordGet(x);
@@ -127,19 +135,25 @@ public class Chunk implements Parametres{
 
 	/**
 	 * Renvoie un cube aux coordonnées x,y,z par raport à la matrice de déssin
-	 * @param x
-	 * @param y
-	 * @param z
+	 * @param x Le X du cube celon la drawingMatrice
+	 * @param y Le Y du cube celon la drawingMatrice (positif)
+	 * @param z Le Z du cube celon la drawingMatrice
 	 * @return un Cube3dVbo
 	 */
-	public Cube3dVbo getCubeDraw(float x, float y, float z) {
+	public Cube3dVbo getCubeDraw(int x, int y, int z) {
 		int tempX = convertCoordAdd(x);
-		int tempY = (int)Math.abs(y)%16;
+		int tempY = Math.floorMod(y,16);
 		int tempZ = convertCoordAdd(z);
 
 		return cubes[tempX][tempY][tempZ];
 	}
 
+	/**
+	 * Supprime le cube au coordonées en entrées (points du plan).
+	 * @param x Le X du cube à supprimer
+	 * @param y Le Y du cube à supprimer
+	 * @param z Le Z du cube à supprimer
+	 */
 	public void delCube(float x, float y, float z){
 		int tempX = convertCoordGet(x);
 		int tempY = (int)Math.abs(Math.ceil(y))%16;
@@ -154,6 +168,12 @@ public class Chunk implements Parametres{
 		updated=false;
 	}
 
+	/**
+	 * Crée un cube et l'ajoute au coordonées du plan en entrée.
+	 * @param x Le X du cube à crée
+	 * @param y Le Y du cube à crée
+	 * @param z Le Z du cube à crée
+	 */
 	public void createCubeAt(float x, float y, float z){
 		int tempX = convertCoordGet(x-1);
 		int tempY = convertCoordGet(y);
@@ -173,10 +193,6 @@ public class Chunk implements Parametres{
 		updated=false;
 	}
 
-	/*
-	 * Methodes
-	 */
-
 	/**
 	 * Ajoute tous les cube liés à l'ID du chunk (aka la ligne dans le programme)
 	 */
@@ -185,7 +201,7 @@ public class Chunk implements Parametres{
 	}
 
 	/**
-	 * Vérifie quels cubes sont actifs (visible ou non) et les met dans la liste de rendu
+	 * Vérifie quels cubes sont actifs (visible ou non) et les met dans la liste de rendu.
 	 * méthode trop lourde !!
 	 */
 	public void checkState(){
@@ -195,44 +211,28 @@ public class Chunk implements Parametres{
 			for(int j =0; j<16; j++){
 				for(int k=0; k<16; k++){
 					if(cubes[i][j][k]!=null){
+						//if ther is a cube
 						if(surround(i,j,k)){
+							//if it's not visible
 							cubes[i][j][k].setEtat(false);
 							nonRenderCubes.add(cubes[i][j][k]);
 						}else{
+							visible = true;
 							cubes[i][j][k].setEtat(true);
 							renderCubes.add(cubes[i][j][k]);
 						}
-					}else{
-						switch(whichFace(i,j,k)){
-						case 1:
-							xPlus=true;
-							break;
-						case 2:
-							xMinus=true;
-							break;
-						case 3:
-							yMinus=true;
-							break;
-						case 4:
-							yPlus=true;
-							break;
-						case 5:
-							zPlus=true;
-							break;
-						case 6:
-							zMinus=true;
-							break;
-						default:
-							break;
-						}
-
-
 					}
 				}
 			}
 		}
 	}
 
+	/**
+	 * Vérifie la visibilitées des cubes autours de celui corespondant au coordonée en paramètre.
+	 * @param x Le X du cube dont il faut vérifier les voisins.
+	 * @param y Le Y du cube dont il faut vérifier les voisins.
+	 * @param z Le Z du cube dont il faut vérifier les voisins.
+	 */
 	public void checkStateAt(int x, int y, int z){
 		checked = true;
 
@@ -256,9 +256,9 @@ public class Chunk implements Parametres{
 	}
 
 	/**
-	 * vérifie que le chunk est à portée de vue
-	 * @param current la position du joueur (caméra)
-	 * @return
+	 * Vérifie que le chunk est à portée de vue
+	 * @param current La position du joueur (caméra)
+	 * @return true si la caméra voit le chunk, false sinon
 	 */
 	public boolean checkPos(Vector3f current){
 		if(Math.abs(current.getX()-getX())>=chunkFar || Math.abs(current.getY()-getY())>=chunkFar || Math.abs(current.getZ()-getZ())>=chunkFar){
@@ -270,10 +270,10 @@ public class Chunk implements Parametres{
 
 	/**
 	 * Met a jours tout les étas des cubes,
-	 * Puis suprimer les ancien buffer pour les recrée avec les nouvelles valeurs.
-	 * @param x
-	 * @param y
-	 * @param z
+	 * puis suprimer les ancien buffer pour les recrée avec les nouvelles valeurs.
+	 * @param x Le X du cube ayant été modifié
+	 * @param y Le Y du cube ayant été modifié
+	 * @param z Le Z du cube ayant été modifié
 	 */
 	public void updateAt(float x, float y, float z){
 
@@ -290,6 +290,10 @@ public class Chunk implements Parametres{
 
 	/**
 	 * Pour un cube donné, renvoi si il est visible ou non
+	 * /!\ fonction à optimiser, trop lourde.
+	 * @param x La coordonée X du cube
+	 * @param y La coordonée Y du cube
+	 * @param z La coordonée Z du cube
 	 */
 	private boolean surround(int x, int y, int z){
 		boolean temp;
@@ -297,13 +301,14 @@ public class Chunk implements Parametres{
 		int yCube = cubes[x][y][z].getY();
 		int zCube = cubes[x][y][z].getZ();
 
-		temp = (x>0) ? cubes[x-1][y][z]!=null : clone.getChunkManager().cubeExist(xCube-1, yCube, zCube);
-		temp = (y>0) ? cubes[x][y-1][z]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube-1, zCube) && temp;
-		temp = (z>0) ? cubes[x][y][z-1]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube, zCube-1) && temp;
-
-		temp = (x<15) ? cubes[x+1][y][z]!=null && temp : clone.getChunkManager().cubeExist(xCube+1, yCube, zCube) && temp;
-		temp = (y<15) ? cubes[x][y+1][z]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube+1, zCube) && temp;
-		temp = (z<15) ? cubes[x][y][z+1]!=null && temp : clone.getChunkManager().cubeExist(xCube, yCube, zCube+1) && temp;
+		temp = clone.getChunkManager().cubeExist(xCube+1, yCube, zCube);
+		temp = clone.getChunkManager().cubeExist(xCube-1, yCube, zCube) && temp;
+		
+		temp = clone.getChunkManager().cubeExist(xCube, yCube+1, zCube) && temp;
+		temp = clone.getChunkManager().cubeExist(xCube, yCube-1, zCube) && temp;
+		
+		temp = clone.getChunkManager().cubeExist(xCube, yCube, zCube+1) && temp;
+		temp = clone.getChunkManager().cubeExist(xCube, yCube, zCube-1) && temp;
 
 		return  temp;
 	}
@@ -342,7 +347,7 @@ public class Chunk implements Parametres{
 
 	/**
 	 * Dessine tous les cubes actifs
-	 * @param texMan
+	 * @param texMan Le gestionaire de texture
 	 */
 	public void draw(TextureManager texMan){
 		if(!renderCubes.isEmpty()){
@@ -368,6 +373,9 @@ public class Chunk implements Parametres{
 		nonRenderCubes.clear();
 	}
 
+	/**
+	 * libère les vbo du procésseur
+	 */
 	public void unbindVbo(){
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboVertexHandleChunk);
 		GL15.glDeleteBuffers(vboVertexHandleChunk);
@@ -376,10 +384,30 @@ public class Chunk implements Parametres{
 			interleavedBuffer.clear();
 		}
 	}
-
-	/*
-	 * Getters
+	
+	/**
+	 * Trouve le plus haut point du Chunk. A defaut de block, renvoi la hauteur de son "sol".
+	 * @return Le point le plus haut du chunk.
 	 */
+	public float getHigher(){
+
+		float tempY = -1;
+
+		for(int i=0; i<16; i++){
+			if(cubes[8][i][8]!=null){
+				if(cubes[8][i][8].getY()>tempY){
+					tempY=cubes[8][i][8].getY();
+				}
+			}
+		}
+
+		if(tempY==-1){
+			tempY=-(getY()*16)-1;
+		}
+
+		return -(tempY+1);
+	}
+
 	/**
 	 * Renvoie la position du chunk selon les x
 	 * @return
@@ -413,87 +441,29 @@ public class Chunk implements Parametres{
 	public boolean getChecked(){
 		return checked;
 	}
+	
+	public boolean getVisible(){
+		return visible;
+	}
 
 	/**
-	 * Trouve le plus haut point du Chunk. A defaut de block, renvoi la hauteur de son "sol".
-	 * @return Le point le plus haut du chunk.
+	 * calcule la valeur entre 0 et 15 en fonction de la coordonnée du plan en entrée l'ors de get
+	 * @param nb La valeur à calculer
+	 * @return La valeur après calcule entre 0 et 15
 	 */
-	public float getHigher(){
-
-		float tempY = -1;
-
-		for(int i=0; i<16; i++){
-			if(cubes[8][i][8]!=null){
-				if(cubes[8][i][8].getY()>tempY){
-					tempY=cubes[8][i][8].getY();
-				}
-			}
-		}
-
-		if(tempY==-1){
-			tempY=-(getY()*16)-1;
-		}
-
-		return -(tempY+1);
-	}
-
-	private int whichFace(int i, int j, int k){
-
-		if(i==0){
-			return 5;
-		}else if(i==15){
-			return 6;
-		}
-
-		if(j==0){
-			return 3;
-		}else if(j==15){
-			return 4;
-		}
-
-		if(k==0){
-			return 1;
-		}else if(k==15){
-			return 2;
-		}
-
-		return 0;
-	}
-
-	public boolean isxPlus() {
-		return xPlus;
-	}
-
-	public boolean isxMinus() {
-		return xMinus;
-	}
-
-	public boolean isyPlus() {
-		return yPlus;
-	}
-
-	public boolean isyMinus() {
-		return yMinus;
-	}
-
-	public boolean iszPlus() {
-		return zPlus;
-	}
-
-	public boolean iszMinus() {
-		return zMinus;
-	}
-
 	private int convertCoordGet(float nb){
 		float temp;
 
 		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
 		temp = (temp%16);
+		
 		if(temp<0){
 			temp += 16;
 		}
+		
 		temp = -temp-((nb>0)?1:0);
 		temp = temp%16;
+		
 		if(temp<0){
 			temp += 16;
 		}
@@ -501,11 +471,17 @@ public class Chunk implements Parametres{
 		return (int)temp;
 	}
 
+	/**
+	 * calcule la valeur entre 0 et 15 en fonction de la coordonnée du plan en entrée l'ors d'ajout
+	 * @param nb La valeur à calculer
+	 * @return La valeur après calcule entre 0 et 15
+	 */
 	private int convertCoordAdd(float nb){
 		float temp;
 
 		temp = nb/Math.abs(nb)*((float)Math.floor(Math.abs(nb)));
 		temp = (temp%16);
+		
 		if(temp<0){
 			temp += 16;
 		}

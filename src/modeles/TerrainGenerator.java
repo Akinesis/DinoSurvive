@@ -25,7 +25,6 @@ public class TerrainGenerator {
 				for(int z = -4; z<4; z++){
 					if(y==-4){
 						genTopNoise(x, y, z);
-						//genHeightMap(x, y, z);
 					}else{
 						genereTerre(x,y,z);
 					}
@@ -105,7 +104,12 @@ public class TerrainGenerator {
 		for(int i = originX; i>originX-16; --i){
 			for(int j = originY; j>originY-16; --j){
 				for(int k = originZ; k>originZ-16; --k){
-					temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 1));
+					if(j == originY-15){
+						temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 10));
+					}else{
+						temp.addCube3dVbo(new Cube3dVbo(i, -j, k, 1, 1));
+					}
+					
 				}
 			}
 		}
@@ -138,14 +142,13 @@ public class TerrainGenerator {
 		int originX = x*16;
 		int originY = y*16;
 		int originZ = z*16;
-		System.out.println(originX);
 		Random rand = new Random();
 		
-
-		for(int i = originY; i>originY-16; --i){
-			for(int j = originZ; j>originZ-16; --j){
+		for(int i = 0; i<16; ++i){
+			for(int j = 0; j<16; ++j){
 				int randomNum = rand.nextInt((34 - 32) + 1) + 32;
-				temp.addCube3dVbo(new Cube3dVbo(originX-2, -i, j, 1, 31));
+				temp.addCube3dVbo(new Cube3dVbo(originX-j, -(originY-0), originZ-15, 1, 31));
+				//System.out.println(originY);
 			}
 		}
 	}

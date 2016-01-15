@@ -1,10 +1,14 @@
 package controleur;
 
+/**
+ * Classe Peut utile qui se charge de lancer le jeu par le biais du controleur
+ * @author joachim
+ *
+ */
 public class Game {
 	
 	private Controleur controleur;
 	
-	//classe pas trop utile mais bon ...
 	public Game(){
 		controleur = new Controleur();
 	}

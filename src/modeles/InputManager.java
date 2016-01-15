@@ -106,7 +106,7 @@ public class InputManager {
 
 		//gravitée
 		if(!clone.getCollision().gravity(camera) && !isJumping){
-			camera.getPos().y += 0.12;
+			//camera.getPos().y += 0.12;
 		}
 
 	}
@@ -285,14 +285,14 @@ public class InputManager {
 		}
 
 		while(Mouse.next()){
-			if(leftClik){
+			if(rightClik){
 				//clone.getChunkManager().delCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				//clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				clone.getChunkManager().delCubeAt(clone.getRayPicker().getPosCube());
 				clone.getChunkManager().updateAt(clone.getRayPicker().getPosCube());
 			}
 
-			if(rightClik){
+			if(leftClik){
 				//clone.getChunkManager().addCubeAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				//clone.getChunkManager().updateAt(camera.getPos().x, camera.getPos().y, camera.getPos().z);
 				clone.getChunkManager().addCubeAt(clone.getRayPicker().getPosCube());
@@ -305,9 +305,9 @@ public class InputManager {
 	}
 
 	/**
-	 * Méthode de déplacement
-	 * @param amt
-	 * @param dir
+	 * Mouvement method of the camera
+	 * @param amt The speed of the mouvement
+	 * @param dir The direction of the method
 	 */
 	private void move(float amt, float dir){
 		double tempX = amt * Math.cos(Math.toRadians(camera.getRot().y + 90 * dir));
@@ -352,9 +352,14 @@ public class InputManager {
 		}
 	}
 
+	/**
+	 * Vertical mouvement
+	 * @param amt Number of blocks too go up or down.
+	 */
 	private void moveY(float amt){
 		if(clone.getCollision().colideY(camera, amt)){
-			isJumping = false;
+			//isJumping = false;
+			camera.getPos().y += amt;
 		}else{
 			camera.getPos().y += amt;
 		}
