@@ -142,7 +142,7 @@ public class Chunk implements Parametres{
 	 */
 	public Cube3dVbo getCubeDraw(int x, int y, int z) {
 		int tempX = convertCoordAdd(x);
-		int tempY = Math.floorMod(y,16);
+		int tempY = Math.floorMod(y, 16);
 		int tempZ = convertCoordAdd(z);
 
 		return cubes[tempX][tempY][tempZ];

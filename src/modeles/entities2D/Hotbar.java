@@ -26,9 +26,9 @@ public class Hotbar extends AbstractEntity2D{
 		return(new float[]{
 				//on part du haut vers le bas pour la partie fond
 				//premier triangle vers le haut
-				0.07f*hau, 0.15f*hau,
+				0f*lar, 0.15f*hau,	 		
+				0.07f*hau, 0.15f*hau,	
 				0f*lar, 0.08f*hau,
-				0f*lar, 0.15f*hau,				
 				//triangle supérieur du rectangle
 				0.07f*hau, 0.85f*hau,
 				0.07f*hau, 0.15f*hau,
