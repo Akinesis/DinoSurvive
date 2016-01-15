@@ -273,6 +273,15 @@ public class InputManager {
 			} else if (camera.getRot().x - mouseDY > 85) {
 				camera.getRot().x = 85;
 			}
+			//si la souris n'est pas grabbed, un menu est forcément up. donc il faut gérer la position de la souris
+			//envoi de la position de la souris  à l'hudmanager (et au controleur?  à un truc qui gèrera autre
+			//chose que juste l'affichage) si y a un clic /
+			else {
+				if(leftClik){
+					clone.getHUDManager().clickOnHUD(Mouse.getDX(), Mouse.getDY());
+				}
+				
+			}
 		}
 
 		while(Mouse.next()){

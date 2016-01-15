@@ -66,12 +66,12 @@ public class MenuJeu extends AbstractEntity2D {
 				0.25f*lar, 0.82f*hau,
 				0.75f*lar, 0.82f*hau,
 				
+				
 				// les deux premiers triangles forment le fond du menu
 				//premier triangle (counterclockwise)
 				0.8f*lar, 0.1f*hau,
 				0.2f*lar, 0.1f*hau,
 				0.2f*lar, 0.9f*hau,
-				
 				//deuxième triangle
 				0.8f*lar, 0.1f*hau,
 				0.2f*lar, 0.9f*hau,

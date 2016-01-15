@@ -234,4 +234,8 @@ public class HUDManager extends AbstractEntity2D{
 	public Portrait getPortrait() {
 		return portrait;
 	}
+
+	public void clickOnHUD(int dx, int dy) {
+		
+	}
 }
