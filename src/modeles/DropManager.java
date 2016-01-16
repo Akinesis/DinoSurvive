@@ -25,6 +25,12 @@ import org.lwjgl.opengl.GL15;
 
 import modeles.entities.FlatItemVBO;
 
+/**
+ * Le gestionaire de drop au sol et de son affichage
+ * @author joachimvanoni
+ *
+ */
+
 public class DropManager {
 
 	private ArrayList<FlatItemVBO> drops;
@@ -39,14 +45,26 @@ public class DropManager {
 		bumpUp = true;
 	}
 
+	/**
+	 * ajoute un item à la liste des drops
+	 * @param item L'objet à ajouter à la liste des drops 
+	 */
 	public void addDrop(FlatItemVBO item){
 		drops.add(item);
 	}
 	
+	/**
+	 * Retire un objet des drop
+	 * @param item L'objet à retirer
+	 */
 	public void removeDrop(FlatItemVBO item){
 		drops.remove(item);
 	}
 	
+	/**
+	 * 
+	 * @param texMan
+	 */
 	public void draw(DropTextureManager texMan){
 		org.lwjgl.opengl.GL11.glDisable(GL_CULL_FACE);
 		glBindBuffer(GL_ARRAY_BUFFER, vboVertexHandleDrop);
