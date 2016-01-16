@@ -23,8 +23,9 @@ public class ChunkManagerHash implements Parametres {
 	private Controleur clone;
 	private TransparentChunk transparancy;
 
-	/*
-	 * Constructeur
+	/**
+	 * Initialise les chunks et la table des chunks
+	 * @param contr le controleur
 	 */
 	public ChunkManagerHash(Controleur contr) {
 		//chunks = new Vector<Chunk>();
@@ -38,10 +39,10 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	/**
-	 * Initialise les chunks
+	 * Initialise les chunks pour le rendus
 	 */
 	public void initChunks(){
-		taille();
+		//taille();
 		clearRender();
 		checkRender();
 		for(Chunk chunk : renderChunks){
@@ -55,12 +56,12 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	/**
-	 * Renvoie le cube � la position demand�e
+	 * Renvoie le cube à la position demandée
 	 * 
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @return
+	 * @param x le x global du cube
+	 * @param y le y global du cube
+	 * @param z le z global du cube
+	 * @return Le cube demander
 	 */
 	public Cube3dVbo getCubeAt(float x, float y, float z) {
 		float xChunk = (float) Math.ceil(x / 16);
@@ -77,6 +78,13 @@ public class ChunkManagerHash implements Parametres {
 		return cube;
 	}
 
+	/**
+	 * Renvoi les coordonées des 3 cubes du corps du joueur
+	 * @param x Le X de la caméra
+	 * @param y Le Y de la caméra
+	 * @param z Le Z de la caméra
+	 * @return
+	 */
 	public Cube3dVbo[] getBody(float x, float y, float z) {
 		Cube3dVbo[] temp = new Cube3dVbo[3];
 
@@ -149,7 +157,7 @@ public class ChunkManagerHash implements Parametres {
 	/**
 	 * Ajoute un chunk dans la liste de chunks à charger
 	 * 
-	 * @param chu
+	 * @param chu le chunk à charger
 	 */
 	public void addChunkToLoad(Chunk chu) {
 		if (!chunksToLoad.contains(chu)) {
@@ -157,6 +165,10 @@ public class ChunkManagerHash implements Parametres {
 		}
 	}
 
+	/**
+	 * Met à jour les cube autours d'un cube donnée
+	 * @param pos la position du cube qui à été mis à jour.
+	 */
 	public void updateAt(Vector3f pos) {
 		Vector<Chunk> chunksToRender = new Vector<Chunk>();
 		chunksToRender.addAll(getChunkToUpdate());
@@ -176,6 +188,10 @@ public class ChunkManagerHash implements Parametres {
 		checkRender(chunksToRender);
 	}
 
+	/**
+	 * Retrouve la liste des chunks à metre à jour.
+	 * @return Les chunks non mis à jour.
+	 */
 	private Vector<Chunk> getChunkToUpdate() {
 		Vector<Chunk> temp = new Vector<Chunk>();
 		for (Chunk chunk : renderChunks) {
@@ -187,9 +203,9 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	/**
-	 * Dessine les chunks
+	 * Dessine les chunks visible
 	 * 
-	 * @param textMan
+	 * @param textMan le TextureManager
 	 */
 	public void drawChunks(TextureManager textMan) {
 		for (Chunk chunk : renderChunks) {
@@ -202,6 +218,9 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 
+	/**
+	 * recharge les chunk qui on été mis à jours.
+	 */
 	public void reloadChunks(){
 		int i =0;
 		ArrayList<Chunk> temp = new ArrayList<Chunk>();
@@ -243,7 +262,7 @@ public class ChunkManagerHash implements Parametres {
 	}
 
 	/**
-	 * 
+	 * Vérifie les visibilitées des chunks proche du cube ayant été modifiés.
 	 * @param liste les chunks ayant été modifiers
 	 */
 	private void checkRender(Vector<Chunk> liste){
@@ -261,6 +280,9 @@ public class ChunkManagerHash implements Parametres {
 		}
 	}
 
+	/**
+	 * suprime tout les chunks de la liste de rendu
+	 */
 	private void clearRender() {
 		renderChunks.clear();
 	}
@@ -310,9 +332,9 @@ public class ChunkManagerHash implements Parametres {
 	/**
 	 * Renvoi le chunck rechercher
 	 * Si le chunk n'éxiste pas , le crée
-	 * @param x les X du Chunk voulu
-	 * @param y
-	 * @param z
+	 * @param x les X du Chunk cherché
+	 * @param y les Y du chunk cherché
+	 * @param z Les Z du chunk cherché
 	 * @return Le chunck rechercher
 	 */
 	public Chunk getChunk(int x, int y, int z) {
@@ -331,8 +353,8 @@ public class ChunkManagerHash implements Parametres {
 	/**
 	 * Renvoi les coordonées du chunk à la position des coordonées en entrés.
 	 * @param x Les X de la caméra
-	 * @param y
-	 * @param z
+	 * @param y Les Y de la caméra
+	 * @param z Les Z de la caméra
 	 * @return Les coordonée du chunk
 	 */
 	public int[] getChunkAt(float x, float y, float z) {
@@ -352,9 +374,9 @@ public class ChunkManagerHash implements Parametres {
 
 	/**
 	 * Trouve si le cube voulu existe
-	 * @param x
-	 * @param y
-	 * @param z
+	 * @param x Les X du cubes à vérifier
+	 * @param y Les Y du cubes à vérifier
+	 * @param z Les Z du cubes à vérifier
 	 * @return vrais si le cube existe, faux sinon
 	 */
 	public boolean cubeExist(int x, int y, int z) {
@@ -372,9 +394,9 @@ public class ChunkManagerHash implements Parametres {
 
 	/**
 	 * Determine si un Chunk est présent
-	 * @param xCh
-	 * @param yCh
-	 * @param zCh
+	 * @param xCh Les X du chunk chercher
+	 * @param yCh Les Y du chunk chercher
+	 * @param zCh Les Z du chunk chercher
 	 * @return Vrais si le chunk est trouver
 	 */
 	public boolean chunkExist(int xCh, int yCh, int zCh) {
@@ -406,8 +428,8 @@ public class ChunkManagerHash implements Parametres {
 	 * Fonction initiale de récursive. Vérifie tout les chunks
 	 * entre le joueur et le chunk à vérifier.
 	 * 
-	 * @param xMove Facteur de d�placement X
-	 * @param zMove Facteur de d�placement Y
+	 * @param xMove Facteur de déplacement X
+	 * @param zMove Facteur de déplacement Y
 	 */
 	public void createChunksInit(int xMove, int zMove){
 		Vector3f pos = clone.getCamera().getCurrentChunk();
@@ -436,8 +458,8 @@ public class ChunkManagerHash implements Parametres {
 	/**
 	 * Fonction recursive de création de chunks en marche
 	 * 
-	 * @param xMove
-	 * @param zMove
+	 * @param xMove Facteur de déplacement X
+	 * @param zMove Facteur de déplacement Y
 	 * @param nbInstance le nombre de chunk générer dans cette direction
 	 * @param dir indice de direction : 1->x+ 2->x- 3->y+ 4->y-
 	 */
@@ -480,7 +502,7 @@ public class ChunkManagerHash implements Parametres {
 
 
 	/**
-	 * Génere 2 des chunks à crée
+	 * Génere 2 des chunks à crée de la liste chunksToCreate
 	 */
 	public void createChunks(){
 		Vector<Chunk> temp = new Vector<Chunk>();
@@ -495,6 +517,12 @@ public class ChunkManagerHash implements Parametres {
 		chunksToCreate.removeAll(temp);
 	}
 	
+	/**
+	 * ajoute un chunk à crée
+	 * @param posX Les X du chunk à ajouter
+	 * @param posY Les Y du chunk à ajouter
+	 * @param posZ Les Z du chunk à ajouter
+	 */
 	private void addChunnksToCreate(int posX, int posY, int posZ){
 		chunksToCreate.add(getChunk(posX,posY, posZ));
 	}
@@ -515,6 +543,13 @@ public class ChunkManagerHash implements Parametres {
 		transparancy.delTransparent(transp);
 	}
 
+	/**
+	 * renvoi l'ID du chunk voulu
+	 * @param x Les X du chunk
+	 * @param y Les Y du chunk
+	 * @param z Les Z du chunk
+	 * @return l'id calculer du chunk
+	 */
 	private int makeID(int x, int y, int z){
 		/*int temp;
 		x = Math.abs(x);
@@ -523,27 +558,46 @@ public class ChunkManagerHash implements Parametres {
 
 		temp = Integer.parseInt(Integer.toString(x)+Integer.toString(y)+Integer.toString(z));
 		System.out.println(temp);*/
-
+		
 		return x;
 	}
 
+	/**
+	 * Retourne le hash code pour le chunk
+	 * @param x Les X du chunk
+	 * @param y Les Y du chunk
+	 * @param z Les Z du chunk
+	 * @return le hash code calculer
+	 */
 	private int hash(int x, int y, int z){
 		return (Math.abs(x)%45+Math.abs(y)%10+Math.abs(z)%45)%100;
 	}
 
+	/**
+	 * Crée un maillon dans chaque case de la hash table
+	 */
 	private void initHash(){
 		for(int i=0; i< 100; i++){
 			chunksHash[i] = new Maillon();
 		}
 	}
 	
+	/**
+	 * Affiche la taille de chaque case de la hash table
+	 */
 	public void taille(){
 		for(int i = 0; i<100; i++){
 			System.out.println(chunksHash[i].getListe().size());
 		}
 	}
 
+	/**
+	 * la classe maillon qui gère la liste des chunk corespondant à son hash code
+	 * @author joachimvanoni
+	 *
+	 */
 	private class Maillon{
+		//la liste des chunk 
 		Vector<Chunk> liste;
 
 		public Maillon(){
@@ -555,6 +609,13 @@ public class ChunkManagerHash implements Parametres {
 
 		}
 
+		/**
+		 * renvoi le chunk si il existe
+		 * @param x Les X du chunk rechercher
+		 * @param y Les Y du chunk rechercher
+		 * @param z Les Z du chunk rechercher
+		 * @return le chunk si il est là, null sinon.
+		 */
 		public Chunk containts(int x, int y, int z) {
 			for (Chunk ck : liste) {
 				if ((ck.getX() == x) && (ck.getY() == y) && (ck.getZ() == z)) {
@@ -565,6 +626,10 @@ public class ChunkManagerHash implements Parametres {
 			return null;
 		}
 
+		/**
+		 * rajoute un chunk à la liste.
+		 * @param chunk Le chunk à ajouter
+		 */
 		public void addChunkMaill(Chunk chunk){
 			if(!liste.contains(chunk)){
 				liste.add(chunk);
