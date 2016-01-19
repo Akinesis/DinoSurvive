@@ -27,6 +27,10 @@ public abstract class Item {
 		this.durabiliteActuelle = this.durabiliteMax;
 	}
 	
+	public Item(String id){
+		identifiant = id;
+	}
+	
 	
 	
 	public String getIdentifiant() {

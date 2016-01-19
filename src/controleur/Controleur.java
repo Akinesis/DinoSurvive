@@ -140,8 +140,8 @@ public class Controleur implements Parametres {
 			terrGen.genWall(-1, -5, 1);
 			terrGen.genereTerre(-2, -4, -2);
 			
-			dropManager.addDrop(new FlatItemVBO(-2, 80.2f, -2, 1));
-			dropManager.addDrop(new FlatItemVBO(-5, 80.2f, -3, 1));
+			dropManager.addDrop(new FlatItemVBO(-2, 80.2f, -2, "1"));
+			dropManager.addDrop(new FlatItemVBO(-5, 80.2f, -3, "1"));
 			dropManager.initDrop(dropTextManager);
 
 			// spawn du joueur au point le plus haut en 8,Y,8

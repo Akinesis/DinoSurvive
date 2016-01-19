@@ -7,10 +7,10 @@ public class FlatItemVBO extends AbstractEntity3D {
 	
 	float size;
 	protected Vector3f pos2;
-	int id;
+	String id;
 	Vector2f coord;
 	
-	public FlatItemVBO(float x, float y, float z, int identifiant){
+	public FlatItemVBO(float x, float y, float z, String identifiant){
 		size = 0.5f;
 		pos = new Vector3f(-x, y, -z);
 		pos2 = new Vector3f(pos.getX()+size, pos.getY()+size, pos.getZ());
