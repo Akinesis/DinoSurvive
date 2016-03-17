@@ -2,8 +2,8 @@ package game.item;
 
 public class Outils extends Item {
 
-	public Outils(int identifiant, String nom) {
-		super(identifiant, nom);
+	public Outils(String identifiant) {
+		super(identifiant);
 		// TODO Auto-generated constructor stub
 	}
 

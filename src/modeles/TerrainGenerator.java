@@ -147,7 +147,7 @@ public class TerrainGenerator {
 		for(int i = 0; i<16; ++i){
 			for(int j = 0; j<16; ++j){
 				int randomNum = rand.nextInt((34 - 32) + 1) + 32;
-				temp.addCube3dVbo(new Cube3dVbo(originX-j, -(originY-0), originZ-15, 1, 31));
+				temp.addCube3dVbo(new Cube3dVbo(originX-j, -(originY-i), originZ-15, 1, 37));
 				//System.out.println(originY);
 			}
 		}

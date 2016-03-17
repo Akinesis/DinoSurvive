@@ -159,6 +159,12 @@ public class TextureManager {
 		case 35:
 			texGenerator = new LightPlankTexture();
 			return texGenerator.genTexture(x, y);
+		case 36:
+			texGenerator = new OrganicTexture();
+			return texGenerator.genTexture(x, y);
+		case 37:
+			texGenerator = new GravelTexture();
+			return texGenerator.genTexture(x, y);
 		default:
 			texGenerator = new DirtTexture();
 			return texGenerator.genTexture(x, y);

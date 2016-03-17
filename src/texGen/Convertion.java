@@ -70,9 +70,9 @@ public class Convertion {
 		boolean indice = true;
 
 
-		x=6;
+		x=10;
 
-		y=4;
+		y=10;
 
 		System.out.println("//north");
 		for(int i = 0; i<init.length; i+=2){

@@ -2,8 +2,8 @@ package game.item;
 
 public class CubesInventaire extends Item {
 
-	public CubesInventaire(int identifiant, String nom) {
-		super(identifiant, nom);
+	public CubesInventaire(String identifiant) {
+		super(identifiant);
 		// TODO Auto-generated constructor stub
 	}
 
